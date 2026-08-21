@@ -1,0 +1,144 @@
+Imports Guna.UI2.WinForms
+Imports MySql.Data.MySqlClient
+
+Public Class frmDepartmentAdd
+    Public Property ModeEdit As Boolean = False
+    Public Property KodeLama As String = ""
+    Private ShadowForm As New Guna.UI2.WinForms.Guna2ShadowForm()
+
+#Region "Private Method"
+
+    Private Function ValidasiInput() As Boolean
+
+        '========================================
+        ' VALIDASI KODE
+        '========================================
+        If String.IsNullOrWhiteSpace(tkode.Text) Then
+
+            MessageBox.Show("Kode department belum diisi.", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            tkode.Focus()
+
+            Return False
+
+        End If
+
+        '========================================
+        ' VALIDASI NAMA
+        '========================================
+        If String.IsNullOrWhiteSpace(tNama.Text) Then
+
+            MessageBox.Show("Nama department belum diisi.", "Validasi", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            tNama.Focus()
+
+            Return False
+
+        End If
+
+
+        Return True
+
+    End Function
+
+#End Region
+
+#Region "Button"
+
+    Private Sub bClose_Click(sender As Object, e As EventArgs) Handles bClose.Click
+
+        Me.DialogResult = DialogResult.Cancel
+        Me.Close()
+
+    End Sub
+
+
+    Private Sub bBatal_Click(sender As Object, e As EventArgs) Handles bBatal.Click
+
+        Me.DialogResult = DialogResult.Cancel
+        Me.Close()
+
+    End Sub
+
+
+    Private Sub bSimpan_Click(sender As Object, e As EventArgs) Handles bSimpan.Click
+
+        '========================================
+        ' VALIDASI INPUT
+        '========================================
+
+        If Not ValidasiInput() Then
+            Return
+        End If
+
+        Using conn As New MySqlConnection(sambung)
+            conn.Open()
+            Dim mTransaksi As MySqlTransaction = conn.BeginTransaction()
+            Try
+                Using comm As New MySqlCommand("insert into sadepartment (ffckode,ffcnama) values(@kode,@nama)", conn, mTransaksi)
+                    comm.Parameters.AddWithValue("@kode", tkode.Text)
+                    comm.Parameters.AddWithValue("@nama", tNama.Text)
+                    comm.ExecuteNonQuery()
+                End Using
+                mTransaksi.Commit()
+                PesanPopupSukses("Sukses", "Kode Department : " & tkode.Text & " berhasil di simpan ")
+                Me.DialogResult = DialogResult.OK
+                Me.Close()
+            Catch ex As MySqlException
+                mTransaksi.Rollback()
+                PesanPopupError("Error MySQL: Kesalahan Database", ex.Message)
+            Catch ex As Exception
+                mTransaksi.Rollback()
+                PesanPopupError("Error umum: Proses dibatalkan", ex.Message)
+            End Try
+        End Using
+
+    End Sub
+
+    Private Sub frmDepartmentAdd_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ShadowForm.SetShadowForm(Me)
+    End Sub
+
+    Private Sub KontrolC_TextChanged(sender As Object, e As EventArgs) Handles tNama.TextChanged, tkode.TextChanged
+
+        Dim tb As Guna2TextBox = CType(sender, Guna2TextBox)
+
+        If tb.Text.Length > 0 Then
+            '    Simpan posisi kursor
+            Dim cursorPos As Integer = tb.SelectionStart
+
+            'Formatkan:  huruf pertama kapital, sisanya huruf kecil
+            Dim text As String = tb.Text
+            Dim formatted As String = Char.ToUpper(text(0)) & text.Substring(1).ToLower()
+
+            If tb.Text <> formatted Then
+                tb.Text = formatted
+                tb.SelectionStart = cursorPos ' kembalikan posisi kursor
+            End If
+        End If
+    End Sub
+
+    Private Sub KontrolT_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tNama.KeyPress, tkode.KeyPress
+        If e.KeyChar = ChrW(Keys.Enter) Then
+            SendKeys.Send("{TAB}")
+            e.Handled = True
+            Exit Sub
+        End If
+
+        ' Blokir karakter tanda kutip tunggal '
+        If e.KeyChar = "'"c Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub frmDepartmentAdd_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Me.BeginInvoke(New MethodInvoker(
+        Sub()
+            tkode.Focus()
+            tkode.Select()
+        End Sub))
+    End Sub
+
+#End Region
+
+End Class

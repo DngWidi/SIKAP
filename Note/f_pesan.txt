@@ -1,0 +1,122 @@
+Imports Guna.UI2.WinForms.Suite
+Public Class f_pesan
+    Public Enum JenisPesan
+        Info
+        Sukses
+        [Error]
+        Peringatan
+        Konfirmasi
+    End Enum
+    Public Property HasilKonfirmasi As DialogResult = DialogResult.None
+    Public Sub TampilkanPesan(ByVal judul As String, ByVal isiPesan As String, ByVal jenis As JenisPesan)
+
+        lJudul.Text = judul
+        lPesan.Text = isiPesan
+
+        ' Reset hasil
+        HasilKonfirmasi = DialogResult.None
+
+        ' Reset tombol
+        bOk.Visible = False
+        bYes.Visible = False
+        bNo.Visible = False
+
+        Select Case jenis
+
+            Case JenisPesan.Sukses
+
+                picIcon.Image = My.Resources.Success
+
+                BackColor = Color.FromArgb(255, 255, 255)
+
+                bOk.FillColor = Color.FromArgb(22, 163, 74)
+                bOk.Visible = True
+
+
+            Case JenisPesan.Error
+
+                picIcon.Image = My.Resources.Eror
+
+                BackColor = Color.FromArgb(255, 255, 255)
+
+                bOk.FillColor = Color.FromArgb(220, 53, 69)
+                bOk.Visible = True
+
+
+            Case JenisPesan.Peringatan
+
+                picIcon.Image = My.Resources.Warning
+
+                BackColor = Color.FromArgb(255, 255, 255)
+
+                bOk.FillColor = Color.FromArgb(245, 158, 11)
+                bOk.Visible = True
+
+
+            Case JenisPesan.Info
+
+                picIcon.Image = My.Resources.Info
+
+                BackColor = Color.FromArgb(255, 255, 255)
+
+                bOk.FillColor = Color.FromArgb(31, 95, 209)
+                bOk.Visible = True
+
+
+            Case JenisPesan.Konfirmasi
+
+                picIcon.Image = My.Resources.Question
+
+                BackColor = Color.FromArgb(255, 255, 255)
+
+                bYes.FillColor = Color.FromArgb(31, 95, 209)
+                bNo.FillColor = Color.FromArgb(226, 232, 240)
+
+                bYes.ForeColor = Color.White
+                bNo.ForeColor = Color.FromArgb(51, 65, 85)
+
+                bYes.Visible = True
+                bNo.Visible = True
+
+        End Select
+
+        Me.ShowDialog()
+
+    End Sub
+    Private Sub bOk_Click(ByVal sender As Object, ByVal e As EventArgs) Handles bOk.Click
+
+        HasilKonfirmasi = DialogResult.OK
+
+        Me.DialogResult = DialogResult.OK
+
+    End Sub
+
+
+    '==========================================================
+    ' BUTTON YES
+    '==========================================================
+
+    Private Sub bYes_Click(ByVal sender As Object, ByVal e As EventArgs) Handles bYes.Click
+
+        HasilKonfirmasi = DialogResult.Yes
+
+        Me.DialogResult = DialogResult.Yes
+
+    End Sub
+
+
+    '==========================================================
+    ' BUTTON NO
+    '==========================================================
+
+    Private Sub bNo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles bNo.Click
+
+        HasilKonfirmasi = DialogResult.No
+
+        Me.DialogResult = DialogResult.No
+
+    End Sub
+
+
+
+End Class

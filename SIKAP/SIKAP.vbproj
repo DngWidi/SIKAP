@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DB986C1A-DA1F-4E3B-B505-E24B5A382396}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>SIKAP.My.MyApplication</StartupObject>
+    <RootNamespace>SIKAP</RootNamespace>
+    <AssemblyName>SIKAP</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>SIKAP.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>SIKAP.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Guna.UI2">
+      <HintPath>..\..\..\Guna_UI_Framework_Ultimate_v2.0.0.1\Guna_UI_Framework_Ultimate_v2.0.0.1\Guna.UI-Framework-Lib-master\Guna.UI2 WinForms\.net 4.0\Guna.UI2.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.25.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="f_pesan.Designer.vb">
+      <DependentUpon>f_pesan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="f_pesan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master Data\Form\frmDepartmentAdd.Designer.vb">
+      <DependentUpon>frmDepartmentAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master Data\Form\frmDepartmentAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master Data\uf_bagian.Designer.vb">
+      <DependentUpon>uf_bagian.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master Data\uf_bagian.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Master Data\uf_department.Designer.vb">
+      <DependentUpon>uf_department.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master Data\uf_department.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Menu_Utama.Designer.vb">
+      <DependentUpon>Menu_Utama.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Menu_Utama.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Models\Pagination.vb" />
+    <Compile Include="Module\Sambungan.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Theme\Thememanager.vb" />
+    <Compile Include="UserControl\ucPagination.Designer.vb">
+      <DependentUpon>ucPagination.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ucPagination.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="f_pesan.resx">
+      <DependentUpon>f_pesan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master Data\Form\frmDepartmentAdd.resx">
+      <DependentUpon>frmDepartmentAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master Data\uf_bagian.resx">
+      <DependentUpon>uf_bagian.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master Data\uf_department.resx">
+      <DependentUpon>uf_department.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu_Utama.resx">
+      <DependentUpon>Menu_Utama.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\ucPagination.resx">
+      <DependentUpon>ucPagination.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Attendance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Dashboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Employee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Leave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Masterdata.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Overtime.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Payrol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Performance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Recruitment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Report.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Resign.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Selfservice.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Calonpegawai.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Interview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Kandidat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Seleksi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Lowongan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Kontrak.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Bagian.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Department.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Kalender.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Kodebiaya.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Jabatan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Kodeabsen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Tambah.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\SearchW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Eror.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Info.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Question.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Success.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Warning.gif" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>
