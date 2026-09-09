@@ -130,38 +130,73 @@ Public Class frmSertifikatAdd
 #End Region
 
 #Region "MODE EDIT"
-
     Private Sub ModeEdit()
+        '========================================
+        ' DATA SERTIFIKAT
+        '========================================
         tsertifikat.Text = NamaSertifikat
         tpenerbit.Text = Penerbit
         tnosertifikat.Text = NomorSertifikat
 
+
+        '========================================
+        ' TANGGAL TERBIT
+        '========================================
         If TanggalTerbit <> Date.MinValue Then
             dtglterbit.Value = TanggalTerbit
         Else
             dtglterbit.Value = Date.Now
         End If
+
+
+        '========================================
+        ' TANGGAL KADALUARSA
+        '========================================
         If TanggalKadaluarsa.HasValue Then
             dtglkadaluarso.Value = TanggalKadaluarsa.Value
             dtglkadaluarso.Checked = True
         Else
             dtglkadaluarso.Value = Date.Now
             dtglkadaluarso.Checked = False
+
         End If
+
+
+        '========================================
+        ' FILE
+        '========================================
+
+        'Nama file yang sudah tersimpan
         _selectedFileName = FileName
-        _selectedFilePath = FilePath
+
+        'JANGAN menganggap file lama sebagai
+        'file lokal yang baru dipilih.
+        _selectedFilePath = String.Empty
+
+        'Path file yang sudah tersimpan
         _storedFilePath = StoredFilePath
 
+
+        'Tampilkan nama file
         If Not String.IsNullOrWhiteSpace(_selectedFileName) Then
             tfile.Text = _selectedFileName
         Else
             tfile.Clear()
         End If
+
+
+        '========================================
+        ' KETERANGAN
+        '========================================
         tketerangan.Text = Keterangan
+
+
+        '========================================
+        ' FOCUS
+        '========================================
         tsertifikat.Focus()
 
     End Sub
-
 #End Region
 
 #Region "CLEAR FORM"
@@ -197,6 +232,8 @@ Public Class frmSertifikatAdd
 
             dialog.FilterIndex = 1
             dialog.Multiselect = False
+            dialog.CheckFileExists = True
+            dialog.CheckPathExists = True
 
             If dialog.ShowDialog() = DialogResult.OK Then
                 _selectedFilePath = dialog.FileName

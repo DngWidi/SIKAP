@@ -65,7 +65,7 @@ Public Class uf_department
                 End Using
             End Using
         Catch ex As Exception
-            PesanPopupError("Error", "Gagal mengambil jumlah data jabatan !!")
+            PesanPopupError("Error", "Gagal mengambil jumlah data department !!")
             Return 0
         End Try
 

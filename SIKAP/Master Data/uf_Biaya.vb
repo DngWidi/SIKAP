@@ -66,7 +66,7 @@ Public Class uf_Biaya
 
         Catch ex As Exception
 
-            PesanPopupError("Error", "Gagal memuat data jabatan !!" & vbCrLf & ex.Message)
+            PesanPopupError("Error", "Gagal memuat data biaya !!" & vbCrLf & ex.Message)
 
         End Try
 
