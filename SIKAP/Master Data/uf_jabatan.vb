@@ -1,14 +1,14 @@
 ﻿Imports Guna.UI2.WinForms
 Imports MySql.Data.MySqlClient
-Public Class uf_bagian
+Public Class uf_jabatan
     Private _keywordCari As String = ""
-    Private Sub DataBagian()
+    Private Sub DataJabatan()
 
         Try
             '========================================
             ' 1. HITUNG TOTAL RECORD
             '========================================
-            paginationBagian.TotalRecord = GetTotalRecord()
+            paginationJabatan.TotalRecord = GetTotalRecord()
 
 
 
@@ -16,16 +16,16 @@ Public Class uf_bagian
             ' 2. PASTIKAN CURRENT PAGE VALID
             '========================================
 
-            If paginationBagian.CurrentPage > paginationBagian.TotalPage Then
+            If paginationJabatan.CurrentPage > paginationJabatan.TotalPage Then
 
-                paginationBagian.CurrentPage = paginationBagian.TotalPage
+                paginationJabatan.CurrentPage = paginationJabatan.TotalPage
 
             End If
 
 
-            If paginationBagian.CurrentPage < 1 Then
+            If paginationJabatan.CurrentPage < 1 Then
 
-                paginationBagian.CurrentPage = 1
+                paginationJabatan.CurrentPage = 1
 
             End If
             '========================================
@@ -37,16 +37,16 @@ Public Class uf_bagian
 
                 conn.Open()
 
-                Dim sql As String = "SELECT ffcbag AS `Kode`,ffcnama As `Nama Bagian` FROM sabagian WHERE ffcbag LIKE @Cari OR ffcnama LIKE @Cari ORDER BY ffcbag LIMIT @Limit OFFSET @Offset"
+                Dim sql As String = "SELECT ffckls AS `Kode`,ffcnama As `Nama Jabatan` FROM sajabatan WHERE ffckls LIKE @Cari OR ffcnama LIKE @Cari ORDER BY ffckls LIMIT @Limit OFFSET @Offset"
 
                 Using cmd As New MySqlCommand(sql, conn)
                     '========================================
                     ' PARAMETER PENCARIAN
                     '========================================
                     cmd.Parameters.Add("@Cari", MySqlDbType.VarChar).Value = "%" & _keywordCari & "%"
-                    cmd.Parameters.Add("@Limit", MySqlDbType.Int32).Value = paginationBagian.PageSize
+                    cmd.Parameters.Add("@Limit", MySqlDbType.Int32).Value = paginationJabatan.PageSize
 
-                    cmd.Parameters.Add("@Offset", MySqlDbType.Int32).Value = paginationBagian.Offset
+                    cmd.Parameters.Add("@Offset", MySqlDbType.Int32).Value = paginationJabatan.Offset
 
 
                     Dim dt As New DataTable()
@@ -56,7 +56,7 @@ Public Class uf_bagian
                     End Using
 
 
-                    dgvBagian.DataSource = dt
+                    dgvJabatan.DataSource = dt
 
                 End Using
 
@@ -66,53 +66,51 @@ Public Class uf_bagian
 
         Catch ex As Exception
 
-            PesanPopupError("Error", "Gagal memuat data bagian !!" & vbCrLf & ex.Message)
+            PesanPopupError("Error", "Gagal memuat data jabatan !!" & vbCrLf & ex.Message)
 
         End Try
 
     End Sub
     Private Sub UpdatePaginationInfo()
 
-        lblInfo.Text = String.Format("Menampilkan {0} - {1} dari {2} Data", paginationBagian.StartRecord, paginationBagian.EndRecord, paginationBagian.TotalRecord)
+        lblInfo.Text = String.Format("Menampilkan {0} - {1} dari {2} Data", paginationJabatan.StartRecord, paginationJabatan.EndRecord, paginationJabatan.TotalRecord)
 
     End Sub
-    Private Sub paginationBagian_PageChanged(sender As Object, e As EventArgs) Handles paginationBagian.PageChanged
-
-        DataBagian()
-
+    Private Sub paginationJabatan_PageChanged(sender As Object, e As EventArgs) Handles paginationJabatan.PageChanged
+        DataJabatan()
     End Sub
 
-    Private Sub uf_bagian_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ' Style Grid
-        ApplyGridTheme(dgvBagian)
-
-
-        ' Load Data
-        DataBagian()
-    End Sub
 
     Private Function GetTotalRecord() As Integer
         Try
             Using conn As New MySqlConnection(sambung)
                 conn.Open()
-                Dim mysql As String = "SELECT COUNT(*)      FROM sabagian  WHERE ffcbag LIKE @Cari  OR ffcnama LIKE @Cari"
+                Dim mysql As String = "SELECT COUNT(*) FROM sajabatan  WHERE ffckls LIKE @Cari  OR ffcnama LIKE @Cari"
                 Using comm As New MySqlCommand(mysql, conn)
                     comm.Parameters.Add("@Cari", MySqlDbType.VarChar).Value = "%" & _keywordCari & "%"
                     Return Convert.ToInt32(comm.ExecuteScalar())
                 End Using
             End Using
         Catch ex As Exception
-            PesanPopupError("Error", "Gagal mengambil jumlah data bagian !!")
+            PesanPopupError("Error", "Gagal mengambil jumlah data jabatan !!")
             Return 0
         End Try
 
     End Function
+    Private Sub uf_jabatan_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ' Style Grid
+        ApplyGridTheme(dgvJabatan)
+
+
+        ' Load Data
+        DataJabatan()
+    End Sub
     Private Sub bTambah_Click(sender As Object, e As EventArgs) Handles bTambah.Click
-        Using frm As New frmBagianAdd()
+        Using frm As New frmJabatanAdd()
 
             If frm.ShowDialog(Me.FindForm()) = DialogResult.OK Then
 
-                DataBagian()
+                DataJabatan()
 
             End If
 
@@ -124,9 +122,9 @@ Public Class uf_bagian
         '========================================
         ' CEK APAKAH ADA DATA YANG DIPILIH
         '========================================
-        If dgvBagian.CurrentRow Is Nothing Then
+        If dgvJabatan.CurrentRow Is Nothing Then
 
-            PesanPopupPeringatan("Pilih Bagian", "Silakan pilih Bagian yang ingin diedit.")
+            PesanPopupPeringatan("Pilih Jabatan", "Silakan pilih jabatan yang ingin diedit.")
 
             Exit Sub
 
@@ -137,16 +135,16 @@ Public Class uf_bagian
         ' AMBIL DATA DARI ROW TERPILIH
         '========================================
         Dim kode As String =
-        dgvBagian.CurrentRow.Cells("Kode").Value.ToString()
+        dgvJabatan.CurrentRow.Cells("Kode").Value.ToString()
 
         Dim nama As String =
-        dgvBagian.CurrentRow.Cells("Nama Bagian").Value.ToString()
+        dgvJabatan.CurrentRow.Cells("Nama Jabatan").Value.ToString()
 
 
         '========================================
         ' BUKA FORM EDIT
         '========================================
-        Using frm As New frmBagianAdd()
+        Using frm As New frmJabatanAdd()
 
             frm.ModeEdit = True
             frm.KodeLama = kode
@@ -157,7 +155,7 @@ Public Class uf_bagian
 
             If frm.ShowDialog(Me.FindForm()) = DialogResult.OK Then
 
-                DataBagian()
+                DataJabatan()
 
             End If
 
@@ -169,9 +167,9 @@ Public Class uf_bagian
         '========================================
         ' CEK DATA YANG DIPILIH
         '========================================
-        If dgvBagian.CurrentRow Is Nothing Then
+        If dgvJabatan.CurrentRow Is Nothing Then
 
-            PesanPopupPeringatan("Pilih Bagian", "Silakan pilih bagian yang ingin dihapus.")
+            PesanPopupPeringatan("Pilih Jabatan", "Silakan pilih jabatan yang ingin dihapus.")
 
             Exit Sub
 
@@ -182,17 +180,17 @@ Public Class uf_bagian
         ' AMBIL DATA
         '========================================
         Dim kode As String =
-            dgvBagian.CurrentRow.Cells("Kode").Value.ToString()
+            dgvJabatan.CurrentRow.Cells("Kode").Value.ToString()
 
         Dim nama As String =
-            dgvBagian.CurrentRow.Cells("Nama Bagian").Value.ToString()
+            dgvJabatan.CurrentRow.Cells("Nama Jabatan").Value.ToString()
 
 
         '========================================
         ' KONFIRMASI
         '========================================
         Dim hasil As DialogResult =
-            PesanPopupKonfirmasi("Hapus Bagian", "Apakah Anda yakin ingin menghapus Bagian berikut?" & vbCrLf & vbCrLf & "Kode : " & kode & vbCrLf & "Nama : " & nama)
+            PesanPopupKonfirmasi("Hapus Jabatan", "Apakah Anda yakin ingin menghapus jabatan berikut?" & vbCrLf & vbCrLf & "Kode : " & kode & vbCrLf & "Nama : " & nama)
 
 
         If hasil <> DialogResult.Yes Then
@@ -211,7 +209,7 @@ Public Class uf_bagian
 
                 conn.Open()
 
-                Dim sql As String = "DELETE FROM sabagian WHERE ffcbag = @Kode"
+                Dim sql As String = "DELETE FROM sajabatan WHERE ffckls = @Kode"
 
                 Using comm As New MySqlCommand(sql, conn)
 
@@ -227,18 +225,18 @@ Public Class uf_bagian
             '========================================
             ' PESAN SUKSES
             '========================================
-            PesanPopupSukses("Sukses", "Bagian berhasil dihapus.")
+            PesanPopupSukses("Sukses", "Jabatan berhasil dihapus.")
 
 
             '========================================
             ' REFRESH DATA
             '========================================
-            DataBagian()
+            DataJabatan()
 
 
         Catch ex As MySqlException
 
-            PesanPopupError("Error", "Gagal menghapus bagian !!" & vbCrLf & ex.Message)
+            PesanPopupError("Error", "Gagal menghapus jabatan !!" & vbCrLf & ex.Message)
 
         Catch ex As Exception
 
@@ -257,13 +255,13 @@ Public Class uf_bagian
         '========================================
         ' KEMBALI KE HALAMAN 1
         '========================================
-        paginationBagian.CurrentPage = 1
+        paginationJabatan.CurrentPage = 1
 
 
         '========================================
         ' LOAD DATA HASIL PENCARIAN
         '========================================
-        DataBagian()
+        DataJabatan()
 
     End Sub
     Private Sub tPencarian_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tPencarian.KeyPress
@@ -311,13 +309,15 @@ Public Class uf_bagian
         '========================================
         ' KEMBALI KE HALAMAN 1
         '========================================
-        paginationBagian.CurrentPage = 1
+        paginationJabatan.CurrentPage = 1
 
 
         '========================================
         ' LOAD ULANG DATA
         '========================================
-        DataBagian()
+        DataJabatan()
 
     End Sub
+
+
 End Class

@@ -32,7 +32,6 @@ Partial Class f_pesan
         Me.picIcon = New System.Windows.Forms.PictureBox()
         Me.lPesan = New System.Windows.Forms.Label()
         Me.pnlHeader = New Guna.UI2.WinForms.Guna2Panel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lJudul = New System.Windows.Forms.Label()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.pnlMain.SuspendLayout()
@@ -40,7 +39,6 @@ Partial Class f_pesan
         Me.pnlFooter.SuspendLayout()
         CType(Me.picIcon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeader.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlMain
@@ -159,7 +157,6 @@ Partial Class f_pesan
         '
         'pnlHeader
         '
-        Me.pnlHeader.Controls.Add(Me.PictureBox1)
         Me.pnlHeader.Controls.Add(Me.lJudul)
         Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeader.FillColor = System.Drawing.Color.White
@@ -168,15 +165,6 @@ Partial Class f_pesan
         Me.pnlHeader.ShadowDecoration.Parent = Me.pnlHeader
         Me.pnlHeader.Size = New System.Drawing.Size(466, 60)
         Me.pnlHeader.TabIndex = 0
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Location = New System.Drawing.Point(20, 16)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(28, 28)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 1
-        Me.PictureBox1.TabStop = False
         '
         'lJudul
         '
@@ -215,14 +203,12 @@ Partial Class f_pesan
         CType(Me.picIcon, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents pnlMain As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents pnlHeader As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents pnlBody As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents lJudul As Label
     Friend WithEvents pnlFooter As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents picIcon As PictureBox

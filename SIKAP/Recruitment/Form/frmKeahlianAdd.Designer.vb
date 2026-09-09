@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmDepartmentAdd
+Partial Class frmKeahlianAdd
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,11 +22,14 @@ Partial Class frmDepartmentAdd
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.pnlMain = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlBody = New Guna.UI2.WinForms.Guna2Panel()
-        Me.tNama = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.ctingkat = New Guna.UI2.WinForms.Guna2ComboBox()
+        Me.tkeahlian = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.tketerangan = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.tkode = New Guna.UI2.WinForms.Guna2TextBox()
         Me.lblKode = New System.Windows.Forms.Label()
         Me.pnlFooter = New Guna.UI2.WinForms.Guna2Panel()
         Me.flpFooterButton = New System.Windows.Forms.FlowLayoutPanel()
@@ -38,6 +41,7 @@ Partial Class frmDepartmentAdd
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.pnlHeaderLine = New Guna.UI2.WinForms.Guna2Panel()
         Me.lblTitle = New System.Windows.Forms.Label()
+        Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.pnlMain.SuspendLayout()
         Me.pnlBody.SuspendLayout()
         Me.pnlFooter.SuspendLayout()
@@ -47,7 +51,6 @@ Partial Class frmDepartmentAdd
         '
         'pnlMain
         '
-        Me.pnlMain.BorderColor = System.Drawing.Color.White
         Me.pnlMain.Controls.Add(Me.pnlBody)
         Me.pnlMain.Controls.Add(Me.pnlFooter)
         Me.pnlMain.Controls.Add(Me.pnlHeader)
@@ -55,94 +58,128 @@ Partial Class frmDepartmentAdd
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
         Me.pnlMain.Name = "pnlMain"
         Me.pnlMain.ShadowDecoration.Parent = Me.pnlMain
-        Me.pnlMain.Size = New System.Drawing.Size(484, 301)
-        Me.pnlMain.TabIndex = 0
+        Me.pnlMain.Size = New System.Drawing.Size(430, 376)
+        Me.pnlMain.TabIndex = 3
         '
         'pnlBody
         '
-        Me.pnlBody.Controls.Add(Me.tNama)
+        Me.pnlBody.Controls.Add(Me.ctingkat)
+        Me.pnlBody.Controls.Add(Me.tkeahlian)
+        Me.pnlBody.Controls.Add(Me.tketerangan)
+        Me.pnlBody.Controls.Add(Me.Label3)
         Me.pnlBody.Controls.Add(Me.Label1)
-        Me.pnlBody.Controls.Add(Me.tkode)
         Me.pnlBody.Controls.Add(Me.lblKode)
         Me.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlBody.Location = New System.Drawing.Point(0, 70)
         Me.pnlBody.Name = "pnlBody"
         Me.pnlBody.Padding = New System.Windows.Forms.Padding(24, 18, 24, 10)
         Me.pnlBody.ShadowDecoration.Parent = Me.pnlBody
-        Me.pnlBody.Size = New System.Drawing.Size(484, 166)
-        Me.pnlBody.TabIndex = 3
+        Me.pnlBody.Size = New System.Drawing.Size(430, 241)
+        Me.pnlBody.TabIndex = 4
         '
-        'tNama
+        'ctingkat
         '
-        Me.tNama.BorderColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(219, Byte), Integer))
-        Me.tNama.BorderRadius = 6
-        Me.tNama.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.tNama.DefaultText = ""
-        Me.tNama.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.tNama.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.tNama.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.tNama.DisabledState.Parent = Me.tNama
-        Me.tNama.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.tNama.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.tNama.FocusedState.Parent = Me.tNama
-        Me.tNama.ForeColor = System.Drawing.Color.FromArgb(CType(CType(31, Byte), Integer), CType(CType(41, Byte), Integer), CType(CType(55, Byte), Integer))
-        Me.tNama.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.tNama.HoverState.Parent = Me.tNama
-        Me.tNama.Location = New System.Drawing.Point(15, 102)
-        Me.tNama.Name = "tNama"
-        Me.tNama.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tNama.PlaceholderText = "Human Resources"
-        Me.tNama.SelectedText = ""
-        Me.tNama.ShadowDecoration.Parent = Me.tNama
-        Me.tNama.Size = New System.Drawing.Size(452, 38)
-        Me.tNama.TabIndex = 3
+        Me.ctingkat.BackColor = System.Drawing.Color.Transparent
+        Me.ctingkat.BorderRadius = 6
+        Me.ctingkat.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.ctingkat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ctingkat.FocusedColor = System.Drawing.Color.Empty
+        Me.ctingkat.FocusedState.Parent = Me.ctingkat
+        Me.ctingkat.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.ctingkat.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
+        Me.ctingkat.FormattingEnabled = True
+        Me.ctingkat.HoverState.Parent = Me.ctingkat
+        Me.ctingkat.ItemHeight = 30
+        Me.ctingkat.ItemsAppearance.Parent = Me.ctingkat
+        Me.ctingkat.Location = New System.Drawing.Point(15, 92)
+        Me.ctingkat.Name = "ctingkat"
+        Me.ctingkat.ShadowDecoration.Parent = Me.ctingkat
+        Me.ctingkat.Size = New System.Drawing.Size(403, 36)
+        Me.ctingkat.TabIndex = 5
+        '
+        'tkeahlian
+        '
+        Me.tkeahlian.BorderColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.tkeahlian.BorderRadius = 6
+        Me.tkeahlian.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.tkeahlian.DefaultText = ""
+        Me.tkeahlian.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.tkeahlian.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.tkeahlian.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.tkeahlian.DisabledState.Parent = Me.tkeahlian
+        Me.tkeahlian.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.tkeahlian.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.tkeahlian.FocusedState.Parent = Me.tkeahlian
+        Me.tkeahlian.ForeColor = System.Drawing.Color.FromArgb(CType(CType(31, Byte), Integer), CType(CType(41, Byte), Integer), CType(CType(55, Byte), Integer))
+        Me.tkeahlian.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.tkeahlian.HoverState.Parent = Me.tkeahlian
+        Me.tkeahlian.Location = New System.Drawing.Point(15, 32)
+        Me.tkeahlian.Name = "tkeahlian"
+        Me.tkeahlian.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.tkeahlian.PlaceholderText = ""
+        Me.tkeahlian.SelectedText = ""
+        Me.tkeahlian.ShadowDecoration.Parent = Me.tkeahlian
+        Me.tkeahlian.Size = New System.Drawing.Size(404, 38)
+        Me.tkeahlian.TabIndex = 4
+        '
+        'tketerangan
+        '
+        Me.tketerangan.BorderColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.tketerangan.BorderRadius = 6
+        Me.tketerangan.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.tketerangan.DefaultText = ""
+        Me.tketerangan.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.tketerangan.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.tketerangan.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.tketerangan.DisabledState.Parent = Me.tketerangan
+        Me.tketerangan.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.tketerangan.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.tketerangan.FocusedState.Parent = Me.tketerangan
+        Me.tketerangan.ForeColor = System.Drawing.Color.FromArgb(CType(CType(31, Byte), Integer), CType(CType(41, Byte), Integer), CType(CType(55, Byte), Integer))
+        Me.tketerangan.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.tketerangan.HoverState.Parent = Me.tketerangan
+        Me.tketerangan.Location = New System.Drawing.Point(15, 153)
+        Me.tketerangan.Multiline = True
+        Me.tketerangan.Name = "tketerangan"
+        Me.tketerangan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.tketerangan.PlaceholderText = ""
+        Me.tketerangan.SelectedText = ""
+        Me.tketerangan.ShadowDecoration.Parent = Me.tketerangan
+        Me.tketerangan.Size = New System.Drawing.Size(404, 82)
+        Me.tketerangan.TabIndex = 6
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(15, 135)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(67, 15)
+        Me.Label3.TabIndex = 3
+        Me.Label3.Text = "Keterangan"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(26, 84)
+        Me.Label1.Location = New System.Drawing.Point(15, 74)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(106, 15)
-        Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Nama Department"
-        '
-        'tkode
-        '
-        Me.tkode.BorderColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(219, Byte), Integer))
-        Me.tkode.BorderRadius = 6
-        Me.tkode.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.tkode.DefaultText = ""
-        Me.tkode.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.tkode.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.tkode.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.tkode.DisabledState.Parent = Me.tkode
-        Me.tkode.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.tkode.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.tkode.FocusedState.Parent = Me.tkode
-        Me.tkode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(31, Byte), Integer), CType(CType(41, Byte), Integer), CType(CType(55, Byte), Integer))
-        Me.tkode.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.tkode.HoverState.Parent = Me.tkode
-        Me.tkode.Location = New System.Drawing.Point(15, 36)
-        Me.tkode.Name = "tkode"
-        Me.tkode.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tkode.PlaceholderText = "Contoh : A-Z"
-        Me.tkode.SelectedText = ""
-        Me.tkode.ShadowDecoration.Parent = Me.tkode
-        Me.tkode.Size = New System.Drawing.Size(452, 38)
-        Me.tkode.TabIndex = 1
+        Me.Label1.Size = New System.Drawing.Size(55, 15)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "Tingkat *"
         '
         'lblKode
         '
         Me.lblKode.AutoSize = True
         Me.lblKode.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblKode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.lblKode.Location = New System.Drawing.Point(26, 18)
+        Me.lblKode.Location = New System.Drawing.Point(15, 13)
         Me.lblKode.Name = "lblKode"
-        Me.lblKode.Size = New System.Drawing.Size(101, 15)
+        Me.lblKode.Size = New System.Drawing.Size(60, 15)
         Me.lblKode.TabIndex = 0
-        Me.lblKode.Text = "Kode Department"
+        Me.lblKode.Text = "Keahlian *"
         '
         'pnlFooter
         '
@@ -150,18 +187,18 @@ Partial Class frmDepartmentAdd
         Me.pnlFooter.Controls.Add(Me.flpFooterButton)
         Me.pnlFooter.Controls.Add(Me.pnlFooterLine)
         Me.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlFooter.Location = New System.Drawing.Point(0, 236)
+        Me.pnlFooter.Location = New System.Drawing.Point(0, 311)
         Me.pnlFooter.Name = "pnlFooter"
         Me.pnlFooter.ShadowDecoration.Parent = Me.pnlFooter
-        Me.pnlFooter.Size = New System.Drawing.Size(484, 65)
-        Me.pnlFooter.TabIndex = 2
+        Me.pnlFooter.Size = New System.Drawing.Size(430, 65)
+        Me.pnlFooter.TabIndex = 3
         '
         'flpFooterButton
         '
         Me.flpFooterButton.Controls.Add(Me.bBatal)
         Me.flpFooterButton.Controls.Add(Me.bSimpan)
         Me.flpFooterButton.Dock = System.Windows.Forms.DockStyle.Right
-        Me.flpFooterButton.Location = New System.Drawing.Point(274, 1)
+        Me.flpFooterButton.Location = New System.Drawing.Point(220, 1)
         Me.flpFooterButton.Name = "flpFooterButton"
         Me.flpFooterButton.Padding = New System.Windows.Forms.Padding(0, 14, 14, 0)
         Me.flpFooterButton.Size = New System.Drawing.Size(210, 64)
@@ -212,7 +249,7 @@ Partial Class frmDepartmentAdd
         Me.pnlFooterLine.Location = New System.Drawing.Point(0, 0)
         Me.pnlFooterLine.Name = "pnlFooterLine"
         Me.pnlFooterLine.ShadowDecoration.Parent = Me.pnlFooterLine
-        Me.pnlFooterLine.Size = New System.Drawing.Size(484, 1)
+        Me.pnlFooterLine.Size = New System.Drawing.Size(430, 1)
         Me.pnlFooterLine.TabIndex = 0
         '
         'pnlHeader
@@ -226,8 +263,8 @@ Partial Class frmDepartmentAdd
         Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.ShadowDecoration.Parent = Me.pnlHeader
-        Me.pnlHeader.Size = New System.Drawing.Size(484, 70)
-        Me.pnlHeader.TabIndex = 0
+        Me.pnlHeader.Size = New System.Drawing.Size(430, 70)
+        Me.pnlHeader.TabIndex = 1
         '
         'bClose
         '
@@ -240,7 +277,7 @@ Partial Class frmDepartmentAdd
         Me.bClose.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.bClose.HoverState.Parent = Me.bClose
         Me.bClose.ImageSize = New System.Drawing.Size(16, 16)
-        Me.bClose.Location = New System.Drawing.Point(450, 12)
+        Me.bClose.Location = New System.Drawing.Point(396, 12)
         Me.bClose.Name = "bClose"
         Me.bClose.ShadowDecoration.Parent = Me.bClose
         Me.bClose.Size = New System.Drawing.Size(36, 36)
@@ -253,11 +290,11 @@ Partial Class frmDepartmentAdd
         Me.lblDescription.BackColor = System.Drawing.Color.Transparent
         Me.lblDescription.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDescription.ForeColor = System.Drawing.Color.White
-        Me.lblDescription.Location = New System.Drawing.Point(23, 40)
+        Me.lblDescription.Location = New System.Drawing.Point(36, 40)
         Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(248, 15)
+        Me.lblDescription.Size = New System.Drawing.Size(222, 15)
         Me.lblDescription.TabIndex = 1
-        Me.lblDescription.Text = "Tambahkan department baru ke dalam sistem"
+        Me.lblDescription.Text = "Tambahkan bagian baru ke dalam sistem"
         '
         'pnlHeaderLine
         '
@@ -266,7 +303,7 @@ Partial Class frmDepartmentAdd
         Me.pnlHeaderLine.Location = New System.Drawing.Point(0, 69)
         Me.pnlHeaderLine.Name = "pnlHeaderLine"
         Me.pnlHeaderLine.ShadowDecoration.Parent = Me.pnlHeaderLine
-        Me.pnlHeaderLine.Size = New System.Drawing.Size(484, 1)
+        Me.pnlHeaderLine.Size = New System.Drawing.Size(430, 1)
         Me.pnlHeaderLine.TabIndex = 1
         '
         'lblTitle
@@ -275,26 +312,31 @@ Partial Class frmDepartmentAdd
         Me.lblTitle.BackColor = System.Drawing.Color.Transparent
         Me.lblTitle.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitle.ForeColor = System.Drawing.Color.White
-        Me.lblTitle.Location = New System.Drawing.Point(24, 12)
+        Me.lblTitle.Location = New System.Drawing.Point(37, 12)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(189, 25)
+        Me.lblTitle.Size = New System.Drawing.Size(142, 25)
         Me.lblTitle.TabIndex = 0
-        Me.lblTitle.Text = "Tambah Department"
+        Me.lblTitle.Text = "Tambah Bagian"
         '
-        'frmDepartmentAdd
+        'Guna2Elipse1
+        '
+        Me.Guna2Elipse1.BorderRadius = 8
+        Me.Guna2Elipse1.TargetControl = Me
+        '
+        'frmKeahlianAdd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(484, 301)
+        Me.ClientSize = New System.Drawing.Size(430, 376)
+        Me.ControlBox = False
         Me.Controls.Add(Me.pnlMain)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmDepartmentAdd"
+        Me.Name = "frmKeahlianAdd"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "frmDepartmentAdd"
+        Me.Text = "frmKeahlianAdd"
         Me.pnlMain.ResumeLayout(False)
         Me.pnlBody.ResumeLayout(False)
         Me.pnlBody.PerformLayout()
@@ -307,19 +349,22 @@ Partial Class frmDepartmentAdd
     End Sub
 
     Friend WithEvents pnlMain As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents pnlHeader As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents pnlHeaderLine As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents lblDescription As Label
-    Friend WithEvents lblTitle As Label
-    Friend WithEvents bClose As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents pnlFooter As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents bBatal As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents pnlFooterLine As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents pnlBody As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents lblKode As Label
-    Friend WithEvents bSimpan As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents tNama As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents tkeahlian As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents tketerangan As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents Label3 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents tkode As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents lblKode As Label
+    Friend WithEvents pnlFooter As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents flpFooterButton As FlowLayoutPanel
+    Friend WithEvents bBatal As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents bSimpan As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents pnlFooterLine As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents pnlHeader As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents bClose As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents lblDescription As Label
+    Friend WithEvents pnlHeaderLine As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents lblTitle As Label
+    Friend WithEvents ctingkat As Guna.UI2.WinForms.Guna2ComboBox
+    Friend WithEvents Guna2Elipse1 As Guna.UI2.WinForms.Guna2Elipse
 End Class

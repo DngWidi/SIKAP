@@ -1,7 +1,7 @@
 ﻿Imports Guna.UI2.WinForms
 Imports MySql.Data.MySqlClient
 
-Public Class frmDepartmentAdd
+Public Class frmJabatanAdd
 
     Public Property ModeEdit As Boolean = False
     Public Property KodeLama As String = ""
@@ -18,7 +18,7 @@ Public Class frmDepartmentAdd
         '========================================
         If String.IsNullOrWhiteSpace(tkode.Text) Then
 
-            PesanPopupPeringatan("Validasi", "Kode department belum diisi.")
+            PesanPopupPeringatan("Validasi", "Kode Jabatan belum diisi.")
 
             tkode.Focus()
 
@@ -32,7 +32,7 @@ Public Class frmDepartmentAdd
         '========================================
         If String.IsNullOrWhiteSpace(tNama.Text) Then
 
-            PesanPopupPeringatan("Validasi", "Nama department belum diisi.")
+            PesanPopupPeringatan("Validasi", "Nama jabatan belum diisi.")
 
             tNama.Focus()
 
@@ -54,12 +54,12 @@ Public Class frmDepartmentAdd
 
                 conn.Open()
 
-                Dim sql As String = "SELECT COUNT(*) FROM sadepartment " & "WHERE ffckode = @kode"
+                Dim sql As String = "SELECT COUNT(*) FROM sajabatan " & "WHERE ffckls  = @kode"
 
                 ' Jika mode Edit, jangan anggap kode lama sebagai duplicate
                 If ModeEdit Then
 
-                    sql &= " AND ffckode <> @kodeLama"
+                    sql &= " AND ffckls <> @kodeLama"
 
                 End If
 
@@ -83,7 +83,7 @@ Public Class frmDepartmentAdd
 
         Catch ex As Exception
 
-            PesanPopupError("Error", "Gagal memeriksa kode department." & vbCrLf & ex.Message)
+            PesanPopupError("Error", "Gagal memeriksa kode jabatan." & vbCrLf & ex.Message)
 
             Return True
 
@@ -128,7 +128,7 @@ Public Class frmDepartmentAdd
         '========================================
         If CekKodeDepartment(tkode.Text.Trim()) Then
 
-            PesanPopupPeringatan("Kode Department", "Kode department '" & tkode.Text.Trim() & "' sudah digunakan.")
+            PesanPopupPeringatan("Kode Jabatan", "Kode jabatan '" & tkode.Text.Trim() & "' sudah digunakan.")
 
             tkode.Focus()
 
@@ -149,7 +149,7 @@ Public Class frmDepartmentAdd
                 ' MODE TAMBAH
                 '========================================
                 If Not ModeEdit Then
-                    Using comm As New MySqlCommand("INSERT INTO sadepartment " & "(ffckode, ffcnama) " & "VALUES (@kode, @nama)", conn, mTransaksi)
+                    Using comm As New MySqlCommand("INSERT INTO sajabatan " & "(ffckls, ffcnama) " & "VALUES (@kode, @nama)", conn, mTransaksi)
 
                         comm.Parameters.AddWithValue("@kode", tkode.Text.Trim())
                         comm.Parameters.AddWithValue("@nama", tNama.Text.Trim())
@@ -161,7 +161,7 @@ Public Class frmDepartmentAdd
                     mTransaksi.Commit()
 
 
-                    PesanPopupSukses("Sukses", "Kode Department : " & tkode.Text.Trim() & " berhasil disimpan.")
+                    PesanPopupSukses("Sukses", "Kode Jabatan : " & tkode.Text.Trim() & " berhasil disimpan.")
 
 
                     '========================================
@@ -169,7 +169,9 @@ Public Class frmDepartmentAdd
                     '========================================
                 Else
 
-                    Using comm As New MySqlCommand("UPDATE sadepartment SET " & "ffcnama = @nama " & "WHERE ffckode = @kodeLama", conn, mTransaksi)
+                    Using comm As New MySqlCommand("UPDATE sajabatan SET  " & "ffcnama = @nama " & "WHERE ffckls = @kodeLama", conn, mTransaksi)
+
+
 
                         comm.Parameters.AddWithValue("@nama", tNama.Text.Trim())
 
@@ -182,7 +184,7 @@ Public Class frmDepartmentAdd
                     mTransaksi.Commit()
 
 
-                    PesanPopupSukses("Sukses", "Department dengan kode : " & KodeLama & " berhasil diperbarui.")
+                    PesanPopupSukses("Sukses", "Jabatan dengan kode : " & KodeLama & " berhasil diperbarui.")
 
                 End If
 
@@ -288,5 +290,4 @@ Public Class frmDepartmentAdd
     End Sub
 
 #End Region
-
 End Class

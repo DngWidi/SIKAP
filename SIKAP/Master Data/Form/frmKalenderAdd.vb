@@ -1,290 +1,197 @@
 ﻿Imports Guna.UI2.WinForms
 Imports MySql.Data.MySqlClient
 
-Public Class frmDepartmentAdd
-
+Public Class frmKalenderAdd
     Public Property ModeEdit As Boolean = False
-    Public Property KodeLama As String = ""
+    Public Property TanggalLama As String = "" ' Menyimpan tanggal awal sebelum diedit (format: yyyy-MM-dd)
 
     Private ShadowForm As New Guna.UI2.WinForms.Guna2ShadowForm()
-
 
 #Region "Private Method"
 
     Private Function ValidasiInput() As Boolean
-
         '========================================
-        ' VALIDASI KODE
+        ' VALIDASI TANGGAL
         '========================================
-        If String.IsNullOrWhiteSpace(tkode.Text) Then
-
-            PesanPopupPeringatan("Validasi", "Kode department belum diisi.")
-
-            tkode.Focus()
-
+        If dTanggal.Value = DateTime.MinValue Then
+            PesanPopupPeringatan("Validasi", "Tanggal libur belum dipilih.")
+            dTanggal.Focus()
             Return False
-
         End If
 
-
         '========================================
-        ' VALIDASI NAMA
+        ' VALIDASI KETERANGAN
         '========================================
-        If String.IsNullOrWhiteSpace(tNama.Text) Then
-
-            PesanPopupPeringatan("Validasi", "Nama department belum diisi.")
-
-            tNama.Focus()
-
+        If String.IsNullOrWhiteSpace(tKeterangan.Text) Then
+            PesanPopupPeringatan("Validasi", "Keterangan libur belum diisi.")
+            tKeterangan.Focus()
             Return False
-
         End If
-
 
         Return True
-
     End Function
 
-
-    Private Function CekKodeDepartment(ByVal kode As String) As Boolean
-
+    Private Function CekTanggalLibur(ByVal tgl As String) As Boolean
         Try
-
             Using conn As New MySqlConnection(sambung)
-
                 conn.Open()
+                ' Kolom tanggal di database Anda adalah ffdtgl
+                Dim sql As String = "SELECT COUNT(*) FROM salibur WHERE ffdtgl = @tgl"
 
-                Dim sql As String = "SELECT COUNT(*) FROM sadepartment " & "WHERE ffckode = @kode"
-
-                ' Jika mode Edit, jangan anggap kode lama sebagai duplicate
+                ' Jika mode Edit dan tanggal tidak berubah, jangan anggap duplikat
                 If ModeEdit Then
-
-                    sql &= " AND ffckode <> @kodeLama"
-
+                    sql &= " AND ffdtgl <> @tglLama"
                 End If
 
-
                 Using comm As New MySqlCommand(sql, conn)
-
-                    comm.Parameters.AddWithValue("@kode", kode)
+                    comm.Parameters.AddWithValue("@tgl", tgl)
 
                     If ModeEdit Then
-                        comm.Parameters.AddWithValue("@kodeLama", KodeLama)
+                        comm.Parameters.AddWithValue("@tglLama", TanggalLama)
                     End If
 
-                    Dim jumlah As Integer =
-                        Convert.ToInt32(comm.ExecuteScalar())
-
+                    Dim jumlah As Integer = Convert.ToInt32(comm.ExecuteScalar())
                     Return jumlah > 0
-
                 End Using
-
             End Using
-
         Catch ex As Exception
-
-            PesanPopupError("Error", "Gagal memeriksa kode department." & vbCrLf & ex.Message)
-
+            PesanPopupError("Error", "Gagal memeriksa data tanggal libur." & vbCrLf & ex.Message)
             Return True
-
         End Try
-
     End Function
-
 
 #End Region
 
-
-#Region "Button"
+#Region "Button Events"
 
     Private Sub bClose_Click(sender As Object, e As EventArgs) Handles bClose.Click
-
         Me.DialogResult = DialogResult.Cancel
         Me.Close()
-
     End Sub
-
 
     Private Sub bBatal_Click(sender As Object, e As EventArgs) Handles bBatal.Click
-
         Me.DialogResult = DialogResult.Cancel
         Me.Close()
-
     End Sub
 
-
     Private Sub bSimpan_Click(sender As Object, e As EventArgs) Handles bSimpan.Click
-
         '========================================
-        ' VALIDASI INPUT
+        ' 1. VALIDASI INPUT
         '========================================
         If Not ValidasiInput() Then
             Return
         End If
 
+        Dim tanggalPilihStr As String = dTanggal.Value.ToString("yyyy-MM-dd")
 
         '========================================
-        ' CEK DUPLICATE KODE
+        ' 2. CEK DUPLIKAT TANGGAL
         '========================================
-        If CekKodeDepartment(tkode.Text.Trim()) Then
-
-            PesanPopupPeringatan("Kode Department", "Kode department '" & tkode.Text.Trim() & "' sudah digunakan.")
-
-            tkode.Focus()
-
+        If CekTanggalLibur(tanggalPilihStr) Then
+            PesanPopupPeringatan("Tanggal Libur", "Hari libur pada tanggal " & tanggalPilihStr & " sudah terdaftar di sistem.")
+            dTanggal.Focus()
             Return
-
         End If
 
-
         Using conn As New MySqlConnection(sambung)
-
             conn.Open()
-
             Dim mTransaksi As MySqlTransaction = conn.BeginTransaction()
 
             Try
-
                 '========================================
-                ' MODE TAMBAH
+                ' 3. MODE TAMBAH
                 '========================================
                 If Not ModeEdit Then
-                    Using comm As New MySqlCommand("INSERT INTO sadepartment " & "(ffckode, ffcnama) " & "VALUES (@kode, @nama)", conn, mTransaksi)
-
-                        comm.Parameters.AddWithValue("@kode", tkode.Text.Trim())
-                        comm.Parameters.AddWithValue("@nama", tNama.Text.Trim())
+                    Using comm As New MySqlCommand("INSERT INTO salibur (ffdtgl, ffcket, ffc_id) VALUES (@tgl, @ket, @user)", conn, mTransaksi)
+                        comm.Parameters.AddWithValue("@tgl", tanggalPilihStr)
+                        comm.Parameters.AddWithValue("@ket", tKeterangan.Text.Trim())
+                        comm.Parameters.AddWithValue("@user", "admin") ' Sesuaikan dengan ID user aktif jika ada
                         comm.ExecuteNonQuery()
-
                     End Using
 
-
                     mTransaksi.Commit()
-
-
-                    PesanPopupSukses("Sukses", "Kode Department : " & tkode.Text.Trim() & " berhasil disimpan.")
-
+                    PesanPopupSukses("Sukses", "Hari libur tanggal " & tanggalPilihStr & " berhasil ditambahkan.")
 
                     '========================================
-                    ' MODE EDIT
+                    ' 4. MODE EDIT
                     '========================================
                 Else
-
-                    Using comm As New MySqlCommand("UPDATE sadepartment SET " & "ffcnama = @nama " & "WHERE ffckode = @kodeLama", conn, mTransaksi)
-
-                        comm.Parameters.AddWithValue("@nama", tNama.Text.Trim())
-
-                        comm.Parameters.AddWithValue("@kodeLama", KodeLama)
-
+                    Using comm As New MySqlCommand("UPDATE salibur SET ffdtgl = @tgl, ffcket = @ket WHERE ffdtgl = @tglLama", conn, mTransaksi)
+                        comm.Parameters.AddWithValue("@tgl", tanggalPilihStr)
+                        comm.Parameters.AddWithValue("@ket", tKeterangan.Text.Trim())
+                        comm.Parameters.AddWithValue("@tglLama", TanggalLama)
                         comm.ExecuteNonQuery()
-
                     End Using
 
                     mTransaksi.Commit()
-
-
-                    PesanPopupSukses("Sukses", "Department dengan kode : " & KodeLama & " berhasil diperbarui.")
-
+                    PesanPopupSukses("Sukses", "Data hari libur berhasil diperbarui.")
                 End If
 
-
                 '========================================
-                ' TUTUP FORM
+                ' 5. TUTUP FORM
                 '========================================
                 Me.DialogResult = DialogResult.OK
                 Me.Close()
 
-
             Catch ex As MySqlException
-
                 Try
                     mTransaksi.Rollback()
                 Catch
                 End Try
-
-                PesanPopupError("Error MySQL: Kesalahan Database", ex.Message)
-
+                PesanPopupError("Error MySQL", ex.Message)
 
             Catch ex As Exception
-
                 Try
                     mTransaksi.Rollback()
                 Catch
                 End Try
-
-                PesanPopupError("Error umum: Proses dibatalkan", ex.Message)
-
+                PesanPopupError("Error", ex.Message)
             End Try
-
         End Using
-
     End Sub
 
+#End Region
 
-    Private Sub frmDepartmentAdd_Load(sender As Object, e As EventArgs) Handles Me.Load
+#Region "Control Interactivity & Formatting"
 
-        ShadowForm.SetShadowForm(Me)
-
-    End Sub
-
-
-    Private Sub KontrolC_TextChanged(sender As Object, e As EventArgs) Handles tNama.TextChanged, tkode.TextChanged
-
+    ' Otomatis format huruf kapital di awal kata untuk TextBox keterangan
+    Private Sub tKeterangan_TextChanged(sender As Object, e As EventArgs) Handles tKeterangan.TextChanged
         Dim tb As Guna2TextBox = CType(sender, Guna2TextBox)
-
         If tb.Text.Length > 0 Then
-
             Dim cursorPos As Integer = tb.SelectionStart
-
             Dim text As String = tb.Text
-
             Dim formatted As String = Char.ToUpper(text(0)) & text.Substring(1).ToLower()
 
             If tb.Text <> formatted Then
-
                 tb.Text = formatted
-
                 tb.SelectionStart = Math.Min(cursorPos, tb.Text.Length)
-
             End If
-
         End If
-
     End Sub
 
-
-    Private Sub KontrolT_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tNama.KeyPress, tkode.KeyPress
-
+    ' Navigasi Enter dan cegah karakter tanda kutip tunggal (') agar aman dari error SQL
+    Private Sub tKeterangan_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tKeterangan.KeyPress
         If e.KeyChar = ChrW(Keys.Enter) Then
-
             SendKeys.Send("{TAB}")
-
             e.Handled = True
-
             Exit Sub
-
         End If
 
-
-        ' Blokir karakter tanda kutip tunggal
         If e.KeyChar = "'"c Then
-
             e.Handled = True
-
         End If
-
     End Sub
 
-
-    Private Sub frmDepartmentAdd_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-
+    Private Sub frmKalenderAdd_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.BeginInvoke(New MethodInvoker(
-                Sub()
+            Sub()
+                tKeterangan.Focus()
+                tKeterangan.Select()
+            End Sub))
+    End Sub
 
-                    tkode.Focus()
-                    tkode.Select()
-
-                End Sub))
-
+    Private Sub frmKalenderAdd_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ShadowForm.SetShadowForm(Me)
     End Sub
 
 #End Region

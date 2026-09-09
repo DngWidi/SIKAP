@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -52,6 +52,10 @@
       <HintPath>..\..\..\Guna_UI_Framework_Ultimate_v2.0.0.1\Guna_UI_Framework_Ultimate_v2.0.0.1\Guna.UI-Framework-Lib-master\Guna.UI2 WinForms\.net 4.0\Guna.UI2.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=8.0.25.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -84,11 +88,53 @@
     <Compile Include="f_pesan.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Master Data\Form\frmBagianAdd.Designer.vb">
+      <DependentUpon>frmBagianAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master Data\Form\frmBagianAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master Data\Form\frmBiayaAdd.Designer.vb">
+      <DependentUpon>frmBiayaAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master Data\Form\frmBiayaAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Master Data\Form\frmDepartmentAdd.Designer.vb">
       <DependentUpon>frmDepartmentAdd.vb</DependentUpon>
     </Compile>
     <Compile Include="Master Data\Form\frmDepartmentAdd.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master Data\Form\frmJabatanAdd.Designer.vb">
+      <DependentUpon>frmJabatanAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master Data\Form\frmJabatanAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master Data\Form\frmKalenderAdd.Designer.vb">
+      <DependentUpon>frmKalenderAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master Data\Form\frmKalenderAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master Data\Form\frmKodeAbsenAdd.Designer.vb">
+      <DependentUpon>frmKodeAbsenAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master Data\Form\frmKodeAbsenAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master Data\uf_Biaya.Designer.vb">
+      <DependentUpon>uf_Biaya.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master Data\uf_Biaya.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Master Data\uf_jabatan.Designer.vb">
+      <DependentUpon>uf_jabatan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master Data\uf_jabatan.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Master Data\uf_bagian.Designer.vb">
       <DependentUpon>uf_bagian.vb</DependentUpon>
@@ -102,6 +148,18 @@
     <Compile Include="Master Data\uf_department.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Master Data\uf_kalenderlibur.Designer.vb">
+      <DependentUpon>uf_kalenderlibur.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master Data\uf_kalenderlibur.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Master Data\uf_kodeabsen.Designer.vb">
+      <DependentUpon>uf_kodeabsen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master Data\uf_kodeabsen.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Menu_Utama.Designer.vb">
       <DependentUpon>Menu_Utama.vb</DependentUpon>
     </Compile>
@@ -109,6 +167,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Models\Pagination.vb" />
+    <Compile Include="Module\Filekandidat.vb" />
     <Compile Include="Module\Sambungan.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -126,6 +185,60 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Recruitment\Form\frmDokumenAdd.Designer.vb">
+      <DependentUpon>frmDokumenAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmDokumenAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmKandidatAdd.Designer.vb">
+      <DependentUpon>frmKandidatAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmKandidatAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmKeahlianAdd.Designer.vb">
+      <DependentUpon>frmKeahlianAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmKeahlianAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmPendidikanAdd.Designer.vb">
+      <DependentUpon>frmPendidikanAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmPendidikanAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmPengalamanAdd.Designer.vb">
+      <DependentUpon>frmPengalamanAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmPengalamanAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmPermintaanKaryawanAdd.Designer.vb">
+      <DependentUpon>frmPermintaanKaryawanAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmPermintaanKaryawanAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmSertifikatAdd.Designer.vb">
+      <DependentUpon>frmSertifikatAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmSertifikatAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recruitment\uf_kandidat.Designer.vb">
+      <DependentUpon>uf_kandidat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\uf_kandidat.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Recruitment\uf_permintaankaryawan.Designer.vb">
+      <DependentUpon>uf_permintaankaryawan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\uf_permintaankaryawan.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Theme\Thememanager.vb" />
     <Compile Include="UserControl\ucPagination.Designer.vb">
       <DependentUpon>ucPagination.vb</DependentUpon>
@@ -138,14 +251,41 @@
     <EmbeddedResource Include="f_pesan.resx">
       <DependentUpon>f_pesan.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Master Data\Form\frmBagianAdd.resx">
+      <DependentUpon>frmBagianAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master Data\Form\frmBiayaAdd.resx">
+      <DependentUpon>frmBiayaAdd.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Master Data\Form\frmDepartmentAdd.resx">
       <DependentUpon>frmDepartmentAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master Data\Form\frmJabatanAdd.resx">
+      <DependentUpon>frmJabatanAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master Data\Form\frmKalenderAdd.resx">
+      <DependentUpon>frmKalenderAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master Data\Form\frmKodeAbsenAdd.resx">
+      <DependentUpon>frmKodeAbsenAdd.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Master Data\uf_bagian.resx">
       <DependentUpon>uf_bagian.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Master Data\uf_Biaya.resx">
+      <DependentUpon>uf_Biaya.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Master Data\uf_department.resx">
       <DependentUpon>uf_department.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master Data\uf_jabatan.resx">
+      <DependentUpon>uf_jabatan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master Data\uf_kalenderlibur.resx">
+      <DependentUpon>uf_kalenderlibur.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master Data\uf_kodeabsen.resx">
+      <DependentUpon>uf_kodeabsen.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu_Utama.resx">
       <DependentUpon>Menu_Utama.vb</DependentUpon>
@@ -155,6 +295,33 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\Form\frmDokumenAdd.resx">
+      <DependentUpon>frmDokumenAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\Form\frmKandidatAdd.resx">
+      <DependentUpon>frmKandidatAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\Form\frmKeahlianAdd.resx">
+      <DependentUpon>frmKeahlianAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\Form\frmPendidikanAdd.resx">
+      <DependentUpon>frmPendidikanAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\Form\frmPengalamanAdd.resx">
+      <DependentUpon>frmPengalamanAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\Form\frmPermintaanKaryawanAdd.resx">
+      <DependentUpon>frmPermintaanKaryawanAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\Form\frmSertifikatAdd.resx">
+      <DependentUpon>frmSertifikatAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\uf_kandidat.resx">
+      <DependentUpon>uf_kandidat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\uf_permintaankaryawan.resx">
+      <DependentUpon>uf_permintaankaryawan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucPagination.resx">
       <DependentUpon>ucPagination.vb</DependentUpon>
@@ -279,6 +446,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Gambar\Warning.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Reset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Sinkronisasi.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Prev.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Gambar\Camera.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -105,10 +105,10 @@ Public Class Menu_Utama
         ' Tambahkan handler berdasarkan nama (sesuai dengan kebutuhan Anda)
         Select Case name
             ' Untuk Menu Recruitment
-            Case "bJobVacancy"
-                AddHandler btn.Click, AddressOf bJobVacancy_Click
-            Case "bApplicant"
-              '  AddHandler btn.Click, AddressOf bApplicant_Click
+            Case "bPermintaanKaryawan"
+                AddHandler btn.Click, AddressOf bPermintaanKaryawan_Click
+            Case "bKandidat"
+                AddHandler btn.Click, AddressOf bKandidat_Click
             Case "bInterview"
               '  AddHandler btn.Click, AddressOf bInterview_Click
 
@@ -183,12 +183,16 @@ Public Class Menu_Utama
             ' Untuk Menu Master Data
             Case "bDepartment"
                 AddHandler btn.Click, AddressOf bDepartment_Click
-            Case "bBank"
-               ' AddHandler btn.Click, AddressOf bBank_Click
-            Case "bHoliday"
-               ' AddHandler btn.Click, AddressOf bHoliday_Click
-            Case "bShift"
-              '  AddHandler btn.Click, AddressOf bShift_Click
+            Case "bBagian"
+                AddHandler btn.Click, AddressOf bBagian_Click
+            Case "bJabatan"
+                AddHandler btn.Click, AddressOf bJabatan_Click
+            Case "bBiaya"
+                AddHandler btn.Click, AddressOf bBiaya_Click
+            Case "bKodeAbsen"
+                AddHandler btn.Click, AddressOf bKodeAbsen_Click
+            Case "bKalender"
+                AddHandler btn.Click, AddressOf bKalender_Click
 
             ' Untuk Menu Report
             Case "bReportEmployee"
@@ -244,6 +248,16 @@ Public Class Menu_Utama
     ' .ForeColor = Color.FromArgb(105, 105, 105),
 #End Region
 #Region "PRIVATE"
+    Private Sub ResetSubMenuMaster()
+        ' Matikan semua tombol submenu Master Data
+        For Each ctrl As Control In pnlSubMaster.Controls
+
+            If TypeOf ctrl Is Guna2Button Then
+                DirectCast(ctrl, Guna2Button).Checked = False
+            End If
+
+        Next
+    End Sub
     Private Sub LoadUserControl(uc As UserControl)
         pnlForm.BringToFront()
         pnlForm.SuspendLayout()
@@ -292,8 +306,8 @@ Public Class Menu_Utama
 
         pnlSubRecruitment.Controls.Clear()
 
-        pnlSubRecruitment.Controls.Add(BuatSubButton("   Lowongan Kerja", "bJobVacancy", My.Resources.Lowongan, True))
-        pnlSubRecruitment.Controls.Add(BuatSubButton("   Kandidat", "bPelanggan", My.Resources.Kandidat, True))
+        pnlSubRecruitment.Controls.Add(BuatSubButton("   Permintaan Karyawan", "bPermintaanKaryawan", My.Resources.Lowongan, True))
+        pnlSubRecruitment.Controls.Add(BuatSubButton("   Kandidat", "bKandidat", My.Resources.Kandidat, True))
         pnlSubRecruitment.Controls.Add(BuatSubButton("   Seleksi", "bKirim", My.Resources.Seleksi, True))
         pnlSubRecruitment.Controls.Add(BuatSubButton("   Penilaian Interview", "bGroup", My.Resources.Interview, True))
         pnlSubRecruitment.Controls.Add(BuatSubButton("   Penawaran Kerja", "bUsaha", My.Resources.Kontrak, True))
@@ -308,10 +322,34 @@ Public Class Menu_Utama
         pnlSubRecruitment.PerformLayout()
 
     End Sub
-    Private Sub bJobVacancy_Click(ByVal sender As Object, ByVal e As EventArgs)
+    Private Sub bPermintaanKaryawan_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ' Matikan semua submenu Master Data
+        ResetSubMenuMaster()
 
+        ' Aktifkan tombol yang sedang dipilih
+        Dim btn = DirectCast(sender, Guna2Button)
+        btn.Checked = True
+
+        ' Aktifkan menu utama Master Data
+        bMaster.Checked = True
+
+        ' Tampilkan UserControl Department
+        LoadUserControl(New uf_permintaankaryawan())
     End Sub
+    Private Sub bKandidat_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ' Matikan semua submenu Master Data
+        ResetSubMenuMaster()
 
+        ' Aktifkan tombol yang sedang dipilih
+        Dim btn = DirectCast(sender, Guna2Button)
+        btn.Checked = True
+
+        ' Aktifkan menu utama Master Data
+        bMaster.Checked = True
+
+        ' Tampilkan UserControl Department
+        LoadUserControl(New uf_kandidat())
+    End Sub
     '============== Employee ==========
     '=========== Master Data =========
     Private Sub bMaster_Click(ByVal sender As Object, ByVal e As EventArgs)
@@ -339,11 +377,11 @@ Public Class Menu_Utama
         pnlSubMaster.Controls.Clear()
 
         pnlSubMaster.Controls.Add(BuatSubButton("   Department", "bDepartment", My.Resources.Department, True))
-        pnlSubMaster.Controls.Add(BuatSubButton("   Bagian", "bPelanggan", My.Resources.Bagian, True))
-        pnlSubMaster.Controls.Add(BuatSubButton("   Jabatan", "bKirim", My.Resources.Jabatan, True))
-        pnlSubMaster.Controls.Add(BuatSubButton("   Kode Biaya", "bGroup", My.Resources.Kodebiaya, True))
-        pnlSubMaster.Controls.Add(BuatSubButton("   Kode Absensi", "bUsaha", My.Resources.Kodeabsen, True))
-        pnlSubMaster.Controls.Add(BuatSubButton("   Kalender Libur", "bSegmen", My.Resources.Kalender, True))
+        pnlSubMaster.Controls.Add(BuatSubButton("   Bagian", "bBagian", My.Resources.Bagian, True))
+        pnlSubMaster.Controls.Add(BuatSubButton("   Jabatan", "bJabatan", My.Resources.Jabatan, True))
+        pnlSubMaster.Controls.Add(BuatSubButton("   Kode Biaya", "bBiaya", My.Resources.Kodebiaya, True))
+        pnlSubMaster.Controls.Add(BuatSubButton("   Kode Absensi", "bKodeAbsen", My.Resources.Kodeabsen, True))
+        pnlSubMaster.Controls.Add(BuatSubButton("   Kalender Libur", "bKalender", My.Resources.Kalender, True))
 
         pnlSubMaster.Visible = True
 
@@ -355,14 +393,96 @@ Public Class Menu_Utama
 
     End Sub
     Private Sub bDepartment_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ' Matikan semua submenu Master Data
+        ResetSubMenuMaster()
 
+        ' Aktifkan tombol yang sedang dipilih
+        Dim btn = DirectCast(sender, Guna2Button)
+        btn.Checked = True
+
+        ' Aktifkan menu utama Master Data
+        bMaster.Checked = True
+
+        ' Tampilkan UserControl Department
         LoadUserControl(New uf_department())
 
-        Dim btn = DirectCast(sender, Guna.UI2.WinForms.Guna2Button)
-        btn.Checked = True
-        bMaster.Checked = True
-    End Sub
 
+    End Sub
+    Private Sub bBagian_Click(ByVal sender As Object, ByVal e As EventArgs)
+
+        ' Matikan semua submenu Master Data
+        ResetSubMenuMaster()
+
+        ' Aktifkan tombol yang sedang dipilih
+        Dim btn = DirectCast(sender, Guna2Button)
+        btn.Checked = True
+
+        ' Aktifkan menu utama Master Data
+        bMaster.Checked = True
+
+        ' Tampilkan UserControl Department
+        LoadUserControl(New uf_bagian())
+    End Sub
+    Private Sub bJabatan_Click(ByVal sender As Object, ByVal e As EventArgs)
+
+        ' Matikan semua submenu Master Data
+        ResetSubMenuMaster()
+
+        ' Aktifkan tombol yang sedang dipilih
+        Dim btn = DirectCast(sender, Guna2Button)
+        btn.Checked = True
+
+        ' Aktifkan menu utama Master Data
+        bMaster.Checked = True
+
+        ' Tampilkan UserControl Department
+        LoadUserControl(New uf_jabatan())
+    End Sub
+    Private Sub bBiaya_Click(ByVal sender As Object, ByVal e As EventArgs)
+
+        ' Matikan semua submenu Master Data
+        ResetSubMenuMaster()
+
+        ' Aktifkan tombol yang sedang dipilih
+        Dim btn = DirectCast(sender, Guna2Button)
+        btn.Checked = True
+
+        ' Aktifkan menu utama Master Data
+        bMaster.Checked = True
+
+        ' Tampilkan UserControl Department
+        LoadUserControl(New uf_Biaya())
+    End Sub
+    Private Sub bKodeAbsen_Click(ByVal sender As Object, ByVal e As EventArgs)
+
+        ' Matikan semua submenu Master Data
+        ResetSubMenuMaster()
+
+        ' Aktifkan tombol yang sedang dipilih
+        Dim btn = DirectCast(sender, Guna2Button)
+        btn.Checked = True
+
+        ' Aktifkan menu utama Master Data
+        bMaster.Checked = True
+
+        ' Tampilkan UserControl Department
+        LoadUserControl(New uf_kodeabsen())
+    End Sub
+    Private Sub bKalender_Click(ByVal sender As Object, ByVal e As EventArgs)
+
+        ' Matikan semua submenu Master Data
+        ResetSubMenuMaster()
+
+        ' Aktifkan tombol yang sedang dipilih
+        Dim btn = DirectCast(sender, Guna2Button)
+        btn.Checked = True
+
+        ' Aktifkan menu utama Master Data
+        bMaster.Checked = True
+
+        ' Tampilkan UserControl Department
+        LoadUserControl(New uf_kalenderlibur())
+    End Sub
 #End Region
 
     Private Sub Form_Utama_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -400,7 +520,7 @@ Public Class Menu_Utama
         'AddHandler bDashboard.Click, AddressOf ButtonUtama_Click
         AddHandler bRecruitment.Click, AddressOf bRecruitment_Click
         AddHandler bMaster.Click, AddressOf bMaster_Click
-
+        '
 
         ' Buat Label Header
         lblHeader = BuatLabelHeader("MAIN MENU")

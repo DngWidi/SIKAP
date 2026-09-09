@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmDepartmentAdd
+Partial Class frmKodeAbsenAdd
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -47,7 +47,6 @@ Partial Class frmDepartmentAdd
         '
         'pnlMain
         '
-        Me.pnlMain.BorderColor = System.Drawing.Color.White
         Me.pnlMain.Controls.Add(Me.pnlBody)
         Me.pnlMain.Controls.Add(Me.pnlFooter)
         Me.pnlMain.Controls.Add(Me.pnlHeader)
@@ -55,8 +54,8 @@ Partial Class frmDepartmentAdd
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
         Me.pnlMain.Name = "pnlMain"
         Me.pnlMain.ShadowDecoration.Parent = Me.pnlMain
-        Me.pnlMain.Size = New System.Drawing.Size(484, 301)
-        Me.pnlMain.TabIndex = 0
+        Me.pnlMain.Size = New System.Drawing.Size(800, 450)
+        Me.pnlMain.TabIndex = 1
         '
         'pnlBody
         '
@@ -69,8 +68,8 @@ Partial Class frmDepartmentAdd
         Me.pnlBody.Name = "pnlBody"
         Me.pnlBody.Padding = New System.Windows.Forms.Padding(24, 18, 24, 10)
         Me.pnlBody.ShadowDecoration.Parent = Me.pnlBody
-        Me.pnlBody.Size = New System.Drawing.Size(484, 166)
-        Me.pnlBody.TabIndex = 3
+        Me.pnlBody.Size = New System.Drawing.Size(800, 315)
+        Me.pnlBody.TabIndex = 4
         '
         'tNama
         '
@@ -91,7 +90,7 @@ Partial Class frmDepartmentAdd
         Me.tNama.Location = New System.Drawing.Point(15, 102)
         Me.tNama.Name = "tNama"
         Me.tNama.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tNama.PlaceholderText = "Human Resources"
+        Me.tNama.PlaceholderText = "Cuti ; Mangkir ; Ijin ; Dll"
         Me.tNama.SelectedText = ""
         Me.tNama.ShadowDecoration.Parent = Me.tNama
         Me.tNama.Size = New System.Drawing.Size(452, 38)
@@ -104,9 +103,9 @@ Partial Class frmDepartmentAdd
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
         Me.Label1.Location = New System.Drawing.Point(26, 84)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(106, 15)
+        Me.Label1.Size = New System.Drawing.Size(67, 15)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Nama Department"
+        Me.Label1.Text = "Keterangan"
         '
         'tkode
         '
@@ -127,10 +126,10 @@ Partial Class frmDepartmentAdd
         Me.tkode.Location = New System.Drawing.Point(15, 36)
         Me.tkode.Name = "tkode"
         Me.tkode.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tkode.PlaceholderText = "Contoh : A-Z"
+        Me.tkode.PlaceholderText = "Contoh : A "
         Me.tkode.SelectedText = ""
         Me.tkode.ShadowDecoration.Parent = Me.tkode
-        Me.tkode.Size = New System.Drawing.Size(452, 38)
+        Me.tkode.Size = New System.Drawing.Size(176, 38)
         Me.tkode.TabIndex = 1
         '
         'lblKode
@@ -140,9 +139,9 @@ Partial Class frmDepartmentAdd
         Me.lblKode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
         Me.lblKode.Location = New System.Drawing.Point(26, 18)
         Me.lblKode.Name = "lblKode"
-        Me.lblKode.Size = New System.Drawing.Size(101, 15)
+        Me.lblKode.Size = New System.Drawing.Size(70, 15)
         Me.lblKode.TabIndex = 0
-        Me.lblKode.Text = "Kode Department"
+        Me.lblKode.Text = "Kode Absen"
         '
         'pnlFooter
         '
@@ -150,18 +149,18 @@ Partial Class frmDepartmentAdd
         Me.pnlFooter.Controls.Add(Me.flpFooterButton)
         Me.pnlFooter.Controls.Add(Me.pnlFooterLine)
         Me.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlFooter.Location = New System.Drawing.Point(0, 236)
+        Me.pnlFooter.Location = New System.Drawing.Point(0, 385)
         Me.pnlFooter.Name = "pnlFooter"
         Me.pnlFooter.ShadowDecoration.Parent = Me.pnlFooter
-        Me.pnlFooter.Size = New System.Drawing.Size(484, 65)
-        Me.pnlFooter.TabIndex = 2
+        Me.pnlFooter.Size = New System.Drawing.Size(800, 65)
+        Me.pnlFooter.TabIndex = 3
         '
         'flpFooterButton
         '
         Me.flpFooterButton.Controls.Add(Me.bBatal)
         Me.flpFooterButton.Controls.Add(Me.bSimpan)
         Me.flpFooterButton.Dock = System.Windows.Forms.DockStyle.Right
-        Me.flpFooterButton.Location = New System.Drawing.Point(274, 1)
+        Me.flpFooterButton.Location = New System.Drawing.Point(590, 1)
         Me.flpFooterButton.Name = "flpFooterButton"
         Me.flpFooterButton.Padding = New System.Windows.Forms.Padding(0, 14, 14, 0)
         Me.flpFooterButton.Size = New System.Drawing.Size(210, 64)
@@ -212,7 +211,7 @@ Partial Class frmDepartmentAdd
         Me.pnlFooterLine.Location = New System.Drawing.Point(0, 0)
         Me.pnlFooterLine.Name = "pnlFooterLine"
         Me.pnlFooterLine.ShadowDecoration.Parent = Me.pnlFooterLine
-        Me.pnlFooterLine.Size = New System.Drawing.Size(484, 1)
+        Me.pnlFooterLine.Size = New System.Drawing.Size(800, 1)
         Me.pnlFooterLine.TabIndex = 0
         '
         'pnlHeader
@@ -226,8 +225,8 @@ Partial Class frmDepartmentAdd
         Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.ShadowDecoration.Parent = Me.pnlHeader
-        Me.pnlHeader.Size = New System.Drawing.Size(484, 70)
-        Me.pnlHeader.TabIndex = 0
+        Me.pnlHeader.Size = New System.Drawing.Size(800, 70)
+        Me.pnlHeader.TabIndex = 1
         '
         'bClose
         '
@@ -240,7 +239,7 @@ Partial Class frmDepartmentAdd
         Me.bClose.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.bClose.HoverState.Parent = Me.bClose
         Me.bClose.ImageSize = New System.Drawing.Size(16, 16)
-        Me.bClose.Location = New System.Drawing.Point(450, 12)
+        Me.bClose.Location = New System.Drawing.Point(766, 12)
         Me.bClose.Name = "bClose"
         Me.bClose.ShadowDecoration.Parent = Me.bClose
         Me.bClose.Size = New System.Drawing.Size(36, 36)
@@ -255,9 +254,9 @@ Partial Class frmDepartmentAdd
         Me.lblDescription.ForeColor = System.Drawing.Color.White
         Me.lblDescription.Location = New System.Drawing.Point(23, 40)
         Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(248, 15)
+        Me.lblDescription.Size = New System.Drawing.Size(246, 15)
         Me.lblDescription.TabIndex = 1
-        Me.lblDescription.Text = "Tambahkan department baru ke dalam sistem"
+        Me.lblDescription.Text = "Tambahkan kode absen baru ke dalam sistem"
         '
         'pnlHeaderLine
         '
@@ -266,7 +265,7 @@ Partial Class frmDepartmentAdd
         Me.pnlHeaderLine.Location = New System.Drawing.Point(0, 69)
         Me.pnlHeaderLine.Name = "pnlHeaderLine"
         Me.pnlHeaderLine.ShadowDecoration.Parent = Me.pnlHeaderLine
-        Me.pnlHeaderLine.Size = New System.Drawing.Size(484, 1)
+        Me.pnlHeaderLine.Size = New System.Drawing.Size(800, 1)
         Me.pnlHeaderLine.TabIndex = 1
         '
         'lblTitle
@@ -277,24 +276,24 @@ Partial Class frmDepartmentAdd
         Me.lblTitle.ForeColor = System.Drawing.Color.White
         Me.lblTitle.Location = New System.Drawing.Point(24, 12)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(189, 25)
+        Me.lblTitle.Size = New System.Drawing.Size(186, 25)
         Me.lblTitle.TabIndex = 0
-        Me.lblTitle.Text = "Tambah Department"
+        Me.lblTitle.Text = "Tambah Kode Absen"
         '
-        'frmDepartmentAdd
+        'frmKodeAbsenAdd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(484, 301)
+        Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.pnlMain)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmDepartmentAdd"
+        Me.Name = "frmKodeAbsenAdd"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "frmDepartmentAdd"
+        Me.Text = "frmKodeAbsenAdd"
         Me.pnlMain.ResumeLayout(False)
         Me.pnlBody.ResumeLayout(False)
         Me.pnlBody.PerformLayout()
@@ -307,19 +306,19 @@ Partial Class frmDepartmentAdd
     End Sub
 
     Friend WithEvents pnlMain As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents pnlHeader As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents pnlHeaderLine As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents lblDescription As Label
-    Friend WithEvents lblTitle As Label
-    Friend WithEvents bClose As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents pnlFooter As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents bBatal As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents pnlFooterLine As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents pnlBody As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents lblKode As Label
-    Friend WithEvents bSimpan As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents tNama As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents tkode As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents lblKode As Label
+    Friend WithEvents pnlFooter As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents flpFooterButton As FlowLayoutPanel
+    Friend WithEvents bBatal As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents bSimpan As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents pnlFooterLine As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents pnlHeader As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents bClose As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents lblDescription As Label
+    Friend WithEvents pnlHeaderLine As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents lblTitle As Label
 End Class

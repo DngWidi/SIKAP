@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class uf_bagian
+Partial Class uf_Biaya
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
@@ -28,40 +28,41 @@ Partial Class uf_bagian
         Me.pnlContext = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlButton = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlPage = New Guna.UI2.WinForms.Guna2Panel()
+        Me.paginationBiaya = New SIKAP.ucPagination()
         Me.lblInfo = New System.Windows.Forms.Label()
-        Me.dgvBagian = New Guna.UI2.WinForms.Guna2DataGridView()
-        Me.pnlToolbar = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.dgvBiaya = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.bHapus = New Guna.UI2.WinForms.Guna2Button()
         Me.bEdit = New Guna.UI2.WinForms.Guna2Button()
         Me.bTambah = New Guna.UI2.WinForms.Guna2Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.pnlToolbar = New Guna.UI2.WinForms.Guna2Panel()
+        Me.bRefresh = New Guna.UI2.WinForms.Guna2Button()
         Me.bCari = New Guna.UI2.WinForms.Guna2Button()
         Me.tPencarian = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.bRefresh = New Guna.UI2.WinForms.Guna2Button()
-        Me.paginationBagian = New SIKAP.ucPagination()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.pnlContext.SuspendLayout()
         Me.pnlButton.SuspendLayout()
         Me.pnlPage.SuspendLayout()
-        CType(Me.dgvBagian, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvBiaya, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlToolbar.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlContext
         '
+        Me.pnlContext.AutoScroll = True
         Me.pnlContext.Controls.Add(Me.pnlButton)
+        Me.pnlContext.Controls.Add(Me.Label1)
         Me.pnlContext.Controls.Add(Me.pnlToolbar)
         Me.pnlContext.Controls.Add(Me.Label2)
         Me.pnlContext.Controls.Add(Me.Label3)
-        Me.pnlContext.Controls.Add(Me.Label1)
         Me.pnlContext.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlContext.Location = New System.Drawing.Point(0, 0)
         Me.pnlContext.Name = "pnlContext"
         Me.pnlContext.ShadowDecoration.Parent = Me.pnlContext
         Me.pnlContext.Size = New System.Drawing.Size(636, 527)
-        Me.pnlContext.TabIndex = 0
+        Me.pnlContext.TabIndex = 5
         '
         'pnlButton
         '
@@ -73,7 +74,7 @@ Partial Class uf_bagian
         Me.pnlButton.BorderRadius = 6
         Me.pnlButton.BorderThickness = 1
         Me.pnlButton.Controls.Add(Me.pnlPage)
-        Me.pnlButton.Controls.Add(Me.dgvBagian)
+        Me.pnlButton.Controls.Add(Me.dgvBiaya)
         Me.pnlButton.Controls.Add(Me.bHapus)
         Me.pnlButton.Controls.Add(Me.bEdit)
         Me.pnlButton.Controls.Add(Me.bTambah)
@@ -81,13 +82,13 @@ Partial Class uf_bagian
         Me.pnlButton.Name = "pnlButton"
         Me.pnlButton.ShadowDecoration.Parent = Me.pnlButton
         Me.pnlButton.Size = New System.Drawing.Size(608, 362)
-        Me.pnlButton.TabIndex = 6
+        Me.pnlButton.TabIndex = 4
         '
         'pnlPage
         '
         Me.pnlPage.BorderColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.pnlPage.BorderThickness = 1
-        Me.pnlPage.Controls.Add(Me.paginationBagian)
+        Me.pnlPage.Controls.Add(Me.paginationBiaya)
         Me.pnlPage.Controls.Add(Me.lblInfo)
         Me.pnlPage.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlPage.Location = New System.Drawing.Point(0, 316)
@@ -95,6 +96,18 @@ Partial Class uf_bagian
         Me.pnlPage.ShadowDecoration.Parent = Me.pnlPage
         Me.pnlPage.Size = New System.Drawing.Size(608, 46)
         Me.pnlPage.TabIndex = 4
+        '
+        'paginationBiaya
+        '
+        Me.paginationBiaya.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
+        Me.paginationBiaya.CurrentPage = 1
+        Me.paginationBiaya.Dock = System.Windows.Forms.DockStyle.Right
+        Me.paginationBiaya.Location = New System.Drawing.Point(258, 0)
+        Me.paginationBiaya.Name = "paginationBiaya"
+        Me.paginationBiaya.PageSize = 10
+        Me.paginationBiaya.Size = New System.Drawing.Size(350, 46)
+        Me.paginationBiaya.TabIndex = 1
+        Me.paginationBiaya.TotalRecord = 0
         '
         'lblInfo
         '
@@ -107,21 +120,21 @@ Partial Class uf_bagian
         Me.lblInfo.TabIndex = 0
         Me.lblInfo.Text = "Menampilkan 1-10 dari 245 Data"
         '
-        'dgvBagian
+        'dgvBiaya
         '
-        Me.dgvBagian.AllowUserToAddRows = False
-        Me.dgvBagian.AllowUserToDeleteRows = False
-        Me.dgvBagian.AllowUserToResizeRows = False
+        Me.dgvBiaya.AllowUserToAddRows = False
+        Me.dgvBiaya.AllowUserToDeleteRows = False
+        Me.dgvBiaya.AllowUserToResizeRows = False
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        Me.dgvBagian.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.dgvBagian.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.dgvBiaya.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvBiaya.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvBagian.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvBagian.BackgroundColor = System.Drawing.Color.White
-        Me.dgvBagian.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.dgvBagian.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        Me.dgvBagian.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgvBiaya.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvBiaya.BackgroundColor = System.Drawing.Color.White
+        Me.dgvBiaya.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvBiaya.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgvBiaya.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.5!)
@@ -129,8 +142,8 @@ Partial Class uf_bagian
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(219, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(254, Byte), Integer))
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvBagian.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvBagian.ColumnHeadersHeight = 24
+        Me.dgvBiaya.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvBiaya.ColumnHeadersHeight = 24
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.5!)
@@ -138,99 +151,39 @@ Partial Class uf_bagian
         DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvBagian.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dgvBagian.EnableHeadersVisualStyles = False
-        Me.dgvBagian.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.dgvBagian.Location = New System.Drawing.Point(3, 63)
-        Me.dgvBagian.MultiSelect = False
-        Me.dgvBagian.Name = "dgvBagian"
-        Me.dgvBagian.ReadOnly = True
-        Me.dgvBagian.RowHeadersVisible = False
-        Me.dgvBagian.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvBagian.Size = New System.Drawing.Size(602, 228)
-        Me.dgvBagian.TabIndex = 3
-        Me.dgvBagian.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
-        Me.dgvBagian.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
-        Me.dgvBagian.ThemeStyle.AlternatingRowsStyle.Font = Nothing
-        Me.dgvBagian.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty
-        Me.dgvBagian.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty
-        Me.dgvBagian.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty
-        Me.dgvBagian.ThemeStyle.BackColor = System.Drawing.Color.White
-        Me.dgvBagian.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.dgvBagian.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvBagian.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        Me.dgvBagian.ThemeStyle.HeaderStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        Me.dgvBagian.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
-        Me.dgvBagian.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        Me.dgvBagian.ThemeStyle.HeaderStyle.Height = 24
-        Me.dgvBagian.ThemeStyle.ReadOnly = True
-        Me.dgvBagian.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
-        Me.dgvBagian.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        Me.dgvBagian.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        Me.dgvBagian.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        Me.dgvBagian.ThemeStyle.RowsStyle.Height = 22
-        Me.dgvBagian.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvBagian.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        '
-        'pnlToolbar
-        '
-        Me.pnlToolbar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlToolbar.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
-        Me.pnlToolbar.BorderColor = System.Drawing.Color.Gainsboro
-        Me.pnlToolbar.BorderRadius = 6
-        Me.pnlToolbar.BorderThickness = 1
-        Me.pnlToolbar.Controls.Add(Me.bRefresh)
-        Me.pnlToolbar.Controls.Add(Me.bCari)
-        Me.pnlToolbar.Controls.Add(Me.tPencarian)
-        Me.pnlToolbar.Controls.Add(Me.Label4)
-        Me.pnlToolbar.Location = New System.Drawing.Point(11, 82)
-        Me.pnlToolbar.Name = "pnlToolbar"
-        Me.pnlToolbar.ShadowDecoration.Parent = Me.pnlToolbar
-        Me.pnlToolbar.Size = New System.Drawing.Size(608, 74)
-        Me.pnlToolbar.TabIndex = 5
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Yu Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(14, 10)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(71, 16)
-        Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Cari Bagian"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(14, 29)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(131, 30)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Data Bagian"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(110, Byte), Integer), CType(CType(119, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(16, 59)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(236, 17)
-        Me.Label3.TabIndex = 4
-        Me.Label3.Text = "Kelola seluruh data bagian perusahaan"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(8, 6)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(174, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Home   >    Master Data   >  Bagian"
+        Me.dgvBiaya.DefaultCellStyle = DataGridViewCellStyle3
+        Me.dgvBiaya.EnableHeadersVisualStyles = False
+        Me.dgvBiaya.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.dgvBiaya.Location = New System.Drawing.Point(3, 63)
+        Me.dgvBiaya.MultiSelect = False
+        Me.dgvBiaya.Name = "dgvBiaya"
+        Me.dgvBiaya.ReadOnly = True
+        Me.dgvBiaya.RowHeadersVisible = False
+        Me.dgvBiaya.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvBiaya.Size = New System.Drawing.Size(602, 228)
+        Me.dgvBiaya.TabIndex = 3
+        Me.dgvBiaya.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
+        Me.dgvBiaya.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
+        Me.dgvBiaya.ThemeStyle.AlternatingRowsStyle.Font = Nothing
+        Me.dgvBiaya.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty
+        Me.dgvBiaya.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty
+        Me.dgvBiaya.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty
+        Me.dgvBiaya.ThemeStyle.BackColor = System.Drawing.Color.White
+        Me.dgvBiaya.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.dgvBiaya.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.dgvBiaya.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgvBiaya.ThemeStyle.HeaderStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        Me.dgvBiaya.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
+        Me.dgvBiaya.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+        Me.dgvBiaya.ThemeStyle.HeaderStyle.Height = 24
+        Me.dgvBiaya.ThemeStyle.ReadOnly = True
+        Me.dgvBiaya.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
+        Me.dgvBiaya.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgvBiaya.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        Me.dgvBiaya.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.dgvBiaya.ThemeStyle.RowsStyle.Height = 22
+        Me.dgvBiaya.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.dgvBiaya.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
         '
         'bHapus
         '
@@ -301,6 +254,56 @@ Partial Class uf_bagian
         Me.bTambah.Text = "Tambah"
         Me.bTambah.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Label1.Location = New System.Drawing.Point(8, 6)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(167, 13)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Home   >    Master Data   >  Biaya"
+        '
+        'pnlToolbar
+        '
+        Me.pnlToolbar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlToolbar.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
+        Me.pnlToolbar.BorderColor = System.Drawing.Color.Gainsboro
+        Me.pnlToolbar.BorderRadius = 6
+        Me.pnlToolbar.BorderThickness = 1
+        Me.pnlToolbar.Controls.Add(Me.bRefresh)
+        Me.pnlToolbar.Controls.Add(Me.bCari)
+        Me.pnlToolbar.Controls.Add(Me.tPencarian)
+        Me.pnlToolbar.Controls.Add(Me.Label4)
+        Me.pnlToolbar.Location = New System.Drawing.Point(11, 82)
+        Me.pnlToolbar.Name = "pnlToolbar"
+        Me.pnlToolbar.ShadowDecoration.Parent = Me.pnlToolbar
+        Me.pnlToolbar.Size = New System.Drawing.Size(608, 74)
+        Me.pnlToolbar.TabIndex = 3
+        '
+        'bRefresh
+        '
+        Me.bRefresh.BorderColor = System.Drawing.Color.Gray
+        Me.bRefresh.BorderRadius = 6
+        Me.bRefresh.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash
+        Me.bRefresh.BorderThickness = 1
+        Me.bRefresh.CheckedState.Parent = Me.bRefresh
+        Me.bRefresh.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.bRefresh.CustomImages.Parent = Me.bRefresh
+        Me.bRefresh.FillColor = System.Drawing.Color.Transparent
+        Me.bRefresh.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bRefresh.ForeColor = System.Drawing.Color.Black
+        Me.bRefresh.HoverState.Parent = Me.bRefresh
+        Me.bRefresh.Image = Global.SIKAP.My.Resources.Resources.Reset
+        Me.bRefresh.ImageSize = New System.Drawing.Size(18, 18)
+        Me.bRefresh.Location = New System.Drawing.Point(505, 27)
+        Me.bRefresh.Name = "bRefresh"
+        Me.bRefresh.ShadowDecoration.Parent = Me.bRefresh
+        Me.bRefresh.Size = New System.Drawing.Size(86, 30)
+        Me.bRefresh.TabIndex = 3
+        Me.bRefresh.Text = "Reset"
+        '
         'bCari
         '
         Me.bCari.BorderRadius = 6
@@ -313,7 +316,7 @@ Partial Class uf_bagian
         Me.bCari.HoverState.Parent = Me.bCari
         Me.bCari.Image = Global.SIKAP.My.Resources.Resources.SearchW
         Me.bCari.ImageSize = New System.Drawing.Size(18, 18)
-        Me.bCari.Location = New System.Drawing.Point(415, 26)
+        Me.bCari.Location = New System.Drawing.Point(413, 27)
         Me.bCari.Name = "bCari"
         Me.bCari.ShadowDecoration.Parent = Me.bCari
         Me.bCari.Size = New System.Drawing.Size(86, 30)
@@ -339,60 +342,58 @@ Partial Class uf_bagian
         Me.tPencarian.Location = New System.Drawing.Point(14, 27)
         Me.tPencarian.Name = "tPencarian"
         Me.tPencarian.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tPencarian.PlaceholderText = "Ketik kode atau nama bagian"
+        Me.tPencarian.PlaceholderText = "Ketik kode atau nama biaya"
         Me.tPencarian.SelectedText = ""
         Me.tPencarian.ShadowDecoration.Parent = Me.tPencarian
-        Me.tPencarian.Size = New System.Drawing.Size(268, 30)
+        Me.tPencarian.Size = New System.Drawing.Size(229, 30)
         Me.tPencarian.TabIndex = 1
         '
-        'bRefresh
+        'Label4
         '
-        Me.bRefresh.BorderColor = System.Drawing.Color.Gray
-        Me.bRefresh.BorderRadius = 6
-        Me.bRefresh.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash
-        Me.bRefresh.BorderThickness = 1
-        Me.bRefresh.CheckedState.Parent = Me.bRefresh
-        Me.bRefresh.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.bRefresh.CustomImages.Parent = Me.bRefresh
-        Me.bRefresh.FillColor = System.Drawing.Color.Transparent
-        Me.bRefresh.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bRefresh.ForeColor = System.Drawing.Color.Black
-        Me.bRefresh.HoverState.Parent = Me.bRefresh
-        Me.bRefresh.Image = Global.SIKAP.My.Resources.Resources.Reset
-        Me.bRefresh.ImageSize = New System.Drawing.Size(18, 18)
-        Me.bRefresh.Location = New System.Drawing.Point(507, 27)
-        Me.bRefresh.Name = "bRefresh"
-        Me.bRefresh.ShadowDecoration.Parent = Me.bRefresh
-        Me.bRefresh.Size = New System.Drawing.Size(86, 30)
-        Me.bRefresh.TabIndex = 4
-        Me.bRefresh.Text = "Reset"
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Yu Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(14, 10)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(63, 16)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "Cari Biaya"
         '
-        'paginationBagian
+        'Label2
         '
-        Me.paginationBagian.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
-        Me.paginationBagian.CurrentPage = 1
-        Me.paginationBagian.Dock = System.Windows.Forms.DockStyle.Right
-        Me.paginationBagian.Location = New System.Drawing.Point(258, 0)
-        Me.paginationBagian.Name = "paginationBagian"
-        Me.paginationBagian.PageSize = 10
-        Me.paginationBagian.Size = New System.Drawing.Size(350, 46)
-        Me.paginationBagian.TabIndex = 1
-        Me.paginationBagian.TotalRecord = 0
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(14, 29)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(116, 30)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Data Biaya"
         '
-        'uf_bagian
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(110, Byte), Integer), CType(CType(119, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(16, 59)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(227, 17)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Kelola seluruh data biaya perusahaan"
+        '
+        'uf_Biaya
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(249, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(254, Byte), Integer))
         Me.Controls.Add(Me.pnlContext)
-        Me.Name = "uf_bagian"
+        Me.Name = "uf_Biaya"
         Me.Size = New System.Drawing.Size(636, 527)
         Me.pnlContext.ResumeLayout(False)
         Me.pnlContext.PerformLayout()
         Me.pnlButton.ResumeLayout(False)
         Me.pnlPage.ResumeLayout(False)
         Me.pnlPage.PerformLayout()
-        CType(Me.dgvBagian, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvBiaya, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlToolbar.ResumeLayout(False)
         Me.pnlToolbar.PerformLayout()
         Me.ResumeLayout(False)
@@ -400,20 +401,20 @@ Partial Class uf_bagian
     End Sub
 
     Friend WithEvents pnlContext As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents pnlToolbar As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents bCari As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents tPencarian As Guna.UI2.WinForms.Guna2TextBox
-    Friend WithEvents Label4 As Label
     Friend WithEvents pnlButton As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents pnlPage As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents paginationBagian As ucPagination
+    Friend WithEvents paginationBiaya As ucPagination
     Friend WithEvents lblInfo As Label
-    Friend WithEvents dgvBagian As Guna.UI2.WinForms.Guna2DataGridView
+    Friend WithEvents dgvBiaya As Guna.UI2.WinForms.Guna2DataGridView
     Friend WithEvents bHapus As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents bEdit As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents bTambah As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents pnlToolbar As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents bRefresh As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents bCari As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents tPencarian As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
 End Class

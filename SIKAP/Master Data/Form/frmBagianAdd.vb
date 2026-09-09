@@ -1,13 +1,11 @@
 ﻿Imports Guna.UI2.WinForms
 Imports MySql.Data.MySqlClient
-
-Public Class frmDepartmentAdd
+Public Class frmBagianAdd
 
     Public Property ModeEdit As Boolean = False
     Public Property KodeLama As String = ""
 
     Private ShadowForm As New Guna.UI2.WinForms.Guna2ShadowForm()
-
 
 #Region "Private Method"
 
@@ -18,7 +16,7 @@ Public Class frmDepartmentAdd
         '========================================
         If String.IsNullOrWhiteSpace(tkode.Text) Then
 
-            PesanPopupPeringatan("Validasi", "Kode department belum diisi.")
+            PesanPopupPeringatan("Validasi", "Kode bagian belum diisi.")
 
             tkode.Focus()
 
@@ -32,7 +30,7 @@ Public Class frmDepartmentAdd
         '========================================
         If String.IsNullOrWhiteSpace(tNama.Text) Then
 
-            PesanPopupPeringatan("Validasi", "Nama department belum diisi.")
+            PesanPopupPeringatan("Validasi", "Nama bagian belum diisi.")
 
             tNama.Focus()
 
@@ -45,8 +43,7 @@ Public Class frmDepartmentAdd
 
     End Function
 
-
-    Private Function CekKodeDepartment(ByVal kode As String) As Boolean
+    Private Function CekKodeBagian(ByVal kode As String) As Boolean
 
         Try
 
@@ -54,12 +51,12 @@ Public Class frmDepartmentAdd
 
                 conn.Open()
 
-                Dim sql As String = "SELECT COUNT(*) FROM sadepartment " & "WHERE ffckode = @kode"
+                Dim sql As String = "SELECT COUNT(*) FROM sabagian " & "WHERE ffcbag = @kode"
 
                 ' Jika mode Edit, jangan anggap kode lama sebagai duplicate
                 If ModeEdit Then
 
-                    sql &= " AND ffckode <> @kodeLama"
+                    sql &= " AND ffcbag <> @kodeLama"
 
                 End If
 
@@ -83,7 +80,7 @@ Public Class frmDepartmentAdd
 
         Catch ex As Exception
 
-            PesanPopupError("Error", "Gagal memeriksa kode department." & vbCrLf & ex.Message)
+            PesanPopupError("Error", "Gagal memeriksa kode bagian." & vbCrLf & ex.Message)
 
             Return True
 
@@ -94,9 +91,6 @@ Public Class frmDepartmentAdd
 
 #End Region
 
-
-#Region "Button"
-
     Private Sub bClose_Click(sender As Object, e As EventArgs) Handles bClose.Click
 
         Me.DialogResult = DialogResult.Cancel
@@ -104,14 +98,12 @@ Public Class frmDepartmentAdd
 
     End Sub
 
-
     Private Sub bBatal_Click(sender As Object, e As EventArgs) Handles bBatal.Click
 
         Me.DialogResult = DialogResult.Cancel
         Me.Close()
 
     End Sub
-
 
     Private Sub bSimpan_Click(sender As Object, e As EventArgs) Handles bSimpan.Click
 
@@ -126,9 +118,9 @@ Public Class frmDepartmentAdd
         '========================================
         ' CEK DUPLICATE KODE
         '========================================
-        If CekKodeDepartment(tkode.Text.Trim()) Then
+        If CekKodeBagian(tkode.Text.Trim()) Then
 
-            PesanPopupPeringatan("Kode Department", "Kode department '" & tkode.Text.Trim() & "' sudah digunakan.")
+            PesanPopupPeringatan("Kode Bagian", "Kode bagian '" & tkode.Text.Trim() & "' sudah digunakan.")
 
             tkode.Focus()
 
@@ -149,7 +141,7 @@ Public Class frmDepartmentAdd
                 ' MODE TAMBAH
                 '========================================
                 If Not ModeEdit Then
-                    Using comm As New MySqlCommand("INSERT INTO sadepartment " & "(ffckode, ffcnama) " & "VALUES (@kode, @nama)", conn, mTransaksi)
+                    Using comm As New MySqlCommand("INSERT INTO sabagian " & "(ffcbag, ffcnama) " & "VALUES (@kode, @nama)", conn, mTransaksi)
 
                         comm.Parameters.AddWithValue("@kode", tkode.Text.Trim())
                         comm.Parameters.AddWithValue("@nama", tNama.Text.Trim())
@@ -161,7 +153,7 @@ Public Class frmDepartmentAdd
                     mTransaksi.Commit()
 
 
-                    PesanPopupSukses("Sukses", "Kode Department : " & tkode.Text.Trim() & " berhasil disimpan.")
+                    PesanPopupSukses("Sukses", "Kode Bagian : " & tkode.Text.Trim() & " berhasil disimpan.")
 
 
                     '========================================
@@ -169,7 +161,9 @@ Public Class frmDepartmentAdd
                     '========================================
                 Else
 
-                    Using comm As New MySqlCommand("UPDATE sadepartment SET " & "ffcnama = @nama " & "WHERE ffckode = @kodeLama", conn, mTransaksi)
+                    Using comm As New MySqlCommand("UPDATE sabagian SET  " & "ffcnama = @nama " & "WHERE ffcbag = @kodeLama", conn, mTransaksi)
+
+
 
                         comm.Parameters.AddWithValue("@nama", tNama.Text.Trim())
 
@@ -182,7 +176,7 @@ Public Class frmDepartmentAdd
                     mTransaksi.Commit()
 
 
-                    PesanPopupSukses("Sukses", "Department dengan kode : " & KodeLama & " berhasil diperbarui.")
+                    PesanPopupSukses("Sukses", "Bagian dengan kode : " & KodeLama & " berhasil diperbarui.")
 
                 End If
 
@@ -219,14 +213,9 @@ Public Class frmDepartmentAdd
 
     End Sub
 
-
-    Private Sub frmDepartmentAdd_Load(sender As Object, e As EventArgs) Handles Me.Load
-
+    Private Sub frmBagianAdd_Load(sender As Object, e As EventArgs) Handles Me.Load
         ShadowForm.SetShadowForm(Me)
-
     End Sub
-
-
     Private Sub KontrolC_TextChanged(sender As Object, e As EventArgs) Handles tNama.TextChanged, tkode.TextChanged
 
         Dim tb As Guna2TextBox = CType(sender, Guna2TextBox)
@@ -274,9 +263,7 @@ Public Class frmDepartmentAdd
 
     End Sub
 
-
-    Private Sub frmDepartmentAdd_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-
+    Private Sub frmBagianAdd_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.BeginInvoke(New MethodInvoker(
                 Sub()
 
@@ -286,7 +273,4 @@ Public Class frmDepartmentAdd
                 End Sub))
 
     End Sub
-
-#End Region
-
 End Class

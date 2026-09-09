@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmDepartmentAdd
+Partial Class frmKalenderAdd
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -24,9 +24,9 @@ Partial Class frmDepartmentAdd
     Private Sub InitializeComponent()
         Me.pnlMain = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlBody = New Guna.UI2.WinForms.Guna2Panel()
-        Me.tNama = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.dTanggal = New Guna.UI2.WinForms.Guna2DateTimePicker()
+        Me.tKeterangan = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.tkode = New Guna.UI2.WinForms.Guna2TextBox()
         Me.lblKode = New System.Windows.Forms.Label()
         Me.pnlFooter = New Guna.UI2.WinForms.Guna2Panel()
         Me.flpFooterButton = New System.Windows.Forms.FlowLayoutPanel()
@@ -47,7 +47,6 @@ Partial Class frmDepartmentAdd
         '
         'pnlMain
         '
-        Me.pnlMain.BorderColor = System.Drawing.Color.White
         Me.pnlMain.Controls.Add(Me.pnlBody)
         Me.pnlMain.Controls.Add(Me.pnlFooter)
         Me.pnlMain.Controls.Add(Me.pnlHeader)
@@ -56,13 +55,13 @@ Partial Class frmDepartmentAdd
         Me.pnlMain.Name = "pnlMain"
         Me.pnlMain.ShadowDecoration.Parent = Me.pnlMain
         Me.pnlMain.Size = New System.Drawing.Size(484, 301)
-        Me.pnlMain.TabIndex = 0
+        Me.pnlMain.TabIndex = 1
         '
         'pnlBody
         '
-        Me.pnlBody.Controls.Add(Me.tNama)
+        Me.pnlBody.Controls.Add(Me.dTanggal)
+        Me.pnlBody.Controls.Add(Me.tKeterangan)
         Me.pnlBody.Controls.Add(Me.Label1)
-        Me.pnlBody.Controls.Add(Me.tkode)
         Me.pnlBody.Controls.Add(Me.lblKode)
         Me.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlBody.Location = New System.Drawing.Point(0, 70)
@@ -70,32 +69,51 @@ Partial Class frmDepartmentAdd
         Me.pnlBody.Padding = New System.Windows.Forms.Padding(24, 18, 24, 10)
         Me.pnlBody.ShadowDecoration.Parent = Me.pnlBody
         Me.pnlBody.Size = New System.Drawing.Size(484, 166)
-        Me.pnlBody.TabIndex = 3
+        Me.pnlBody.TabIndex = 4
         '
-        'tNama
+        'dTanggal
         '
-        Me.tNama.BorderColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(219, Byte), Integer))
-        Me.tNama.BorderRadius = 6
-        Me.tNama.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.tNama.DefaultText = ""
-        Me.tNama.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.tNama.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.tNama.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.tNama.DisabledState.Parent = Me.tNama
-        Me.tNama.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.tNama.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.tNama.FocusedState.Parent = Me.tNama
-        Me.tNama.ForeColor = System.Drawing.Color.FromArgb(CType(CType(31, Byte), Integer), CType(CType(41, Byte), Integer), CType(CType(55, Byte), Integer))
-        Me.tNama.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.tNama.HoverState.Parent = Me.tNama
-        Me.tNama.Location = New System.Drawing.Point(15, 102)
-        Me.tNama.Name = "tNama"
-        Me.tNama.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tNama.PlaceholderText = "Human Resources"
-        Me.tNama.SelectedText = ""
-        Me.tNama.ShadowDecoration.Parent = Me.tNama
-        Me.tNama.Size = New System.Drawing.Size(452, 38)
-        Me.tNama.TabIndex = 3
+        Me.dTanggal.BorderRadius = 6
+        Me.dTanggal.BorderStyle = System.Drawing.Drawing2D.DashStyle.DashDot
+        Me.dTanggal.BorderThickness = 1
+        Me.dTanggal.CheckedState.Parent = Me.dTanggal
+        Me.dTanggal.FillColor = System.Drawing.Color.White
+        Me.dTanggal.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.dTanggal.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dTanggal.HoverState.Parent = Me.dTanggal
+        Me.dTanggal.Location = New System.Drawing.Point(15, 36)
+        Me.dTanggal.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.dTanggal.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.dTanggal.Name = "dTanggal"
+        Me.dTanggal.ShadowDecoration.Parent = Me.dTanggal
+        Me.dTanggal.Size = New System.Drawing.Size(181, 36)
+        Me.dTanggal.TabIndex = 4
+        Me.dTanggal.Value = New Date(2026, 8, 26, 15, 32, 2, 46)
+        '
+        'tKeterangan
+        '
+        Me.tKeterangan.BorderColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.tKeterangan.BorderRadius = 6
+        Me.tKeterangan.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.tKeterangan.DefaultText = ""
+        Me.tKeterangan.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.tKeterangan.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.tKeterangan.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.tKeterangan.DisabledState.Parent = Me.tKeterangan
+        Me.tKeterangan.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.tKeterangan.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.tKeterangan.FocusedState.Parent = Me.tKeterangan
+        Me.tKeterangan.ForeColor = System.Drawing.Color.FromArgb(CType(CType(31, Byte), Integer), CType(CType(41, Byte), Integer), CType(CType(55, Byte), Integer))
+        Me.tKeterangan.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.tKeterangan.HoverState.Parent = Me.tKeterangan
+        Me.tKeterangan.Location = New System.Drawing.Point(15, 102)
+        Me.tKeterangan.Name = "tKeterangan"
+        Me.tKeterangan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.tKeterangan.PlaceholderText = "Libur Natal"
+        Me.tKeterangan.SelectedText = ""
+        Me.tKeterangan.ShadowDecoration.Parent = Me.tKeterangan
+        Me.tKeterangan.Size = New System.Drawing.Size(452, 38)
+        Me.tKeterangan.TabIndex = 3
         '
         'Label1
         '
@@ -104,34 +122,9 @@ Partial Class frmDepartmentAdd
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
         Me.Label1.Location = New System.Drawing.Point(26, 84)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(106, 15)
+        Me.Label1.Size = New System.Drawing.Size(67, 15)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Nama Department"
-        '
-        'tkode
-        '
-        Me.tkode.BorderColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(219, Byte), Integer))
-        Me.tkode.BorderRadius = 6
-        Me.tkode.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.tkode.DefaultText = ""
-        Me.tkode.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.tkode.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.tkode.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.tkode.DisabledState.Parent = Me.tkode
-        Me.tkode.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.tkode.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.tkode.FocusedState.Parent = Me.tkode
-        Me.tkode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(31, Byte), Integer), CType(CType(41, Byte), Integer), CType(CType(55, Byte), Integer))
-        Me.tkode.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.tkode.HoverState.Parent = Me.tkode
-        Me.tkode.Location = New System.Drawing.Point(15, 36)
-        Me.tkode.Name = "tkode"
-        Me.tkode.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tkode.PlaceholderText = "Contoh : A-Z"
-        Me.tkode.SelectedText = ""
-        Me.tkode.ShadowDecoration.Parent = Me.tkode
-        Me.tkode.Size = New System.Drawing.Size(452, 38)
-        Me.tkode.TabIndex = 1
+        Me.Label1.Text = "Keterangan"
         '
         'lblKode
         '
@@ -140,9 +133,9 @@ Partial Class frmDepartmentAdd
         Me.lblKode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
         Me.lblKode.Location = New System.Drawing.Point(26, 18)
         Me.lblKode.Name = "lblKode"
-        Me.lblKode.Size = New System.Drawing.Size(101, 15)
+        Me.lblKode.Size = New System.Drawing.Size(49, 15)
         Me.lblKode.TabIndex = 0
-        Me.lblKode.Text = "Kode Department"
+        Me.lblKode.Text = "Tanggal"
         '
         'pnlFooter
         '
@@ -154,7 +147,7 @@ Partial Class frmDepartmentAdd
         Me.pnlFooter.Name = "pnlFooter"
         Me.pnlFooter.ShadowDecoration.Parent = Me.pnlFooter
         Me.pnlFooter.Size = New System.Drawing.Size(484, 65)
-        Me.pnlFooter.TabIndex = 2
+        Me.pnlFooter.TabIndex = 3
         '
         'flpFooterButton
         '
@@ -227,7 +220,7 @@ Partial Class frmDepartmentAdd
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.ShadowDecoration.Parent = Me.pnlHeader
         Me.pnlHeader.Size = New System.Drawing.Size(484, 70)
-        Me.pnlHeader.TabIndex = 0
+        Me.pnlHeader.TabIndex = 1
         '
         'bClose
         '
@@ -255,9 +248,9 @@ Partial Class frmDepartmentAdd
         Me.lblDescription.ForeColor = System.Drawing.Color.White
         Me.lblDescription.Location = New System.Drawing.Point(23, 40)
         Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(248, 15)
+        Me.lblDescription.Size = New System.Drawing.Size(258, 15)
         Me.lblDescription.TabIndex = 1
-        Me.lblDescription.Text = "Tambahkan department baru ke dalam sistem"
+        Me.lblDescription.Text = "Tambahkan kalender libur baru ke dalam sistem"
         '
         'pnlHeaderLine
         '
@@ -277,11 +270,11 @@ Partial Class frmDepartmentAdd
         Me.lblTitle.ForeColor = System.Drawing.Color.White
         Me.lblTitle.Location = New System.Drawing.Point(24, 12)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(189, 25)
+        Me.lblTitle.Size = New System.Drawing.Size(208, 25)
         Me.lblTitle.TabIndex = 0
-        Me.lblTitle.Text = "Tambah Department"
+        Me.lblTitle.Text = "Tambah Kalender Libur"
         '
-        'frmDepartmentAdd
+        'frmKalenderAdd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -291,10 +284,10 @@ Partial Class frmDepartmentAdd
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmDepartmentAdd"
+        Me.Name = "frmKalenderAdd"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "frmDepartmentAdd"
+        Me.Text = "frmKalenderAdd"
         Me.pnlMain.ResumeLayout(False)
         Me.pnlBody.ResumeLayout(False)
         Me.pnlBody.PerformLayout()
@@ -307,19 +300,19 @@ Partial Class frmDepartmentAdd
     End Sub
 
     Friend WithEvents pnlMain As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents pnlHeader As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents pnlHeaderLine As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents lblDescription As Label
-    Friend WithEvents lblTitle As Label
-    Friend WithEvents bClose As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents pnlFooter As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents bBatal As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents pnlFooterLine As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents pnlBody As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents lblKode As Label
-    Friend WithEvents bSimpan As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents tNama As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents dTanggal As Guna.UI2.WinForms.Guna2DateTimePicker
+    Friend WithEvents tKeterangan As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents tkode As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents lblKode As Label
+    Friend WithEvents pnlFooter As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents flpFooterButton As FlowLayoutPanel
+    Friend WithEvents bBatal As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents bSimpan As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents pnlFooterLine As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents pnlHeader As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents bClose As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents lblDescription As Label
+    Friend WithEvents pnlHeaderLine As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents lblTitle As Label
 End Class

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class uf_department
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class uf_kodeabsen
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
+    <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,94 +20,34 @@ Partial Class uf_department
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.pnlToolbar = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlContext = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlButton = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlPage = New Guna.UI2.WinForms.Guna2Panel()
-        Me.paginationDepartment = New SIKAP.ucPagination()
+        Me.paginationKodeAbsen = New SIKAP.ucPagination()
         Me.lblInfo = New System.Windows.Forms.Label()
-        Me.dgvDepartment = New Guna.UI2.WinForms.Guna2DataGridView()
+        Me.dgvKodeAbsen = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.bHapus = New Guna.UI2.WinForms.Guna2Button()
         Me.bEdit = New Guna.UI2.WinForms.Guna2Button()
         Me.bTambah = New Guna.UI2.WinForms.Guna2Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.pnlToolbar = New Guna.UI2.WinForms.Guna2Panel()
         Me.bRefresh = New Guna.UI2.WinForms.Guna2Button()
         Me.bCari = New Guna.UI2.WinForms.Guna2Button()
         Me.tPencarian = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.pnlToolbar.SuspendLayout()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.pnlContext.SuspendLayout()
         Me.pnlButton.SuspendLayout()
         Me.pnlPage.SuspendLayout()
-        CType(Me.dgvDepartment, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvKodeAbsen, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlToolbar.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(8, 6)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(196, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Home   >    Master Data   >  Department"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(14, 29)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(182, 30)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Data Department"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(110, Byte), Integer), CType(CType(119, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(16, 59)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(260, 17)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Kelola seluruh data deparment perusahaan"
-        '
-        'pnlToolbar
-        '
-        Me.pnlToolbar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlToolbar.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
-        Me.pnlToolbar.BorderColor = System.Drawing.Color.Gainsboro
-        Me.pnlToolbar.BorderRadius = 6
-        Me.pnlToolbar.BorderThickness = 1
-        Me.pnlToolbar.Controls.Add(Me.bRefresh)
-        Me.pnlToolbar.Controls.Add(Me.bCari)
-        Me.pnlToolbar.Controls.Add(Me.tPencarian)
-        Me.pnlToolbar.Controls.Add(Me.Label4)
-        Me.pnlToolbar.Location = New System.Drawing.Point(11, 82)
-        Me.pnlToolbar.Name = "pnlToolbar"
-        Me.pnlToolbar.ShadowDecoration.Parent = Me.pnlToolbar
-        Me.pnlToolbar.Size = New System.Drawing.Size(608, 74)
-        Me.pnlToolbar.TabIndex = 3
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Yu Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(14, 10)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(98, 16)
-        Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Cari Department"
         '
         'pnlContext
         '
@@ -122,7 +62,7 @@ Partial Class uf_department
         Me.pnlContext.Name = "pnlContext"
         Me.pnlContext.ShadowDecoration.Parent = Me.pnlContext
         Me.pnlContext.Size = New System.Drawing.Size(636, 527)
-        Me.pnlContext.TabIndex = 4
+        Me.pnlContext.TabIndex = 5
         '
         'pnlButton
         '
@@ -134,7 +74,7 @@ Partial Class uf_department
         Me.pnlButton.BorderRadius = 6
         Me.pnlButton.BorderThickness = 1
         Me.pnlButton.Controls.Add(Me.pnlPage)
-        Me.pnlButton.Controls.Add(Me.dgvDepartment)
+        Me.pnlButton.Controls.Add(Me.dgvKodeAbsen)
         Me.pnlButton.Controls.Add(Me.bHapus)
         Me.pnlButton.Controls.Add(Me.bEdit)
         Me.pnlButton.Controls.Add(Me.bTambah)
@@ -148,7 +88,7 @@ Partial Class uf_department
         '
         Me.pnlPage.BorderColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.pnlPage.BorderThickness = 1
-        Me.pnlPage.Controls.Add(Me.paginationDepartment)
+        Me.pnlPage.Controls.Add(Me.paginationKodeAbsen)
         Me.pnlPage.Controls.Add(Me.lblInfo)
         Me.pnlPage.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlPage.Location = New System.Drawing.Point(0, 316)
@@ -157,17 +97,17 @@ Partial Class uf_department
         Me.pnlPage.Size = New System.Drawing.Size(608, 46)
         Me.pnlPage.TabIndex = 4
         '
-        'paginationDepartment
+        'paginationKodeAbsen
         '
-        Me.paginationDepartment.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
-        Me.paginationDepartment.CurrentPage = 1
-        Me.paginationDepartment.Dock = System.Windows.Forms.DockStyle.Right
-        Me.paginationDepartment.Location = New System.Drawing.Point(258, 0)
-        Me.paginationDepartment.Name = "paginationDepartment"
-        Me.paginationDepartment.PageSize = 10
-        Me.paginationDepartment.Size = New System.Drawing.Size(350, 46)
-        Me.paginationDepartment.TabIndex = 1
-        Me.paginationDepartment.TotalRecord = 0
+        Me.paginationKodeAbsen.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
+        Me.paginationKodeAbsen.CurrentPage = 1
+        Me.paginationKodeAbsen.Dock = System.Windows.Forms.DockStyle.Right
+        Me.paginationKodeAbsen.Location = New System.Drawing.Point(258, 0)
+        Me.paginationKodeAbsen.Name = "paginationKodeAbsen"
+        Me.paginationKodeAbsen.PageSize = 10
+        Me.paginationKodeAbsen.Size = New System.Drawing.Size(350, 46)
+        Me.paginationKodeAbsen.TabIndex = 1
+        Me.paginationKodeAbsen.TotalRecord = 0
         '
         'lblInfo
         '
@@ -180,70 +120,70 @@ Partial Class uf_department
         Me.lblInfo.TabIndex = 0
         Me.lblInfo.Text = "Menampilkan 1-10 dari 245 Data"
         '
-        'dgvDepartment
+        'dgvKodeAbsen
         '
-        Me.dgvDepartment.AllowUserToAddRows = False
-        Me.dgvDepartment.AllowUserToDeleteRows = False
-        Me.dgvDepartment.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        Me.dgvDepartment.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.dgvDepartment.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.dgvKodeAbsen.AllowUserToAddRows = False
+        Me.dgvKodeAbsen.AllowUserToDeleteRows = False
+        Me.dgvKodeAbsen.AllowUserToResizeRows = False
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        Me.dgvKodeAbsen.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        Me.dgvKodeAbsen.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvDepartment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvDepartment.BackgroundColor = System.Drawing.Color.White
-        Me.dgvDepartment.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.dgvDepartment.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        Me.dgvDepartment.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(219, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(254, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvDepartment.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvDepartment.ColumnHeadersHeight = 24
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvDepartment.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dgvDepartment.EnableHeadersVisualStyles = False
-        Me.dgvDepartment.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.dgvDepartment.Location = New System.Drawing.Point(3, 63)
-        Me.dgvDepartment.MultiSelect = False
-        Me.dgvDepartment.Name = "dgvDepartment"
-        Me.dgvDepartment.ReadOnly = True
-        Me.dgvDepartment.RowHeadersVisible = False
-        Me.dgvDepartment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvDepartment.Size = New System.Drawing.Size(602, 228)
-        Me.dgvDepartment.TabIndex = 3
-        Me.dgvDepartment.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
-        Me.dgvDepartment.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
-        Me.dgvDepartment.ThemeStyle.AlternatingRowsStyle.Font = Nothing
-        Me.dgvDepartment.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty
-        Me.dgvDepartment.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty
-        Me.dgvDepartment.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty
-        Me.dgvDepartment.ThemeStyle.BackColor = System.Drawing.Color.White
-        Me.dgvDepartment.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.dgvDepartment.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvDepartment.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        Me.dgvDepartment.ThemeStyle.HeaderStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        Me.dgvDepartment.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
-        Me.dgvDepartment.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        Me.dgvDepartment.ThemeStyle.HeaderStyle.Height = 24
-        Me.dgvDepartment.ThemeStyle.ReadOnly = True
-        Me.dgvDepartment.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
-        Me.dgvDepartment.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        Me.dgvDepartment.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        Me.dgvDepartment.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        Me.dgvDepartment.ThemeStyle.RowsStyle.Height = 22
-        Me.dgvDepartment.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvDepartment.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.dgvKodeAbsen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvKodeAbsen.BackgroundColor = System.Drawing.Color.White
+        Me.dgvKodeAbsen.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvKodeAbsen.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgvKodeAbsen.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(219, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(254, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvKodeAbsen.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        Me.dgvKodeAbsen.ColumnHeadersHeight = 24
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvKodeAbsen.DefaultCellStyle = DataGridViewCellStyle6
+        Me.dgvKodeAbsen.EnableHeadersVisualStyles = False
+        Me.dgvKodeAbsen.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.dgvKodeAbsen.Location = New System.Drawing.Point(3, 63)
+        Me.dgvKodeAbsen.MultiSelect = False
+        Me.dgvKodeAbsen.Name = "dgvKodeAbsen"
+        Me.dgvKodeAbsen.ReadOnly = True
+        Me.dgvKodeAbsen.RowHeadersVisible = False
+        Me.dgvKodeAbsen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvKodeAbsen.Size = New System.Drawing.Size(602, 228)
+        Me.dgvKodeAbsen.TabIndex = 3
+        Me.dgvKodeAbsen.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
+        Me.dgvKodeAbsen.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
+        Me.dgvKodeAbsen.ThemeStyle.AlternatingRowsStyle.Font = Nothing
+        Me.dgvKodeAbsen.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty
+        Me.dgvKodeAbsen.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty
+        Me.dgvKodeAbsen.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty
+        Me.dgvKodeAbsen.ThemeStyle.BackColor = System.Drawing.Color.White
+        Me.dgvKodeAbsen.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.dgvKodeAbsen.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.dgvKodeAbsen.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgvKodeAbsen.ThemeStyle.HeaderStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        Me.dgvKodeAbsen.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
+        Me.dgvKodeAbsen.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+        Me.dgvKodeAbsen.ThemeStyle.HeaderStyle.Height = 24
+        Me.dgvKodeAbsen.ThemeStyle.ReadOnly = True
+        Me.dgvKodeAbsen.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
+        Me.dgvKodeAbsen.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgvKodeAbsen.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        Me.dgvKodeAbsen.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.dgvKodeAbsen.ThemeStyle.RowsStyle.Height = 22
+        Me.dgvKodeAbsen.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.dgvKodeAbsen.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
         '
         'bHapus
         '
@@ -314,6 +254,34 @@ Partial Class uf_department
         Me.bTambah.Text = "Tambah"
         Me.bTambah.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Label1.Location = New System.Drawing.Point(8, 6)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(199, 13)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Home   >    Master Data   >  Kode Absen" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
+        'pnlToolbar
+        '
+        Me.pnlToolbar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlToolbar.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
+        Me.pnlToolbar.BorderColor = System.Drawing.Color.Gainsboro
+        Me.pnlToolbar.BorderRadius = 6
+        Me.pnlToolbar.BorderThickness = 1
+        Me.pnlToolbar.Controls.Add(Me.bRefresh)
+        Me.pnlToolbar.Controls.Add(Me.bCari)
+        Me.pnlToolbar.Controls.Add(Me.tPencarian)
+        Me.pnlToolbar.Controls.Add(Me.Label4)
+        Me.pnlToolbar.Location = New System.Drawing.Point(11, 82)
+        Me.pnlToolbar.Name = "pnlToolbar"
+        Me.pnlToolbar.ShadowDecoration.Parent = Me.pnlToolbar
+        Me.pnlToolbar.Size = New System.Drawing.Size(608, 74)
+        Me.pnlToolbar.TabIndex = 3
+        '
         'bRefresh
         '
         Me.bRefresh.BorderColor = System.Drawing.Color.Gray
@@ -374,47 +342,79 @@ Partial Class uf_department
         Me.tPencarian.Location = New System.Drawing.Point(14, 27)
         Me.tPencarian.Name = "tPencarian"
         Me.tPencarian.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tPencarian.PlaceholderText = "Ketik kode atau nama deparment"
+        Me.tPencarian.PlaceholderText = "Ketik kode atau nama absen"
         Me.tPencarian.SelectedText = ""
         Me.tPencarian.ShadowDecoration.Parent = Me.tPencarian
         Me.tPencarian.Size = New System.Drawing.Size(229, 30)
         Me.tPencarian.TabIndex = 1
         '
-        'uf_department
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Yu Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(14, 10)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(99, 16)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "Cari Kode Absen"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(14, 29)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(182, 30)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Data Kode Absen"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(110, Byte), Integer), CType(CType(119, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(16, 59)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(264, 17)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Kelola seluruh data kode absen perusahaan"
+        '
+        'uf_kodeabsen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(249, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(254, Byte), Integer))
         Me.Controls.Add(Me.pnlContext)
-        Me.Name = "uf_department"
+        Me.Name = "uf_kodeabsen"
         Me.Size = New System.Drawing.Size(636, 527)
-        Me.pnlToolbar.ResumeLayout(False)
-        Me.pnlToolbar.PerformLayout()
         Me.pnlContext.ResumeLayout(False)
         Me.pnlContext.PerformLayout()
         Me.pnlButton.ResumeLayout(False)
         Me.pnlPage.ResumeLayout(False)
         Me.pnlPage.PerformLayout()
-        CType(Me.dgvDepartment, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvKodeAbsen, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlToolbar.ResumeLayout(False)
+        Me.pnlToolbar.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents pnlToolbar As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents Label4 As Label
-    Friend WithEvents tPencarian As Guna.UI2.WinForms.Guna2TextBox
-    Friend WithEvents bCari As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents pnlContext As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents pnlButton As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents bTambah As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents bEdit As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents bHapus As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents pnlPage As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents dgvDepartment As Guna.UI2.WinForms.Guna2DataGridView
+    Friend WithEvents paginationKodeAbsen As ucPagination
     Friend WithEvents lblInfo As Label
-    Friend WithEvents paginationDepartment As ucPagination
+    Friend WithEvents dgvKodeAbsen As Guna.UI2.WinForms.Guna2DataGridView
+    Friend WithEvents bHapus As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents bEdit As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents bTambah As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents pnlToolbar As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents bRefresh As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents bCari As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents tPencarian As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
 End Class
