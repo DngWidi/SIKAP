@@ -1198,42 +1198,67 @@ Public Class frmKandidatAdd
 
         dgvsertifikat.Columns.Clear()
         dgvsertifikat.AutoGenerateColumns = False
-        Dim colId As New DataGridViewTextBoxColumn()
 
-        colId.Name = "ffcidsertifikat"
-        colId.HeaderText = "ID"
-        colId.Visible = False
+        '========================================================
+        ' ID SERTIFIKAT
+        '========================================================
+        dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "ffcidsertifikat", .HeaderText = "ID", .Visible = False})
 
-        dgvsertifikat.Columns.Add(colId)
-
-
+        '========================================================
+        ' DATA SERTIFIKAT
+        '========================================================
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "NamaSertifikat", .HeaderText = "Nama Sertifikat"})
+
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Penerbit", .HeaderText = "Penerbit"})
+
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "NomorSertifikat", .HeaderText = "Nomor Sertifikat"})
-        dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "TanggalTerbit", .HeaderText = "Tgl. Terbit"})
-        dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "TanggalKadaluarsa", .HeaderText = "Kadaluarsa"})
+
+        dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "TanggalTerbit", .HeaderText = "Tanggal Terbit"})
+
+        dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "TanggalKadaluarsa", .HeaderText = "Tanggal Kadaluarsa"})
+
+        '========================================================
+        ' NAMA FILE
+        '========================================================
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "File", .HeaderText = "File"})
-        dgvsertifikat.Columns.Add("SourceFilePath", "SourceFilePath")
-        dgvsertifikat.Columns("SourceFilePath").Visible = False
 
-        dgvsertifikat.Columns.Add("StoredFilePath", "StoredFilePath")
-        dgvsertifikat.Columns("StoredFilePath").Visible = False
+        '========================================================
+        ' FILE LOKAL
+        ' Digunakan jika user memilih file baru
+        '========================================================
+        dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "SourceFilePath", .HeaderText = "SourceFilePath", .Visible = False})
 
-        Dim colFilePath As New DataGridViewTextBoxColumn()
+        '========================================================
+        ' FILE SERVER
+        ' Relative path file yang sudah tersimpan
+        '========================================================
+        dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "StoredFilePath", .HeaderText = "StoredFilePath", .Visible = False})
 
-        colFilePath.Name = "FilePath"
-        colFilePath.HeaderText = "File Path"
-        colFilePath.Visible = False
-        dgvsertifikat.Columns.Add(colFilePath)
+        '========================================================
+        ' KETERANGAN
+        '========================================================
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Keterangan", .HeaderText = "Keterangan"})
+
+        '========================================================
+        ' BUTTON LIHAT FILE
+        '========================================================
         dgvsertifikat.Columns.Add(New DataGridViewButtonColumn With {.Name = "LihatFile", .HeaderText = "File", .Text = "Lihat", .UseColumnTextForButtonValue = True})
-        dgvsertifikat.Columns.Add(New DataGridViewButtonColumn With {.Name = "Edit", .HeaderText = "Aksi", .Text = "Edit", .UseColumnTextForButtonValue = True})
+
+        '========================================================
+        ' BUTTON EDIT
+        '========================================================
+        dgvsertifikat.Columns.Add(New DataGridViewButtonColumn With {.Name = "Edit", .HeaderText = "", .Text = "Edit", .UseColumnTextForButtonValue = True})
+
+        '========================================================
+        ' BUTTON HAPUS
+        '========================================================
         dgvsertifikat.Columns.Add(New DataGridViewButtonColumn With {.Name = "Hapus", .HeaderText = "", .Text = "Hapus", .UseColumnTextForButtonValue = True})
+
     End Sub
     Private Sub bAddSertifikat_Click(sender As Object, e As EventArgs) Handles bAddSertifikat.Click
 
         Using frm As New frmSertifikatAdd()
-            frm.Mode = ModeForm.Tambah
+            frm.Mode = frmSertifikatAdd.ModeForm.Tambah
             If frm.ShowDialog(Me) = DialogResult.OK Then
                 TambahRowSertifikat(frm)
             End If
@@ -1242,65 +1267,188 @@ Public Class frmKandidatAdd
 
     End Sub
     Private Sub TambahRowSertifikat(frm As frmSertifikatAdd)
-        Dim rowIndex As Integer = dgvsertifikat.Rows.Add()
-        Dim row As DataGridViewRow = dgvsertifikat.Rows(rowIndex)
-        row.Cells("ffcidsertifikat").Value = 0
-        row.Cells("NamaSertifikat").Value = frm.NamaSertifikat
-        row.Cells("Penerbit").Value = frm.Penerbit
-        row.Cells("NomorSertifikat").Value = frm.NomorSertifikat
-        row.Cells("TanggalTerbit").Value = frm.TanggalTerbit
-        row.Cells("TanggalKadaluarsa").Value = frm.TanggalKadaluarsa
-        row.Cells("File").Value = frm.FileName
-        row.Cells("FilePath").Value = frm.FilePath
-        row.Cells("Keterangan").Value = frm.Keterangan
+        Try
+
+            Dim rowIndex As Integer = dgvsertifikat.Rows.Add()
+
+            Dim row As DataGridViewRow = dgvsertifikat.Rows(rowIndex)
+
+            '====================================================
+            ' ID
+            '====================================================
+            row.Cells("ffcidsertifikat").Value = 0
+
+            '====================================================
+            ' DATA SERTIFIKAT
+            '====================================================
+            row.Cells("NamaSertifikat").Value = frm.NamaSertifikat
+            row.Cells("Penerbit").Value = frm.Penerbit
+            row.Cells("NomorSertifikat").Value = frm.NomorSertifikat
+            row.Cells("TanggalTerbit").Value = frm.TanggalTerbit
+            If frm.TanggalKadaluarsa.HasValue Then
+                row.Cells("TanggalKadaluarsa").Value = frm.TanggalKadaluarsa.Value
+            Else
+                row.Cells("TanggalKadaluarsa").Value = DBNull.Value
+            End If
+
+            '====================================================
+            ' FILE
+            '====================================================
+
+            'Nama file
+            row.Cells("File").Value = frm.FileName
+
+            'File lokal yang dipilih user
+            row.Cells("SourceFilePath").Value = frm.FilePath
+
+            'Untuk data baru belum ada file server
+            row.Cells("StoredFilePath").Value = frm.StoredFilePath
+
+            '====================================================
+            ' KETERANGAN
+            '====================================================
+            row.Cells("Keterangan").Value = frm.Keterangan
+
+        Catch ex As Exception
+
+            PesanPopupError("ERROR", "Gagal menambahkan sertifikat : " & ex.Message)
+
+        End Try
     End Sub
     Private Sub EditSertifikat(rowIndex As Integer)
 
-        Using frm As New frmSertifikatAdd()
-            frm.Mode = frmSertifikatAdd.ModeForm.Edit
-            frm.NamaSertifikat = GetCellValue(dgvsertifikat.Rows(rowIndex), "NamaSertifikat")
-            frm.Penerbit = GetCellValue(dgvsertifikat.Rows(rowIndex), "Penerbit")
-            frm.NomorSertifikat = GetCellValue(dgvsertifikat.Rows(rowIndex), "NomorSertifikat")
-            frm.TanggalTerbit = GetDateValue(dgvsertifikat.Rows(rowIndex), "TanggalTerbit")
-            frm.TanggalKadaluarsa = GetDateValue(dgvsertifikat.Rows(rowIndex), "TanggalKadaluarsa")
-            frm.FileName = GetCellValue(dgvsertifikat.Rows(rowIndex), "File")
-            frm.StoredFilePath = GetCellValue(dgvsertifikat.Rows(rowIndex), "StoredFilePath")
-            frm.Keterangan = GetCellValue(dgvsertifikat.Rows(rowIndex), "Keterangan")
+        Try
 
-            If frm.ShowDialog(Me.FindForm()) = DialogResult.OK Then
-
-                dgvsertifikat.Rows(rowIndex).Cells("NamaSertifikat").Value = frm.NamaSertifikat
-                dgvsertifikat.Rows(rowIndex).Cells("Penerbit").Value = frm.Penerbit
-                dgvsertifikat.Rows(rowIndex).Cells("NomorSertifikat").Value = frm.NomorSertifikat
-                dgvsertifikat.Rows(rowIndex).Cells("TanggalTerbit").Value = frm.TanggalTerbit
-                dgvsertifikat.Rows(rowIndex).Cells("TanggalKadaluarsa").Value = frm.TanggalKadaluarsa
-                dgvsertifikat.Rows(rowIndex).Cells("File").Value = frm.FileName
-                dgvsertifikat.Rows(rowIndex).Cells("SourceFilePath").Value = frm.FilePath
-                dgvsertifikat.Rows(rowIndex).Cells("StoredFilePath").Value = frm.StoredFilePath
-                dgvsertifikat.Rows(rowIndex).Cells("Keterangan").Value = frm.Keterangan
-
+            If rowIndex < 0 OrElse rowIndex >= dgvsertifikat.Rows.Count Then
+                Return
             End If
 
-        End Using
+            Dim row As DataGridViewRow = dgvsertifikat.Rows(rowIndex)
+
+            Using frm As New frmSertifikatAdd()
+
+                frm.Mode = frmSertifikatAdd.ModeForm.Edit
+
+                '================================================
+                ' ID
+                '================================================
+                frm.IdSertifikat = GetLongValue(row, "ffcidsertifikat")
+
+                '================================================
+                ' DATA SERTIFIKAT
+                '================================================
+                frm.NamaSertifikat = GetCellValue(row, "NamaSertifikat")
+
+                frm.Penerbit = GetCellValue(row, "Penerbit")
+
+                frm.NomorSertifikat = GetCellValue(row, "NomorSertifikat")
+
+                frm.TanggalTerbit = GetDateValue(row, "TanggalTerbit")
+
+                Dim tanggalKadaluarsa As String = GetCellValue(row, "TanggalKadaluarsa")
+
+                If String.IsNullOrWhiteSpace(tanggalKadaluarsa) Then
+                    frm.TanggalKadaluarsa = Nothing
+                Else
+                    Dim dt As Date
+
+                    If Date.TryParse(tanggalKadaluarsa, dt) Then
+                        frm.TanggalKadaluarsa = dt
+                    Else
+                        frm.TanggalKadaluarsa = Nothing
+                    End If
+
+                End If
+
+                '================================================
+                ' FILE
+                '================================================
+
+                'Nama file
+                frm.FileName = GetCellValue(row, "File")
+
+                'JANGAN mengisi FilePath dari grid.
+                '
+                'FilePath hanya untuk file lokal baru.
+                '
+                'Saat edit file lama, SourceFilePath
+                'harus kosong.
+
+                frm.FilePath = String.Empty
+
+                'Path server file lama
+                frm.StoredFilePath = GetCellValue(row, "StoredFilePath")
+
+                '================================================
+                ' KETERANGAN
+                '================================================
+                frm.Keterangan = GetCellValue(row, "Keterangan")
+
+                '================================================
+                ' TAMPILKAN POPUP
+                '================================================
+                If frm.ShowDialog(Me) = DialogResult.OK Then
+
+                    UpdateRowSertifikat(rowIndex, frm)
+                End If
+
+            End Using
+
+        Catch ex As Exception
+
+            PesanPopupError("ERROR", "Gagal mengedit sertifikat : " & ex.Message)
+
+        End Try
 
     End Sub
     Private Sub UpdateRowSertifikat(rowIndex As Integer, frm As frmSertifikatAdd)
 
-        If rowIndex < 0 OrElse
-       rowIndex >= dgvsertifikat.Rows.Count Then
-            Return
-        End If
-        Dim row As DataGridViewRow = dgvsertifikat.Rows(rowIndex)
-        row.Cells("ffcidsertifikat").Value =
-        frm.IdSertifikat
-        row.Cells("NamaSertifikat").Value = frm.NamaSertifikat
-        row.Cells("Penerbit").Value = frm.Penerbit
-        row.Cells("NomorSertifikat").Value = frm.NomorSertifikat
-        row.Cells("TanggalTerbit").Value = frm.TanggalTerbit
-        row.Cells("TanggalKadaluarsa").Value = frm.TanggalKadaluarsa
-        row.Cells("File").Value = frm.FileName
-        row.Cells("FilePath").Value = frm.FilePath
-        row.Cells("Keterangan").Value = frm.Keterangan
+        Try
+
+            If rowIndex < 0 OrElse rowIndex >= dgvsertifikat.Rows.Count Then
+                Return
+            End If
+
+            Dim row As DataGridViewRow = dgvsertifikat.Rows(rowIndex)
+
+            '====================================================
+            ' ID
+            '====================================================
+            row.Cells("ffcidsertifikat").Value = frm.IdSertifikat
+
+            '====================================================
+            ' DATA
+            '====================================================
+            row.Cells("NamaSertifikat").Value = frm.NamaSertifikat
+            row.Cells("Penerbit").Value = frm.Penerbit
+            row.Cells("NomorSertifikat").Value = frm.NomorSertifikat
+            row.Cells("TanggalTerbit").Value = frm.TanggalTerbit
+            If frm.TanggalKadaluarsa.HasValue Then
+                row.Cells("TanggalKadaluarsa").Value = frm.TanggalKadaluarsa.Value
+            Else
+                row.Cells("TanggalKadaluarsa").Value = DBNull.Value
+            End If
+
+            '====================================================
+            ' FILE
+            '====================================================
+
+            row.Cells("File").Value = frm.FileName
+
+            row.Cells("SourceFilePath").Value = frm.FilePath
+
+            row.Cells("StoredFilePath").Value = frm.StoredFilePath
+
+            '====================================================
+            ' KETERANGAN
+            '====================================================
+            row.Cells("Keterangan").Value = frm.Keterangan
+
+        Catch ex As Exception
+
+            PesanPopupError("ERROR", "Gagal memperbarui sertifikat : " & ex.Message)
+
+        End Try
 
     End Sub
 
@@ -1377,103 +1525,138 @@ Public Class frmKandidatAdd
 #Region "DOKUMEN"
 
     Private Sub SetupGridDokumen()
-
         dgvdokumen.Columns.Clear()
         dgvdokumen.AutoGenerateColumns = False
 
-        Dim colId As New DataGridViewTextBoxColumn()
 
-        colId.Name = "ffciddokumen"
-        colId.HeaderText = "ID"
-        colId.Visible = False
-        dgvdokumen.Columns.Add(colId)
+        dgvdokumen.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "ffciddokumen", .HeaderText = "ID", .Visible = False})
         dgvdokumen.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Jenis", .HeaderText = "Jenis"})
-        dgvdokumen.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "NamaFile", .HeaderText = "Nama File"})
+        dgvdokumen.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "NamaFile", .HeaderText = "Nama Dokumen"})
         dgvdokumen.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "File", .HeaderText = "File"})
+        dgvdokumen.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "SourceFilePath", .HeaderText = "SourceFilePath", .Visible = False})
+        dgvdokumen.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "StoredFilePath", .HeaderText = "StoredFilePath", .Visible = False})
         dgvdokumen.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Ukuran", .HeaderText = "Ukuran"})
-
         dgvdokumen.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "TipeFile", .HeaderText = "Tipe File"})
-
-        Dim colFilePath As New DataGridViewTextBoxColumn()
-
-        colFilePath.Name = "FilePath"
-        colFilePath.HeaderText = "File Path"
-        colFilePath.Visible = False
-
-        dgvdokumen.Columns.Add(colFilePath)
-
         dgvdokumen.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Keterangan", .HeaderText = "Keterangan"})
         dgvdokumen.Columns.Add(New DataGridViewButtonColumn With {.Name = "LihatFile", .HeaderText = "File", .Text = "Lihat", .UseColumnTextForButtonValue = True})
-
-        dgvdokumen.Columns.Add(New DataGridViewButtonColumn With {.Name = "Edit", .HeaderText = "Aksi", .Text = "Edit", .UseColumnTextForButtonValue = True})
-
+        dgvdokumen.Columns.Add(New DataGridViewButtonColumn With {.Name = "Edit", .HeaderText = "", .Text = "Edit", .UseColumnTextForButtonValue = True})
         dgvdokumen.Columns.Add(New DataGridViewButtonColumn With {.Name = "Hapus", .HeaderText = "", .Text = "Hapus", .UseColumnTextForButtonValue = True})
 
     End Sub
     Private Sub bAddDokumen_Click(sender As Object, e As EventArgs) Handles bUploadDokumen.Click
         Using frm As New frmDokumenAdd()
             frm.Mode = frmDokumenAdd.ModeForm.Tambah
+
             If frm.ShowDialog(Me) = DialogResult.OK Then
                 TambahRowDokumen(frm)
             End If
+
         End Using
     End Sub
     Private Sub TambahRowDokumen(frm As frmDokumenAdd)
+        Try
 
-        Dim rowIndex As Integer = dgvdokumen.Rows.Add()
-        Dim row As DataGridViewRow = dgvdokumen.Rows(rowIndex)
-        row.Cells("ffciddokumen").Value = 0
-        row.Cells("Jenis").Value = frm.Jenis
-        row.Cells("NamaFile").Value = frm.NamaFile
-        row.Cells("File").Value = frm.FileName
-        row.Cells("Ukuran").Value = frm.Ukuran
-        row.Cells("TipeFile").Value = frm.TipeFile
-        row.Cells("FilePath").Value = frm.FilePath
-        row.Cells("Keterangan").Value = frm.Keterangan
+            Dim rowIndex As Integer = dgvdokumen.Rows.Add()
+
+            Dim row As DataGridViewRow = dgvdokumen.Rows(rowIndex)
+
+            row.Cells("ffciddokumen").Value = 0
+
+            row.Cells("Jenis").Value = frm.Jenis
+            row.Cells("NamaFile").Value = frm.Nama
+
+            row.Cells("File").Value = frm.FileName
+
+            row.Cells("SourceFilePath").Value = frm.FilePath
+
+            row.Cells("StoredFilePath").Value = frm.StoredFilePath
+
+
+            row.Cells("TipeFile").Value = frm.TipeFile
+
+
+            row.Cells("Ukuran").Value = frm.Ukuran
+
+            row.Cells("Keterangan").Value = frm.Keterangan
+
+        Catch ex As Exception
+
+            PesanPopupError("ERROR", "Gagal menambahkan dokumen : " & ex.Message)
+
+        End Try
     End Sub
     Private Sub EditDokumen(rowIndex As Integer)
+        Try
 
-        If rowIndex < 0 OrElse rowIndex >= dgvdokumen.Rows.Count Then
-            Return
-        End If
-        Dim row As DataGridViewRow = dgvdokumen.Rows(rowIndex)
-        Dim idDokumen As Long = 0
-        If row.Cells("ffciddokumen").Value IsNot Nothing Then
-            Long.TryParse(row.Cells("ffciddokumen").Value.ToString(), idDokumen)
-        End If
-
-
-        Using frm As New frmDokumenAdd()
-            frm.Mode = ModeForm.Edit
-            frm.IdDokumen = idDokumen
-            frm.Jenis = GetCellValue(row, "Jenis")
-            frm.NamaFile = GetCellValue(row, "NamaFile")
-            frm.FileName = GetCellValue(row, "File")
-            frm.FilePath = GetCellValue(row, "FilePath")
-            frm.TipeFile = GetCellValue(row, "TipeFile")
-            frm.Ukuran = GetLongFromGrid(row, "Ukuran")
-            frm.Keterangan = GetCellValue(row, "Keterangan")
-            If frm.ShowDialog(Me) = DialogResult.OK Then
-                UpdateRowDokumen(rowIndex, frm)
+            If rowIndex < 0 OrElse
+           rowIndex >= dgvdokumen.Rows.Count Then
+                Return
             End If
-        End Using
+
+            Dim row As DataGridViewRow = dgvdokumen.Rows(rowIndex)
+
+            Using frm As New frmDokumenAdd()
+
+                frm.Mode = frmDokumenAdd.ModeForm.Edit
+
+                frm.IdDokumen = GetLongValue(row, "ffciddokumen")
+                frm.Jenis = GetCellValue(row, "Jenis")
+
+                frm.Nama = GetCellValue(row, "NamaFile")
+
+
+                frm.FileName = GetCellValue(row, "File")
+
+                'File lokal harus kosong ketika membuka
+                'file lama untuk edit.
+                frm.FilePath = String.Empty
+
+                'Path server file lama
+                frm.StoredFilePath = GetCellValue(row, "StoredFilePath")
+                frm.TipeFile = GetCellValue(row, "TipeFile")
+                frm.Ukuran = GetLongValue(row, "Ukuran")
+                frm.Keterangan = GetCellValue(row, "Keterangan")
+                If frm.ShowDialog(Me) = DialogResult.OK Then
+
+                    UpdateRowDokumen(rowIndex, frm)
+                End If
+
+            End Using
+
+        Catch ex As Exception
+            PesanPopupError("ERROR", "Gagal mengedit dokumen : " & ex.Message)
+        End Try
 
     End Sub
     Private Sub UpdateRowDokumen(rowIndex As Integer, frm As frmDokumenAdd)
 
-        If rowIndex < 0 OrElse rowIndex >= dgvdokumen.Rows.Count Then
-            Return
-        End If
-        Dim row As DataGridViewRow = dgvdokumen.Rows(rowIndex)
-        row.Cells("ffciddokumen").Value = frm.IdDokumen
+        Try
 
-        row.Cells("Jenis").Value = frm.Jenis
-        row.Cells("NamaFile").Value = frm.NamaFile
-        row.Cells("File").Value = frm.FileName
-        row.Cells("Ukuran").Value = frm.Ukuran
-        row.Cells("TipeFile").Value = frm.TipeFile
-        row.Cells("FilePath").Value = frm.FilePath
-        row.Cells("Keterangan").Value = frm.Keterangan
+            If rowIndex < 0 OrElse rowIndex >= dgvdokumen.Rows.Count Then
+                Return
+            End If
+
+            Dim row As DataGridViewRow = dgvdokumen.Rows(rowIndex)
+
+            row.Cells("ffciddokumen").Value = frm.IdDokumen
+
+            row.Cells("Jenis").Value = frm.Jenis
+            row.Cells("NamaFile").Value = frm.Nama
+            row.Cells("File").Value = frm.FileName
+            row.Cells("SourceFilePath").Value = frm.FilePath
+            row.Cells("StoredFilePath").Value = frm.StoredFilePath
+
+            row.Cells("TipeFile").Value = frm.TipeFile
+
+            row.Cells("Ukuran").Value = frm.Ukuran
+
+            row.Cells("Keterangan").Value = frm.Keterangan
+
+        Catch ex As Exception
+
+            PesanPopupError("ERROR", "Gagal memperbarui dokumen : " & ex.Message)
+
+        End Try
 
     End Sub
     Private Sub HapusDokumen(rowIndex As Integer)
@@ -1696,20 +1879,53 @@ Public Class frmKandidatAdd
                             row.Cells("Penerbit").Value = DBString(rd, "ffcpenerbit")
                             row.Cells("NomorSertifikat").Value = DBString(rd, "ffcnomorsertifikat")
 
+
                             If Not rd.IsDBNull(rd.GetOrdinal("ffdtglterbit")) Then
-                                row.Cells("TanggalTerbit").Value = Convert.ToDateTime(rd("ffdtglterbit"))
+                                row.Cells("TanggalTerbit").Value = Convert.ToDateTime(rd("ffdtglterbit")).Date
+                            Else
+                                row.Cells("TanggalTerbit").Value = DBNull.Value
                             End If
 
                             If Not rd.IsDBNull(rd.GetOrdinal("ffdtglkadaluarsa")) Then
                                 row.Cells("TanggalKadaluarsa").Value = Convert.ToDateTime(rd("ffdtglkadaluarsa"))
                             Else
-                                row.Cells("TanggalKadaluarsa").Value =
-                                DBNull.Value
+                                row.Cells("TanggalKadaluarsa").Value = DBNull.Value
                             End If
 
-                            row.Cells("File").Value = DBString(rd, "ffcfile")
-                            row.Cells("FilePath").Value = DBString(rd, "ffcfile")
+                            Dim storedFilePath As String = DBString(rd, "ffcfile")
+
+                            'Nama file untuk ditampilkan
+                            If String.IsNullOrWhiteSpace(storedFilePath) Then
+                                row.Cells("File").Value = String.Empty
+                            Else
+                                row.Cells("File").Value = Path.GetFileName(storedFilePath)
+                            End If
+
+
+                            '============================================
+                            ' 11. SOURCE FILE PATH
+                            '
+                            ' Data dari database berarti file
+                            ' sudah tersimpan di server.
+                            '
+                            ' Jadi SourceFilePath kosong.
+                            '============================================
+                            row.Cells("SourceFilePath").Value = String.Empty
+
+
+                            '============================================
+                            ' 12. STORED FILE PATH
+                            '
+                            ' Simpan relative path server.
+                            '============================================
+                            row.Cells("StoredFilePath").Value = storedFilePath
+
+
+                            '============================================
+                            ' 13. KETERANGAN
+                            '============================================
                             row.Cells("Keterangan").Value = DBString(rd, "ffcketerangan")
+
 
                         End While
 
@@ -1749,9 +1965,64 @@ Public Class frmKandidatAdd
                             Else
                                 row.Cells("Ukuran").Value = DBNull.Value
                             End If
+                            '============================================
+                            ' 9. TIPE FILE
+                            '============================================
                             row.Cells("TipeFile").Value = DBString(rd, "ffctipefile")
-                            row.Cells("File").Value = DBString(rd, "ffcfile")
+
+
+                            '============================================
+                            ' 10. FILE
+                            '
+                            ' Database:
+                            '
+                            ' Kandidat/KND-202609-0001/
+                            ' Dokumen/CV.pdf
+                            '
+                            ' Grid File:
+                            '
+                            ' CV.pdf
+                            '
+                            ' StoredFilePath:
+                            '
+                            ' Kandidat/KND-202609-0001/Dokumen/CV.pdf
+                            '============================================
+                            Dim storedFilePath As String = DBString(rd, "ffcfile")
+
+                            '============================================
+                            ' 11. NAMA FILE YANG DITAMPILKAN
+                            '============================================
+                            If String.IsNullOrWhiteSpace(storedFilePath) Then
+
+                                row.Cells("File").Value = String.Empty
+
+                            Else
+
+                                row.Cells("File").Value = Path.GetFileName(storedFilePath)
+
+                            End If
+
+
+                            '============================================
+                            ' 12. SOURCE FILE PATH
+                            '
+                            ' Karena data berasal dari database,
+                            ' file dianggap sudah tersimpan di server.
+                            '============================================
+                            row.Cells("SourceFilePath").Value = String.Empty
+
+
+                            '============================================
+                            ' 13. STORED FILE PATH
+                            '============================================
+                            row.Cells("StoredFilePath").Value = storedFilePath
+
+
+                            '============================================
+                            ' 14. KETERANGAN
+                            '============================================
                             row.Cells("Keterangan").Value = DBString(rd, "ffcketerangan")
+
                         End While
                     End Using
                 End Using
