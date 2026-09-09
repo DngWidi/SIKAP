@@ -369,29 +369,32 @@ Public Class frmKandidatAdd
         End If
 
     End Function
-    Private Function ProsesFileSertifikat(row As DataGridViewRow, noKandidat As String, fileBaru As List(Of String)) As String
 
-        Dim sourcePath As String = GetCellValue(row, "SourceFilePath")
 
-        Dim storedPath As String = GetCellValue(row, "StoredFilePath")
+    ' Private Function ProsesFileSertifikat(row As DataGridViewRow, noKandidat As String, fileBaru As List(Of String)) As String
+    '
+    '    Dim sourcePath As String = GetCellValue(row, "SourceFilePath")'
+    '
+    '    Dim storedPath As String = GetCellValue(row, "StoredFilePath")'
+    '
+    '    'Tidak ada file baru
+    '    If String.IsNullOrWhiteSpace(sourcePath) Then
+    '   Return storedPath
+    '   End If
+    ''
+    '   'Ada file baru → copy ke server
+    '   Dim newStoredPath As String = SimpanFile(sourcePath, noKandidat, "Sertifikat")
+    '
+    '   If String.IsNullOrWhiteSpace(newStoredPath) Then
+    '   Throw New Exception("Gagal menyimpan file sertifikat ke server.")
+    ''   End If
+    '
+    '        fileBaru.Add(newStoredPath)
+    '
+    '    Return newStoredPath
+    ''
+    ' End Function
 
-        'Tidak ada file baru
-        If String.IsNullOrWhiteSpace(sourcePath) Then
-            Return storedPath
-        End If
-
-        'Ada file baru → copy ke server
-        Dim newStoredPath As String = SimpanFile(sourcePath, noKandidat, "Sertifikat")
-
-        If String.IsNullOrWhiteSpace(newStoredPath) Then
-            Throw New Exception("Gagal menyimpan file sertifikat ke server.")
-        End If
-
-        fileBaru.Add(newStoredPath)
-
-        Return newStoredPath
-
-    End Function
 #End Region
 #Region "Private"
 
@@ -399,7 +402,7 @@ Public Class frmKandidatAdd
         Using conn As New MySqlConnection(sambung)
             conn.Open()
 
-            Dim sql As String = "SELECT ffcnokandidat, ffcnama,ffctempatlahir,ffdtgllahir,ffcjeniskelamin,ffcstatuspernikahan,ffcnotelp,ffcemail,ffcalamat,ffckelurahan,ffckecamatan,ffckota,ffcprovinsi,ffckodepos, " &
+            Dim sql As String = "SELECT ffcnokandidat, ffcnama,ffctempatlahir,ffdtgllahir,ffcjeniskelamin,ffcstatuspernikahan,ffcnik,ffcnotelp,ffcemail,ffcalamat,ffckelurahan,ffckecamatan,ffckota,ffcprovinsi,ffckodepos, " &
             "ffcfilefoto FROM sakandidat WHERE ffcidkandidat = @ID"
 
 
@@ -1203,55 +1206,22 @@ Public Class frmKandidatAdd
         ' ID SERTIFIKAT
         '========================================================
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "ffcidsertifikat", .HeaderText = "ID", .Visible = False})
-
+        dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "ffciddokumen", .HeaderText = "IDDokumen", .Visible = False})
         '========================================================
         ' DATA SERTIFIKAT
         '========================================================
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "NamaSertifikat", .HeaderText = "Nama Sertifikat"})
-
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Penerbit", .HeaderText = "Penerbit"})
-
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "NomorSertifikat", .HeaderText = "Nomor Sertifikat"})
-
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "TanggalTerbit", .HeaderText = "Tanggal Terbit"})
-
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "TanggalKadaluarsa", .HeaderText = "Tanggal Kadaluarsa"})
 
-        '========================================================
-        ' NAMA FILE
-        '========================================================
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "File", .HeaderText = "File"})
-
-        '========================================================
-        ' FILE LOKAL
-        ' Digunakan jika user memilih file baru
-        '========================================================
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "SourceFilePath", .HeaderText = "SourceFilePath", .Visible = False})
-
-        '========================================================
-        ' FILE SERVER
-        ' Relative path file yang sudah tersimpan
-        '========================================================
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "StoredFilePath", .HeaderText = "StoredFilePath", .Visible = False})
-
-        '========================================================
-        ' KETERANGAN
-        '========================================================
         dgvsertifikat.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Keterangan", .HeaderText = "Keterangan"})
-
-        '========================================================
-        ' BUTTON LIHAT FILE
-        '========================================================
         dgvsertifikat.Columns.Add(New DataGridViewButtonColumn With {.Name = "LihatFile", .HeaderText = "File", .Text = "Lihat", .UseColumnTextForButtonValue = True})
-
-        '========================================================
-        ' BUTTON EDIT
-        '========================================================
         dgvsertifikat.Columns.Add(New DataGridViewButtonColumn With {.Name = "Edit", .HeaderText = "", .Text = "Edit", .UseColumnTextForButtonValue = True})
-
-        '========================================================
-        ' BUTTON HAPUS
-        '========================================================
         dgvsertifikat.Columns.Add(New DataGridViewButtonColumn With {.Name = "Hapus", .HeaderText = "", .Text = "Hapus", .UseColumnTextForButtonValue = True})
 
     End Sub
@@ -1489,6 +1459,7 @@ Public Class frmKandidatAdd
         End Select
 
     End Sub
+
     Private Sub LihatFileSertifikat(rowIndex As Integer)
 
         If rowIndex < 0 Then
@@ -1496,27 +1467,17 @@ Public Class frmKandidatAdd
         End If
 
         Dim row As DataGridViewRow = dgvsertifikat.Rows(rowIndex)
-        If Not dgvsertifikat.Columns.Contains("FilePath") Then
-            PesanPopupPeringatan("Peringatan", "Lokasi file sertifikat tidak tersedia.")
-            Return
-        End If
-        Dim filePath As String = Convert.ToString(row.Cells("FilePath").Value)
+        Dim relativePath As String = Convert.ToString(row.Cells("StoredFilePath").Value)
 
-
-        If String.IsNullOrWhiteSpace(filePath) Then
+        If String.IsNullOrWhiteSpace(relativePath) Then
             PesanPopupPeringatan("Peringatan", "File sertifikat belum dipilih.")
             Return
         End If
-        If Not IO.File.Exists(filePath) Then
-            PesanPopupPeringatan("Peringatan", "File sertifikat tidak ditemukan.")
-            Return
-        End If
-
 
         Try
-            Process.Start(New ProcessStartInfo With {.FileName = filePath, .UseShellExecute = True})
+            BukaFile(relativePath)
         Catch ex As Exception
-            PesanPopupError("Error", "File sertifikat tidak dapat dibuka.")
+            PesanPopupError("Error", "File sertifikat tidak dapat dibuka : " & ex.Message)
         End Try
 
     End Sub
@@ -1703,16 +1664,12 @@ Public Class frmKandidatAdd
     End Sub
     Private Sub LihatFileDokumen(rowIndex As Integer)
         Try
-            Dim path As String = If(dgvdokumen.Rows(rowIndex).Cells("FilePath").Value, String.Empty).ToString()
-            If String.IsNullOrWhiteSpace(path) Then
+            Dim relativePath As String = If(dgvdokumen.Rows(rowIndex).Cells("StoredFilePath").Value, String.Empty).ToString()
+            If String.IsNullOrWhiteSpace(relativePath) Then
                 PesanPopupPeringatan("Peringatan", "File tidak ditemukan.")
                 Return
             End If
-            If Not IO.File.Exists(path) Then
-                PesanPopupPeringatan("Peringatan", "File tidak ditemukan di lokasi penyimpanan.")
-                Return
-            End If
-            Process.Start(New ProcessStartInfo With {.FileName = path, .UseShellExecute = True})
+            BukaFile(relativePath)
         Catch ex As Exception
             PesanPopupError("ERROR", "Gagal membuka file : " & ex.Message)
         End Try
@@ -1869,8 +1826,9 @@ Public Class frmKandidatAdd
             End If
             Using conn As New MySqlConnection(sambung)
                 conn.Open()
-                Using cmd As New MySqlCommand("SELECT ffcidsertifikat,ffcnamasertifikat,ffcpenerbit,ffcnomorsertifikat,ffdtglterbit,ffdtglkadaluarsa,ffcfile,ffcketerangan FROM sakandidatsertifikat " &
-                                      "WHERE ffcidkandidat = @idkandidat ORDER BY ffcidsertifikat", conn)
+                Using cmd As New MySqlCommand("SELECT s.ffcidsertifikat, s.ffcnamasertifikat, s.ffcpenerbit, s.ffcnomorsertifikat, s.ffdtglterbit, s.ffdtglkadaluarsa, s.ffciddokumen, d.ffcfile, s.ffcketerangan " &
+                                              "FROM sakandidatsertifikat s LEFT JOIN sakandidatdokumen d ON d.ffciddokumen = s.ffciddokumen " &
+                                              "WHERE s.ffcidkandidat = @idkandidat ORDER BY s.ffcidsertifikat", conn)
                     cmd.Parameters.Add("@idkandidat", MySqlDbType.Int64).Value = idKandidat
                     Using rd As MySqlDataReader = cmd.ExecuteReader()
 
@@ -1881,7 +1839,7 @@ Public Class frmKandidatAdd
                             row.Cells("NamaSertifikat").Value = DBString(rd, "ffcnamasertifikat")
                             row.Cells("Penerbit").Value = DBString(rd, "ffcpenerbit")
                             row.Cells("NomorSertifikat").Value = DBString(rd, "ffcnomorsertifikat")
-
+                            row.Cells("ffciddokumen").Value = If(rd.IsDBNull(rd.GetOrdinal("ffciddokumen")), DBNull.Value, CObj(rd.GetInt64(rd.GetOrdinal("ffciddokumen"))))
 
                             If Not rd.IsDBNull(rd.GetOrdinal("ffdtglterbit")) Then
                                 row.Cells("TanggalTerbit").Value = Convert.ToDateTime(rd("ffdtglterbit")).Date
@@ -1953,7 +1911,6 @@ Public Class frmKandidatAdd
             End If
             Using conn As New MySqlConnection(sambung)
                 conn.Open()
-
                 Dim sql As String = "SELECT ffciddokumen, ffcjenis,ffcnama,ffcfile,ffctipefile,ffcukurang,ffcketerangan FROM sakandidatdokumen WHERE ffcidkandidat = @ID ORDER BY ffciddokumen DESC"
                 Using cmd As New MySqlCommand(sql, conn)
                     cmd.Parameters.Add("@ID", MySqlDbType.Int64).Value = idKandidat
@@ -1966,8 +1923,8 @@ Public Class frmKandidatAdd
                             row.Cells("ffciddokumen").Value = Convert.ToInt64(rd("ffciddokumen"))
                             row.Cells("Jenis").Value = DBString(rd, "ffcjenis")
                             row.Cells("NamaFile").Value = DBString(rd, "ffcnama")
-                            If Not rd.IsDBNull(rd.GetOrdinal("ffcukuran")) Then
-                                row.Cells("Ukuran").Value = Convert.ToInt64(rd("ffcukuran"))
+                            If Not rd.IsDBNull(rd.GetOrdinal("ffcukurang")) Then
+                                row.Cells("Ukuran").Value = Convert.ToInt64(rd("ffcukurang"))
                             Else
                                 row.Cells("Ukuran").Value = DBNull.Value
                             End If
@@ -2143,7 +2100,7 @@ Public Class frmKandidatAdd
             Else
 
                 Dim sqlUpdate As String = "UPDATE sakandidatpengalaman Set ffcperusahaan = @Perusahaan, ffcjabatan = @Jabatan, ffdtglmulai = @TanggalMulai, " &
-                "ffdtglselesai = @TanggalSelesai, ffcgajiterakhir = @GajiTerakhir, ffcalasanberhenti = @AlasanBerhenti,ffcketerangan = @KeteranganWHERE ffcidpengalaman = @ID And ffcidkandidat = @IDKandidat"
+                "ffdtglselesai = @TanggalSelesai, ffcgajiterakhir = @GajiTerakhir, ffcalasanberhenti = @AlasanBerhenti,ffcketerangan = @Keterangan WHERE ffcidpengalaman = @ID And ffcidkandidat = @IDKandidat"
 
 
                 Using cmd As New MySqlCommand(sqlUpdate, conn, trans)
@@ -2224,20 +2181,17 @@ Public Class frmKandidatAdd
         '========================================
         ' 1. DELETE
         '========================================
-
         For Each id As Long In _deletedSertifikatIds
-            Using cmd As New MySqlCommand("DELETE FROM sakandidatsertifikat WHERE ffcidsertifikat = @id  AND ffcidkandidat = @idKandidat", conn, trans)
+            Using cmd As New MySqlCommand("DELETE FROM sakandidatsertifikat WHERE ffcidsertifikat = @id AND ffcidkandidat = @idKandidat", conn, trans)
                 cmd.Parameters.AddWithValue("@id", id)
                 cmd.Parameters.AddWithValue("@idKandidat", idKandidat)
                 cmd.ExecuteNonQuery()
             End Using
-
         Next
 
         '========================================
         ' 2. INSERT / UPDATE
         '========================================
-
         For Each row As DataGridViewRow In dgvsertifikat.Rows
 
             If row.IsNewRow Then Continue For
@@ -2250,21 +2204,52 @@ Public Class frmKandidatAdd
             Dim tanggalKadaluarsa As Object = GetDateValue(row, "TanggalKadaluarsa")
             Dim keterangan As String = GetCellValue(row, "Keterangan")
 
-            '========================================
-            ' FILE
-            '========================================
+            ' ID dokumen yang sudah terhubung sebelumnya (0 jika belum ada)
+            Dim idDokumen As Long = GetLongFromGrid(row, "ffciddokumen")
 
-            Dim filePath As String = ProsesFileSertifikat(row, noKandidat, fileBaru)
+            ' Apakah user memilih file BARU untuk baris ini?
+            Dim sourcePathBaru As String = Convert.ToString(GetCellValue(row, "SourceFilePath"))
+            Dim adaFileBaru As Boolean = Not String.IsNullOrWhiteSpace(sourcePathBaru)
 
+            If adaFileBaru Then
 
-            '========================================
-            ' INSERT
-            '========================================
+                ' Copy file fisik ke folder server
+                Dim newStoredPath As String = SimpanFile(sourcePathBaru, noKandidat, "Sertifikat")
+                If String.IsNullOrWhiteSpace(newStoredPath) Then
+                    Throw New Exception("Gagal menyimpan file sertifikat ke server.")
+                End If
+                fileBaru.Add(newStoredPath)
+
+                Dim namaFileBaru As String = Path.GetFileName(newStoredPath)
+
+                If idDokumen > 0 Then
+                    ' Sudah ada dokumen sebelumnya -> update record dokumennya
+                    Using cmdDok As New MySqlCommand("UPDATE sakandidatdokumen SET ffcnama = @nama, ffcfile = @file, ffdupdate = NOW() WHERE ffciddokumen = @id", conn, trans)
+                        cmdDok.Parameters.AddWithValue("@nama", namaFileBaru)
+                        cmdDok.Parameters.AddWithValue("@file", newStoredPath)
+                        cmdDok.Parameters.AddWithValue("@id", idDokumen)
+                        cmdDok.ExecuteNonQuery()
+                    End Using
+                Else
+                    ' Belum ada dokumen -> insert baru, ambil ID-nya
+                    Using cmdDok As New MySqlCommand("INSERT INTO sakandidatdokumen (ffcidkandidat, ffcjenis, ffcnama, ffcfile) VALUES (@idkandidat, 'Sertifikat', @nama, @file)", conn, trans)
+                        cmdDok.Parameters.AddWithValue("@idkandidat", idKandidat)
+                        cmdDok.Parameters.AddWithValue("@nama", namaFileBaru)
+                        cmdDok.Parameters.AddWithValue("@file", newStoredPath)
+                        cmdDok.ExecuteNonQuery()
+                    End Using
+                    idDokumen = Convert.ToInt64(New MySqlCommand("SELECT LAST_INSERT_ID()", conn, trans).ExecuteScalar())
+                End If
+            End If
+
+            Dim paramIdDokumen As Object = If(idDokumen > 0, CObj(idDokumen), DBNull.Value)
 
             If id <= 0 Then
-
-                Using cmd As New MySqlCommand("INSERT INTO sakandidatsertifikat (ffcidkandidat,ffcnamasertifikat,ffcpenerbit,ffcnomorsertifikat,ffdtglterbit,ffdtglkadaluarsa,ffcfile,ffcketerangan) VALUES (@idKandidat," &
-                        "@nama,@penerbit,@nomor,@tglTerbit,@tglKadaluarsa,@file,@keterangan)", conn, trans)
+                '========================================
+                ' INSERT sertifikat baru
+                '========================================
+                Using cmd As New MySqlCommand("INSERT INTO sakandidatsertifikat (ffcidkandidat,ffcnamasertifikat,ffcpenerbit,ffcnomorsertifikat,ffdtglterbit,ffdtglkadaluarsa,ffciddokumen,ffcketerangan) VALUES (@idKandidat," &
+                    "@nama,@penerbit,@nomor,@tglTerbit,@tglKadaluarsa,@idDokumen,@keterangan)", conn, trans)
 
                     cmd.Parameters.AddWithValue("@idKandidat", idKandidat)
                     cmd.Parameters.AddWithValue("@nama", namaSertifikat)
@@ -2272,26 +2257,24 @@ Public Class frmKandidatAdd
                     cmd.Parameters.AddWithValue("@nomor", nomorSertifikat)
                     cmd.Parameters.AddWithValue("@tglTerbit", tanggalTerbit)
                     cmd.Parameters.AddWithValue("@tglKadaluarsa", tanggalKadaluarsa)
-                    cmd.Parameters.AddWithValue("@file", filePath)
+                    cmd.Parameters.AddWithValue("@idDokumen", paramIdDokumen)
                     cmd.Parameters.AddWithValue("@keterangan", keterangan)
                     cmd.ExecuteNonQuery()
 
                 End Using
-                '========================================
-                ' UPDATE
-                '========================================
-
             Else
-
+                '========================================
+                ' UPDATE sertifikat
+                '========================================
                 Using cmd As New MySqlCommand("UPDATE sakandidatsertifikat SET ffcnamasertifikat = @nama, ffcpenerbit = @penerbit,ffcnomorsertifikat = @nomor,ffdtglterbit = @tglTerbit,ffdtglkadaluarsa = @tglKadaluarsa," &
-                                             " ffcfile = @file,ffcketerangan = @keterangan WHERE ffcidsertifikat = @id AND ffcidkandidat = @idKandidat", conn, trans)
+                                         " ffciddokumen = @idDokumen,ffcketerangan = @keterangan WHERE ffcidsertifikat = @id AND ffcidkandidat = @idKandidat", conn, trans)
 
                     cmd.Parameters.AddWithValue("@nama", namaSertifikat)
                     cmd.Parameters.AddWithValue("@penerbit", penerbit)
                     cmd.Parameters.AddWithValue("@nomor", nomorSertifikat)
                     cmd.Parameters.AddWithValue("@tglTerbit", tanggalTerbit)
                     cmd.Parameters.AddWithValue("@tglKadaluarsa", tanggalKadaluarsa)
-                    cmd.Parameters.AddWithValue("@file", filePath)
+                    cmd.Parameters.AddWithValue("@idDokumen", paramIdDokumen)
                     cmd.Parameters.AddWithValue("@keterangan", keterangan)
                     cmd.Parameters.AddWithValue("@id", id)
                     cmd.Parameters.AddWithValue("@idKandidat", idKandidat)
@@ -2299,13 +2282,12 @@ Public Class frmKandidatAdd
                     cmd.ExecuteNonQuery()
 
                 End Using
-
             End If
 
         Next
 
     End Sub
-    Private Sub SimpanDokumen(conn As MySqlConnection, trans As MySqlTransaction, idKandidat As Long)
+    Private Sub SimpanDokumen(conn As MySqlConnection, trans As MySqlTransaction, idKandidat As Long, noKandidat As String, fileBaru As List(Of String))
         For Each id As Long In _deletedDokumenIds
 
             Using cmd As New MySqlCommand("DELETE FROM sakandidatdokumen WHERE ffciddokumen = @id  AND ffcidkandidat = @idkandidat", conn, trans)
@@ -2327,21 +2309,56 @@ Public Class frmKandidatAdd
 
             End If
 
+            ' Dim jenis As String = GetCellValue(row, "Jenis")
+
+            '  Dim namaFile As String = GetCellValue(row, "NamaFile")
+
+            ' Dim filePath As String = GetCellValue(row, "StoredFilePath")
+
+            ' Dim tipeFile As String = GetCellValue(row, "TipeFile")
+
+            ' Dim ukuran As Object = GetLongValue(row, "Ukuran")
+
+            ' Dim keterangan As String = GetCellValue(row, "Keterangan")
+
             Dim jenis As String = GetCellValue(row, "Jenis")
 
             Dim namaFile As String = GetCellValue(row, "NamaFile")
 
-            Dim filePath As String = GetCellValue(row, "FilePath")
-
             Dim tipeFile As String = GetCellValue(row, "TipeFile")
 
-            Dim ukuran As Object = GetLongValue(row, "Ukuran")
-
             Dim keterangan As String = GetCellValue(row, "Keterangan")
-            If idDokumen <= 0 Then
 
-                Using cmd As New MySqlCommand("INSERT INTO sakandidatdokumen (ffcidkandidat,ffcjenis,ffcnama,ffcfile,ffctipefile,ffcukurang,ffcketerangan) VALUES (@idkandidat," &
-                   " @jenis,@nama,@file,@tipefile, @ukurang, @keterangan )", conn, trans)
+            '========================================
+            ' FILE FISIK
+            '========================================
+            Dim sourcePathBaru As String = Convert.ToString(GetCellValue(row, "SourceFilePath"))
+            Dim filePath As String
+            Dim ukuran As Object
+
+            If Not String.IsNullOrWhiteSpace(sourcePathBaru) Then
+
+                ' Ada file baru -> copy fisik ke folder server
+                Dim newStoredPath As String = SimpanFile(sourcePathBaru, noKandidat, "Dokumen")
+
+                If String.IsNullOrWhiteSpace(newStoredPath) Then
+                    Throw New Exception("Gagal menyimpan file dokumen ke server.")
+                End If
+
+                fileBaru.Add(newStoredPath)
+                filePath = newStoredPath
+                ukuran = New FileInfo(sourcePathBaru).Length
+
+            Else
+                ' Tidak ada file baru -> pakai path lama (mode edit tanpa ganti file)
+                filePath = GetCellValue(row, "StoredFilePath")
+                ukuran = GetLongValue(row, "Ukuran")
+
+            End If
+
+            If idDokumen <= 0 Then
+                Using cmd As New MySqlCommand("INSERT INTO sakandidatdokumen (ffcidkandidat,ffcjenis,ffcnama,ffcfile,ffctipefile,ffnukurang,ffcketerangan) VALUES (@idkandidat," &
+                                              " @jenis,@nama,@file,@tipefile, @ukurang, @keterangan )", conn, trans)
                     cmd.Parameters.AddWithValue("@idkandidat", idKandidat)
                     cmd.Parameters.AddWithValue("@jenis", jenis)
                     cmd.Parameters.AddWithValue("@nama", namaFile)
@@ -2355,7 +2372,7 @@ Public Class frmKandidatAdd
 
             Else
 
-                Using cmd As New MySqlCommand("UPDATE sakandidatdokumen SET ffcjenis = @jenis,ffcnama = @nama,ffcfile = @file,ffctipefile = @tipefile,ffcukurang = @ukurang,ffcketerangan = @keterangan " &
+                Using cmd As New MySqlCommand("UPDATE sakandidatdokumen SET ffcjenis = @jenis,ffcnama = @nama,ffcfile = @file,ffctipefile = @tipefile,ffnukurang = @ukurang,ffcketerangan = @keterangan " &
                                               " WHERE ffciddokumen = @id AND ffcidkandidat = @idkandidat", conn, trans)
                     cmd.Parameters.AddWithValue("@id", idDokumen)
                     cmd.Parameters.AddWithValue("@idkandidat", idKandidat)
@@ -2432,8 +2449,8 @@ Public Class frmKandidatAdd
                     SimpanPengalaman(conn, trans, _idKandidat)
                     SimpanKeahlian(conn, trans, _idKandidat)
                     SimpanSertifikat(conn, trans, IdKandidat, tkandidat.Text.Trim(), fileBaru)
-                    '  SimpanDokumen(conn, trans, IdKandidat, tkandidat.Text.Trim(), fileBaru)
-                    SimpanDokumen(conn, trans, _idKandidat)
+                    SimpanDokumen(conn, trans, _idKandidat, tkandidat.Text.Trim(), fileBaru)
+
 
                     trans.Commit()
 
@@ -2540,14 +2557,10 @@ Public Class frmKandidatAdd
                     End Using
 
                     SimpanPendidikan(conn, trans, _idKandidat)
-
                     SimpanPengalaman(conn, trans, _idKandidat)
-
                     SimpanKeahlian(conn, trans, _idKandidat)
                     SimpanSertifikat(conn, trans, IdKandidat, tkandidat.Text.Trim(), fileBaru)
-                    ' SimpanSertifikat(conn, trans, _idKandidat)
-
-                    SimpanDokumen(conn, trans, _idKandidat)
+                    SimpanDokumen(conn, trans, _idKandidat, tkandidat.Text.Trim(), fileBaru)
 
                     trans.Commit()
 
