@@ -1864,17 +1864,20 @@ Public Class frmKandidatAdd
     Private Sub LoadSertifikat(idKandidat As Long)
         Try
             dgvsertifikat.Rows.Clear()
+            If idKandidat <= 0 Then
+                Return
+            End If
             Using conn As New MySqlConnection(sambung)
                 conn.Open()
                 Using cmd As New MySqlCommand("SELECT ffcidsertifikat,ffcnamasertifikat,ffcpenerbit,ffcnomorsertifikat,ffdtglterbit,ffdtglkadaluarsa,ffcfile,ffcketerangan FROM sakandidatsertifikat " &
                                       "WHERE ffcidkandidat = @idkandidat ORDER BY ffcidsertifikat", conn)
-                    cmd.Parameters.AddWithValue("@idkandidat", idKandidat)
+                    cmd.Parameters.Add("@idkandidat", MySqlDbType.Int64).Value = idKandidat
                     Using rd As MySqlDataReader = cmd.ExecuteReader()
 
                         While rd.Read()
                             Dim rowIndex As Integer = dgvsertifikat.Rows.Add()
                             Dim row As DataGridViewRow = dgvsertifikat.Rows(rowIndex)
-                            row.Cells("ffcidsertifikat").Value = rd("ffcidsertifikat")
+                            row.Cells("ffcidsertifikat").Value = Convert.ToInt64(rd("ffcidsertifikat"))
                             row.Cells("NamaSertifikat").Value = DBString(rd, "ffcnamasertifikat")
                             row.Cells("Penerbit").Value = DBString(rd, "ffcpenerbit")
                             row.Cells("NomorSertifikat").Value = DBString(rd, "ffcnomorsertifikat")
@@ -1887,7 +1890,7 @@ Public Class frmKandidatAdd
                             End If
 
                             If Not rd.IsDBNull(rd.GetOrdinal("ffdtglkadaluarsa")) Then
-                                row.Cells("TanggalKadaluarsa").Value = Convert.ToDateTime(rd("ffdtglkadaluarsa"))
+                                row.Cells("TanggalKadaluarsa").Value = Convert.ToDateTime(rd("ffdtglkadaluarsa")).Date
                             Else
                                 row.Cells("TanggalKadaluarsa").Value = DBNull.Value
                             End If
@@ -1934,7 +1937,7 @@ Public Class frmKandidatAdd
                 End Using
             End Using
         Catch ex As Exception
-            PesanPopupError("ERROR", "Gagal memuat data keahlian." & vbCrLf & ex.Message)
+            PesanPopupError("ERROR", "Gagal memuat sertifikat kandidat." & vbCrLf & ex.Message)
         End Try
 
 
@@ -1945,6 +1948,9 @@ Public Class frmKandidatAdd
     Private Sub LoadDokumen(idKandidat As Long)
         Try
             dgvdokumen.Rows.Clear()
+            If idKandidat <= 0 Then
+                Return
+            End If
             Using conn As New MySqlConnection(sambung)
                 conn.Open()
 
@@ -1957,7 +1963,7 @@ Public Class frmKandidatAdd
                         While rd.Read()
                             Dim rowIndex As Integer = dgvdokumen.Rows.Add()
                             Dim row As DataGridViewRow = dgvdokumen.Rows(rowIndex)
-                            row.Cells("ffciddokumen").Value = rd("ffciddokumen")
+                            row.Cells("ffciddokumen").Value = Convert.ToInt64(rd("ffciddokumen"))
                             row.Cells("Jenis").Value = DBString(rd, "ffcjenis")
                             row.Cells("NamaFile").Value = DBString(rd, "ffcnama")
                             If Not rd.IsDBNull(rd.GetOrdinal("ffcukuran")) Then
@@ -2483,7 +2489,7 @@ Public Class frmKandidatAdd
 
     End Sub
     Private Sub UpdateKandidat()
-
+        Dim fileBaru As New List(Of String)
         Using conn As New MySqlConnection(sambung)
             conn.Open()
             Using trans As MySqlTransaction = conn.BeginTransaction()
@@ -2538,8 +2544,8 @@ Public Class frmKandidatAdd
                     SimpanPengalaman(conn, trans, _idKandidat)
 
                     SimpanKeahlian(conn, trans, _idKandidat)
-
-                    SimpanSertifikat(conn, trans, _idKandidat)
+                    SimpanSertifikat(conn, trans, IdKandidat, tkandidat.Text.Trim(), fileBaru)
+                    ' SimpanSertifikat(conn, trans, _idKandidat)
 
                     SimpanDokumen(conn, trans, _idKandidat)
 
