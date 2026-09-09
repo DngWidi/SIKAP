@@ -66,7 +66,7 @@ Public Class frmSertifikatAdd
         End Set
     End Property
 #End Region
-#End Region
+
 #Region "FORM LOAD"
 
     Private Sub frmSertifikatAdd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -123,8 +123,6 @@ Public Class frmSertifikatAdd
         dtglterbit.Value = Date.Now
         dtglkadaluarso.Value = Date.Now
         dtglkadaluarso.Checked = False
-        _selectedFileName = String.Empty
-        _selectedFilePath = String.Empty
         tfile.Clear()
         tsertifikat.Focus()
     End Sub
@@ -152,8 +150,9 @@ Public Class frmSertifikatAdd
         End If
         _selectedFileName = FileName
         _selectedFilePath = FilePath
+        _storedFilePath = StoredFilePath
 
-        If Not String.IsNullOrWhiteSpace(_fileName) Then
+        If Not String.IsNullOrWhiteSpace(_selectedFileName) Then
             tfile.Text = _selectedFileName
         Else
             tfile.Clear()
@@ -176,8 +175,9 @@ Public Class frmSertifikatAdd
         dtglkadaluarso.Checked = False
         tfile.Clear()
         tketerangan.Clear()
-        _fileName = String.Empty
-        _filePath = String.Empty
+        _selectedFileName = String.Empty
+        _selectedFilePath = String.Empty
+        _storedFilePath = String.Empty
     End Sub
 
 #End Region
@@ -188,15 +188,22 @@ Public Class frmSertifikatAdd
 
         Using dialog As New OpenFileDialog()
             dialog.Title = "Pilih File Sertifikat"
-            dialog.Filter = "File Dokumen|*.pdf;*.jpg;*.jpeg;*.png|" & "PDF|*.pdf|" & "Gambar|*.jpg;*.jpeg;*.png|" & "Semua File|*.*"
+
+            dialog.Filter =
+            "File Dokumen|*.pdf;*.jpg;*.jpeg;*.png|" &
+            "PDF|*.pdf|" &
+            "Gambar|*.jpg;*.jpeg;*.png|" &
+            "Semua File|*.*"
+
             dialog.FilterIndex = 1
             dialog.Multiselect = False
 
             If dialog.ShowDialog() = DialogResult.OK Then
-                _selectedFileName = dialog.FileName
+                _selectedFilePath = dialog.FileName
                 _selectedFileName = Path.GetFileName(dialog.FileName)
                 tfile.Text = _selectedFileName
             End If
+
         End Using
     End Sub
 
@@ -249,6 +256,7 @@ Public Class frmSertifikatAdd
         End If
         FileName = _selectedFileName
         FilePath = _selectedFilePath
+        StoredFilePath = _storedFilePath
         Keterangan = tketerangan.Text.Trim()
         Me.DialogResult = DialogResult.OK
         Me.Close()

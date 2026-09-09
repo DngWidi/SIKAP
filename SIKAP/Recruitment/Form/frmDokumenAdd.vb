@@ -21,6 +21,9 @@ Public Class frmDokumenAdd
     Private _selectedFilePath As String = String.Empty
     Private _selectedFileName As String = String.Empty
 
+    'File yang sudah tersimpan sebelumnya (untuk mode edit)
+    Private _storedFilePath As String = String.Empty
+
 #End Region
 
 #Region "PROPERTY"
@@ -37,8 +40,30 @@ Public Class frmDokumenAdd
     Public Property IdDokumen As Long = 0
     Public Property Jenis As String = String.Empty
     Public Property Nama As String = String.Empty
-    Public Property FileName As String = String.Empty
-    Public Property FilePath As String = String.Empty
+    Public Property FileName As String
+        Get
+            Return _selectedFileName
+        End Get
+        Set(value As String)
+            _selectedFileName = value
+        End Set
+    End Property
+    Public Property FilePath As String
+        Get
+            Return _selectedFilePath
+        End Get
+        Set(value As String)
+            _selectedFilePath = value
+        End Set
+    End Property
+    Public Property StoredFilePath As String
+        Get
+            Return _storedFilePath
+        End Get
+        Set(value As String)
+            _storedFilePath = value
+        End Set
+    End Property
     Public Property TipeFile As String = String.Empty
     Public Property Ukuran As Long = 0
     Public Property Keterangan As String = String.Empty
@@ -78,7 +103,7 @@ Public Class frmDokumenAdd
             tketerangan.Clear()
             _selectedFilePath = String.Empty
             _selectedFileName = String.Empty
-
+            _storedFilePath = String.Empty
         End If
 
         If Mode = ModeForm.Edit Then
@@ -93,7 +118,7 @@ Public Class frmDokumenAdd
             tketerangan.Text = Keterangan
             _selectedFilePath = FilePath
             _selectedFileName = FileName
-
+            _storedFilePath = StoredFilePath
         End If
 
     End Sub
@@ -179,9 +204,10 @@ Public Class frmDokumenAdd
             tnama.Focus()
             Return False
         End If
-        If String.IsNullOrWhiteSpace(_selectedFileName) Then
+        If String.IsNullOrWhiteSpace(_selectedFileName) AndAlso String.IsNullOrWhiteSpace(_storedFilePath) Then
             PesanPopupPeringatan("Peringatan", "File dokumen wajib dipilih.")
             Return False
+
         End If
         Return True
 
@@ -199,8 +225,11 @@ Public Class frmDokumenAdd
         End If
         Jenis = cjenis.Text.Trim()
         Nama = tnama.Text.Trim()
+
         FileName = _selectedFileName
         FilePath = _selectedFilePath
+        StoredFilePath = _storedFilePath
+
         TipeFile = ttipefile.Text.Trim()
 
 
