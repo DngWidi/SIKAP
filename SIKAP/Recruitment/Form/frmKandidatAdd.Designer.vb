@@ -1340,10 +1340,10 @@ Partial Class frmKandidatAdd
         Me.flpFooterButton.Controls.Add(Me.bBatal)
         Me.flpFooterButton.Controls.Add(Me.bSimpan)
         Me.flpFooterButton.Dock = System.Windows.Forms.DockStyle.Right
-        Me.flpFooterButton.Location = New System.Drawing.Point(986, 1)
+        Me.flpFooterButton.Location = New System.Drawing.Point(928, 1)
         Me.flpFooterButton.Name = "flpFooterButton"
         Me.flpFooterButton.Padding = New System.Windows.Forms.Padding(0, 14, 14, 0)
-        Me.flpFooterButton.Size = New System.Drawing.Size(210, 64)
+        Me.flpFooterButton.Size = New System.Drawing.Size(268, 64)
         Me.flpFooterButton.TabIndex = 3
         Me.flpFooterButton.WrapContents = False
         '
@@ -1380,7 +1380,7 @@ Partial Class frmKandidatAdd
         Me.bSimpan.Location = New System.Drawing.Point(99, 17)
         Me.bSimpan.Name = "bSimpan"
         Me.bSimpan.ShadowDecoration.Parent = Me.bSimpan
-        Me.bSimpan.Size = New System.Drawing.Size(100, 36)
+        Me.bSimpan.Size = New System.Drawing.Size(157, 36)
         Me.bSimpan.TabIndex = 2
         Me.bSimpan.Text = "Simpan"
         '

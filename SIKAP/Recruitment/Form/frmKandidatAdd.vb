@@ -2211,12 +2211,30 @@ Public Class frmKandidatAdd
             If row.IsNewRow Then Continue For
 
             Dim id As Long = GetLongValue(row, "ffcidsertifikat")
-            Dim namaSertifikat As String = GetCellValue(row, "NamaSertifikat")
-            Dim penerbit As String = GetCellValue(row, "Penerbit")
-            Dim nomorSertifikat As String = GetCellValue(row, "NomorSertifikat")
+
+            Dim namaSertifikatObj As Object = GetCellValue(row, "NamaSertifikat")
+            Dim namaSertifikat As String = If(namaSertifikatObj Is Nothing OrElse IsDBNull(namaSertifikatObj), String.Empty, namaSertifikatObj.ToString())
+
+            Dim penerbitObj As Object = GetCellValue(row, "Penerbit")
+            Dim penerbit As String = If(penerbitObj Is Nothing OrElse IsDBNull(penerbitObj), String.Empty, penerbitObj.ToString())
+
+            Dim nomorSertifikatObj As Object = GetCellValue(row, "NomorSertifikat")
+            Dim nomorSertifikat As String = If(nomorSertifikatObj Is Nothing OrElse IsDBNull(nomorSertifikatObj), String.Empty, nomorSertifikatObj.ToString())
+
             Dim tanggalTerbit As Object = GetDateValue(row, "TanggalTerbit")
             Dim tanggalKadaluarsa As Object = GetDateValue(row, "TanggalKadaluarsa")
-            Dim keterangan As String = GetCellValue(row, "Keterangan")
+
+            Dim keteranganObj As Object = GetCellValue(row, "Keterangan")
+            Dim keterangan As String = If(keteranganObj Is Nothing OrElse IsDBNull(keteranganObj), String.Empty, keteranganObj.ToString())
+
+
+            '   Dim id As Long = GetLongValue(row, "ffcidsertifikat")
+            '   Dim namaSertifikat As String = GetCellValue(row, "NamaSertifikat")
+            '   Dim penerbit As String = GetCellValue(row, "Penerbit")
+            '  Dim nomorSertifikat As String = GetCellValue(row, "NomorSertifikat")
+            '  Dim tanggalTerbit As Object = GetDateValue(row, "TanggalTerbit")
+            '  Dim tanggalKadaluarsa As Object = GetDateValue(row, "TanggalKadaluarsa")
+            ' Dim keterangan As String = GetCellValue(row, "Keterangan")
 
             ' ID dokumen yang sudah terhubung sebelumnya (0 jika belum ada)
             Dim idDokumen As Long = GetLongFromGrid(row, "ffciddokumen")
@@ -2323,17 +2341,7 @@ Public Class frmKandidatAdd
 
             End If
 
-            ' Dim jenis As String = GetCellValue(row, "Jenis")
 
-            '  Dim namaFile As String = GetCellValue(row, "NamaFile")
-
-            ' Dim filePath As String = GetCellValue(row, "StoredFilePath")
-
-            ' Dim tipeFile As String = GetCellValue(row, "TipeFile")
-
-            ' Dim ukuran As Object = GetLongValue(row, "Ukuran")
-
-            ' Dim keterangan As String = GetCellValue(row, "Keterangan")
 
             Dim jenis As String = GetCellValue(row, "Jenis")
 
@@ -2407,11 +2415,6 @@ Public Class frmKandidatAdd
 
     Private Sub SimpanKandidat()
 
-        '==================================================
-        ' BAGIAN INSERT AKAN KITA ISI SETELAH STRUKTUR
-        ' TABEL FINAL KANDIDAT DIKONFIRMASI
-        '==================================================
-
         Dim fileBaru As New List(Of String)
 
         Using conn As New MySqlConnection(sambung)
@@ -2459,6 +2462,8 @@ Public Class frmKandidatAdd
 
                     _idKandidat = Convert.ToInt64(New MySqlCommand("SELECT LAST_INSERT_ID()", conn, trans).ExecuteScalar())
 
+
+
                     SimpanPendidikan(conn, trans, _idKandidat)
                     SimpanPengalaman(conn, trans, _idKandidat)
                     SimpanKeahlian(conn, trans, _idKandidat)
@@ -2481,24 +2486,19 @@ Public Class frmKandidatAdd
                 Catch ex As MySqlException
                     trans.Rollback()
                     For Each relativePath As String In fileBaru
-
                         Try
                             HapusFile(relativePath)
                         Catch
                         End Try
-
+                        PesanPopupError("Error MySQL: Kesalahan Database", ex.Message)
                     Next
-                    PesanPopupError("Error MySQL: Kesalahan Database", ex.Message)
-
                 Catch ex As Exception
                     trans.Rollback()
                     For Each relativePath As String In fileBaru
-
                         Try
                             HapusFile(relativePath)
                         Catch
                         End Try
-
                     Next
                     PesanPopupError("Error umum: Proses dibatalkan", ex.Message)
 
@@ -2512,20 +2512,14 @@ Public Class frmKandidatAdd
 
         End Using
 
-
-
-
-
-
-
     End Sub
     Private Sub UpdateKandidat()
         Dim fileBaru As New List(Of String)
         Using conn As New MySqlConnection(sambung)
             conn.Open()
             Using trans As MySqlTransaction = conn.BeginTransaction()
-                Try
-                    Dim namaFoto As String = SimpanFoto()
+                '  Try
+                Dim namaFoto As String = SimpanFoto()
                     '========================================
                     ' UPDATE MASTER
                     '========================================
@@ -2585,15 +2579,15 @@ Public Class frmKandidatAdd
 
                     Me.Close()
 
-                Catch ex As MySqlException
-                    trans.Rollback()
-                    PesanPopupError("Error MySQL: Kesalahan Database", ex.Message)
+                'Catch ex As MySqlException
+                '  trans.Rollback()
+                ' PesanPopupError("Error MySQL: Kesalahan Database", ex.Message)
 
-                Catch ex As Exception
-                    trans.Rollback()
-                    PesanPopupError("Error umum: Proses dibatalkan", ex.Message)
+                '  Catch ex As Exception
+                '  trans.Rollback()
+                ' PesanPopupError("Error umum: Proses dibatalkan", ex.Message)
 
-                End Try
+                '   End Try
 
             End Using
 
@@ -2703,12 +2697,18 @@ Public Class frmKandidatAdd
             Return
         End If
 
-        If Not PesanPopupKonfirmasi("Konfirmasi", "Apakah data kandidat akan disimpan?") Then
+        Dim HasilKonfirmasi As DialogResult = PesanPopupKonfirmasi("Konfirmasi", "Apakah data kandidat akan disimpan ?")
+        If HasilKonfirmasi = DialogResult.No Then
             Return
         End If
+
+
+
         If _mode = ModeForm.Tambah Then
 
+
             SimpanKandidat()
+
 
         ElseIf _mode = ModeForm.Edit Then
 
