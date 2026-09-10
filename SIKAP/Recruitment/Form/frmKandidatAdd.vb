@@ -1911,7 +1911,7 @@ Public Class frmKandidatAdd
             End If
             Using conn As New MySqlConnection(sambung)
                 conn.Open()
-                Dim sql As String = "SELECT ffciddokumen, ffcjenis,ffcnama,ffcfile,ffctipefile,ffcukurang,ffcketerangan FROM sakandidatdokumen WHERE ffcidkandidat = @ID ORDER BY ffciddokumen DESC"
+                Dim sql As String = "SELECT ffciddokumen, ffcjenis,ffcnama,ffcfile,ffctipefile,ffnukurang,ffcketerangan FROM sakandidatdokumen WHERE ffcidkandidat = @ID ORDER BY ffciddokumen DESC"
                 Using cmd As New MySqlCommand(sql, conn)
                     cmd.Parameters.Add("@ID", MySqlDbType.Int64).Value = idKandidat
 
@@ -1923,8 +1923,8 @@ Public Class frmKandidatAdd
                             row.Cells("ffciddokumen").Value = Convert.ToInt64(rd("ffciddokumen"))
                             row.Cells("Jenis").Value = DBString(rd, "ffcjenis")
                             row.Cells("NamaFile").Value = DBString(rd, "ffcnama")
-                            If Not rd.IsDBNull(rd.GetOrdinal("ffcukurang")) Then
-                                row.Cells("Ukuran").Value = Convert.ToInt64(rd("ffcukurang"))
+                            If Not rd.IsDBNull(rd.GetOrdinal("ffnukurang")) Then
+                                row.Cells("Ukuran").Value = Convert.ToInt64(rd("ffnukurang"))
                             Else
                                 row.Cells("Ukuran").Value = DBNull.Value
                             End If

@@ -503,7 +503,7 @@ Partial Class frmSertifikatAdd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.White
+        Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(424, 511)
         Me.ControlBox = False
         Me.Controls.Add(Me.pnlMain)

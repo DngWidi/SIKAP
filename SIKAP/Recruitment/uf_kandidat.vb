@@ -1,10 +1,11 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class uf_kandidat
-    Private _idKandidatTerpilih As Long = 0
-    Private _noKandidatTerpilih As String = ""
-    Private _namaKandidatTerpilih As String = ""
-    Private _statusTerpilih As String = ""
+    ' Private _idKandidatTerpilih As Long = 0
+    ' Private _noKandidatTerpilih As String = ""
+    '  Private _namaKandidatTerpilih As String = ""
+    '  Private _statusTerpilih As String = ""
+
 #Region "Function"
     Private Function GetTotalRecord() As Integer
         Try
@@ -56,13 +57,15 @@ Public Class uf_kandidat
 
 
                     dgvKandidat.DataSource = dt
-
+                    If dgvKandidat.Columns.Contains("ffcidkandidat") Then
+                        dgvKandidat.Columns("ffcidkandidat").Visible = False
+                    End If
                 End Using
 
             End Using
 
             UpdatePaginationInfo()
-            ResetKandidatTerpilih()
+            '   ResetKandidatTerpilih()
 
         Catch ex As Exception
             PesanPopupError("Error", "Gagal memuat data kandidat." & vbCrLf & ex.Message)
@@ -72,16 +75,17 @@ Public Class uf_kandidat
     Private Sub UpdatePaginationInfo()
         lblInfo.Text = String.Format("Menampilkan {0} - {1} dari {2} Data", paginationKandidat.StartRecord, paginationKandidat.EndRecord, paginationKandidat.TotalRecord)
     End Sub
-    Private Sub ResetKandidatTerpilih()
-        _idKandidatTerpilih = 0
-        _noKandidatTerpilih = ""
-        _namaKandidatTerpilih = ""
-        _statusTerpilih = ""
-    End Sub
+    '  Private Sub ResetKandidatTerpilih()
+    '    _idKandidatTerpilih = 0
+    '    _noKandidatTerpilih = ""
+    '    _namaKandidatTerpilih = ""
+    '    _statusTerpilih = ""
+    '  End Sub
     Private Sub paginationKandidat_PageChanged(sender As Object, e As EventArgs) Handles paginationKandidat.PageChanged
         DataKandidat()
     End Sub
     Private Sub uf_kandidat_Load(sender As Object, e As EventArgs) Handles Me.Load
+
         ' Style Grid
         ApplyGridTheme(dgvKandidat)
         ' Load Data
@@ -101,35 +105,44 @@ Public Class uf_kandidat
         '========================================
         ' VALIDASI PILIHAN
         '========================================
-        If _idKandidatTerpilih <= 0 Then
+        If dgvKandidat.CurrentRow Is Nothing Then
             PesanPopupPeringatan("Peringatan", "Silakan pilih kandidat yang ingin diedit.")
             Return
-
         End If
 
+        Dim idKandidat As Long = Convert.ToInt64(dgvKandidat.CurrentRow.Cells("ffcidkandidat").Value)
 
+        '========================================
+        ' BUKA FORM EDIT
+        '========================================
+        Using frm As New frmKandidatAdd()
+            frm.Mode = frmKandidatAdd.ModeForm.Edit
+            frm.IdKandidat = idKandidat
+            If frm.ShowDialog(Me.FindForm()) = DialogResult.OK Then
+                DataKandidat()
+            End If
+        End Using
 
-
-        '     Using frm As New frmKandidatAdd()
-        '     frm.Mode = frmKandidatAdd.ModeForm.Edit
-        '     frm.IdPermintaan = _idPermintaanTerpilih
-        '     If frm.ShowDialog(Me.FindForm()) = DialogResult.OK Then
-        '     DataKandidat()
-        '     End If
-        '   End Using
     End Sub
+
     Private Sub bHapus_Click(sender As Object, e As EventArgs) Handles bHapus.Click
+
         '========================================
         ' VALIDASI PILIHAN
         '========================================
-        If _idKandidatTerpilih <= 0 Then
+        If dgvKandidat.CurrentRow Is Nothing Then
             PesanPopupPeringatan("Peringatan", "Silakan pilih kandidat yang ingin dinonaktifkan.")
             Return
         End If
+
+        Dim idKandidat As Long = Convert.ToInt64(dgvKandidat.CurrentRow.Cells("ffcidkandidat").Value)
+        Dim namaKandidat As String = Convert.ToString(dgvKandidat.CurrentRow.Cells("Nama").Value)
+        Dim statusKandidat As String = Convert.ToString(dgvKandidat.CurrentRow.Cells("Status").Value)
+
         '========================================
         ' VALIDASI STATUS
         '========================================
-        If _statusTerpilih.ToUpper() = "INACTIVE" Then
+        If statusKandidat.ToUpper() = "INACTIVE" Then
             PesanPopupPeringatan("Peringatan", "Kandidat tersebut sudah berstatus INACTIVE.")
             Return
         End If
@@ -137,22 +150,21 @@ Public Class uf_kandidat
         '========================================
         ' KONFIRMASI
         '========================================
-        If Not PesanPopupKonfirmasi("Konfirmasi", "Apakah Anda yakin ingin menonaktifkan kandidat " & _namaKandidatTerpilih & "?") Then
+        Dim hasil As DialogResult = PesanPopupKonfirmasi("Konfirmasi", "Apakah Anda yakin ingin menonaktifkan kandidat " & namaKandidat & "?")
+        If hasil <> DialogResult.Yes Then
             Return
         End If
 
         Try
-
-            Dim sql As String = "UPDATE sakandidat SET ffcstatus = 'INACTIVE',ffcuserupdate = @UserUpdate, ffdupdate = CURRENT_TIMESTAMP  WHERE ffcidkandidat = @ID  "
+            Dim sql As String = "UPDATE sakandidat SET ffcstatus = 'INACTIVE',ffcuserupdate = @UserUpdate, ffdupdate = CURRENT_TIMESTAMP WHERE ffcidkandidat = @ID"
 
             Using conn As New MySqlConnection(sambung)
                 conn.Open()
                 Using cmd As New MySqlCommand(sql, conn)
-                    cmd.Parameters.AddWithValue("@ID", _idKandidatTerpilih)
-                    cmd.Parameters.AddWithValue("@UserUpdate", "Administrator")
+                    cmd.Parameters.AddWithValue("@ID", idKandidat)
+                    cmd.Parameters.AddWithValue("@UserUpdate", Environment.UserName)
                     cmd.ExecuteNonQuery()
                 End Using
-
             End Using
 
             PesanPopupSukses("Berhasil", "Kandidat berhasil dinonaktifkan.")

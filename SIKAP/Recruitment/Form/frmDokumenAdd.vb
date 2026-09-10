@@ -74,6 +74,7 @@ Public Class frmDokumenAdd
 
     Private Sub frmKandidatDokumenAdd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetupForm()
+        ShadowForm.SetShadowForm(Me)
     End Sub
 
 
