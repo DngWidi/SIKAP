@@ -85,7 +85,6 @@ Public Class uf_kandidat
         DataKandidat()
     End Sub
     Private Sub uf_kandidat_Load(sender As Object, e As EventArgs) Handles Me.Load
-
         ' Style Grid
         ApplyGridTheme(dgvKandidat)
         ' Load Data
@@ -93,11 +92,10 @@ Public Class uf_kandidat
     End Sub
     Private Sub bTambah_Click(sender As Object, e As EventArgs) Handles bTambah.Click
         Using frm As New frmKandidatAdd()
-
+            frm.Mode = frmKandidatAdd.ModeForm.Tambah
             If frm.ShowDialog(Me.FindForm()) = DialogResult.OK Then
                 DataKandidat()
             End If
-
         End Using
     End Sub
     Private Sub bEdit_Click(sender As Object, e As EventArgs) Handles bEdit.Click

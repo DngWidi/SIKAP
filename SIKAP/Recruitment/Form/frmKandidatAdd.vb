@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Security
+Imports Guna.UI2.WinForms
 Imports MySql.Data.MySqlClient
 Public Class frmKandidatAdd
     Public Enum ModeForm
@@ -549,6 +550,7 @@ Public Class frmKandidatAdd
         tkandidat.Text = GenerateNoKandidat()
         SetControlEnabled(True)
         tkandidat.ReadOnly = True
+        tnamalengkap.Select()
         bSimpan.Visible = True
 
     End Sub
@@ -696,25 +698,33 @@ Public Class frmKandidatAdd
 
 #Region "PENDIDIKAN"
     Private Sub SetupGridPendidikan()
+        dgvpendidikan.Columns.Clear() ' Bersihkan kolom bawaan jika ada
 
         With dgvpendidikan
-
             .AutoGenerateColumns = False
-
             .AllowUserToAddRows = False
             .AllowUserToDeleteRows = False
             .AllowUserToResizeRows = False
-
             .ReadOnly = True
-
-            .SelectionMode =
-            DataGridViewSelectionMode.FullRowSelect
-
+            .SelectionMode = DataGridViewSelectionMode.FullRowSelect
             .MultiSelect = False
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            .ColumnHeadersHeight = 40
+            ' ==========================================
+            ' TAMBAHKAN DEFINISI KOLOM DI SINI
+            ' ==========================================
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "ffcidpendidikan", .HeaderText = "ID", .Visible = False})
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Tingkat", .HeaderText = "Tingkat"})
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Institusi", .HeaderText = "Institusi"})
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Jurusan", .HeaderText = "Jurusan"})
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "TahunMasuk", .HeaderText = "Tahun Masuk"})
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "TahunLulus", .HeaderText = "Tahun Lulus"})
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Nilai", .HeaderText = "Nilai"})
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Keterangan", .HeaderText = "Keterangan"})
 
-            .AutoSizeColumnsMode =
-            DataGridViewAutoSizeColumnsMode.Fill
-
+            ' Tambahkan kolom action button (Edit dan Hapus) agar event CellContentClick Anda berfungsi
+            .Columns.Add(New DataGridViewButtonColumn With {.Name = "Edit", .HeaderText = "", .Text = "Edit", .UseColumnTextForButtonValue = True})
+            .Columns.Add(New DataGridViewButtonColumn With {.Name = "Hapus", .HeaderText = "", .Text = "Hapus", .UseColumnTextForButtonValue = True})
         End With
 
     End Sub
@@ -866,26 +876,14 @@ Public Class frmKandidatAdd
 #Region "PENGALAMAN"
     Private Sub SetupGridPengalaman()
 
-        ' With dgvpengalaman
-        '
-        '        .AutoGenerateColumns = False
-        '        .AllowUserToAddRows = False
-        '        .AllowUserToDeleteRows = False
-        '        .AllowUserToResizeRows = False
-        '        .ReadOnly = True
-        '        .SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        '        .MultiSelect = False'
-        '
-        '        .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill'
-        '
-        '        End With
-        With dgvpengalaman
+        ' Bersihkan kolom bawaan jika ada
+        dgvpengalaman.Columns.Clear()
 
+        With dgvpengalaman
             .AutoGenerateColumns = False
             .AllowUserToAddRows = False
             .AllowUserToDeleteRows = False
             .ReadOnly = True
-
             .SelectionMode = DataGridViewSelectionMode.FullRowSelect
             .MultiSelect = False
             .RowHeadersVisible = False
@@ -905,10 +903,26 @@ Public Class frmKandidatAdd
             .AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 250, 252)
             .DefaultCellStyle.SelectionBackColor = Color.FromArgb(219, 234, 254)
             .DefaultCellStyle.SelectionForeColor = Color.Black
+
+            ' ==========================================
+            ' DEFINISI KOLOM SESUAI URUTAN INSERT
+            ' ==========================================
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "ffcidpengalaman", .HeaderText = "ID", .Visible = False})
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Perusahaan", .HeaderText = "Perusahaan"})
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Jabatan", .HeaderText = "Jabatan"})
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "TanggalMulai", .HeaderText = "Tanggal Mulai"})
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "TanggalSelesai", .HeaderText = "Tanggal Selesai"})
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "GajiTerakhir", .HeaderText = "Gaji Terakhir"})
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "AlasanBerhenti", .HeaderText = "Alasan Berhenti"})
+            .Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Keterangan", .HeaderText = "Keterangan"})
+
+            ' Kolom Tombol Action
+            .Columns.Add(New DataGridViewButtonColumn With {.Name = "Edit", .HeaderText = "", .Text = "Edit", .UseColumnTextForButtonValue = True})
+            .Columns.Add(New DataGridViewButtonColumn With {.Name = "Hapus", .HeaderText = "", .Text = "Hapus", .UseColumnTextForButtonValue = True})
+
+            ' Opsional: Mengatur lebar kolom (Fill) agar memenuhi grid
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         End With
-        If dgvpengalaman.Columns.Contains("ffcidpengalaman") Then
-            dgvpengalaman.Columns("ffcidpengalaman").Visible = False
-        End If
     End Sub
     Private Sub bAddPengalaman_Click(sender As Object, e As EventArgs) Handles bAddPengalaman.Click
         Using frm As New frmPengalamanAdd()
@@ -1074,7 +1088,7 @@ Public Class frmKandidatAdd
     Private Sub SetupGridKeahlian()
         dgvkeahlian.Columns.Clear()
         dgvkeahlian.AutoGenerateColumns = False
-
+        dgvkeahlian.ColumnHeadersHeight = 40
         Dim colId As New DataGridViewTextBoxColumn()
         colId.Name = "ffcidkeahlian"
         colId.HeaderText = "ID"
@@ -1201,7 +1215,7 @@ Public Class frmKandidatAdd
 
         dgvsertifikat.Columns.Clear()
         dgvsertifikat.AutoGenerateColumns = False
-
+        dgvsertifikat.ColumnHeadersHeight = 40
         '========================================================
         ' ID SERTIFIKAT
         '========================================================
@@ -1488,7 +1502,7 @@ Public Class frmKandidatAdd
     Private Sub SetupGridDokumen()
         dgvdokumen.Columns.Clear()
         dgvdokumen.AutoGenerateColumns = False
-
+        dgvdokumen.ColumnHeadersHeight = 40
 
         dgvdokumen.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "ffciddokumen", .HeaderText = "ID", .Visible = False})
         dgvdokumen.Columns.Add(New DataGridViewTextBoxColumn With {.Name = "Jenis", .HeaderText = "Jenis"})
@@ -2162,7 +2176,7 @@ Public Class frmKandidatAdd
             Else
 
                 Dim sqlUpdate As String = "UPDATE sakandidatkeahlian SET ffckeahlian = @Keahlian, " &
-                "ffctingkat = @Tingkat,ffcketerangan = @KeteranganWHERE ffcidkeahlian = @ID AND ffcidkandidat = @IDKandidat"
+                "ffctingkat = @Tingkat,ffcketerangan = @Keterangan WHERE ffcidkeahlian = @ID AND ffcidkandidat = @IDKandidat"
 
                 Using cmd As New MySqlCommand(sqlUpdate, conn, trans)
                     AddParameter(cmd, "@ID", idKeahlian)
@@ -2589,6 +2603,70 @@ Public Class frmKandidatAdd
 
     End Sub
 #End Region
+#Region "TEXT COMBOBOX DLL"
+    Private Sub KontrolC_TextChanged(sender As Object, e As EventArgs) Handles _
+        tnamalengkap.TextChanged, ttempatlahir.TextChanged, temail.TextChanged, talamat.TextChanged, tkelurahan.TextChanged, tkecamatan.TextChanged, tkota.TextChanged, tprovinsi.TextChanged
+        Dim tb As Guna2TextBox = CType(sender, Guna2TextBox)
+
+        If tb.Text.Length > 0 Then
+
+            Dim cursorPos As Integer = tb.SelectionStart
+
+            Dim text As String = tb.Text
+
+            Dim formatted As String = Char.ToUpper(text(0)) & text.Substring(1).ToLower()
+
+            If tb.Text <> formatted Then
+
+                tb.Text = formatted
+
+                tb.SelectionStart = Math.Min(cursorPos, tb.Text.Length)
+
+            End If
+
+        End If
+    End Sub
+    Private Sub KontrolT_KeyPress(sender As Object, e As KeyPressEventArgs) Handles _
+        tnamalengkap.KeyPress, ttempatlahir.KeyPress, temail.KeyPress, talamat.KeyPress, tkelurahan.KeyPress, tkecamatan.KeyPress, tkota.KeyPress, tprovinsi.KeyPress
+        If e.KeyChar = ChrW(Keys.Enter) Then
+
+            SendKeys.Send("{TAB}")
+
+            e.Handled = True
+
+            Exit Sub
+
+        End If
+
+
+        ' Blokir karakter tanda kutip tunggal
+        If e.KeyChar = "'"c Then
+
+            e.Handled = True
+
+        End If
+    End Sub
+    Private Sub KontrolA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles _
+        tnik.KeyPress, tnotelp.KeyPress, tkodepos.KeyPress
+        If (e.KeyChar = ChrW(Keys.Enter)) Then
+            SendKeys.Send("{TAB}")
+            e.Handled = True
+        End If
+        Dim KeyAscii As Integer
+        KeyAscii = Asc(e.KeyChar)
+        Select Case KeyAscii
+            Case 48 To 57, 8, 13, 46
+            Case Else
+                KeyAscii = 0
+        End Select
+        If KeyAscii = 0 Then
+            e.Handled = True
+        Else
+            e.Handled = False
+        End If
+    End Sub
+#End Region
+
     Private Sub frmKandidatAdd_Load(sender As Object, e As EventArgs) Handles Me.Load
         Try
             SetupForm()
@@ -2664,5 +2742,6 @@ Public Class frmKandidatAdd
         End Try
 
     End Sub
+
 
 End Class

@@ -7,7 +7,7 @@ Module Filekandidat
     ' ROOT PENYIMPANAN FILE KANDIDAT
     '========================================================
 
-    Public Const ROOT_FILE_KANDIDAT As String = "\\192.168.1.2\DataKandidat"
+    Public Const ROOT_FILE_KANDIDAT As String = "\\192.168.1.250\backup data\DataKandidat"
 
 
 #End Region
@@ -19,7 +19,7 @@ Module Filekandidat
     ' Mendapatkan folder utama kandidat
     '
     ' Contoh:
-    ' \\192.168.1.2\DataKandidat\Kandidat\KND-202609-0001
+    ' \\192.168.1.250\backup data\Kandidat\Kandidat\KND-202609-0001
     '========================================================
 
     Public Function GetFolderKandidat(noKandidat As String) As String
