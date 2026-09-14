@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class uf_permintaankaryawan
+Partial Class uf_seleksi
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
@@ -22,21 +22,17 @@ Partial Class uf_permintaankaryawan
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(uf_permintaankaryawan))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(uf_seleksi))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlContext = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlButton = New Guna.UI2.WinForms.Guna2Panel()
-        Me.bSubmit = New Guna.UI2.WinForms.Guna2Button()
+        Me.bProsesSeleksi = New Guna.UI2.WinForms.Guna2Button()
         Me.bDetail = New Guna.UI2.WinForms.Guna2Button()
-        Me.bHapus = New Guna.UI2.WinForms.Guna2Button()
-        Me.bEdit = New Guna.UI2.WinForms.Guna2Button()
         Me.pnlPage = New Guna.UI2.WinForms.Guna2Panel()
-        Me.paginationPermintaan = New SIKAP.ucPagination()
         Me.lblInfo = New System.Windows.Forms.Label()
-        Me.dgvPermintaan = New Guna.UI2.WinForms.Guna2DataGridView()
-        Me.bTambah = New Guna.UI2.WinForms.Guna2Button()
+        Me.dgvSeleksi = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlToolbar = New Guna.UI2.WinForms.Guna2Panel()
         Me.cstatus = New Guna.UI2.WinForms.Guna2ComboBox()
@@ -46,10 +42,11 @@ Partial Class uf_permintaankaryawan
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.paginationSeleksi = New SIKAP.ucPagination()
         Me.pnlContext.SuspendLayout()
         Me.pnlButton.SuspendLayout()
         Me.pnlPage.SuspendLayout()
-        CType(Me.dgvPermintaan, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvSeleksi, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlToolbar.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -66,7 +63,7 @@ Partial Class uf_permintaankaryawan
         Me.pnlContext.Name = "pnlContext"
         Me.pnlContext.ShadowDecoration.Parent = Me.pnlContext
         Me.pnlContext.Size = New System.Drawing.Size(696, 527)
-        Me.pnlContext.TabIndex = 5
+        Me.pnlContext.TabIndex = 6
         '
         'pnlButton
         '
@@ -77,42 +74,39 @@ Partial Class uf_permintaankaryawan
         Me.pnlButton.BorderColor = System.Drawing.Color.Silver
         Me.pnlButton.BorderRadius = 6
         Me.pnlButton.BorderThickness = 1
-        Me.pnlButton.Controls.Add(Me.bSubmit)
+        Me.pnlButton.Controls.Add(Me.bProsesSeleksi)
         Me.pnlButton.Controls.Add(Me.bDetail)
-        Me.pnlButton.Controls.Add(Me.bHapus)
-        Me.pnlButton.Controls.Add(Me.bEdit)
         Me.pnlButton.Controls.Add(Me.pnlPage)
-        Me.pnlButton.Controls.Add(Me.dgvPermintaan)
-        Me.pnlButton.Controls.Add(Me.bTambah)
+        Me.pnlButton.Controls.Add(Me.dgvSeleksi)
         Me.pnlButton.Location = New System.Drawing.Point(11, 162)
         Me.pnlButton.Name = "pnlButton"
         Me.pnlButton.ShadowDecoration.Parent = Me.pnlButton
         Me.pnlButton.Size = New System.Drawing.Size(668, 362)
         Me.pnlButton.TabIndex = 4
         '
-        'bSubmit
+        'bProsesSeleksi
         '
-        Me.bSubmit.BorderColor = System.Drawing.Color.Gainsboro
-        Me.bSubmit.BorderRadius = 5
-        Me.bSubmit.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash
-        Me.bSubmit.BorderThickness = 2
-        Me.bSubmit.CheckedState.Parent = Me.bSubmit
-        Me.bSubmit.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.bSubmit.CustomImages.Parent = Me.bSubmit
-        Me.bSubmit.FillColor = System.Drawing.Color.Transparent
-        Me.bSubmit.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bSubmit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.bSubmit.HoverState.Parent = Me.bSubmit
-        Me.bSubmit.Image = CType(resources.GetObject("bSubmit.Image"), System.Drawing.Image)
-        Me.bSubmit.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
-        Me.bSubmit.ImageSize = New System.Drawing.Size(18, 18)
-        Me.bSubmit.Location = New System.Drawing.Point(377, 14)
-        Me.bSubmit.Name = "bSubmit"
-        Me.bSubmit.ShadowDecoration.Parent = Me.bSubmit
-        Me.bSubmit.Size = New System.Drawing.Size(94, 32)
-        Me.bSubmit.TabIndex = 8
-        Me.bSubmit.Text = "Submit"
-        Me.bSubmit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.bProsesSeleksi.BorderColor = System.Drawing.Color.Gainsboro
+        Me.bProsesSeleksi.BorderRadius = 5
+        Me.bProsesSeleksi.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash
+        Me.bProsesSeleksi.BorderThickness = 2
+        Me.bProsesSeleksi.CheckedState.Parent = Me.bProsesSeleksi
+        Me.bProsesSeleksi.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.bProsesSeleksi.CustomImages.Parent = Me.bProsesSeleksi
+        Me.bProsesSeleksi.FillColor = System.Drawing.Color.Transparent
+        Me.bProsesSeleksi.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bProsesSeleksi.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.bProsesSeleksi.HoverState.Parent = Me.bProsesSeleksi
+        Me.bProsesSeleksi.Image = CType(resources.GetObject("bProsesSeleksi.Image"), System.Drawing.Image)
+        Me.bProsesSeleksi.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.bProsesSeleksi.ImageSize = New System.Drawing.Size(18, 18)
+        Me.bProsesSeleksi.Location = New System.Drawing.Point(103, 15)
+        Me.bProsesSeleksi.Name = "bProsesSeleksi"
+        Me.bProsesSeleksi.ShadowDecoration.Parent = Me.bProsesSeleksi
+        Me.bProsesSeleksi.Size = New System.Drawing.Size(126, 32)
+        Me.bProsesSeleksi.TabIndex = 8
+        Me.bProsesSeleksi.Text = "Proses Seleksi"
+        Me.bProsesSeleksi.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'bDetail
         '
@@ -129,7 +123,7 @@ Partial Class uf_permintaankaryawan
         Me.bDetail.Image = CType(resources.GetObject("bDetail.Image"), System.Drawing.Image)
         Me.bDetail.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
         Me.bDetail.ImageSize = New System.Drawing.Size(18, 18)
-        Me.bDetail.Location = New System.Drawing.Point(288, 14)
+        Me.bDetail.Location = New System.Drawing.Point(14, 15)
         Me.bDetail.Name = "bDetail"
         Me.bDetail.ShadowDecoration.Parent = Me.bDetail
         Me.bDetail.Size = New System.Drawing.Size(83, 32)
@@ -137,57 +131,11 @@ Partial Class uf_permintaankaryawan
         Me.bDetail.Text = "Detail"
         Me.bDetail.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'bHapus
-        '
-        Me.bHapus.BorderColor = System.Drawing.Color.Gainsboro
-        Me.bHapus.BorderRadius = 5
-        Me.bHapus.BorderThickness = 1
-        Me.bHapus.CheckedState.Parent = Me.bHapus
-        Me.bHapus.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.bHapus.CustomImages.Parent = Me.bHapus
-        Me.bHapus.FillColor = System.Drawing.Color.Transparent
-        Me.bHapus.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bHapus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.bHapus.HoverState.Parent = Me.bHapus
-        Me.bHapus.Image = Global.SIKAP.My.Resources.Resources.Delete
-        Me.bHapus.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
-        Me.bHapus.ImageSize = New System.Drawing.Size(18, 18)
-        Me.bHapus.Location = New System.Drawing.Point(199, 14)
-        Me.bHapus.Name = "bHapus"
-        Me.bHapus.ShadowDecoration.Parent = Me.bHapus
-        Me.bHapus.Size = New System.Drawing.Size(83, 32)
-        Me.bHapus.TabIndex = 6
-        Me.bHapus.Text = "Hapus"
-        Me.bHapus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'bEdit
-        '
-        Me.bEdit.BorderColor = System.Drawing.Color.Gainsboro
-        Me.bEdit.BorderRadius = 5
-        Me.bEdit.BorderThickness = 1
-        Me.bEdit.CheckedState.Parent = Me.bEdit
-        Me.bEdit.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.bEdit.CustomImages.Parent = Me.bEdit
-        Me.bEdit.FillColor = System.Drawing.Color.Transparent
-        Me.bEdit.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bEdit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.bEdit.HoverState.Parent = Me.bEdit
-        Me.bEdit.Image = Global.SIKAP.My.Resources.Resources.Edit
-        Me.bEdit.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
-        Me.bEdit.ImageSize = New System.Drawing.Size(18, 18)
-        Me.bEdit.Location = New System.Drawing.Point(118, 14)
-        Me.bEdit.Name = "bEdit"
-        Me.bEdit.ShadowDecoration.Parent = Me.bEdit
-        Me.bEdit.Size = New System.Drawing.Size(75, 32)
-        Me.bEdit.TabIndex = 5
-        Me.bEdit.Text = "Edit"
-        Me.bEdit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'pnlPage
         '
         Me.pnlPage.BorderColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.pnlPage.BorderThickness = 1
-        Me.pnlPage.Controls.Add(Me.paginationPermintaan)
+        Me.pnlPage.Controls.Add(Me.paginationSeleksi)
         Me.pnlPage.Controls.Add(Me.lblInfo)
         Me.pnlPage.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlPage.Location = New System.Drawing.Point(0, 316)
@@ -195,18 +143,6 @@ Partial Class uf_permintaankaryawan
         Me.pnlPage.ShadowDecoration.Parent = Me.pnlPage
         Me.pnlPage.Size = New System.Drawing.Size(668, 46)
         Me.pnlPage.TabIndex = 4
-        '
-        'paginationPermintaan
-        '
-        Me.paginationPermintaan.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
-        Me.paginationPermintaan.CurrentPage = 1
-        Me.paginationPermintaan.Dock = System.Windows.Forms.DockStyle.Right
-        Me.paginationPermintaan.Location = New System.Drawing.Point(318, 0)
-        Me.paginationPermintaan.Name = "paginationPermintaan"
-        Me.paginationPermintaan.PageSize = 10
-        Me.paginationPermintaan.Size = New System.Drawing.Size(350, 46)
-        Me.paginationPermintaan.TabIndex = 1
-        Me.paginationPermintaan.TotalRecord = 0
         '
         'lblInfo
         '
@@ -219,21 +155,21 @@ Partial Class uf_permintaankaryawan
         Me.lblInfo.TabIndex = 0
         Me.lblInfo.Text = "Menampilkan 1-10 dari 245 Data"
         '
-        'dgvPermintaan
+        'dgvSeleksi
         '
-        Me.dgvPermintaan.AllowUserToAddRows = False
-        Me.dgvPermintaan.AllowUserToDeleteRows = False
-        Me.dgvPermintaan.AllowUserToResizeRows = False
+        Me.dgvSeleksi.AllowUserToAddRows = False
+        Me.dgvSeleksi.AllowUserToDeleteRows = False
+        Me.dgvSeleksi.AllowUserToResizeRows = False
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        Me.dgvPermintaan.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.dgvPermintaan.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.dgvSeleksi.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvSeleksi.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvPermintaan.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvPermintaan.BackgroundColor = System.Drawing.Color.White
-        Me.dgvPermintaan.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.dgvPermintaan.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        Me.dgvPermintaan.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgvSeleksi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvSeleksi.BackgroundColor = System.Drawing.Color.White
+        Me.dgvSeleksi.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvSeleksi.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgvSeleksi.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.5!)
@@ -241,8 +177,9 @@ Partial Class uf_permintaankaryawan
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(219, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(254, Byte), Integer))
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvPermintaan.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvPermintaan.ColumnHeadersHeight = 24
+        Me.dgvSeleksi.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvSeleksi.ColumnHeadersHeight = 24
+        Me.dgvSeleksi.Cursor = System.Windows.Forms.Cursors.Hand
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.5!)
@@ -250,62 +187,39 @@ Partial Class uf_permintaankaryawan
         DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvPermintaan.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dgvPermintaan.EnableHeadersVisualStyles = False
-        Me.dgvPermintaan.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.dgvPermintaan.Location = New System.Drawing.Point(3, 63)
-        Me.dgvPermintaan.MultiSelect = False
-        Me.dgvPermintaan.Name = "dgvPermintaan"
-        Me.dgvPermintaan.ReadOnly = True
-        Me.dgvPermintaan.RowHeadersVisible = False
-        Me.dgvPermintaan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvPermintaan.Size = New System.Drawing.Size(662, 228)
-        Me.dgvPermintaan.TabIndex = 3
-        Me.dgvPermintaan.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
-        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
-        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.Font = Nothing
-        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty
-        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty
-        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty
-        Me.dgvPermintaan.ThemeStyle.BackColor = System.Drawing.Color.White
-        Me.dgvPermintaan.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.dgvPermintaan.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvPermintaan.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        Me.dgvPermintaan.ThemeStyle.HeaderStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        Me.dgvPermintaan.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
-        Me.dgvPermintaan.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        Me.dgvPermintaan.ThemeStyle.HeaderStyle.Height = 24
-        Me.dgvPermintaan.ThemeStyle.ReadOnly = True
-        Me.dgvPermintaan.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
-        Me.dgvPermintaan.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        Me.dgvPermintaan.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        Me.dgvPermintaan.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        Me.dgvPermintaan.ThemeStyle.RowsStyle.Height = 22
-        Me.dgvPermintaan.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvPermintaan.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        '
-        'bTambah
-        '
-        Me.bTambah.BorderColor = System.Drawing.Color.Gainsboro
-        Me.bTambah.BorderRadius = 5
-        Me.bTambah.BorderThickness = 1
-        Me.bTambah.CheckedState.Parent = Me.bTambah
-        Me.bTambah.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.bTambah.CustomImages.Parent = Me.bTambah
-        Me.bTambah.FillColor = System.Drawing.Color.Transparent
-        Me.bTambah.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bTambah.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.bTambah.HoverState.Parent = Me.bTambah
-        Me.bTambah.Image = Global.SIKAP.My.Resources.Resources.Add
-        Me.bTambah.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
-        Me.bTambah.ImageSize = New System.Drawing.Size(18, 18)
-        Me.bTambah.Location = New System.Drawing.Point(14, 14)
-        Me.bTambah.Name = "bTambah"
-        Me.bTambah.ShadowDecoration.Parent = Me.bTambah
-        Me.bTambah.Size = New System.Drawing.Size(98, 32)
-        Me.bTambah.TabIndex = 0
-        Me.bTambah.Text = "Tambah"
-        Me.bTambah.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.dgvSeleksi.DefaultCellStyle = DataGridViewCellStyle3
+        Me.dgvSeleksi.EnableHeadersVisualStyles = False
+        Me.dgvSeleksi.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.dgvSeleksi.Location = New System.Drawing.Point(3, 63)
+        Me.dgvSeleksi.MultiSelect = False
+        Me.dgvSeleksi.Name = "dgvSeleksi"
+        Me.dgvSeleksi.ReadOnly = True
+        Me.dgvSeleksi.RowHeadersVisible = False
+        Me.dgvSeleksi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvSeleksi.Size = New System.Drawing.Size(662, 228)
+        Me.dgvSeleksi.TabIndex = 3
+        Me.dgvSeleksi.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
+        Me.dgvSeleksi.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
+        Me.dgvSeleksi.ThemeStyle.AlternatingRowsStyle.Font = Nothing
+        Me.dgvSeleksi.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty
+        Me.dgvSeleksi.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty
+        Me.dgvSeleksi.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty
+        Me.dgvSeleksi.ThemeStyle.BackColor = System.Drawing.Color.White
+        Me.dgvSeleksi.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.dgvSeleksi.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.dgvSeleksi.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgvSeleksi.ThemeStyle.HeaderStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        Me.dgvSeleksi.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
+        Me.dgvSeleksi.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+        Me.dgvSeleksi.ThemeStyle.HeaderStyle.Height = 24
+        Me.dgvSeleksi.ThemeStyle.ReadOnly = True
+        Me.dgvSeleksi.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
+        Me.dgvSeleksi.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgvSeleksi.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        Me.dgvSeleksi.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.dgvSeleksi.ThemeStyle.RowsStyle.Height = 22
+        Me.dgvSeleksi.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.dgvSeleksi.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
         '
         'Label1
         '
@@ -313,9 +227,9 @@ Partial Class uf_permintaankaryawan
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.Label1.Location = New System.Drawing.Point(8, 6)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(237, 13)
+        Me.Label1.Size = New System.Drawing.Size(168, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Home   >    Recruitment >  Permintaan Karyawan"
+        Me.Label1.Text = "Home   >    Recruitment >  Seleksi"
         '
         'pnlToolbar
         '
@@ -416,7 +330,7 @@ Partial Class uf_permintaankaryawan
         Me.tPencarian.Location = New System.Drawing.Point(14, 27)
         Me.tPencarian.Name = "tPencarian"
         Me.tPencarian.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tPencarian.PlaceholderText = "Ketik No. Request / Jabatan / Department"
+        Me.tPencarian.PlaceholderText = "No Kandidat / Nama"
         Me.tPencarian.SelectedText = ""
         Me.tPencarian.ShadowDecoration.Parent = Me.tPencarian
         Me.tPencarian.Size = New System.Drawing.Size(268, 36)
@@ -428,9 +342,9 @@ Partial Class uf_permintaankaryawan
         Me.Label4.Font = New System.Drawing.Font("Yu Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(14, 10)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(96, 16)
+        Me.Label4.Size = New System.Drawing.Size(82, 16)
         Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Cari Permintaan"
+        Me.Label4.Text = "Cari Kandidat"
         '
         'Label2
         '
@@ -439,9 +353,9 @@ Partial Class uf_permintaankaryawan
         Me.Label2.ForeColor = System.Drawing.Color.Black
         Me.Label2.Location = New System.Drawing.Point(14, 29)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(279, 30)
+        Me.Label2.Size = New System.Drawing.Size(175, 30)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Data Permintaan Karyawan"
+        Me.Label2.Text = "Seleksi Kandidat"
         '
         'Label3
         '
@@ -450,24 +364,35 @@ Partial Class uf_permintaankaryawan
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(110, Byte), Integer), CType(CType(119, Byte), Integer))
         Me.Label3.Location = New System.Drawing.Point(16, 59)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(320, 17)
+        Me.Label3.Size = New System.Drawing.Size(389, 17)
         Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Kelola seluruh data permintaan karyawan perusahaan"
+        Me.Label3.Text = "Kelola proses seleksi kandidat berdasarkan permintaan karyawan"
         '
-        'uf_permintaankaryawan
+        'paginationSeleksi
+        '
+        Me.paginationSeleksi.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
+        Me.paginationSeleksi.CurrentPage = 1
+        Me.paginationSeleksi.Dock = System.Windows.Forms.DockStyle.Right
+        Me.paginationSeleksi.Location = New System.Drawing.Point(318, 0)
+        Me.paginationSeleksi.Name = "paginationSeleksi"
+        Me.paginationSeleksi.PageSize = 10
+        Me.paginationSeleksi.Size = New System.Drawing.Size(350, 46)
+        Me.paginationSeleksi.TabIndex = 1
+        Me.paginationSeleksi.TotalRecord = 0
+        '
+        'uf_seleksi
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(249, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(254, Byte), Integer))
         Me.Controls.Add(Me.pnlContext)
-        Me.Name = "uf_permintaankaryawan"
+        Me.Name = "uf_seleksi"
         Me.Size = New System.Drawing.Size(696, 527)
         Me.pnlContext.ResumeLayout(False)
         Me.pnlContext.PerformLayout()
         Me.pnlButton.ResumeLayout(False)
         Me.pnlPage.ResumeLayout(False)
         Me.pnlPage.PerformLayout()
-        CType(Me.dgvPermintaan, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvSeleksi, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlToolbar.ResumeLayout(False)
         Me.pnlToolbar.PerformLayout()
         Me.ResumeLayout(False)
@@ -476,22 +401,19 @@ Partial Class uf_permintaankaryawan
 
     Friend WithEvents pnlContext As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents pnlButton As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents bProsesSeleksi As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents bDetail As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents pnlPage As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents paginationPermintaan As ucPagination
+    Friend WithEvents paginationSeleksi As ucPagination
     Friend WithEvents lblInfo As Label
-    Friend WithEvents dgvPermintaan As Guna.UI2.WinForms.Guna2DataGridView
-    Friend WithEvents bTambah As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents dgvSeleksi As Guna.UI2.WinForms.Guna2DataGridView
     Friend WithEvents Label1 As Label
     Friend WithEvents pnlToolbar As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents cstatus As Guna.UI2.WinForms.Guna2ComboBox
     Friend WithEvents bRefresh As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents bCari As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents tPencarian As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents cstatus As Guna.UI2.WinForms.Guna2ComboBox
-    Friend WithEvents bDetail As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents bHapus As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents bEdit As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents bSubmit As Guna.UI2.WinForms.Guna2Button
 End Class

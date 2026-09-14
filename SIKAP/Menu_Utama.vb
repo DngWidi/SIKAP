@@ -109,6 +109,8 @@ Public Class Menu_Utama
                 AddHandler btn.Click, AddressOf bPermintaanKaryawan_Click
             Case "bKandidat"
                 AddHandler btn.Click, AddressOf bKandidat_Click
+            Case "bSeleksi"
+                AddHandler btn.Click, AddressOf bSeleksi_Click
             Case "bInterview"
               '  AddHandler btn.Click, AddressOf bInterview_Click
 
@@ -249,6 +251,12 @@ Public Class Menu_Utama
 #End Region
 #Region "PRIVATE"
     Private Sub ResetSubMenuMaster()
+        ' Reset status checked di panel Recruitment
+        For Each ctrl As Control In pnlSubRecruitment.Controls
+            If TypeOf ctrl Is Guna2Button Then
+                DirectCast(ctrl, Guna2Button).Checked = False
+            End If
+        Next
         ' Matikan semua tombol submenu Master Data
         For Each ctrl As Control In pnlSubMaster.Controls
 
@@ -308,10 +316,10 @@ Public Class Menu_Utama
 
         pnlSubRecruitment.Controls.Add(BuatSubButton("   Permintaan Karyawan", "bPermintaanKaryawan", My.Resources.Lowongan, True))
         pnlSubRecruitment.Controls.Add(BuatSubButton("   Kandidat", "bKandidat", My.Resources.Kandidat, True))
-        pnlSubRecruitment.Controls.Add(BuatSubButton("   Seleksi", "bKirim", My.Resources.Seleksi, True))
-        pnlSubRecruitment.Controls.Add(BuatSubButton("   Penilaian Interview", "bGroup", My.Resources.Interview, True))
-        pnlSubRecruitment.Controls.Add(BuatSubButton("   Penawaran Kerja", "bUsaha", My.Resources.Kontrak, True))
-        pnlSubRecruitment.Controls.Add(BuatSubButton("   Calon Pegawai", "bSegmen", My.Resources.Calonpegawai, True))
+        pnlSubRecruitment.Controls.Add(BuatSubButton("   Seleksi", "bSeleksi", My.Resources.Seleksi, True))
+        pnlSubRecruitment.Controls.Add(BuatSubButton("   Penilaian Interview", "bIntervierw", My.Resources.Interview, True))
+        pnlSubRecruitment.Controls.Add(BuatSubButton("   Penawaran Kerja", "bPenawaranKerja", My.Resources.Kontrak, True))
+        pnlSubRecruitment.Controls.Add(BuatSubButton("   Calon Pegawai", "bCalon", My.Resources.Calonpegawai, True))
 
         pnlSubRecruitment.Visible = True
 
@@ -331,7 +339,7 @@ Public Class Menu_Utama
         btn.Checked = True
 
         ' Aktifkan menu utama Master Data
-        bMaster.Checked = True
+        bRecruitment.Checked = True
 
         ' Tampilkan UserControl Department
         LoadUserControl(New uf_permintaankaryawan())
@@ -345,10 +353,24 @@ Public Class Menu_Utama
         btn.Checked = True
 
         ' Aktifkan menu utama Master Data
-        bMaster.Checked = True
+        bRecruitment.Checked = True
 
         ' Tampilkan UserControl Department
         LoadUserControl(New uf_kandidat())
+    End Sub
+    Private Sub bSeleksi_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ' Matikan semua submenu Master Data
+        ResetSubMenuMaster()
+
+        ' Aktifkan tombol yang sedang dipilih
+        Dim btn = DirectCast(sender, Guna2Button)
+        btn.Checked = True
+
+        ' Aktifkan menu utama Master Data
+        bRecruitment.Checked = True
+
+        ' Tampilkan UserControl Department
+        LoadUserControl(New uf_seleksi())
     End Sub
     '============== Employee ==========
     '=========== Master Data =========

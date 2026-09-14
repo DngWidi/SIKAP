@@ -1,6 +1,8 @@
 ﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement.ListView
 Imports Guna.UI2.WinForms
 Imports MySql.Data.MySqlClient
+'Imports FontAwesome.Sharp
+Imports System.Drawing
 Public Class uf_permintaankaryawan
     '========================================
     ' VARIABLE PENCARIAN
@@ -104,6 +106,37 @@ Public Class uf_permintaankaryawan
         End Select
 
     End Function
+    Private Function BuatIconKandidat() As Bitmap
+        Dim iconPicture As New FontAwesome.Sharp.IconPictureBox()
+
+        Try
+            ' 1. Ubah icon menjadi UserPlus agar user tahu ini untuk menambah data
+            iconPicture.IconChar = FontAwesome.Sharp.IconChar.UserPlus
+            iconPicture.IconFont = FontAwesome.Sharp.IconFont.Auto
+
+            ' 2. Perkecil ukuran icon agar pas di dalam baris
+            iconPicture.IconSize = 14
+
+            ' 3. Gunakan warna abu-abu gelap kehitaman
+            iconPicture.IconColor = Color.FromArgb(45, 45, 45)
+            iconPicture.BackColor = Color.Transparent
+
+            ' 4. Sesuaikan ukuran bitmap
+            iconPicture.Size = New Size(16, 16)
+
+            Dim bmp As New Bitmap(16, 16)
+
+            iconPicture.DrawToBitmap(
+                bmp,
+                New Rectangle(0, 0, 16, 16)
+            )
+
+            Return bmp
+
+        Finally
+            iconPicture.Dispose()
+        End Try
+    End Function
 #End Region
 
 #Region "Private"
@@ -148,20 +181,29 @@ Public Class uf_permintaankaryawan
             '========================================
             Using conn As New MySqlConnection(sambung)
                 conn.Open()
-                Dim sql As String = "SELECT ffcidpermintaan AS `ID`,ffcnopermintaan AS `No. Permintaan`,ffdtglpermintaan AS `Tanggal`,ffcnikrequester AS `NIK Requester`," &
-                "ffckddepart AS `Department`, ffckdbagian AS `Bagian`,ffckdjabatan AS `Jabatan`,ffnjumlah AS `Jumlah`,ffcjnskebutuhan AS `Jenis Kebutuhan`," &
-                "ffcprioritas AS `Prioritas`,ffcstatuskaryawan AS `Status Karyawan`,ffdtglbutuh AS `Tanggal Dibutuhkan`,ffcstatus AS `StatusCode`," &
-                "CASE ffcstatus  WHEN 'DRAFT' THEN 'Draft' WHEN 'WAITING_DEPARTMENT' THEN 'Waiting Department Approval' WHEN 'WAITING_HRD' " &
-                "THEN 'Waiting HR Approval' WHEN 'REJECTED' THEN 'Rejected' WHEN 'APPROVED' THEN 'Approved' WHEN 'PROCESSING' THEN 'Processing' " &
-                "WHEN 'PARTIALLY_FULFILLED' THEN 'Partially Fulfilled' WHEN 'ON_HOLD' THEN 'On Hold' WHEN 'COMPLETED' THEN 'Completed' ELSE ffcstatus " &
-                " END AS `Status` FROM sapermintaankaryawan WHERE 1 = 1 "
+                '    Dim sql As String = "SELECT ffcidpermintaan AS `ID`,ffcnopermintaan AS `No. Permintaan`,ffdtglpermintaan AS `Tanggal`,ffcnikrequester AS `NIK Requester`," &
+                '   "ffckddepart AS `Department`, ffckdbagian AS `Bagian`,ffckdjabatan AS `Jabatan`,ffnjumlah AS `Jumlah`,ffcjnskebutuhan AS `Jenis Kebutuhan`," &
+                '   "ffcprioritas AS `Prioritas`,ffcstatuskaryawan AS `Status Karyawan`,ffdtglbutuh AS `Tanggal Dibutuhkan`,ffcstatus AS `StatusCode`," &
+                '   "CASE ffcstatus  WHEN 'DRAFT' THEN 'Draft' WHEN 'WAITING_DEPARTMENT' THEN 'Waiting Department Approval' WHEN 'WAITING_HRD' " &
+                '   "THEN 'Waiting HR Approval' WHEN 'REJECTED' THEN 'Rejected' WHEN 'APPROVED' THEN 'Approved' WHEN 'PROCESSING' THEN 'Processing' " &
+                '   "WHEN 'PARTIALLY_FULFILLED' THEN 'Partially Fulfilled' WHEN 'ON_HOLD' THEN 'On Hold' WHEN 'COMPLETED' THEN 'Completed' ELSE ffcstatus " &
+                '   " END AS `Status` FROM sapermintaankaryawan WHERE 1 = 1 "
+
+                Dim sql As String = "SELECT  p.ffcidpermintaan As `ID`, p.ffcnopermintaan As `No. Permintaan`,p.ffdtglpermintaan As `Tanggal`,p.ffcnikrequester As `NIK Requester`, " &
+                "p.ffckddepart As `Department`,p.ffckdbagian As `Bagian`,p.ffckdjabatan As `Jabatan`,p.ffnjumlah As `Jumlah`,p.ffcjnskebutuhan As `Jenis Kebutuhan`, " &
+                "p.ffcprioritas As `Prioritas`,p.ffcstatuskaryawan As `Status Karyawan`,p.ffdtglbutuh As `Tanggal Dibutuhkan`,p.ffcstatus As `StatusCode`, (Select COUNT(*) " &
+                "FROM sakandidatrekrutmen r  WHERE r.ffcidpermintaan = p.ffcidpermintaan) As `JumlahKandidat`, CASE p.ffcstatus  When 'DRAFT' THEN 'Draft' " &
+                "WHEN 'WAITING_DEPARTMENT' THEN 'Waiting Department Approval' WHEN 'WAITING_HRD' THEN 'Waiting HR Approval' WHEN 'REJECTED' THEN 'Rejected' " &
+                "WHEN 'APPROVED' THEN 'Approved' WHEN 'PROCESSING' THEN 'Processing' WHEN 'PARTIALLY_FULFILLED' THEN 'Partially Fulfilled' " &
+                "WHEN 'ON_HOLD' THEN 'On Hold' WHEN 'COMPLETED' THEN 'Completed'  ELSE p.ffcstatus  END AS `Status`FROM sapermintaankaryawan p WHERE 1 = 1 "
+
 
                 '========================================
                 ' FILTER KEYWORD
                 '========================================
 
                 If _keywordCari <> "" Then
-                    sql &= "AND (ffcnopermintaan LIKE @Keyword OR ffckdjabatan LIKE @Keyword OR ffckddepart LIKE @Keyword ) "
+                    sql &= "AND (p.ffcnopermintaan LIKE @Keyword OR p.ffckdjabatan LIKE @Keyword OR p.ffckddepart LIKE @Keyword) "
                 End If
 
                 '========================================
@@ -169,13 +211,13 @@ Public Class uf_permintaankaryawan
                 '========================================
 
                 If _statusCari <> "" Then
-                    sql &= "AND ffcstatus = @Status "
+                    sql &= "AND p.ffcstatus = @Status "
                 End If
 
                 '========================================
                 ' SORTING + PAGINATION
                 '========================================
-                sql &= "ORDER BY ffcidpermintaan DESC LIMIT @Limit OFFSET @Offset "
+                sql &= "ORDER BY p.ffcidpermintaan DESC LIMIT @Limit OFFSET @Offset "
 
                 Using cmd As New MySqlCommand(sql, conn)
                     '========================================
@@ -204,6 +246,13 @@ Public Class uf_permintaankaryawan
                         da.Fill(dt)
                         dgvPermintaan.DataSource = dt
                     End Using
+
+                    ' --- PANGGIL DI SINI ---
+                    SetupKolomKandidat()
+
+                    If dgvPermintaan.Columns.Contains("JumlahKandidat") Then
+                        dgvPermintaan.Columns("JumlahKandidat").Visible = False
+                    End If
                 End Using
             End Using
 
@@ -230,7 +279,7 @@ Public Class uf_permintaankaryawan
 
             UpdateActionButtons()
         Catch ex As Exception
-            PesanPopupError("Error", "Gagal memuat data department !!" & vbCrLf & ex.Message)
+            PesanPopupError("Error", "Gagal memuat data permintaan karyawan !!" & vbCrLf & ex.Message)
         End Try
 
     End Sub
@@ -253,7 +302,46 @@ Public Class uf_permintaankaryawan
             .MultiSelect = False
             .RowHeadersVisible = False
             .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
+            ' --- TAMBAHKAN DUA BARIS INI ---
+            .ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(31, 95, 209)
+            .ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White
         End With
+    End Sub
+    Private Sub SetupKolomKandidat()
+        If dgvPermintaan.Columns.Contains("colKandidat") Then
+            dgvPermintaan.Columns.Remove("colKandidat")
+        End If
+
+        Dim colKandidat As New DataGridViewTextBoxColumn()
+
+        With colKandidat
+
+            .Name = "colKandidat"
+            .HeaderText = "Kandidat"
+
+            .Width = 90
+            .MinimumWidth = 90
+
+            .ReadOnly = True
+
+            .SortMode =
+                DataGridViewColumnSortMode.NotSortable
+
+            .DefaultCellStyle.Alignment =
+                DataGridViewContentAlignment.MiddleCenter
+
+            .DefaultCellStyle.BackColor =
+                Color.White
+
+            .DefaultCellStyle.SelectionBackColor =
+                Color.FromArgb(219, 234, 254)
+
+            .DefaultCellStyle.SelectionForeColor =
+                Color.Black
+
+        End With
+        dgvPermintaan.Columns.Add(colKandidat)
+
     End Sub
     Private Sub FormatDataGridView()
         If dgvPermintaan.Columns.Count = 0 Then
@@ -347,42 +435,232 @@ Public Class uf_permintaankaryawan
         End If
     End Sub
     Private Sub dgvPermintaan_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPermintaan.CellClick
+
+        '==================================================
+        ' VALIDASI HEADER
+        '==================================================
         If e.RowIndex < 0 Then
+
             _idPermintaanTerpilih = 0
             _statusTerpilih = ""
+
             UpdateActionButtons()
+
+            Return
+
+        End If
+
+        '==================================================
+        ' AMBIL BARIS
+        '==================================================
+        Dim row As DataGridViewRow =
+        dgvPermintaan.Rows(e.RowIndex)
+
+        '==================================================
+        ' AMBIL ID PERMINTAAN
+        '==================================================
+        _idPermintaanTerpilih = 0
+
+        If row.Cells("ID").Value IsNot Nothing AndAlso
+       Not IsDBNull(row.Cells("ID").Value) Then
+
+            Long.TryParse(row.Cells("ID").Value.ToString(), _idPermintaanTerpilih)
+
+        End If
+
+        '==================================================
+        ' AMBIL STATUS DATABASE
+        '==================================================
+        _statusTerpilih = ""
+
+        If row.Cells("StatusCode").Value IsNot Nothing AndAlso
+       Not IsDBNull(row.Cells("StatusCode").Value) Then
+
+            _statusTerpilih = row.Cells("StatusCode").Value.ToString().Trim()
+
+        End If
+
+        '==================================================
+        ' UPDATE ACTION BUTTON
+        '==================================================
+        UpdateActionButtons()
+
+        '==================================================
+        ' CEK APAKAH YANG DIKLIK KOLOM KANDIDAT
+        '==================================================
+        If Not dgvPermintaan.Columns.Contains("colKandidat") Then
             Return
         End If
 
-        Dim row As DataGridViewRow = dgvPermintaan.Rows(e.RowIndex)
+        If e.ColumnIndex <> dgvPermintaan.Columns("colKandidat").Index Then
 
-        '========================================
-        ' AMBIL ID PERMINTAAN
-        '========================================
-
-        If row.Cells("ID").Value IsNot Nothing AndAlso row.Cells("ID").Value IsNot DBNull.Value Then
-            _idPermintaanTerpilih = Convert.ToInt64(row.Cells("ID").Value)
-        Else
-            _idPermintaanTerpilih = 0
+            Return
 
         End If
 
-        '========================================
-        ' AMBIL STATUS DATABASE
-        '========================================
+        '==================================================
+        ' VALIDASI ID
+        '==================================================
+        If _idPermintaanTerpilih <= 0 Then
+            PesanPopupPeringatan("Peringatan", "ID permintaan tidak valid.")
+            Return
 
-        If row.Cells("StatusCode").Value IsNot Nothing AndAlso row.Cells("StatusCode").Value IsNot DBNull.Value Then
-            _statusTerpilih = row.Cells("StatusCode").Value.ToString().Trim()
-        Else
-            _statusTerpilih = ""
         End If
 
-        '========================================
-        ' UPDATE BUTTON
-        '========================================
+        '==================================================
+        ' BUKA FORM KANDIDAT
+        '==================================================
+        Using frm As New frmPermintaanKandidat(_idPermintaanTerpilih)
 
-        UpdateActionButtons()
+            frm.ShowDialog(Me.FindForm())
 
+        End Using
+
+        '==================================================
+        ' REFRESH JUMLAH KANDIDAT
+        '==================================================
+        DataPermintaanKaryawan()
+
+    End Sub
+
+    Private Sub dgvPermintaan_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles dgvPermintaan.CellPainting
+
+        '==================================================
+        ' BUKAN DATA ROW
+        '==================================================
+        If e.RowIndex < 0 Then
+            Return
+        End If
+
+        '==================================================
+        ' PASTIKAN KOLOM KANDIDAT ADA
+        '==================================================
+        If Not dgvPermintaan.Columns.Contains("colKandidat") Then
+            Return
+        End If
+
+        '==================================================
+        ' HANYA KOLOM KANDIDAT
+        '==================================================
+        If e.ColumnIndex <>
+       dgvPermintaan.Columns("colKandidat").Index Then
+
+            Return
+
+        End If
+
+        '==================================================
+        ' JANGAN PROSES NEW ROW
+        '==================================================
+        If dgvPermintaan.Rows(e.RowIndex).IsNewRow Then
+            Return
+        End If
+
+        '==================================================
+        ' AMBIL JUMLAH KANDIDAT
+        '==================================================
+        Dim jumlahKandidat As Integer = 0
+
+        If dgvPermintaan.Columns.Contains("JumlahKandidat") Then
+
+            Dim value As Object = dgvPermintaan.Rows(e.RowIndex).Cells("JumlahKandidat").Value
+
+            If value IsNot Nothing AndAlso Not IsDBNull(value) Then
+
+                Integer.TryParse(value.ToString(), jumlahKandidat)
+
+            End If
+
+        End If
+
+        '==================================================
+        ' PAINT BACKGROUND
+        '==================================================
+        e.PaintBackground(e.CellBounds, True)
+
+        '==================================================
+        ' PAINT BORDER
+        '==================================================
+        e.Paint(e.CellBounds, DataGridViewPaintParts.Border)
+
+        '==================================================
+        ' BUAT ICON KANDIDAT
+        '==================================================
+        Using kandidatBitmap As Bitmap = BuatIconKandidat()
+
+            '================================================
+            ' TEXT JUMLAH
+            '================================================
+            Dim jumlahText As String =
+            jumlahKandidat.ToString()
+
+            Using textFont As New Font("Segoe UI", 9, FontStyle.Regular)
+
+                '============================================
+                ' UKUR TEXT
+                '============================================
+                Dim textSize As SizeF = e.Graphics.MeasureString(jumlahText, textFont)
+
+                Dim spacing As Integer = 4
+
+                '============================================
+                ' TOTAL LEBAR
+                '============================================
+                Dim totalWidth As Single = kandidatBitmap.Width + spacing + textSize.Width
+
+                '============================================
+                ' POSISI X
+                '============================================
+                Dim startX As Single = e.CellBounds.X + (e.CellBounds.Width - totalWidth) / 2
+
+                '============================================
+                ' POSISI Y ICON
+                '============================================
+                Dim iconY As Single = e.CellBounds.Y + (e.CellBounds.Height - kandidatBitmap.Height) / 2
+
+                '============================================
+                ' POSISI Y TEXT
+                '============================================
+                Dim textY As Single = e.CellBounds.Y + (e.CellBounds.Height - textSize.Height) / 2
+
+                '============================================
+                ' DRAW ICON
+                '============================================
+                e.Graphics.DrawImage(kandidatBitmap, startX, iconY)
+
+                '============================================
+                ' DRAW JUMLAH
+                '============================================
+                e.Graphics.DrawString(jumlahText, textFont, Brushes.Blue, startX + kandidatBitmap.Width + spacing, textY)
+
+            End Using
+
+        End Using
+
+        '==================================================
+        ' HENTIKAN DEFAULT PAINT
+        '==================================================
+        e.Handled = True
+
+    End Sub
+    Private Sub dgvPermintaan_CellMouseMove(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvPermintaan.CellMouseMove
+
+        If e.RowIndex >= 0 AndAlso e.ColumnIndex >= 0 AndAlso dgvPermintaan.Columns.Contains("colKandidat") AndAlso e.ColumnIndex = dgvPermintaan.Columns("colKandidat").Index Then
+            dgvPermintaan.Cursor = Cursors.Hand
+        Else
+            dgvPermintaan.Cursor = Cursors.Default
+        End If
+
+    End Sub
+    Private Sub dgvPermintaan_CellToolTipTextNeeded(sender As Object, e As DataGridViewCellToolTipTextNeededEventArgs) Handles dgvPermintaan.CellToolTipTextNeeded
+        ' Pastikan bukan area header
+        If e.RowIndex >= 0 AndAlso e.ColumnIndex >= 0 Then
+            ' Cek apakah ini kolom Kandidat
+            If dgvPermintaan.Columns.Contains("colKandidat") AndAlso e.ColumnIndex = dgvPermintaan.Columns("colKandidat").Index Then
+                ' Set pesan tooltip yang akan muncul
+                e.ToolTipText = "Klik di sini untuk melihat atau menambah data Kandidat"
+            End If
+        End If
     End Sub
 
 #End Region
@@ -446,7 +724,9 @@ Public Class uf_permintaankaryawan
     End Sub
 #End Region
     Private Sub uf_permintaankaryawan_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ApplyGridTheme(dgvPermintaan)
+        SetupDataGridView()
+        '  SetupKolomKandidat()
+        ' ApplyGridTheme(dgvPermintaan)
         SetupStatus()
         DataPermintaanKaryawan()
     End Sub

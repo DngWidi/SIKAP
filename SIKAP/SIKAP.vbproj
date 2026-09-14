@@ -48,6 +48,10 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FontAwesome.Sharp, Version=6.6.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
     <Reference Include="Guna.UI2">
       <HintPath>..\..\..\Guna_UI_Framework_Ultimate_v2.0.0.1\Guna_UI_Framework_Ultimate_v2.0.0.1\Guna.UI-Framework-Lib-master\Guna.UI2 WinForms\.net 4.0\Guna.UI2.dll</HintPath>
     </Reference>
@@ -217,10 +221,28 @@
     <Compile Include="Recruitment\Form\frmPengalamanAdd.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Recruitment\Form\frmPermintaanKandidat.Designer.vb">
+      <DependentUpon>frmPermintaanKandidat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmPermintaanKandidat.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Recruitment\Form\frmPermintaanKaryawanAdd.Designer.vb">
       <DependentUpon>frmPermintaanKaryawanAdd.vb</DependentUpon>
     </Compile>
     <Compile Include="Recruitment\Form\frmPermintaanKaryawanAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmPilihKandidat.Designer.vb">
+      <DependentUpon>frmPilihKandidat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmPilihKandidat.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmProsesSeleksi.Designer.vb">
+      <DependentUpon>frmProsesSeleksi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmProsesSeleksi.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Recruitment\Form\frmSertifikatAdd.Designer.vb">
@@ -239,6 +261,12 @@
       <DependentUpon>uf_permintaankaryawan.vb</DependentUpon>
     </Compile>
     <Compile Include="Recruitment\uf_permintaankaryawan.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Recruitment\uf_seleksi.Designer.vb">
+      <DependentUpon>uf_seleksi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\uf_seleksi.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Theme\Thememanager.vb" />
@@ -313,8 +341,17 @@
     <EmbeddedResource Include="Recruitment\Form\frmPengalamanAdd.resx">
       <DependentUpon>frmPengalamanAdd.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\Form\frmPermintaanKandidat.resx">
+      <DependentUpon>frmPermintaanKandidat.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Recruitment\Form\frmPermintaanKaryawanAdd.resx">
       <DependentUpon>frmPermintaanKaryawanAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\Form\frmPilihKandidat.resx">
+      <DependentUpon>frmPilihKandidat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\Form\frmProsesSeleksi.resx">
+      <DependentUpon>frmProsesSeleksi.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Recruitment\Form\frmSertifikatAdd.resx">
       <DependentUpon>frmSertifikatAdd.vb</DependentUpon>
@@ -324,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Recruitment\uf_permintaankaryawan.resx">
       <DependentUpon>uf_permintaankaryawan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\uf_seleksi.resx">
+      <DependentUpon>uf_seleksi.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucPagination.resx">
       <DependentUpon>ucPagination.vb</DependentUpon>
