@@ -1285,7 +1285,6 @@ Public Class frmProsesSeleksi
             LoadProsesSeleksi()
         Catch ex As Exception
             PesanPopupError("Error", "Gagal membuka proses seleksi untuk Edit." & vbCrLf & ex.Message)
-
         End Try
 
     End Sub
