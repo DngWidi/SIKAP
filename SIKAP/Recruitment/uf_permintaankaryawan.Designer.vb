@@ -33,7 +33,6 @@ Partial Class uf_permintaankaryawan
         Me.bHapus = New Guna.UI2.WinForms.Guna2Button()
         Me.bEdit = New Guna.UI2.WinForms.Guna2Button()
         Me.pnlPage = New Guna.UI2.WinForms.Guna2Panel()
-        Me.paginationPermintaan = New SIKAP.ucPagination()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.dgvPermintaan = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.bTambah = New Guna.UI2.WinForms.Guna2Button()
@@ -46,6 +45,7 @@ Partial Class uf_permintaankaryawan
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.paginationPermintaan = New SIKAP.ucPagination()
         Me.pnlContext.SuspendLayout()
         Me.pnlButton.SuspendLayout()
         Me.pnlPage.SuspendLayout()
@@ -196,18 +196,6 @@ Partial Class uf_permintaankaryawan
         Me.pnlPage.Size = New System.Drawing.Size(668, 46)
         Me.pnlPage.TabIndex = 4
         '
-        'paginationPermintaan
-        '
-        Me.paginationPermintaan.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
-        Me.paginationPermintaan.CurrentPage = 1
-        Me.paginationPermintaan.Dock = System.Windows.Forms.DockStyle.Right
-        Me.paginationPermintaan.Location = New System.Drawing.Point(318, 0)
-        Me.paginationPermintaan.Name = "paginationPermintaan"
-        Me.paginationPermintaan.PageSize = 10
-        Me.paginationPermintaan.Size = New System.Drawing.Size(350, 46)
-        Me.paginationPermintaan.TabIndex = 1
-        Me.paginationPermintaan.TotalRecord = 0
-        '
         'lblInfo
         '
         Me.lblInfo.AutoSize = True
@@ -243,6 +231,7 @@ Partial Class uf_permintaankaryawan
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvPermintaan.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgvPermintaan.ColumnHeadersHeight = 24
+        Me.dgvPermintaan.Cursor = System.Windows.Forms.Cursors.Hand
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.5!)
@@ -453,6 +442,18 @@ Partial Class uf_permintaankaryawan
         Me.Label3.Size = New System.Drawing.Size(320, 17)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Kelola seluruh data permintaan karyawan perusahaan"
+        '
+        'paginationPermintaan
+        '
+        Me.paginationPermintaan.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
+        Me.paginationPermintaan.CurrentPage = 1
+        Me.paginationPermintaan.Dock = System.Windows.Forms.DockStyle.Right
+        Me.paginationPermintaan.Location = New System.Drawing.Point(318, 0)
+        Me.paginationPermintaan.Name = "paginationPermintaan"
+        Me.paginationPermintaan.PageSize = 10
+        Me.paginationPermintaan.Size = New System.Drawing.Size(350, 46)
+        Me.paginationPermintaan.TabIndex = 1
+        Me.paginationPermintaan.TotalRecord = 0
         '
         'uf_permintaankaryawan
         '

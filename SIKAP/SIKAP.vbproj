@@ -191,6 +191,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Recruitment\Form\FrmDetailSeleksi.Designer.vb">
+      <DependentUpon>FrmDetailSeleksi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\Form\FrmDetailSeleksi.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Recruitment\Form\frmDokumenAdd.Designer.vb">
       <DependentUpon>frmDokumenAdd.vb</DependentUpon>
     </Compile>
@@ -325,6 +331,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\Form\FrmDetailSeleksi.resx">
+      <DependentUpon>FrmDetailSeleksi.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Recruitment\Form\frmDokumenAdd.resx">
       <DependentUpon>frmDokumenAdd.vb</DependentUpon>

@@ -825,6 +825,9 @@ Partial Class frmKandidatAdd
         '
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
         Me.dgvpendidikan.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvpendidikan.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvpendidikan.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvpendidikan.BackgroundColor = System.Drawing.Color.White
         Me.dgvpendidikan.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -853,7 +856,7 @@ Partial Class frmKandidatAdd
         Me.dgvpendidikan.Name = "dgvpendidikan"
         Me.dgvpendidikan.RowHeadersVisible = False
         Me.dgvpendidikan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvpendidikan.Size = New System.Drawing.Size(612, 220)
+        Me.dgvpendidikan.Size = New System.Drawing.Size(1143, 220)
         Me.dgvpendidikan.TabIndex = 2
         Me.dgvpendidikan.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
         Me.dgvpendidikan.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
@@ -928,6 +931,9 @@ Partial Class frmKandidatAdd
         '
         DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
         Me.dgvkeahlian.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        Me.dgvkeahlian.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvkeahlian.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvkeahlian.BackgroundColor = System.Drawing.Color.White
         Me.dgvkeahlian.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -956,7 +962,7 @@ Partial Class frmKandidatAdd
         Me.dgvkeahlian.Name = "dgvkeahlian"
         Me.dgvkeahlian.RowHeadersVisible = False
         Me.dgvkeahlian.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvkeahlian.Size = New System.Drawing.Size(612, 220)
+        Me.dgvkeahlian.Size = New System.Drawing.Size(1144, 220)
         Me.dgvkeahlian.TabIndex = 5
         Me.dgvkeahlian.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
         Me.dgvkeahlian.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
@@ -1031,6 +1037,9 @@ Partial Class frmKandidatAdd
         '
         DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
         Me.dgvpengalaman.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
+        Me.dgvpengalaman.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvpengalaman.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvpengalaman.BackgroundColor = System.Drawing.Color.White
         Me.dgvpengalaman.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -1059,7 +1068,7 @@ Partial Class frmKandidatAdd
         Me.dgvpengalaman.Name = "dgvpengalaman"
         Me.dgvpengalaman.RowHeadersVisible = False
         Me.dgvpengalaman.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvpengalaman.Size = New System.Drawing.Size(612, 220)
+        Me.dgvpengalaman.Size = New System.Drawing.Size(1139, 220)
         Me.dgvpengalaman.TabIndex = 5
         Me.dgvpengalaman.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
         Me.dgvpengalaman.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
@@ -1134,6 +1143,9 @@ Partial Class frmKandidatAdd
         '
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
         Me.dgvsertifikat.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle10
+        Me.dgvsertifikat.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvsertifikat.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvsertifikat.BackgroundColor = System.Drawing.Color.White
         Me.dgvsertifikat.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -1162,7 +1174,7 @@ Partial Class frmKandidatAdd
         Me.dgvsertifikat.Name = "dgvsertifikat"
         Me.dgvsertifikat.RowHeadersVisible = False
         Me.dgvsertifikat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvsertifikat.Size = New System.Drawing.Size(612, 220)
+        Me.dgvsertifikat.Size = New System.Drawing.Size(1147, 220)
         Me.dgvsertifikat.TabIndex = 5
         Me.dgvsertifikat.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
         Me.dgvsertifikat.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
@@ -1237,6 +1249,9 @@ Partial Class frmKandidatAdd
         '
         DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
         Me.dgvdokumen.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle13
+        Me.dgvdokumen.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvdokumen.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvdokumen.BackgroundColor = System.Drawing.Color.White
         Me.dgvdokumen.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -1265,7 +1280,7 @@ Partial Class frmKandidatAdd
         Me.dgvdokumen.Name = "dgvdokumen"
         Me.dgvdokumen.RowHeadersVisible = False
         Me.dgvdokumen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvdokumen.Size = New System.Drawing.Size(612, 220)
+        Me.dgvdokumen.Size = New System.Drawing.Size(1147, 220)
         Me.dgvdokumen.TabIndex = 5
         Me.dgvdokumen.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
         Me.dgvdokumen.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White

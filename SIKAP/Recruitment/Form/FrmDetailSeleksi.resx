@@ -117,23 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="bDetail.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAtFJREFUeF7tm09rE0EYxiOin8GTZy9e/Q7evIgXb4IHd222pQlElGhDa83ugiII
-        Ed3EGFsMHtJS60HBUtr6p/SaglLxEm0pSlsNEUFf593Malxn2yTd1MzkfeCBzew7k3l+mc3OYTdCIpFI
-        jUomiwdtzblmac4HW8+CIq5YenYUs/GYwcJCwQBKGLPxmMFihRUsnn5Shtmlj0r48XTZg1DhMYPFC4UD
-        yWwvF48ZLD+AzFAJbqdKfw0mY1vbAPyfZW/jMYPl7+z/LHsbjxksf2dcShnfcpKxrW0AqpgAtApAVfOY
-        wRJ1Usk8ZrC8wuHFb0qZABAAAkAACAABCBHA2HIN1jaqrh+wY1FNNzl0ABi8Wq17lR37z79d/3Pe8xvW
-        tt35dtw45nbecwA4scaJohsnKzrfjv8bAFz2CAHDF3rxEpDNBIAAEIBwAdA+gAX3bkXN7gM6Yan2AZ0w
-        7QOadOgAZDMBIAAEIFwAtA9gwb1bUSf2Ac3e3pr1ngPY7T6g6wHQPkAyEwACQAAIQEsAUos1iL/8AsbC
-        JkQXNqT1wItNSLz62joA2YP73TIA0SAyuxUA7sPS8dKKcCAZHZ9Y8QDs/LB02I/Lm4NjcPnGDBizn4ST
-        E3ng+RqkzKdg9heEY7ZtzbnKYwYLXyrgENyVEJZHrkyCMbczhP6ZdRi98Eg4xi7c/AsTYYt98REzmt/C
-        iQyxX9WYFwdHG3OfYSQ15U46HRtfTZ/LHuLDyC229I5affkaBkvemheGR+OlgjWmcX/ret+9w7y7GjL1
-        3HFby/3AgBdzS/+Ev3TntRveOp/7buu5Y7ybWmIBz/CQkCgu/w6feFgGm7Wxy+Un8wlerqZsLTtcX+Z5
-        iE2+g9jUe7DYsQtGc6K8TF1BBPax/4QCBk4PjuOfHQ+fvclL1Jf7bqLuPMPgdTsTxZPF/fx0byhzNnPA
-        1u+etnTnVM+FJ3WNIpFfWzebvbbxOhcAAAAASUVORK5CYII=
-</value>
-  </data>
+  <metadata name="Guna2Elipse1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
 </root>

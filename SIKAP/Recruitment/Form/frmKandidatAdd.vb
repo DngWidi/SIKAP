@@ -2518,8 +2518,8 @@ Public Class frmKandidatAdd
         Using conn As New MySqlConnection(sambung)
             conn.Open()
             Using trans As MySqlTransaction = conn.BeginTransaction()
-                '  Try
-                Dim namaFoto As String = SimpanFoto()
+                Try
+                    Dim namaFoto As String = SimpanFoto()
                     '========================================
                     ' UPDATE MASTER
                     '========================================
@@ -2579,15 +2579,14 @@ Public Class frmKandidatAdd
 
                     Me.Close()
 
-                'Catch ex As MySqlException
-                '  trans.Rollback()
-                ' PesanPopupError("Error MySQL: Kesalahan Database", ex.Message)
+                Catch ex As MySqlException
+                    trans.Rollback()
+                    PesanPopupError("Error MySQL: Kesalahan Database", ex.Message)
+                Catch ex As Exception
+                    trans.Rollback()
+                    PesanPopupError("Error umum: Proses dibatalkan", ex.Message)
 
-                '  Catch ex As Exception
-                '  trans.Rollback()
-                ' PesanPopupError("Error umum: Proses dibatalkan", ex.Message)
-
-                '   End Try
+                End Try
 
             End Using
 

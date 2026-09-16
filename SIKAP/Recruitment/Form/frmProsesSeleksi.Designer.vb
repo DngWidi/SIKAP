@@ -23,9 +23,9 @@ Partial Class frmProsesSeleksi
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlMain = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlBody = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2Panel4 = New Guna.UI2.WinForms.Guna2Panel()
@@ -89,6 +89,7 @@ Partial Class frmProsesSeleksi
         Me.pnlHeaderLine = New Guna.UI2.WinForms.Guna2Panel()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.pnlMain.SuspendLayout()
         Me.pnlBody.SuspendLayout()
         Me.Guna2Panel4.SuspendLayout()
@@ -110,7 +111,7 @@ Partial Class frmProsesSeleksi
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
         Me.pnlMain.Name = "pnlMain"
         Me.pnlMain.ShadowDecoration.Parent = Me.pnlMain
-        Me.pnlMain.Size = New System.Drawing.Size(555, 609)
+        Me.pnlMain.Size = New System.Drawing.Size(1032, 793)
         Me.pnlMain.TabIndex = 2
         '
         'pnlBody
@@ -129,7 +130,7 @@ Partial Class frmProsesSeleksi
         Me.pnlBody.Name = "pnlBody"
         Me.pnlBody.Padding = New System.Windows.Forms.Padding(24, 18, 24, 10)
         Me.pnlBody.ShadowDecoration.Parent = Me.pnlBody
-        Me.pnlBody.Size = New System.Drawing.Size(555, 474)
+        Me.pnlBody.Size = New System.Drawing.Size(1032, 658)
         Me.pnlBody.TabIndex = 4
         '
         'Guna2Panel4
@@ -138,10 +139,10 @@ Partial Class frmProsesSeleksi
         Me.Guna2Panel4.BorderRadius = 8
         Me.Guna2Panel4.BorderThickness = 1
         Me.Guna2Panel4.Controls.Add(Me.dgvRiwayatSeleksi)
-        Me.Guna2Panel4.Location = New System.Drawing.Point(12, 710)
+        Me.Guna2Panel4.Location = New System.Drawing.Point(12, 374)
         Me.Guna2Panel4.Name = "Guna2Panel4"
         Me.Guna2Panel4.ShadowDecoration.Parent = Me.Guna2Panel4
-        Me.Guna2Panel4.Size = New System.Drawing.Size(501, 263)
+        Me.Guna2Panel4.Size = New System.Drawing.Size(1008, 273)
         Me.Guna2Panel4.TabIndex = 21
         '
         'dgvRiwayatSeleksi
@@ -149,8 +150,8 @@ Partial Class frmProsesSeleksi
         Me.dgvRiwayatSeleksi.AllowUserToAddRows = False
         Me.dgvRiwayatSeleksi.AllowUserToDeleteRows = False
         Me.dgvRiwayatSeleksi.AllowUserToResizeRows = False
-        DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
-        Me.dgvRiwayatSeleksi.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+        Me.dgvRiwayatSeleksi.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvRiwayatSeleksi.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -159,23 +160,23 @@ Partial Class frmProsesSeleksi
         Me.dgvRiwayatSeleksi.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvRiwayatSeleksi.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
         Me.dgvRiwayatSeleksi.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle17.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        DataGridViewCellStyle17.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(219, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(254, Byte), Integer))
-        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvRiwayatSeleksi.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(219, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(254, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvRiwayatSeleksi.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgvRiwayatSeleksi.ColumnHeadersHeight = 24
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        DataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvRiwayatSeleksi.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvRiwayatSeleksi.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgvRiwayatSeleksi.EnableHeadersVisualStyles = False
         Me.dgvRiwayatSeleksi.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.dgvRiwayatSeleksi.Location = New System.Drawing.Point(16, 12)
@@ -184,7 +185,7 @@ Partial Class frmProsesSeleksi
         Me.dgvRiwayatSeleksi.ReadOnly = True
         Me.dgvRiwayatSeleksi.RowHeadersVisible = False
         Me.dgvRiwayatSeleksi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvRiwayatSeleksi.Size = New System.Drawing.Size(472, 239)
+        Me.dgvRiwayatSeleksi.Size = New System.Drawing.Size(979, 244)
         Me.dgvRiwayatSeleksi.TabIndex = 5
         Me.dgvRiwayatSeleksi.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
         Me.dgvRiwayatSeleksi.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
@@ -214,7 +215,7 @@ Partial Class frmProsesSeleksi
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.ForeColor = System.Drawing.Color.Fuchsia
-        Me.Label14.Location = New System.Drawing.Point(12, 690)
+        Me.Label14.Location = New System.Drawing.Point(12, 354)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(97, 13)
         Me.Label14.TabIndex = 21
@@ -239,10 +240,10 @@ Partial Class frmProsesSeleksi
         Me.Guna2Panel3.Controls.Add(Me.Label30)
         Me.Guna2Panel3.Controls.Add(Me.Label31)
         Me.Guna2Panel3.Controls.Add(Me.Label32)
-        Me.Guna2Panel3.Location = New System.Drawing.Point(12, 347)
+        Me.Guna2Panel3.Location = New System.Drawing.Point(12, 205)
         Me.Guna2Panel3.Name = "Guna2Panel3"
         Me.Guna2Panel3.ShadowDecoration.Parent = Me.Guna2Panel3
-        Me.Guna2Panel3.Size = New System.Drawing.Size(501, 340)
+        Me.Guna2Panel3.Size = New System.Drawing.Size(1008, 146)
         Me.Guna2Panel3.TabIndex = 20
         '
         'tCatatan
@@ -259,14 +260,14 @@ Partial Class frmProsesSeleksi
         Me.tCatatan.FocusedState.Parent = Me.tCatatan
         Me.tCatatan.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.tCatatan.HoverState.Parent = Me.tCatatan
-        Me.tCatatan.Location = New System.Drawing.Point(141, 259)
+        Me.tCatatan.Location = New System.Drawing.Point(141, 91)
         Me.tCatatan.Multiline = True
         Me.tCatatan.Name = "tCatatan"
         Me.tCatatan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.tCatatan.PlaceholderText = ""
         Me.tCatatan.SelectedText = ""
         Me.tCatatan.ShadowDecoration.Parent = Me.tCatatan
-        Me.tCatatan.Size = New System.Drawing.Size(347, 67)
+        Me.tCatatan.Size = New System.Drawing.Size(844, 37)
         Me.tCatatan.TabIndex = 14
         '
         'cHasil
@@ -283,7 +284,7 @@ Partial Class frmProsesSeleksi
         Me.cHasil.HoverState.Parent = Me.cHasil
         Me.cHasil.ItemHeight = 30
         Me.cHasil.ItemsAppearance.Parent = Me.cHasil
-        Me.cHasil.Location = New System.Drawing.Point(141, 217)
+        Me.cHasil.Location = New System.Drawing.Point(766, 49)
         Me.cHasil.Name = "cHasil"
         Me.cHasil.ShadowDecoration.Parent = Me.cHasil
         Me.cHasil.Size = New System.Drawing.Size(219, 36)
@@ -303,7 +304,7 @@ Partial Class frmProsesSeleksi
         Me.tNilai.FocusedState.Parent = Me.tNilai
         Me.tNilai.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.tNilai.HoverState.Parent = Me.tNilai
-        Me.tNilai.Location = New System.Drawing.Point(141, 175)
+        Me.tNilai.Location = New System.Drawing.Point(460, 49)
         Me.tNilai.Name = "tNilai"
         Me.tNilai.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.tNilai.PlaceholderText = ""
@@ -326,7 +327,7 @@ Partial Class frmProsesSeleksi
         Me.tInterviewer.FocusedState.Parent = Me.tInterviewer
         Me.tInterviewer.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.tInterviewer.HoverState.Parent = Me.tInterviewer
-        Me.tInterviewer.Location = New System.Drawing.Point(141, 133)
+        Me.tInterviewer.Location = New System.Drawing.Point(141, 49)
         Me.tInterviewer.Name = "tInterviewer"
         Me.tInterviewer.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.tInterviewer.PlaceholderText = ""
@@ -346,7 +347,7 @@ Partial Class frmProsesSeleksi
         Me.dtpJadwal.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpJadwal.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpJadwal.HoverState.Parent = Me.dtpJadwal
-        Me.dtpJadwal.Location = New System.Drawing.Point(141, 91)
+        Me.dtpJadwal.Location = New System.Drawing.Point(766, 7)
         Me.dtpJadwal.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpJadwal.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpJadwal.Name = "dtpJadwal"
@@ -369,7 +370,7 @@ Partial Class frmProsesSeleksi
         Me.cStatus.HoverState.Parent = Me.cStatus
         Me.cStatus.ItemHeight = 30
         Me.cStatus.ItemsAppearance.Parent = Me.cStatus
-        Me.cStatus.Location = New System.Drawing.Point(141, 49)
+        Me.cStatus.Location = New System.Drawing.Point(460, 7)
         Me.cStatus.Name = "cStatus"
         Me.cStatus.ShadowDecoration.Parent = Me.cStatus
         Me.cStatus.Size = New System.Drawing.Size(219, 36)
@@ -400,7 +401,7 @@ Partial Class frmProsesSeleksi
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label13.Location = New System.Drawing.Point(13, 270)
+        Me.Label13.Location = New System.Drawing.Point(13, 102)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(47, 15)
         Me.Label13.TabIndex = 6
@@ -411,7 +412,7 @@ Partial Class frmProsesSeleksi
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label12.Location = New System.Drawing.Point(13, 228)
+        Me.Label12.Location = New System.Drawing.Point(685, 60)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(33, 15)
         Me.Label12.TabIndex = 5
@@ -422,7 +423,7 @@ Partial Class frmProsesSeleksi
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label11.Location = New System.Drawing.Point(13, 186)
+        Me.Label11.Location = New System.Drawing.Point(368, 60)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(31, 15)
         Me.Label11.TabIndex = 4
@@ -433,7 +434,7 @@ Partial Class frmProsesSeleksi
         Me.Label29.AutoSize = True
         Me.Label29.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label29.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label29.Location = New System.Drawing.Point(13, 144)
+        Me.Label29.Location = New System.Drawing.Point(13, 60)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(66, 15)
         Me.Label29.TabIndex = 3
@@ -444,7 +445,7 @@ Partial Class frmProsesSeleksi
         Me.Label30.AutoSize = True
         Me.Label30.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label30.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label30.Location = New System.Drawing.Point(13, 102)
+        Me.Label30.Location = New System.Drawing.Point(685, 18)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(43, 15)
         Me.Label30.TabIndex = 2
@@ -455,7 +456,7 @@ Partial Class frmProsesSeleksi
         Me.Label31.AutoSize = True
         Me.Label31.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label31.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label31.Location = New System.Drawing.Point(13, 60)
+        Me.Label31.Location = New System.Drawing.Point(368, 18)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(40, 15)
         Me.Label31.TabIndex = 1
@@ -477,7 +478,7 @@ Partial Class frmProsesSeleksi
         Me.Label33.AutoSize = True
         Me.Label33.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label33.ForeColor = System.Drawing.Color.Fuchsia
-        Me.Label33.Location = New System.Drawing.Point(12, 331)
+        Me.Label33.Location = New System.Drawing.Point(12, 189)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(102, 13)
         Me.Label33.TabIndex = 19
@@ -500,10 +501,10 @@ Partial Class frmProsesSeleksi
         Me.Guna2Panel2.Controls.Add(Me.Label24)
         Me.Guna2Panel2.Controls.Add(Me.Label25)
         Me.Guna2Panel2.Controls.Add(Me.Label26)
-        Me.Guna2Panel2.Location = New System.Drawing.Point(12, 208)
+        Me.Guna2Panel2.Location = New System.Drawing.Point(519, 40)
         Me.Guna2Panel2.Name = "Guna2Panel2"
         Me.Guna2Panel2.ShadowDecoration.Parent = Me.Guna2Panel2
-        Me.Guna2Panel2.Size = New System.Drawing.Size(501, 114)
+        Me.Guna2Panel2.Size = New System.Drawing.Size(501, 146)
         Me.Guna2Panel2.TabIndex = 18
         '
         'lJabatan
@@ -643,7 +644,7 @@ Partial Class frmProsesSeleksi
         Me.Label27.AutoSize = True
         Me.Label27.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label27.ForeColor = System.Drawing.Color.Fuchsia
-        Me.Label27.Location = New System.Drawing.Point(12, 192)
+        Me.Label27.Location = New System.Drawing.Point(524, 18)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(159, 13)
         Me.Label27.TabIndex = 17
@@ -857,18 +858,19 @@ Partial Class frmProsesSeleksi
         Me.pnlFooter.Controls.Add(Me.flpFooterButton)
         Me.pnlFooter.Controls.Add(Me.pnlFooterLine)
         Me.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlFooter.Location = New System.Drawing.Point(0, 544)
+        Me.pnlFooter.Location = New System.Drawing.Point(0, 728)
         Me.pnlFooter.Name = "pnlFooter"
         Me.pnlFooter.ShadowDecoration.Parent = Me.pnlFooter
-        Me.pnlFooter.Size = New System.Drawing.Size(555, 65)
+        Me.pnlFooter.Size = New System.Drawing.Size(1032, 65)
         Me.pnlFooter.TabIndex = 3
         '
         'flpFooterButton
         '
         Me.flpFooterButton.Controls.Add(Me.bBatal)
         Me.flpFooterButton.Controls.Add(Me.bSimpan)
+        Me.flpFooterButton.Controls.Add(Me.Label15)
         Me.flpFooterButton.Dock = System.Windows.Forms.DockStyle.Right
-        Me.flpFooterButton.Location = New System.Drawing.Point(345, 1)
+        Me.flpFooterButton.Location = New System.Drawing.Point(822, 1)
         Me.flpFooterButton.Name = "flpFooterButton"
         Me.flpFooterButton.Padding = New System.Windows.Forms.Padding(0, 14, 14, 0)
         Me.flpFooterButton.Size = New System.Drawing.Size(210, 64)
@@ -919,7 +921,7 @@ Partial Class frmProsesSeleksi
         Me.pnlFooterLine.Location = New System.Drawing.Point(0, 0)
         Me.pnlFooterLine.Name = "pnlFooterLine"
         Me.pnlFooterLine.ShadowDecoration.Parent = Me.pnlFooterLine
-        Me.pnlFooterLine.Size = New System.Drawing.Size(555, 1)
+        Me.pnlFooterLine.Size = New System.Drawing.Size(1032, 1)
         Me.pnlFooterLine.TabIndex = 0
         '
         'pnlHeader
@@ -933,7 +935,7 @@ Partial Class frmProsesSeleksi
         Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.ShadowDecoration.Parent = Me.pnlHeader
-        Me.pnlHeader.Size = New System.Drawing.Size(555, 70)
+        Me.pnlHeader.Size = New System.Drawing.Size(1032, 70)
         Me.pnlHeader.TabIndex = 1
         '
         'bClose
@@ -947,7 +949,7 @@ Partial Class frmProsesSeleksi
         Me.bClose.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.bClose.HoverState.Parent = Me.bClose
         Me.bClose.ImageSize = New System.Drawing.Size(16, 16)
-        Me.bClose.Location = New System.Drawing.Point(521, 12)
+        Me.bClose.Location = New System.Drawing.Point(998, 12)
         Me.bClose.Name = "bClose"
         Me.bClose.ShadowDecoration.Parent = Me.bClose
         Me.bClose.Size = New System.Drawing.Size(36, 36)
@@ -973,7 +975,7 @@ Partial Class frmProsesSeleksi
         Me.pnlHeaderLine.Location = New System.Drawing.Point(0, 69)
         Me.pnlHeaderLine.Name = "pnlHeaderLine"
         Me.pnlHeaderLine.ShadowDecoration.Parent = Me.pnlHeaderLine
-        Me.pnlHeaderLine.Size = New System.Drawing.Size(555, 1)
+        Me.pnlHeaderLine.Size = New System.Drawing.Size(1032, 1)
         Me.pnlHeaderLine.TabIndex = 1
         '
         'lblTitle
@@ -992,11 +994,22 @@ Partial Class frmProsesSeleksi
         '
         Me.Guna2Elipse1.TargetControl = Me
         '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label15.Location = New System.Drawing.Point(205, 14)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(10, 15)
+        Me.Label15.TabIndex = 8
+        Me.Label15.Text = ":"
+        '
         'frmProsesSeleksi
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(555, 609)
+        Me.ClientSize = New System.Drawing.Size(1032, 793)
         Me.ControlBox = False
         Me.Controls.Add(Me.pnlMain)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -1018,6 +1031,7 @@ Partial Class frmProsesSeleksi
         Me.Guna2Panel1.PerformLayout()
         Me.pnlFooter.ResumeLayout(False)
         Me.flpFooterButton.ResumeLayout(False)
+        Me.flpFooterButton.PerformLayout()
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
         Me.ResumeLayout(False)
@@ -1087,4 +1101,5 @@ Partial Class frmProsesSeleksi
     Friend WithEvents Guna2Panel4 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents dgvRiwayatSeleksi As Guna.UI2.WinForms.Guna2DataGridView
     Friend WithEvents Guna2Elipse1 As Guna.UI2.WinForms.Guna2Elipse
+    Friend WithEvents Label15 As Label
 End Class

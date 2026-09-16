@@ -309,7 +309,7 @@ Public Class uf_seleksi
         lblInfo.Text = String.Format("Menampilkan {0} - {1} dari {2} Data", paginationSeleksi.StartRecord, paginationSeleksi.EndRecord, paginationSeleksi.TotalRecord)
     End Sub
     Private Sub SetupDataGridView()
-
+        ApplyGridTheme(dgvSeleksi)
         With dgvSeleksi
             .AutoGenerateColumns = True
             .AllowUserToAddRows = False
@@ -622,35 +622,16 @@ Public Class uf_seleksi
 
     Private Sub bDetail_Click(sender As Object, e As EventArgs) Handles bDetail.Click
 
-        If _idKandidatTerpilih <= 0 Then
-            PesanPopupPeringatan("Peringatan", "Silakan pilih kandidat terlebih dahulu.")
-            Return
+        Using frm As New FrmDetailSeleksi()
 
-        End If
+            frm.IdKandidat = _idKandidatTerpilih
+            frm.IdRekrutmen = _idRekrutmenTerpilih
 
+            frm.ShowDialog()
 
-        '======================================================
-        ' UNTUK SEMENTARA
-        '======================================================
-        '
-        ' Di sini nanti kita buka:
-        '
-        ' frmKandidatAdd
-        '
-        ' dalam Mode View.
-        '
-        ' Saya sengaja belum menuliskan constructor /
-        ' property-nya karena kita akan menyesuaikan
-        ' dengan frmKandidatAdd versi terakhir Anda.
-        '
-        '======================================================
-        PesanPopupPeringatan("Informasi", "Detail kandidat akan kita hubungkan ke frmKandidatAdd pada tahap berikutnya.")
+        End Using
     End Sub
 
-
-    '==========================================================
-    ' PROSES SELEKSI
-    '==========================================================
 
     '==========================================================
     ' PROSES SELEKSI
@@ -665,9 +646,6 @@ Public Class uf_seleksi
 
         End If
 
-
-
-
         If _idKandidatTerpilih <= 0 Then
             PesanPopupPeringatan("Peringatan", "Data kandidat tidak ditemukan.")
             Return
@@ -681,16 +659,25 @@ Public Class uf_seleksi
         Select Case _statusTerpilih
 
             Case "SCREENING"
-
                 tahapAwal = "SCREENING"
 
             Case "TEST"
-
                 tahapAwal = "TEST"
 
-            Case Else
-                PesanPopupPeringatan("Peringatan", "Kandidat tidak dapat diproses dari status " & GetStatusDisplay(_statusTerpilih) & ".")
+            Case "INTERVIEW"
+                tahapAwal = "INTERVIEW_HR"
 
+            Case "OFFER"
+                tahapAwal = "OFFERING"
+
+            Case "ACCEPTED", "HIRED", "REJECTED"
+
+                PesanPopupPeringatan("Informasi", "Kandidat dengan status " & GetStatusDisplay(_statusTerpilih) & " tidak dapat diproses kembali.")
+
+                Return
+
+            Case Else
+                PesanPopupPeringatan("Peringatan", "Status recruitment kandidat tidak dikenali.")
                 Return
 
         End Select

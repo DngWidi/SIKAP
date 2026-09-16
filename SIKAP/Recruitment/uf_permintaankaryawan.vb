@@ -293,6 +293,7 @@ Public Class uf_permintaankaryawan
 #End Region
 #Region "DataGridView"
     Private Sub SetupDataGridView()
+        ApplyGridTheme(dgvPermintaan)
         With dgvPermintaan
             .AutoGenerateColumns = True
             .AllowUserToAddRows = False
