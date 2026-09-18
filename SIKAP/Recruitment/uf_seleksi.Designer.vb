@@ -22,27 +22,27 @@ Partial Class uf_seleksi
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(uf_seleksi))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(uf_seleksi))
         Me.pnlContext = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlButton = New Guna.UI2.WinForms.Guna2Panel()
-        Me.bProsesSeleksi = New Guna.UI2.WinForms.Guna2Button()
-        Me.bDetail = New Guna.UI2.WinForms.Guna2Button()
         Me.pnlPage = New Guna.UI2.WinForms.Guna2Panel()
+        Me.paginationSeleksi = New SIKAP.ucPagination()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.dgvSeleksi = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlToolbar = New Guna.UI2.WinForms.Guna2Panel()
         Me.cstatus = New Guna.UI2.WinForms.Guna2ComboBox()
-        Me.bRefresh = New Guna.UI2.WinForms.Guna2Button()
-        Me.bCari = New Guna.UI2.WinForms.Guna2Button()
-        Me.tPencarian = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.paginationSeleksi = New SIKAP.ucPagination()
+        Me.bProsesSeleksi = New Guna.UI2.WinForms.Guna2Button()
+        Me.bDetail = New Guna.UI2.WinForms.Guna2Button()
+        Me.bRefresh = New Guna.UI2.WinForms.Guna2Button()
+        Me.bCari = New Guna.UI2.WinForms.Guna2Button()
+        Me.tPencarian = New Guna.UI2.WinForms.Guna2TextBox()
         Me.pnlContext.SuspendLayout()
         Me.pnlButton.SuspendLayout()
         Me.pnlPage.SuspendLayout()
@@ -84,53 +84,6 @@ Partial Class uf_seleksi
         Me.pnlButton.Size = New System.Drawing.Size(668, 362)
         Me.pnlButton.TabIndex = 4
         '
-        'bProsesSeleksi
-        '
-        Me.bProsesSeleksi.BorderColor = System.Drawing.Color.Gainsboro
-        Me.bProsesSeleksi.BorderRadius = 5
-        Me.bProsesSeleksi.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash
-        Me.bProsesSeleksi.BorderThickness = 2
-        Me.bProsesSeleksi.CheckedState.Parent = Me.bProsesSeleksi
-        Me.bProsesSeleksi.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.bProsesSeleksi.CustomImages.Parent = Me.bProsesSeleksi
-        Me.bProsesSeleksi.FillColor = System.Drawing.Color.Transparent
-        Me.bProsesSeleksi.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bProsesSeleksi.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.bProsesSeleksi.HoverState.Parent = Me.bProsesSeleksi
-        Me.bProsesSeleksi.Image = CType(resources.GetObject("bProsesSeleksi.Image"), System.Drawing.Image)
-        Me.bProsesSeleksi.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
-        Me.bProsesSeleksi.ImageSize = New System.Drawing.Size(18, 18)
-        Me.bProsesSeleksi.Location = New System.Drawing.Point(103, 15)
-        Me.bProsesSeleksi.Name = "bProsesSeleksi"
-        Me.bProsesSeleksi.ShadowDecoration.Parent = Me.bProsesSeleksi
-        Me.bProsesSeleksi.Size = New System.Drawing.Size(126, 32)
-        Me.bProsesSeleksi.TabIndex = 8
-        Me.bProsesSeleksi.Text = "Proses Seleksi"
-        Me.bProsesSeleksi.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'bDetail
-        '
-        Me.bDetail.BorderColor = System.Drawing.Color.Gainsboro
-        Me.bDetail.BorderRadius = 5
-        Me.bDetail.BorderThickness = 1
-        Me.bDetail.CheckedState.Parent = Me.bDetail
-        Me.bDetail.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.bDetail.CustomImages.Parent = Me.bDetail
-        Me.bDetail.FillColor = System.Drawing.Color.Transparent
-        Me.bDetail.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bDetail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.bDetail.HoverState.Parent = Me.bDetail
-        Me.bDetail.Image = CType(resources.GetObject("bDetail.Image"), System.Drawing.Image)
-        Me.bDetail.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
-        Me.bDetail.ImageSize = New System.Drawing.Size(18, 18)
-        Me.bDetail.Location = New System.Drawing.Point(14, 15)
-        Me.bDetail.Name = "bDetail"
-        Me.bDetail.ShadowDecoration.Parent = Me.bDetail
-        Me.bDetail.Size = New System.Drawing.Size(83, 32)
-        Me.bDetail.TabIndex = 7
-        Me.bDetail.Text = "Detail"
-        Me.bDetail.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'pnlPage
         '
         Me.pnlPage.BorderColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
@@ -143,6 +96,18 @@ Partial Class uf_seleksi
         Me.pnlPage.ShadowDecoration.Parent = Me.pnlPage
         Me.pnlPage.Size = New System.Drawing.Size(668, 46)
         Me.pnlPage.TabIndex = 4
+        '
+        'paginationSeleksi
+        '
+        Me.paginationSeleksi.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
+        Me.paginationSeleksi.CurrentPage = 1
+        Me.paginationSeleksi.Dock = System.Windows.Forms.DockStyle.Right
+        Me.paginationSeleksi.Location = New System.Drawing.Point(318, 0)
+        Me.paginationSeleksi.Name = "paginationSeleksi"
+        Me.paginationSeleksi.PageSize = 10
+        Me.paginationSeleksi.Size = New System.Drawing.Size(350, 46)
+        Me.paginationSeleksi.TabIndex = 1
+        Me.paginationSeleksi.TotalRecord = 0
         '
         'lblInfo
         '
@@ -270,6 +235,85 @@ Partial Class uf_seleksi
         Me.cstatus.Size = New System.Drawing.Size(183, 36)
         Me.cstatus.TabIndex = 4
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Yu Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(14, 10)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(82, 16)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "Cari Kandidat"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(14, 29)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(175, 30)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Seleksi Kandidat"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(110, Byte), Integer), CType(CType(119, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(16, 59)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(389, 17)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Kelola proses seleksi kandidat berdasarkan permintaan karyawan"
+        '
+        'bProsesSeleksi
+        '
+        Me.bProsesSeleksi.BorderColor = System.Drawing.Color.Gainsboro
+        Me.bProsesSeleksi.BorderRadius = 5
+        Me.bProsesSeleksi.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash
+        Me.bProsesSeleksi.BorderThickness = 2
+        Me.bProsesSeleksi.CheckedState.Parent = Me.bProsesSeleksi
+        Me.bProsesSeleksi.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.bProsesSeleksi.CustomImages.Parent = Me.bProsesSeleksi
+        Me.bProsesSeleksi.FillColor = System.Drawing.Color.Transparent
+        Me.bProsesSeleksi.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bProsesSeleksi.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.bProsesSeleksi.HoverState.Parent = Me.bProsesSeleksi
+        Me.bProsesSeleksi.Image = CType(resources.GetObject("bProsesSeleksi.Image"), System.Drawing.Image)
+        Me.bProsesSeleksi.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.bProsesSeleksi.ImageSize = New System.Drawing.Size(18, 18)
+        Me.bProsesSeleksi.Location = New System.Drawing.Point(103, 15)
+        Me.bProsesSeleksi.Name = "bProsesSeleksi"
+        Me.bProsesSeleksi.ShadowDecoration.Parent = Me.bProsesSeleksi
+        Me.bProsesSeleksi.Size = New System.Drawing.Size(126, 32)
+        Me.bProsesSeleksi.TabIndex = 8
+        Me.bProsesSeleksi.Text = "Proses Seleksi"
+        Me.bProsesSeleksi.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'bDetail
+        '
+        Me.bDetail.BorderColor = System.Drawing.Color.Gainsboro
+        Me.bDetail.BorderRadius = 5
+        Me.bDetail.BorderThickness = 1
+        Me.bDetail.CheckedState.Parent = Me.bDetail
+        Me.bDetail.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.bDetail.CustomImages.Parent = Me.bDetail
+        Me.bDetail.FillColor = System.Drawing.Color.Transparent
+        Me.bDetail.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bDetail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.bDetail.HoverState.Parent = Me.bDetail
+        Me.bDetail.Image = CType(resources.GetObject("bDetail.Image"), System.Drawing.Image)
+        Me.bDetail.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.bDetail.ImageSize = New System.Drawing.Size(18, 18)
+        Me.bDetail.Location = New System.Drawing.Point(14, 15)
+        Me.bDetail.Name = "bDetail"
+        Me.bDetail.ShadowDecoration.Parent = Me.bDetail
+        Me.bDetail.Size = New System.Drawing.Size(83, 32)
+        Me.bDetail.TabIndex = 7
+        Me.bDetail.Text = "Detail"
+        Me.bDetail.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'bRefresh
         '
         Me.bRefresh.BorderColor = System.Drawing.Color.Gray
@@ -335,50 +379,6 @@ Partial Class uf_seleksi
         Me.tPencarian.ShadowDecoration.Parent = Me.tPencarian
         Me.tPencarian.Size = New System.Drawing.Size(268, 36)
         Me.tPencarian.TabIndex = 1
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Yu Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(14, 10)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(82, 16)
-        Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Cari Kandidat"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(14, 29)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(175, 30)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Seleksi Kandidat"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(110, Byte), Integer), CType(CType(119, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(16, 59)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(389, 17)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Kelola proses seleksi kandidat berdasarkan permintaan karyawan"
-        '
-        'paginationSeleksi
-        '
-        Me.paginationSeleksi.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
-        Me.paginationSeleksi.CurrentPage = 1
-        Me.paginationSeleksi.Dock = System.Windows.Forms.DockStyle.Right
-        Me.paginationSeleksi.Location = New System.Drawing.Point(318, 0)
-        Me.paginationSeleksi.Name = "paginationSeleksi"
-        Me.paginationSeleksi.PageSize = 10
-        Me.paginationSeleksi.Size = New System.Drawing.Size(350, 46)
-        Me.paginationSeleksi.TabIndex = 1
-        Me.paginationSeleksi.TotalRecord = 0
         '
         'uf_seleksi
         '

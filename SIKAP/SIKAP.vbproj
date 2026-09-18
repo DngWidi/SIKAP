@@ -191,10 +191,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Recruitment\Form\FrmDetailSeleksi.Designer.vb">
-      <DependentUpon>FrmDetailSeleksi.vb</DependentUpon>
+    <Compile Include="Recruitment\Form\frmDetailSeleksi.Designer.vb">
+      <DependentUpon>frmDetailSeleksi.vb</DependentUpon>
     </Compile>
-    <Compile Include="Recruitment\Form\FrmDetailSeleksi.vb">
+    <Compile Include="Recruitment\Form\frmDetailSeleksi.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Recruitment\Form\frmDokumenAdd.Designer.vb">
@@ -225,6 +225,12 @@
       <DependentUpon>frmPengalamanAdd.vb</DependentUpon>
     </Compile>
     <Compile Include="Recruitment\Form\frmPengalamanAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmPenilaianInterviewAdd.Designer.vb">
+      <DependentUpon>frmPenilaianInterviewAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmPenilaianInterviewAdd.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Recruitment\Form\frmPermintaanKandidat.Designer.vb">
@@ -261,6 +267,12 @@
       <DependentUpon>uf_kandidat.vb</DependentUpon>
     </Compile>
     <Compile Include="Recruitment\uf_kandidat.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Recruitment\uf_penilaianinterview.Designer.vb">
+      <DependentUpon>uf_penilaianinterview.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\uf_penilaianinterview.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Recruitment\uf_permintaankaryawan.Designer.vb">
@@ -332,8 +344,8 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Recruitment\Form\FrmDetailSeleksi.resx">
-      <DependentUpon>FrmDetailSeleksi.vb</DependentUpon>
+    <EmbeddedResource Include="Recruitment\Form\frmDetailSeleksi.resx">
+      <DependentUpon>frmDetailSeleksi.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Recruitment\Form\frmDokumenAdd.resx">
       <DependentUpon>frmDokumenAdd.vb</DependentUpon>
@@ -349,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Recruitment\Form\frmPengalamanAdd.resx">
       <DependentUpon>frmPengalamanAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\Form\frmPenilaianInterviewAdd.resx">
+      <DependentUpon>frmPenilaianInterviewAdd.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Recruitment\Form\frmPermintaanKandidat.resx">
       <DependentUpon>frmPermintaanKandidat.vb</DependentUpon>
@@ -367,6 +382,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Recruitment\uf_kandidat.resx">
       <DependentUpon>uf_kandidat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\uf_penilaianinterview.resx">
+      <DependentUpon>uf_penilaianinterview.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Recruitment\uf_permintaankaryawan.resx">
       <DependentUpon>uf_permintaankaryawan.vb</DependentUpon>

@@ -1,10 +1,11 @@
 ﻿Imports System.Data
 Imports System.Windows.Forms.LinkLabel
 Imports MySql.Data.MySqlClient
-Public Class FrmDetailSeleksi
+Public Class frmDetailSeleksi
     Private _idKandidat As Long = 0
     Private _idRekrutmen As Long = 0
     Private _idProsesTerpilih As Long = 0
+    Private ShadowForm As New Guna.UI2.WinForms.Guna2ShadowForm()
     Public Property IdKandidat As Long
         Get
             Return _idKandidat
@@ -203,7 +204,7 @@ Public Class FrmDetailSeleksi
     End Sub
 #End Region
     Private Sub frmDetailSeleksi_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        ShadowForm.SetShadowForm(Me)
         Try
 
             If _idKandidat <= 0 Then

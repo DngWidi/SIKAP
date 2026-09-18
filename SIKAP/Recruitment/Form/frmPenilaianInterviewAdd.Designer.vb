@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmDetailSeleksi
+Partial Class frmPenilaianInterviewAdd
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,40 +23,24 @@ Partial Class frmDetailSeleksi
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlMain = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlBody = New Guna.UI2.WinForms.Guna2Panel()
+        Me.Label30 = New System.Windows.Forms.Label()
         Me.Guna2Panel3 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.lDetailHasil = New System.Windows.Forms.Label()
-        Me.lDetailNilai = New System.Windows.Forms.Label()
-        Me.lDetailInterviewer = New System.Windows.Forms.Label()
-        Me.lDetailProses = New System.Windows.Forms.Label()
-        Me.lDetailJadwal = New System.Windows.Forms.Label()
-        Me.lDetailStatus = New System.Windows.Forms.Label()
-        Me.lDetailTahap = New System.Windows.Forms.Label()
-        Me.tDetailCatatan = New System.Windows.Forms.Label()
-        Me.Label49 = New System.Windows.Forms.Label()
-        Me.Label48 = New System.Windows.Forms.Label()
-        Me.Label47 = New System.Windows.Forms.Label()
-        Me.Label46 = New System.Windows.Forms.Label()
-        Me.Label45 = New System.Windows.Forms.Label()
-        Me.Label44 = New System.Windows.Forms.Label()
-        Me.Label43 = New System.Windows.Forms.Label()
-        Me.Label42 = New System.Windows.Forms.Label()
-        Me.Label41 = New System.Windows.Forms.Label()
-        Me.Label40 = New System.Windows.Forms.Label()
-        Me.Label39 = New System.Windows.Forms.Label()
-        Me.Label38 = New System.Windows.Forms.Label()
-        Me.Label37 = New System.Windows.Forms.Label()
         Me.Label36 = New System.Windows.Forms.Label()
+        Me.tcatatan = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label35 = New System.Windows.Forms.Label()
-        Me.dgvRiwayatSeleksi = New Guna.UI2.WinForms.Guna2DataGridView()
+        Me.chasil = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.lStatusRecruitment = New System.Windows.Forms.Label()
-        Me.lTanggalApply = New System.Windows.Forms.Label()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.lTglJadwal = New System.Windows.Forms.Label()
+        Me.lTahap = New System.Windows.Forms.Label()
         Me.lJabatan = New System.Windows.Forms.Label()
         Me.lBagian = New System.Windows.Forms.Label()
         Me.lDepartment = New System.Windows.Forms.Label()
@@ -95,23 +79,25 @@ Partial Class frmDetailSeleksi
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.pnlFooter = New Guna.UI2.WinForms.Guna2Panel()
-        Me.bEditProses = New Guna.UI2.WinForms.Guna2Button()
-        Me.bSimpan = New Guna.UI2.WinForms.Guna2Button()
+        Me.bselesai = New Guna.UI2.WinForms.Guna2Button()
+        Me.bbatal = New Guna.UI2.WinForms.Guna2Button()
         Me.pnlFooterLine = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlHeader = New Guna.UI2.WinForms.Guna2Panel()
         Me.bClose = New Guna.UI2.WinForms.Guna2Button()
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.pnlHeaderLine = New Guna.UI2.WinForms.Guna2Panel()
         Me.lblTitle = New System.Windows.Forms.Label()
+        Me.nNilai = New Guna.UI2.WinForms.Guna2NumericUpDown()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
+        Me.lInterview = New Guna.UI2.WinForms.Guna2TextBox()
         Me.pnlMain.SuspendLayout()
         Me.pnlBody.SuspendLayout()
         Me.Guna2Panel3.SuspendLayout()
-        CType(Me.dgvRiwayatSeleksi, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2Panel2.SuspendLayout()
         Me.Guna2Panel1.SuspendLayout()
         Me.pnlFooter.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
+        CType(Me.nNilai, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlMain
@@ -123,14 +109,14 @@ Partial Class frmDetailSeleksi
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
         Me.pnlMain.Name = "pnlMain"
         Me.pnlMain.ShadowDecoration.Parent = Me.pnlMain
-        Me.pnlMain.Size = New System.Drawing.Size(1206, 640)
-        Me.pnlMain.TabIndex = 4
+        Me.pnlMain.Size = New System.Drawing.Size(560, 790)
+        Me.pnlMain.TabIndex = 5
         '
         'pnlBody
         '
+        Me.pnlBody.AutoScroll = True
+        Me.pnlBody.Controls.Add(Me.Label30)
         Me.pnlBody.Controls.Add(Me.Guna2Panel3)
-        Me.pnlBody.Controls.Add(Me.dgvRiwayatSeleksi)
-        Me.pnlBody.Controls.Add(Me.Label34)
         Me.pnlBody.Controls.Add(Me.Guna2Panel2)
         Me.pnlBody.Controls.Add(Me.Label11)
         Me.pnlBody.Controls.Add(Me.Guna2Panel1)
@@ -140,377 +126,172 @@ Partial Class frmDetailSeleksi
         Me.pnlBody.Name = "pnlBody"
         Me.pnlBody.Padding = New System.Windows.Forms.Padding(24, 18, 24, 10)
         Me.pnlBody.ShadowDecoration.Parent = Me.pnlBody
-        Me.pnlBody.Size = New System.Drawing.Size(1206, 525)
+        Me.pnlBody.Size = New System.Drawing.Size(560, 675)
         Me.pnlBody.TabIndex = 4
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label30.ForeColor = System.Drawing.Color.Fuchsia
+        Me.Label30.Location = New System.Drawing.Point(12, 430)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(99, 13)
+        Me.Label30.TabIndex = 23
+        Me.Label30.Text = "HASIL INTERVIEW"
         '
         'Guna2Panel3
         '
         Me.Guna2Panel3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.Guna2Panel3.BorderRadius = 8
         Me.Guna2Panel3.BorderThickness = 1
-        Me.Guna2Panel3.Controls.Add(Me.lDetailHasil)
-        Me.Guna2Panel3.Controls.Add(Me.lDetailNilai)
-        Me.Guna2Panel3.Controls.Add(Me.lDetailInterviewer)
-        Me.Guna2Panel3.Controls.Add(Me.lDetailProses)
-        Me.Guna2Panel3.Controls.Add(Me.lDetailJadwal)
-        Me.Guna2Panel3.Controls.Add(Me.lDetailStatus)
-        Me.Guna2Panel3.Controls.Add(Me.lDetailTahap)
-        Me.Guna2Panel3.Controls.Add(Me.tDetailCatatan)
-        Me.Guna2Panel3.Controls.Add(Me.Label49)
-        Me.Guna2Panel3.Controls.Add(Me.Label48)
-        Me.Guna2Panel3.Controls.Add(Me.Label47)
-        Me.Guna2Panel3.Controls.Add(Me.Label46)
-        Me.Guna2Panel3.Controls.Add(Me.Label45)
-        Me.Guna2Panel3.Controls.Add(Me.Label44)
-        Me.Guna2Panel3.Controls.Add(Me.Label43)
-        Me.Guna2Panel3.Controls.Add(Me.Label42)
-        Me.Guna2Panel3.Controls.Add(Me.Label41)
-        Me.Guna2Panel3.Controls.Add(Me.Label40)
-        Me.Guna2Panel3.Controls.Add(Me.Label39)
-        Me.Guna2Panel3.Controls.Add(Me.Label38)
-        Me.Guna2Panel3.Controls.Add(Me.Label37)
+        Me.Guna2Panel3.Controls.Add(Me.nNilai)
         Me.Guna2Panel3.Controls.Add(Me.Label36)
+        Me.Guna2Panel3.Controls.Add(Me.tcatatan)
         Me.Guna2Panel3.Controls.Add(Me.Label35)
-        Me.Guna2Panel3.Location = New System.Drawing.Point(534, 255)
+        Me.Guna2Panel3.Controls.Add(Me.chasil)
+        Me.Guna2Panel3.Controls.Add(Me.Label34)
+        Me.Guna2Panel3.Controls.Add(Me.Label33)
+        Me.Guna2Panel3.Controls.Add(Me.Label32)
+        Me.Guna2Panel3.Controls.Add(Me.Label31)
+        Me.Guna2Panel3.Controls.Add(Me.Panel1)
+        Me.Guna2Panel3.Location = New System.Drawing.Point(16, 452)
         Me.Guna2Panel3.Name = "Guna2Panel3"
         Me.Guna2Panel3.ShadowDecoration.Parent = Me.Guna2Panel3
-        Me.Guna2Panel3.Size = New System.Drawing.Size(651, 262)
+        Me.Guna2Panel3.Size = New System.Drawing.Size(497, 216)
         Me.Guna2Panel3.TabIndex = 22
-        '
-        'lDetailHasil
-        '
-        Me.lDetailHasil.AutoSize = True
-        Me.lDetailHasil.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.lDetailHasil.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.lDetailHasil.Location = New System.Drawing.Point(117, 168)
-        Me.lDetailHasil.Name = "lDetailHasil"
-        Me.lDetailHasil.Size = New System.Drawing.Size(12, 15)
-        Me.lDetailHasil.TabIndex = 22
-        Me.lDetailHasil.Text = "-"
-        '
-        'lDetailNilai
-        '
-        Me.lDetailNilai.AutoSize = True
-        Me.lDetailNilai.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.lDetailNilai.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.lDetailNilai.Location = New System.Drawing.Point(117, 142)
-        Me.lDetailNilai.Name = "lDetailNilai"
-        Me.lDetailNilai.Size = New System.Drawing.Size(12, 15)
-        Me.lDetailNilai.TabIndex = 21
-        Me.lDetailNilai.Text = "-"
-        '
-        'lDetailInterviewer
-        '
-        Me.lDetailInterviewer.AutoSize = True
-        Me.lDetailInterviewer.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.lDetailInterviewer.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.lDetailInterviewer.Location = New System.Drawing.Point(117, 116)
-        Me.lDetailInterviewer.Name = "lDetailInterviewer"
-        Me.lDetailInterviewer.Size = New System.Drawing.Size(12, 15)
-        Me.lDetailInterviewer.TabIndex = 20
-        Me.lDetailInterviewer.Text = "-"
-        '
-        'lDetailProses
-        '
-        Me.lDetailProses.AutoSize = True
-        Me.lDetailProses.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.lDetailProses.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.lDetailProses.Location = New System.Drawing.Point(117, 90)
-        Me.lDetailProses.Name = "lDetailProses"
-        Me.lDetailProses.Size = New System.Drawing.Size(12, 15)
-        Me.lDetailProses.TabIndex = 19
-        Me.lDetailProses.Text = "-"
-        '
-        'lDetailJadwal
-        '
-        Me.lDetailJadwal.AutoSize = True
-        Me.lDetailJadwal.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.lDetailJadwal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.lDetailJadwal.Location = New System.Drawing.Point(117, 64)
-        Me.lDetailJadwal.Name = "lDetailJadwal"
-        Me.lDetailJadwal.Size = New System.Drawing.Size(12, 15)
-        Me.lDetailJadwal.TabIndex = 18
-        Me.lDetailJadwal.Text = "-"
-        '
-        'lDetailStatus
-        '
-        Me.lDetailStatus.AutoSize = True
-        Me.lDetailStatus.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.lDetailStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.lDetailStatus.Location = New System.Drawing.Point(117, 38)
-        Me.lDetailStatus.Name = "lDetailStatus"
-        Me.lDetailStatus.Size = New System.Drawing.Size(12, 15)
-        Me.lDetailStatus.TabIndex = 17
-        Me.lDetailStatus.Text = "-"
-        '
-        'lDetailTahap
-        '
-        Me.lDetailTahap.AutoSize = True
-        Me.lDetailTahap.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.lDetailTahap.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.lDetailTahap.Location = New System.Drawing.Point(117, 12)
-        Me.lDetailTahap.Name = "lDetailTahap"
-        Me.lDetailTahap.Size = New System.Drawing.Size(12, 15)
-        Me.lDetailTahap.TabIndex = 16
-        Me.lDetailTahap.Text = "-"
-        '
-        'tDetailCatatan
-        '
-        Me.tDetailCatatan.AutoSize = True
-        Me.tDetailCatatan.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.tDetailCatatan.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.tDetailCatatan.Location = New System.Drawing.Point(18, 219)
-        Me.tDetailCatatan.Name = "tDetailCatatan"
-        Me.tDetailCatatan.Size = New System.Drawing.Size(0, 15)
-        Me.tDetailCatatan.TabIndex = 15
-        '
-        'Label49
-        '
-        Me.Label49.AutoSize = True
-        Me.Label49.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label49.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label49.Location = New System.Drawing.Point(101, 168)
-        Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(10, 15)
-        Me.Label49.TabIndex = 14
-        Me.Label49.Text = ":"
-        '
-        'Label48
-        '
-        Me.Label48.AutoSize = True
-        Me.Label48.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label48.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label48.Location = New System.Drawing.Point(101, 142)
-        Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(10, 15)
-        Me.Label48.TabIndex = 13
-        Me.Label48.Text = ":"
-        '
-        'Label47
-        '
-        Me.Label47.AutoSize = True
-        Me.Label47.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label47.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label47.Location = New System.Drawing.Point(101, 116)
-        Me.Label47.Name = "Label47"
-        Me.Label47.Size = New System.Drawing.Size(10, 15)
-        Me.Label47.TabIndex = 12
-        Me.Label47.Text = ":"
-        '
-        'Label46
-        '
-        Me.Label46.AutoSize = True
-        Me.Label46.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label46.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label46.Location = New System.Drawing.Point(101, 90)
-        Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(10, 15)
-        Me.Label46.TabIndex = 11
-        Me.Label46.Text = ":"
-        '
-        'Label45
-        '
-        Me.Label45.AutoSize = True
-        Me.Label45.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label45.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label45.Location = New System.Drawing.Point(101, 64)
-        Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(10, 15)
-        Me.Label45.TabIndex = 10
-        Me.Label45.Text = ":"
-        '
-        'Label44
-        '
-        Me.Label44.AutoSize = True
-        Me.Label44.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label44.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label44.Location = New System.Drawing.Point(101, 38)
-        Me.Label44.Name = "Label44"
-        Me.Label44.Size = New System.Drawing.Size(10, 15)
-        Me.Label44.TabIndex = 9
-        Me.Label44.Text = ":"
-        '
-        'Label43
-        '
-        Me.Label43.AutoSize = True
-        Me.Label43.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label43.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label43.Location = New System.Drawing.Point(101, 12)
-        Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(10, 15)
-        Me.Label43.TabIndex = 8
-        Me.Label43.Text = ":"
-        '
-        'Label42
-        '
-        Me.Label42.AutoSize = True
-        Me.Label42.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label42.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label42.Location = New System.Drawing.Point(18, 194)
-        Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(47, 15)
-        Me.Label42.TabIndex = 7
-        Me.Label42.Text = "Catatan"
-        '
-        'Label41
-        '
-        Me.Label41.AutoSize = True
-        Me.Label41.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label41.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label41.Location = New System.Drawing.Point(18, 168)
-        Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(33, 15)
-        Me.Label41.TabIndex = 6
-        Me.Label41.Text = "Hasil"
-        '
-        'Label40
-        '
-        Me.Label40.AutoSize = True
-        Me.Label40.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label40.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label40.Location = New System.Drawing.Point(18, 142)
-        Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(31, 15)
-        Me.Label40.TabIndex = 5
-        Me.Label40.Text = "Nilai"
-        '
-        'Label39
-        '
-        Me.Label39.AutoSize = True
-        Me.Label39.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label39.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label39.Location = New System.Drawing.Point(18, 116)
-        Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(71, 15)
-        Me.Label39.TabIndex = 4
-        Me.Label39.Text = "Interviewers"
-        '
-        'Label38
-        '
-        Me.Label38.AutoSize = True
-        Me.Label38.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label38.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label38.Location = New System.Drawing.Point(18, 90)
-        Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(41, 15)
-        Me.Label38.TabIndex = 3
-        Me.Label38.Text = "Proses"
-        '
-        'Label37
-        '
-        Me.Label37.AutoSize = True
-        Me.Label37.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label37.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label37.Location = New System.Drawing.Point(18, 64)
-        Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(43, 15)
-        Me.Label37.TabIndex = 2
-        Me.Label37.Text = "Jadwal"
         '
         'Label36
         '
         Me.Label36.AutoSize = True
         Me.Label36.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label36.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label36.Location = New System.Drawing.Point(18, 38)
+        Me.Label36.Location = New System.Drawing.Point(121, 108)
         Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(40, 15)
-        Me.Label36.TabIndex = 1
-        Me.Label36.Text = "Status"
+        Me.Label36.Size = New System.Drawing.Size(10, 15)
+        Me.Label36.TabIndex = 9
+        Me.Label36.Text = ":"
+        '
+        'tcatatan
+        '
+        Me.tcatatan.BorderColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.tcatatan.BorderRadius = 6
+        Me.tcatatan.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.tcatatan.DefaultText = ""
+        Me.tcatatan.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.tcatatan.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.tcatatan.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.tcatatan.DisabledState.Parent = Me.tcatatan
+        Me.tcatatan.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.tcatatan.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.tcatatan.FocusedState.Parent = Me.tcatatan
+        Me.tcatatan.ForeColor = System.Drawing.Color.FromArgb(CType(CType(31, Byte), Integer), CType(CType(41, Byte), Integer), CType(CType(55, Byte), Integer))
+        Me.tcatatan.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.tcatatan.HoverState.Parent = Me.tcatatan
+        Me.tcatatan.Location = New System.Drawing.Point(137, 94)
+        Me.tcatatan.Multiline = True
+        Me.tcatatan.Name = "tcatatan"
+        Me.tcatatan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.tcatatan.PlaceholderText = ""
+        Me.tcatatan.SelectedText = ""
+        Me.tcatatan.ShadowDecoration.Parent = Me.tcatatan
+        Me.tcatatan.Size = New System.Drawing.Size(350, 116)
+        Me.tcatatan.TabIndex = 8
         '
         'Label35
         '
         Me.Label35.AutoSize = True
         Me.Label35.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label35.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label35.Location = New System.Drawing.Point(18, 12)
+        Me.Label35.Location = New System.Drawing.Point(12, 108)
         Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(39, 15)
-        Me.Label35.TabIndex = 0
-        Me.Label35.Text = "Tahap"
+        Me.Label35.Size = New System.Drawing.Size(47, 15)
+        Me.Label35.TabIndex = 7
+        Me.Label35.Text = "Catatan"
         '
-        'dgvRiwayatSeleksi
+        'chasil
         '
-        Me.dgvRiwayatSeleksi.AllowUserToAddRows = False
-        Me.dgvRiwayatSeleksi.AllowUserToDeleteRows = False
-        Me.dgvRiwayatSeleksi.AllowUserToResizeRows = False
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        Me.dgvRiwayatSeleksi.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
-        Me.dgvRiwayatSeleksi.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvRiwayatSeleksi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvRiwayatSeleksi.BackgroundColor = System.Drawing.Color.White
-        Me.dgvRiwayatSeleksi.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.dgvRiwayatSeleksi.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        Me.dgvRiwayatSeleksi.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(219, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(254, Byte), Integer))
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvRiwayatSeleksi.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
-        Me.dgvRiwayatSeleksi.ColumnHeadersHeight = 24
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvRiwayatSeleksi.DefaultCellStyle = DataGridViewCellStyle6
-        Me.dgvRiwayatSeleksi.EnableHeadersVisualStyles = False
-        Me.dgvRiwayatSeleksi.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.dgvRiwayatSeleksi.Location = New System.Drawing.Point(534, 38)
-        Me.dgvRiwayatSeleksi.MultiSelect = False
-        Me.dgvRiwayatSeleksi.Name = "dgvRiwayatSeleksi"
-        Me.dgvRiwayatSeleksi.ReadOnly = True
-        Me.dgvRiwayatSeleksi.RowHeadersVisible = False
-        Me.dgvRiwayatSeleksi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvRiwayatSeleksi.Size = New System.Drawing.Size(651, 211)
-        Me.dgvRiwayatSeleksi.TabIndex = 21
-        Me.dgvRiwayatSeleksi.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
-        Me.dgvRiwayatSeleksi.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
-        Me.dgvRiwayatSeleksi.ThemeStyle.AlternatingRowsStyle.Font = Nothing
-        Me.dgvRiwayatSeleksi.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty
-        Me.dgvRiwayatSeleksi.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty
-        Me.dgvRiwayatSeleksi.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty
-        Me.dgvRiwayatSeleksi.ThemeStyle.BackColor = System.Drawing.Color.White
-        Me.dgvRiwayatSeleksi.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.dgvRiwayatSeleksi.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvRiwayatSeleksi.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        Me.dgvRiwayatSeleksi.ThemeStyle.HeaderStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        Me.dgvRiwayatSeleksi.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
-        Me.dgvRiwayatSeleksi.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        Me.dgvRiwayatSeleksi.ThemeStyle.HeaderStyle.Height = 24
-        Me.dgvRiwayatSeleksi.ThemeStyle.ReadOnly = True
-        Me.dgvRiwayatSeleksi.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
-        Me.dgvRiwayatSeleksi.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        Me.dgvRiwayatSeleksi.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        Me.dgvRiwayatSeleksi.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        Me.dgvRiwayatSeleksi.ThemeStyle.RowsStyle.Height = 22
-        Me.dgvRiwayatSeleksi.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvRiwayatSeleksi.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.chasil.BackColor = System.Drawing.Color.Transparent
+        Me.chasil.BorderRadius = 6
+        Me.chasil.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.chasil.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.chasil.FocusedColor = System.Drawing.Color.Empty
+        Me.chasil.FocusedState.Parent = Me.chasil
+        Me.chasil.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.chasil.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
+        Me.chasil.FormattingEnabled = True
+        Me.chasil.HoverState.Parent = Me.chasil
+        Me.chasil.ItemHeight = 30
+        Me.chasil.ItemsAppearance.Parent = Me.chasil
+        Me.chasil.Location = New System.Drawing.Point(137, 52)
+        Me.chasil.Name = "chasil"
+        Me.chasil.ShadowDecoration.Parent = Me.chasil
+        Me.chasil.Size = New System.Drawing.Size(350, 36)
+        Me.chasil.TabIndex = 6
         '
         'Label34
         '
         Me.Label34.AutoSize = True
-        Me.Label34.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label34.ForeColor = System.Drawing.Color.Fuchsia
-        Me.Label34.Location = New System.Drawing.Point(531, 18)
+        Me.Label34.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label34.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label34.Location = New System.Drawing.Point(121, 63)
         Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(114, 13)
-        Me.Label34.TabIndex = 20
-        Me.Label34.Text = "DATA RECRUITMENT"
+        Me.Label34.Size = New System.Drawing.Size(10, 15)
+        Me.Label34.TabIndex = 4
+        Me.Label34.Text = ":"
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label33.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label33.Location = New System.Drawing.Point(121, 20)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(10, 15)
+        Me.Label33.TabIndex = 3
+        Me.Label33.Text = ":"
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label32.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label32.Location = New System.Drawing.Point(12, 63)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(33, 15)
+        Me.Label32.TabIndex = 2
+        Me.Label32.Text = "Hasil"
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label31.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label31.Location = New System.Drawing.Point(12, 20)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(31, 15)
+        Me.Label31.TabIndex = 1
+        Me.Label31.Text = "Nilai"
+        '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.Silver
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(497, 2)
+        Me.Panel1.TabIndex = 0
         '
         'Guna2Panel2
         '
         Me.Guna2Panel2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.Guna2Panel2.BorderRadius = 8
         Me.Guna2Panel2.BorderThickness = 1
-        Me.Guna2Panel2.Controls.Add(Me.lStatusRecruitment)
-        Me.Guna2Panel2.Controls.Add(Me.lTanggalApply)
+        Me.Guna2Panel2.Controls.Add(Me.lInterview)
+        Me.Guna2Panel2.Controls.Add(Me.Label28)
+        Me.Guna2Panel2.Controls.Add(Me.Label29)
+        Me.Guna2Panel2.Controls.Add(Me.lTglJadwal)
+        Me.Guna2Panel2.Controls.Add(Me.lTahap)
         Me.Guna2Panel2.Controls.Add(Me.lJabatan)
         Me.Guna2Panel2.Controls.Add(Me.lBagian)
         Me.Guna2Panel2.Controls.Add(Me.lDepartment)
@@ -530,33 +311,55 @@ Partial Class frmDetailSeleksi
         Me.Guna2Panel2.Controls.Add(Me.Label24)
         Me.Guna2Panel2.Controls.Add(Me.Label25)
         Me.Guna2Panel2.Controls.Add(Me.Label26)
-        Me.Guna2Panel2.Location = New System.Drawing.Point(15, 255)
+        Me.Guna2Panel2.Location = New System.Drawing.Point(15, 205)
         Me.Guna2Panel2.Name = "Guna2Panel2"
         Me.Guna2Panel2.ShadowDecoration.Parent = Me.Guna2Panel2
-        Me.Guna2Panel2.Size = New System.Drawing.Size(501, 262)
+        Me.Guna2Panel2.Size = New System.Drawing.Size(497, 220)
         Me.Guna2Panel2.TabIndex = 19
         '
-        'lStatusRecruitment
+        'Label28
         '
-        Me.lStatusRecruitment.AutoSize = True
-        Me.lStatusRecruitment.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.lStatusRecruitment.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.lStatusRecruitment.Location = New System.Drawing.Point(138, 168)
-        Me.lStatusRecruitment.Name = "lStatusRecruitment"
-        Me.lStatusRecruitment.Size = New System.Drawing.Size(10, 15)
-        Me.lStatusRecruitment.TabIndex = 20
-        Me.lStatusRecruitment.Text = ":"
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label28.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label28.Location = New System.Drawing.Point(122, 194)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(10, 15)
+        Me.Label28.TabIndex = 22
+        Me.Label28.Text = ":"
         '
-        'lTanggalApply
+        'Label29
         '
-        Me.lTanggalApply.AutoSize = True
-        Me.lTanggalApply.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.lTanggalApply.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.lTanggalApply.Location = New System.Drawing.Point(138, 142)
-        Me.lTanggalApply.Name = "lTanggalApply"
-        Me.lTanggalApply.Size = New System.Drawing.Size(10, 15)
-        Me.lTanggalApply.TabIndex = 19
-        Me.lTanggalApply.Text = ":"
+        Me.Label29.AutoSize = True
+        Me.Label29.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label29.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label29.Location = New System.Drawing.Point(13, 194)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(71, 15)
+        Me.Label29.TabIndex = 21
+        Me.Label29.Text = "Interviewers"
+        '
+        'lTglJadwal
+        '
+        Me.lTglJadwal.AutoSize = True
+        Me.lTglJadwal.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.lTglJadwal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.lTglJadwal.Location = New System.Drawing.Point(138, 168)
+        Me.lTglJadwal.Name = "lTglJadwal"
+        Me.lTglJadwal.Size = New System.Drawing.Size(10, 15)
+        Me.lTglJadwal.TabIndex = 20
+        Me.lTglJadwal.Text = ":"
+        '
+        'lTahap
+        '
+        Me.lTahap.AutoSize = True
+        Me.lTahap.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.lTahap.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.lTahap.Location = New System.Drawing.Point(138, 142)
+        Me.lTahap.Name = "lTahap"
+        Me.lTahap.Size = New System.Drawing.Size(10, 15)
+        Me.lTahap.TabIndex = 19
+        Me.lTahap.Text = ":"
         '
         'lJabatan
         '
@@ -612,6 +415,7 @@ Partial Class frmDetailSeleksi
         Me.lNoRecruitment.Size = New System.Drawing.Size(10, 15)
         Me.lNoRecruitment.TabIndex = 14
         Me.lNoRecruitment.Text = ":"
+        Me.lNoRecruitment.Visible = False
         '
         'Label22
         '
@@ -689,6 +493,7 @@ Partial Class frmDetailSeleksi
         Me.Label15.Size = New System.Drawing.Size(10, 15)
         Me.Label15.TabIndex = 7
         Me.Label15.Text = ":"
+        Me.Label15.Visible = False
         '
         'Label14
         '
@@ -697,9 +502,9 @@ Partial Class frmDetailSeleksi
         Me.Label14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
         Me.Label14.Location = New System.Drawing.Point(13, 168)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(108, 15)
+        Me.Label14.Size = New System.Drawing.Size(43, 15)
         Me.Label14.TabIndex = 6
-        Me.Label14.Text = "Status Recruitment"
+        Me.Label14.Text = "Jadwal"
         '
         'Label13
         '
@@ -708,9 +513,9 @@ Partial Class frmDetailSeleksi
         Me.Label13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
         Me.Label13.Location = New System.Drawing.Point(13, 142)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(83, 15)
+        Me.Label13.Size = New System.Drawing.Size(91, 15)
         Me.Label13.TabIndex = 5
-        Me.Label13.Text = "Tanggal Apply"
+        Me.Label13.Text = "Tahap Interview"
         '
         'Label12
         '
@@ -766,13 +571,14 @@ Partial Class frmDetailSeleksi
         Me.Label26.Size = New System.Drawing.Size(91, 15)
         Me.Label26.TabIndex = 0
         Me.Label26.Text = "No Recruitment"
+        Me.Label26.Visible = False
         '
         'Label11
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.Fuchsia
-        Me.Label11.Location = New System.Drawing.Point(12, 231)
+        Me.Label11.Location = New System.Drawing.Point(12, 181)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(114, 13)
         Me.Label11.TabIndex = 18
@@ -798,10 +604,10 @@ Partial Class frmDetailSeleksi
         Me.Guna2Panel1.Controls.Add(Me.Label2)
         Me.Guna2Panel1.Controls.Add(Me.Label1)
         Me.Guna2Panel1.Controls.Add(Me.Label7)
-        Me.Guna2Panel1.Location = New System.Drawing.Point(15, 38)
+        Me.Guna2Panel1.Location = New System.Drawing.Point(15, 29)
         Me.Guna2Panel1.Name = "Guna2Panel1"
         Me.Guna2Panel1.ShadowDecoration.Parent = Me.Guna2Panel1
-        Me.Guna2Panel1.Size = New System.Drawing.Size(501, 171)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(497, 145)
         Me.Guna2Panel1.TabIndex = 17
         '
         'lEmail
@@ -974,7 +780,7 @@ Partial Class frmDetailSeleksi
         Me.Label21.AutoSize = True
         Me.Label21.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label21.ForeColor = System.Drawing.Color.Fuchsia
-        Me.Label21.Location = New System.Drawing.Point(12, 18)
+        Me.Label21.Location = New System.Drawing.Point(12, 9)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(94, 13)
         Me.Label21.TabIndex = 16
@@ -983,54 +789,55 @@ Partial Class frmDetailSeleksi
         'pnlFooter
         '
         Me.pnlFooter.BorderColor = System.Drawing.Color.FromArgb(CType(CType(248, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(252, Byte), Integer))
-        Me.pnlFooter.Controls.Add(Me.bEditProses)
-        Me.pnlFooter.Controls.Add(Me.bSimpan)
+        Me.pnlFooter.Controls.Add(Me.bselesai)
+        Me.pnlFooter.Controls.Add(Me.bbatal)
         Me.pnlFooter.Controls.Add(Me.pnlFooterLine)
         Me.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlFooter.Location = New System.Drawing.Point(0, 595)
+        Me.pnlFooter.Location = New System.Drawing.Point(0, 745)
         Me.pnlFooter.Name = "pnlFooter"
         Me.pnlFooter.ShadowDecoration.Parent = Me.pnlFooter
-        Me.pnlFooter.Size = New System.Drawing.Size(1206, 45)
+        Me.pnlFooter.Size = New System.Drawing.Size(560, 45)
         Me.pnlFooter.TabIndex = 3
         '
-        'bEditProses
+        'bselesai
         '
-        Me.bEditProses.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.bEditProses.BorderColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(219, Byte), Integer))
-        Me.bEditProses.BorderRadius = 6
-        Me.bEditProses.BorderThickness = 1
-        Me.bEditProses.CheckedState.Parent = Me.bEditProses
-        Me.bEditProses.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.bEditProses.CustomImages.Parent = Me.bEditProses
-        Me.bEditProses.FillColor = System.Drawing.Color.White
-        Me.bEditProses.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.bEditProses.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.bEditProses.HoverState.Parent = Me.bEditProses
-        Me.bEditProses.Location = New System.Drawing.Point(937, 6)
-        Me.bEditProses.Name = "bEditProses"
-        Me.bEditProses.ShadowDecoration.Parent = Me.bEditProses
-        Me.bEditProses.Size = New System.Drawing.Size(108, 36)
-        Me.bEditProses.TabIndex = 4
-        Me.bEditProses.Text = "Edit Proses"
+        Me.bselesai.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.bselesai.BorderColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.bselesai.BorderRadius = 6
+        Me.bselesai.BorderThickness = 1
+        Me.bselesai.CheckedState.Parent = Me.bselesai
+        Me.bselesai.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.bselesai.CustomImages.Parent = Me.bselesai
+        Me.bselesai.FillColor = System.Drawing.Color.White
+        Me.bselesai.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.bselesai.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.bselesai.HoverState.Parent = Me.bselesai
+        Me.bselesai.Location = New System.Drawing.Point(326, 6)
+        Me.bselesai.Name = "bselesai"
+        Me.bselesai.ShadowDecoration.Parent = Me.bselesai
+        Me.bselesai.Size = New System.Drawing.Size(108, 36)
+        Me.bselesai.TabIndex = 5
+        Me.bselesai.Text = "Selesai Interview"
         '
-        'bSimpan
+        'bbatal
         '
-        Me.bSimpan.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.bSimpan.BorderColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(219, Byte), Integer))
-        Me.bSimpan.BorderRadius = 6
-        Me.bSimpan.CheckedState.Parent = Me.bSimpan
-        Me.bSimpan.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.bSimpan.CustomImages.Parent = Me.bSimpan
-        Me.bSimpan.FillColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.bSimpan.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bSimpan.ForeColor = System.Drawing.Color.White
-        Me.bSimpan.HoverState.Parent = Me.bSimpan
-        Me.bSimpan.Location = New System.Drawing.Point(1094, 6)
-        Me.bSimpan.Name = "bSimpan"
-        Me.bSimpan.ShadowDecoration.Parent = Me.bSimpan
-        Me.bSimpan.Size = New System.Drawing.Size(100, 34)
-        Me.bSimpan.TabIndex = 3
-        Me.bSimpan.Text = "Tutup"
+        Me.bbatal.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.bbatal.BorderColor = System.Drawing.Color.FromArgb(CType(CType(209, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(219, Byte), Integer))
+        Me.bbatal.BorderRadius = 6
+        Me.bbatal.BorderThickness = 1
+        Me.bbatal.CheckedState.Parent = Me.bbatal
+        Me.bbatal.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.bbatal.CustomImages.Parent = Me.bbatal
+        Me.bbatal.FillColor = System.Drawing.Color.White
+        Me.bbatal.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.bbatal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.bbatal.HoverState.Parent = Me.bbatal
+        Me.bbatal.Location = New System.Drawing.Point(440, 6)
+        Me.bbatal.Name = "bbatal"
+        Me.bbatal.ShadowDecoration.Parent = Me.bbatal
+        Me.bbatal.Size = New System.Drawing.Size(108, 36)
+        Me.bbatal.TabIndex = 4
+        Me.bbatal.Text = "Batal"
         '
         'pnlFooterLine
         '
@@ -1039,7 +846,7 @@ Partial Class frmDetailSeleksi
         Me.pnlFooterLine.Location = New System.Drawing.Point(0, 0)
         Me.pnlFooterLine.Name = "pnlFooterLine"
         Me.pnlFooterLine.ShadowDecoration.Parent = Me.pnlFooterLine
-        Me.pnlFooterLine.Size = New System.Drawing.Size(1206, 1)
+        Me.pnlFooterLine.Size = New System.Drawing.Size(560, 1)
         Me.pnlFooterLine.TabIndex = 0
         '
         'pnlHeader
@@ -1053,7 +860,7 @@ Partial Class frmDetailSeleksi
         Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.ShadowDecoration.Parent = Me.pnlHeader
-        Me.pnlHeader.Size = New System.Drawing.Size(1206, 70)
+        Me.pnlHeader.Size = New System.Drawing.Size(560, 70)
         Me.pnlHeader.TabIndex = 1
         '
         'bClose
@@ -1067,7 +874,7 @@ Partial Class frmDetailSeleksi
         Me.bClose.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.bClose.HoverState.Parent = Me.bClose
         Me.bClose.ImageSize = New System.Drawing.Size(16, 16)
-        Me.bClose.Location = New System.Drawing.Point(1172, 12)
+        Me.bClose.Location = New System.Drawing.Point(526, 12)
         Me.bClose.Name = "bClose"
         Me.bClose.ShadowDecoration.Parent = Me.bClose
         Me.bClose.Size = New System.Drawing.Size(36, 36)
@@ -1082,9 +889,9 @@ Partial Class frmDetailSeleksi
         Me.lblDescription.ForeColor = System.Drawing.Color.White
         Me.lblDescription.Location = New System.Drawing.Point(37, 40)
         Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(289, 15)
+        Me.lblDescription.Size = New System.Drawing.Size(202, 15)
         Me.lblDescription.TabIndex = 1
-        Me.lblDescription.Text = "Infromasi lengkap kandidat dan riwayat proses seleksi"
+        Me.lblDescription.Text = "Infromasi lengkap kandidat interview"
         '
         'pnlHeaderLine
         '
@@ -1093,7 +900,7 @@ Partial Class frmDetailSeleksi
         Me.pnlHeaderLine.Location = New System.Drawing.Point(0, 69)
         Me.pnlHeaderLine.Name = "pnlHeaderLine"
         Me.pnlHeaderLine.ShadowDecoration.Parent = Me.pnlHeaderLine
-        Me.pnlHeaderLine.Size = New System.Drawing.Size(1206, 1)
+        Me.pnlHeaderLine.Size = New System.Drawing.Size(560, 1)
         Me.pnlHeaderLine.TabIndex = 1
         '
         'lblTitle
@@ -1104,35 +911,76 @@ Partial Class frmDetailSeleksi
         Me.lblTitle.ForeColor = System.Drawing.Color.White
         Me.lblTitle.Location = New System.Drawing.Point(37, 12)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(208, 25)
+        Me.lblTitle.Size = New System.Drawing.Size(149, 25)
         Me.lblTitle.TabIndex = 0
-        Me.lblTitle.Text = "Detail Seleksi Kandidat"
+        Me.lblTitle.Text = "Detail Interview"
+        '
+        'nNilai
+        '
+        Me.nNilai.BackColor = System.Drawing.Color.Transparent
+        Me.nNilai.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.nNilai.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.nNilai.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.nNilai.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.nNilai.DisabledState.Parent = Me.nNilai
+        Me.nNilai.DisabledState.UpDownButtonFillColor = System.Drawing.Color.FromArgb(CType(CType(177, Byte), Integer), CType(CType(177, Byte), Integer), CType(CType(177, Byte), Integer))
+        Me.nNilai.DisabledState.UpDownButtonForeColor = System.Drawing.Color.FromArgb(CType(CType(203, Byte), Integer), CType(CType(203, Byte), Integer), CType(CType(203, Byte), Integer))
+        Me.nNilai.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.nNilai.FocusedState.Parent = Me.nNilai
+        Me.nNilai.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nNilai.ForeColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
+        Me.nNilai.Location = New System.Drawing.Point(140, 8)
+        Me.nNilai.Name = "nNilai"
+        Me.nNilai.ShadowDecoration.Parent = Me.nNilai
+        Me.nNilai.Size = New System.Drawing.Size(347, 36)
+        Me.nNilai.TabIndex = 10
         '
         'Guna2Elipse1
         '
         Me.Guna2Elipse1.TargetControl = Me
         '
-        'FrmDetailSeleksi
+        'lInterview
+        '
+        Me.lInterview.BorderRadius = 8
+        Me.lInterview.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.lInterview.DefaultText = ""
+        Me.lInterview.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.lInterview.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.lInterview.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.lInterview.DisabledState.Parent = Me.lInterview
+        Me.lInterview.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.lInterview.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lInterview.FocusedState.Parent = Me.lInterview
+        Me.lInterview.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lInterview.HoverState.Parent = Me.lInterview
+        Me.lInterview.Location = New System.Drawing.Point(138, 186)
+        Me.lInterview.Name = "lInterview"
+        Me.lInterview.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.lInterview.PlaceholderText = ""
+        Me.lInterview.SelectedText = ""
+        Me.lInterview.ShadowDecoration.Parent = Me.lInterview
+        Me.lInterview.Size = New System.Drawing.Size(350, 31)
+        Me.lInterview.TabIndex = 23
+        '
+        'frmPenilaianInterviewAdd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1206, 640)
-        Me.ControlBox = False
+        Me.ClientSize = New System.Drawing.Size(560, 790)
         Me.Controls.Add(Me.pnlMain)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "FrmDetailSeleksi"
+        Me.Name = "frmPenilaianInterviewAdd"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "FrmDetailSeleksi"
+        Me.Text = "frmPenilaianInterviewAdd"
         Me.pnlMain.ResumeLayout(False)
         Me.pnlBody.ResumeLayout(False)
         Me.pnlBody.PerformLayout()
         Me.Guna2Panel3.ResumeLayout(False)
         Me.Guna2Panel3.PerformLayout()
-        CType(Me.dgvRiwayatSeleksi, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2Panel2.ResumeLayout(False)
         Me.Guna2Panel2.PerformLayout()
         Me.Guna2Panel1.ResumeLayout(False)
@@ -1140,21 +988,35 @@ Partial Class frmDetailSeleksi
         Me.pnlFooter.ResumeLayout(False)
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
+        CType(Me.nNilai, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents pnlMain As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents pnlBody As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents pnlFooter As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents pnlFooterLine As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents pnlHeader As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents bClose As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents pnlHeaderLine As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents lblTitle As Label
-    Friend WithEvents lblDescription As Label
-    Friend WithEvents Label21 As Label
-    Friend WithEvents Guna2Elipse1 As Guna.UI2.WinForms.Guna2Elipse
+    Friend WithEvents Guna2Panel2 As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents lTglJadwal As Label
+    Friend WithEvents lTahap As Label
+    Friend WithEvents lJabatan As Label
+    Friend WithEvents lBagian As Label
+    Friend WithEvents lDepartment As Label
+    Friend WithEvents lNoPermintaan As Label
+    Friend WithEvents lNoRecruitment As Label
+    Friend WithEvents Label22 As Label
+    Friend WithEvents Label20 As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label23 As Label
+    Friend WithEvents Label24 As Label
+    Friend WithEvents Label25 As Label
+    Friend WithEvents Label26 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents lEmail As Label
@@ -1172,54 +1034,30 @@ Partial Class frmDetailSeleksi
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label7 As Label
-    Friend WithEvents Guna2Panel2 As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents Label14 As Label
-    Friend WithEvents Label13 As Label
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label23 As Label
-    Friend WithEvents Label24 As Label
-    Friend WithEvents Label25 As Label
-    Friend WithEvents Label26 As Label
-    Friend WithEvents Label34 As Label
-    Friend WithEvents lStatusRecruitment As Label
-    Friend WithEvents lTanggalApply As Label
-    Friend WithEvents lJabatan As Label
-    Friend WithEvents lBagian As Label
-    Friend WithEvents lDepartment As Label
-    Friend WithEvents lNoPermintaan As Label
-    Friend WithEvents lNoRecruitment As Label
-    Friend WithEvents Label22 As Label
-    Friend WithEvents Label20 As Label
-    Friend WithEvents Label19 As Label
-    Friend WithEvents Label18 As Label
-    Friend WithEvents Label17 As Label
-    Friend WithEvents Label16 As Label
-    Friend WithEvents Label15 As Label
-    Friend WithEvents dgvRiwayatSeleksi As Guna.UI2.WinForms.Guna2DataGridView
+    Friend WithEvents Label21 As Label
+    Friend WithEvents pnlFooter As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents bbatal As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents pnlFooterLine As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents pnlHeader As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents bClose As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents lblDescription As Label
+    Friend WithEvents pnlHeaderLine As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents lblTitle As Label
+    Friend WithEvents Label28 As Label
+    Friend WithEvents Label29 As Label
+    Friend WithEvents Label30 As Label
     Friend WithEvents Guna2Panel3 As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents Label41 As Label
-    Friend WithEvents Label40 As Label
-    Friend WithEvents Label39 As Label
-    Friend WithEvents Label38 As Label
-    Friend WithEvents Label37 As Label
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Label34 As Label
+    Friend WithEvents Label33 As Label
+    Friend WithEvents Label32 As Label
+    Friend WithEvents Label31 As Label
     Friend WithEvents Label36 As Label
+    Friend WithEvents tcatatan As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Label35 As Label
-    Friend WithEvents tDetailCatatan As Label
-    Friend WithEvents Label49 As Label
-    Friend WithEvents Label48 As Label
-    Friend WithEvents Label47 As Label
-    Friend WithEvents Label46 As Label
-    Friend WithEvents Label45 As Label
-    Friend WithEvents Label44 As Label
-    Friend WithEvents Label43 As Label
-    Friend WithEvents Label42 As Label
-    Friend WithEvents bSimpan As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents lDetailHasil As Label
-    Friend WithEvents lDetailNilai As Label
-    Friend WithEvents lDetailInterviewer As Label
-    Friend WithEvents lDetailProses As Label
-    Friend WithEvents lDetailJadwal As Label
-    Friend WithEvents lDetailStatus As Label
-    Friend WithEvents lDetailTahap As Label
-    Friend WithEvents bEditProses As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents chasil As Guna.UI2.WinForms.Guna2ComboBox
+    Friend WithEvents bselesai As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents nNilai As Guna.UI2.WinForms.Guna2NumericUpDown
+    Friend WithEvents Guna2Elipse1 As Guna.UI2.WinForms.Guna2Elipse
+    Friend WithEvents lInterview As Guna.UI2.WinForms.Guna2TextBox
 End Class

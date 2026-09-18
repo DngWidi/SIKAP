@@ -622,7 +622,7 @@ Public Class uf_seleksi
 
     Private Sub bDetail_Click(sender As Object, e As EventArgs) Handles bDetail.Click
 
-        Using frm As New FrmDetailSeleksi()
+        Using frm As New frmDetailSeleksi()
 
             frm.IdKandidat = _idKandidatTerpilih
             frm.IdRekrutmen = _idRekrutmenTerpilih

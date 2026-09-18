@@ -523,7 +523,6 @@ Public Class uf_permintaankaryawan
         DataPermintaanKaryawan()
 
     End Sub
-
     Private Sub dgvPermintaan_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles dgvPermintaan.CellPainting
 
         '==================================================
@@ -849,7 +848,6 @@ Public Class uf_permintaankaryawan
             End If
         End Using
     End Sub
-
     Private Sub bHapus_Click(sender As Object, e As EventArgs) Handles bHapus.Click
         '========================================
         ' VALIDASI PILIHAN
@@ -922,7 +920,6 @@ Public Class uf_permintaankaryawan
         End Using
 
     End Sub
-
     Private Sub bDetail_Click(sender As Object, e As EventArgs) Handles bDetail.Click
         If _idPermintaanTerpilih <= 0 Then
             PesanPopupPeringatan("Pilih data permintaan terlebih dahulu.", "Silakan pilih data yang ingin dilihat.")
@@ -938,7 +935,6 @@ Public Class uf_permintaankaryawan
             frm.ShowDialog(Me.FindForm())
         End Using
     End Sub
-
     Private Sub bSubmit_Click(sender As Object, e As EventArgs) Handles bSubmit.Click
         '========================================
         ' VALIDASI PILIHAN
