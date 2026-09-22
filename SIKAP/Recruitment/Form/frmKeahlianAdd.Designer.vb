@@ -116,7 +116,7 @@ Partial Class frmKeahlianAdd
         Me.tkeahlian.Location = New System.Drawing.Point(15, 32)
         Me.tkeahlian.Name = "tkeahlian"
         Me.tkeahlian.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tkeahlian.PlaceholderText = ""
+        Me.tkeahlian.PlaceholderText = "Office"
         Me.tkeahlian.SelectedText = ""
         Me.tkeahlian.ShadowDecoration.Parent = Me.tkeahlian
         Me.tkeahlian.Size = New System.Drawing.Size(404, 38)
@@ -142,7 +142,7 @@ Partial Class frmKeahlianAdd
         Me.tketerangan.Multiline = True
         Me.tketerangan.Name = "tketerangan"
         Me.tketerangan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tketerangan.PlaceholderText = ""
+        Me.tketerangan.PlaceholderText = "Keterangan"
         Me.tketerangan.SelectedText = ""
         Me.tketerangan.ShadowDecoration.Parent = Me.tketerangan
         Me.tketerangan.Size = New System.Drawing.Size(404, 82)

@@ -16,6 +16,8 @@ Public Class frmKandidatAdd
     Private _deletedSertifikatIds As New List(Of Long)
     Private _deletedDokumenIds As New List(Of Long)
     Private _fotoFileName As String = String.Empty
+    'Foto yang saat ini tersimpan di database
+    Private _fotoDatabase As String = String.Empty
     'Path foto sementara
     Private _fotoPath As String = String.Empty
     Private _userLogin As String = Environment.UserName
@@ -39,6 +41,15 @@ Public Class frmKandidatAdd
     End Property
 
 #Region "Function"
+    Private Function DBString(rd As MySqlDataReader, columnName As String) As String
+
+        If IsDBNull(rd(columnName)) Then
+            Return String.Empty
+        End If
+        Return rd(columnName).ToString()
+
+    End Function
+
     Private Function NullIfEmpty(value As String) As Object
 
         If String.IsNullOrWhiteSpace(value) Then
@@ -186,45 +197,82 @@ Public Class frmKandidatAdd
         End Try
 
     End Function
+    '  Private Function SimpanFoto() As String
+
+    '  If String.IsNullOrWhiteSpace(_fotoPath) Then
+    '  Return String.Empty
+    '  End If
+    '    If Not File.Exists(_fotoPath) Then
+    '  Return String.Empty
+    ' End If
+    'Dim folderFoto As String = Path.Combine(Application.StartupPath, "Data", "Kandidat", "Foto")
+    'If Not Directory.Exists(folderFoto) Then
+    '    Directory.CreateDirectory(folderFoto)
+    'End If
+    'Dim extension As String = Path.GetExtension(_fotoPath)
+    'Dim namaFile As String = tkandidat.Text.Trim() & extension
+    'Dim targetPath As String = Path.Combine(folderFoto, namaFile)
+    ' File.Copy(_fotoPath, targetPath, True)
+    'Return Path.Combine("Data", "Kandidat", "Foto", namaFile)
+    ' End Function
     Private Function SimpanFoto() As String
 
         If String.IsNullOrWhiteSpace(_fotoPath) Then
-
             Return String.Empty
-
         End If
-
 
         If Not File.Exists(_fotoPath) Then
-
             Return String.Empty
-
         End If
 
+        Dim noKandidat As String = tkandidat.Text.Trim()
 
-        Dim folderFoto As String = Path.Combine(Application.StartupPath, "Data", "Kandidat", "Foto")
-
-
-        If Not Directory.Exists(folderFoto) Then
-
-            Directory.CreateDirectory(folderFoto)
-
+        If String.IsNullOrWhiteSpace(noKandidat) Then
+            Throw New Exception("Nomor kandidat belum tersedia.")
         End If
 
+        BuatFolderKandidat(noKandidat)
 
-        Dim extension As String = Path.GetExtension(_fotoPath)
+        Return SimpanFile(_fotoPath, noKandidat, "FOTO")
 
+    End Function
+    Private Function SimpanFotoEdit(fotoLama As String) As String
 
-        Dim namaFile As String = tkandidat.Text.Trim() & extension
+        '==========================================================
+        ' TIDAK ADA FOTO BARU
+        '==========================================================
+        If String.IsNullOrWhiteSpace(_fotoPath) Then
+            Return fotoLama
+        End If
 
+        '==========================================================
+        ' FILE FOTO BARU TIDAK DITEMUKAN
+        '==========================================================
+        If Not File.Exists(_fotoPath) Then
+            Throw New FileNotFoundException("File foto baru tidak ditemukan.", _fotoPath)
+        End If
 
-        Dim targetPath As String = Path.Combine(folderFoto, namaFile)
+        '==========================================================
+        ' NOMOR KANDIDAT
+        '==========================================================
+        Dim noKandidat As String = tkandidat.Text.Trim()
 
+        If String.IsNullOrWhiteSpace(noKandidat) Then
+            Throw New Exception("Nomor kandidat belum tersedia.")
+        End If
 
-        File.Copy(_fotoPath, targetPath, True)
+        '==========================================================
+        ' SIMPAN FOTO BARU
+        '
+        ' Hasil:
+        ' Kandidat/KND-202609-0001/Foto/xxxxxxxx_nama.jpg
+        '==========================================================
+        Dim fotoBaru As String = SimpanFile(_fotoPath, noKandidat, "FOTO")
 
-
-        Return Path.Combine("Data", "Kandidat", "Foto", namaFile)
+        '==========================================================
+        ' KEMBALIKAN PATH FOTO BARU
+        '==========================================================
+        Return fotoBaru
 
     End Function
     Private Function GetYearValue(row As DataGridViewRow, columnName As String) As Object
@@ -370,58 +418,55 @@ Public Class frmKandidatAdd
         End If
 
     End Function
+    Private Function GetStringValue(row As DataGridViewRow, columnName As String) As String
 
+        If row Is Nothing Then
+            Return String.Empty
+        End If
 
-    ' Private Function ProsesFileSertifikat(row As DataGridViewRow, noKandidat As String, fileBaru As List(Of String)) As String
-    '
-    '    Dim sourcePath As String = GetCellValue(row, "SourceFilePath")'
-    '
-    '    Dim storedPath As String = GetCellValue(row, "StoredFilePath")'
-    '
-    '    'Tidak ada file baru
-    '    If String.IsNullOrWhiteSpace(sourcePath) Then
-    '   Return storedPath
-    '   End If
-    ''
-    '   'Ada file baru → copy ke server
-    '   Dim newStoredPath As String = SimpanFile(sourcePath, noKandidat, "Sertifikat")
-    '
-    '   If String.IsNullOrWhiteSpace(newStoredPath) Then
-    '   Throw New Exception("Gagal menyimpan file sertifikat ke server.")
-    ''   End If
-    '
-    '        fileBaru.Add(newStoredPath)
-    '
-    '    Return newStoredPath
-    ''
-    ' End Function
+        If row.DataGridView Is Nothing Then
+            Return String.Empty
+        End If
+
+        If Not row.DataGridView.Columns.Contains(columnName) Then
+            Return String.Empty
+        End If
+
+        Dim value As Object = row.Cells(columnName).Value
+
+        If value Is Nothing OrElse IsDBNull(value) Then
+            Return String.Empty
+        End If
+
+        Return value.ToString()
+
+    End Function
 
 #End Region
 #Region "Private"
 
     Private Sub LoadDataKandidat(idKandidat As Long)
+
         Using conn As New MySqlConnection(sambung)
+
             conn.Open()
 
-            Dim sql As String = "SELECT ffcnokandidat, ffcnama,ffctempatlahir,ffdtgllahir,ffcjeniskelamin,ffcstatuspernikahan,ffcnik,ffcnotelp,ffcemail,ffcalamat,ffckelurahan,ffckecamatan,ffckota,ffcprovinsi,ffckodepos, " &
-            "ffcfilefoto FROM sakandidat WHERE ffcidkandidat = @ID"
-
+            Dim sql As String = "SELECT ffcnokandidat,ffcnama,ffctempatlahir,ffdtgllahir,ffcjeniskelamin, ffcstatuspernikahan, " &
+            "ffcnik,ffcnotelp,ffcemail,ffcalamat,ffckelurahan,ffckecamatan,ffckota,ffcprovinsi, ffckodepos, ffcfilefoto " &
+            "FROM sakandidat WHERE ffcidkandidat = @ID"
 
             Using cmd As New MySqlCommand(sql, conn)
                 cmd.Parameters.Add("@ID", MySqlDbType.Int64).Value = idKandidat
-                Using rd As MySqlDataReader =
-                cmd.ExecuteReader()
+                Using rd As MySqlDataReader = cmd.ExecuteReader()
 
                     If Not rd.Read() Then
-
                         PesanPopupError("ERROR", "Data kandidat tidak ditemukan.")
-
                         Me.Close()
-
                         Return
-
                     End If
-
+                    '==================================================
+                    ' DATA KANDIDAT
+                    '==================================================
 
                     tkandidat.Text = DBString(rd, "ffcnokandidat")
                     tnamalengkap.Text = DBString(rd, "ffcnama")
@@ -435,34 +480,63 @@ Public Class frmKandidatAdd
                     tkota.Text = DBString(rd, "ffckota")
                     tprovinsi.Text = DBString(rd, "ffcprovinsi")
                     tkodepos.Text = DBString(rd, "ffckodepos")
+                    '==================================================
+                    ' COMBOBOX
+                    '==================================================
                     SelectCombo(ckelamin, DBString(rd, "ffcjeniskelamin"))
                     SelectCombo(cstatuspernikahan, DBString(rd, "ffcstatuspernikahan"))
+
+                    '==================================================
+                    ' TANGGAL LAHIR
+                    '==================================================
+
                     If Not IsDBNull(rd("ffdtgllahir")) Then
                         dtgllahir.Value = Convert.ToDateTime(rd("ffdtgllahir"))
+
                     End If
 
-                    Dim fileFoto As String = DBString(rd, "ffcfilefoto")
-                    If Not String.IsNullOrWhiteSpace(fileFoto) Then
-                        Dim fullPath As String = Path.Combine(Application.StartupPath, fileFoto)
+
+                    '==================================================
+                    ' FOTO DATABASE
+                    '==================================================
+                    _fotoDatabase = DBString(rd, "ffcfilefoto")
+                    'Belum ada foto baru yang dipilih
+                    _fotoPath = String.Empty
+
+
+                    '==================================================
+                    ' BERSIHKAN FOTO YANG MUNGKIN SUDAH ADA
+                    '==================================================
+
+                    If PicFoto.Image IsNot Nothing Then
+
+                        Dim oldImage As Image = PicFoto.Image
+
+                        PicFoto.Image = Nothing
+
+                        oldImage.Dispose()
+
+                    End If
+
+
+                    '==================================================
+                    ' LOAD FOTO
+                    '==================================================
+
+                    If Not String.IsNullOrWhiteSpace(_fotoDatabase) Then
+                        Dim fullPath As String = GetFullFilePath(_fotoDatabase)
 
                         If File.Exists(fullPath) Then
-
-                            Using fs As New FileStream(fullPath, FileMode.Open, FileAccess.Read)
-
-                                PicFoto.Image = Image.FromStream(fs)
-
+                            Using fs As New FileStream(fullPath, FileMode.Open, FileAccess.Read, FileShare.Read)
+                                Using tempImage As Image = Image.FromStream(fs)
+                                    PicFoto.Image = New Bitmap(tempImage)
+                                End Using
                             End Using
-
                         End If
-
                     End If
-
                 End Using
-
             End Using
-
         End Using
-
     End Sub
     Private Sub AddParameter(cmd As MySqlCommand, parameterName As String, value As Object)
 
@@ -482,14 +556,6 @@ Public Class frmKandidatAdd
         End If
 
     End Sub
-    Private Function DBString(rd As MySqlDataReader, columnName As String) As String
-
-        If IsDBNull(rd(columnName)) Then
-            Return String.Empty
-        End If
-        Return rd(columnName).ToString()
-
-    End Function
     Private Sub SelectCombo(combo As Guna.UI2.WinForms.Guna2ComboBox, value As String)
 
         combo.SelectedIndex = -1
@@ -550,7 +616,6 @@ Public Class frmKandidatAdd
         tkandidat.Text = GenerateNoKandidat()
         SetControlEnabled(True)
         tkandidat.ReadOnly = True
-        tnamalengkap.Select()
         bSimpan.Visible = True
 
     End Sub
@@ -1708,7 +1773,29 @@ Public Class frmKandidatAdd
 
     End Sub
 #End Region
+    Private Sub HapusFileBaru(fileBaru As List(Of String))
 
+        If fileBaru Is Nothing Then
+            Return
+        End If
+
+        For Each relativePath As String In fileBaru
+
+            If String.IsNullOrWhiteSpace(relativePath) Then
+                Continue For
+            End If
+
+            Try
+
+                HapusFile(relativePath)
+
+            Catch
+                'Jangan menutupi error utama
+            End Try
+
+        Next
+
+    End Sub
     Private Sub LoadPendidikan(idKandidat As Long)
 
         Try
@@ -2320,67 +2407,135 @@ Public Class frmKandidatAdd
 
     End Sub
     Private Sub SimpanDokumen(conn As MySqlConnection, trans As MySqlTransaction, idKandidat As Long, noKandidat As String, fileBaru As List(Of String))
+
+        '==========================================================
+        ' 1. DELETE DOKUMEN YANG DIHAPUS USER
+        '==========================================================
         For Each id As Long In _deletedDokumenIds
 
-            Using cmd As New MySqlCommand("DELETE FROM sakandidatdokumen WHERE ffciddokumen = @id  AND ffcidkandidat = @idkandidat", conn, trans)
+            Using cmd As New MySqlCommand("DELETE FROM sakandidatdokumen WHERE ffciddokumen = @id AND ffcidkandidat = @idkandidat", conn, trans)
                 cmd.Parameters.AddWithValue("@id", id)
                 cmd.Parameters.AddWithValue("@idkandidat", idKandidat)
                 cmd.ExecuteNonQuery()
+
             End Using
+
         Next
 
+
+        '==========================================================
+        ' 2. INSERT / UPDATE DOKUMEN
+        '==========================================================
         For Each row As DataGridViewRow In dgvdokumen.Rows
 
+            ' Lewati baris baru kosong milik DataGridView
             If row.IsNewRow Then
                 Continue For
             End If
-            Dim idDokumen As Long = 0
-
-            If row.Cells("ffciddokumen").Value IsNot Nothing AndAlso row.Cells("ffciddokumen").Value IsNot DBNull.Value Then
-                Long.TryParse(row.Cells("ffciddokumen").Value.ToString(), idDokumen)
-
-            End If
 
 
+            '======================================================
+            ' ID DOKUMEN
+            '======================================================
+            Dim idDokumen As Long = GetLongValue(row, "ffciddokumen")
 
-            Dim jenis As String = GetCellValue(row, "Jenis")
 
-            Dim namaFile As String = GetCellValue(row, "NamaFile")
+            '======================================================
+            ' DATA DOKUMEN
+            '======================================================
+            Dim jenis As String = GetStringValue(row, "Jenis")
+            Dim namaFile As String = GetStringValue(row, "NamaFile")
+            Dim tipeFile As String = GetStringValue(row, "TipeFile")
+            Dim keterangan As String = GetStringValue(row, "Keterangan")
 
-            Dim tipeFile As String = GetCellValue(row, "TipeFile")
 
-            Dim keterangan As String = GetCellValue(row, "Keterangan")
-
-            '========================================
+            '======================================================
             ' FILE FISIK
-            '========================================
-            Dim sourcePathBaru As String = Convert.ToString(GetCellValue(row, "SourceFilePath"))
-            Dim filePath As String
-            Dim ukuran As Object
+            '======================================================
+            Dim sourcePathBaru As String = GetStringValue(row, "SourceFilePath")
 
+            Dim filePath As String = String.Empty
+
+            Dim ukuran As Long = 0
+
+
+            '======================================================
+            ' JIKA USER MEMILIH FILE BARU
+            '======================================================
             If Not String.IsNullOrWhiteSpace(sourcePathBaru) Then
 
-                ' Ada file baru -> copy fisik ke folder server
+                '--------------------------------------------------
+                ' Copy file fisik ke folder server
+                '--------------------------------------------------
                 Dim newStoredPath As String = SimpanFile(sourcePathBaru, noKandidat, "Dokumen")
 
                 If String.IsNullOrWhiteSpace(newStoredPath) Then
                     Throw New Exception("Gagal menyimpan file dokumen ke server.")
                 End If
 
+
+                '--------------------------------------------------
+                ' Simpan path file baru ke daftar rollback
+                '--------------------------------------------------
                 fileBaru.Add(newStoredPath)
+
+                '--------------------------------------------------
+                ' Gunakan path file baru
+                '--------------------------------------------------
                 filePath = newStoredPath
-                ukuran = New FileInfo(sourcePathBaru).Length
+
+
+                '--------------------------------------------------
+                ' Ambil ukuran file
+                '--------------------------------------------------
+                If File.Exists(sourcePathBaru) Then
+
+                    ukuran =
+                    New FileInfo(sourcePathBaru).Length
+
+                End If
+
 
             Else
-                ' Tidak ada file baru -> pakai path lama (mode edit tanpa ganti file)
-                filePath = GetCellValue(row, "StoredFilePath")
-                ukuran = GetLongValue(row, "Ukuran")
+
+                '==================================================
+                ' TIDAK ADA FILE BARU
+                ' Mode Edit:
+                ' gunakan file lama
+                '==================================================
+                filePath =
+                GetStringValue(row, "StoredFilePath")
+
+
+                '--------------------------------------------------
+                ' Ambil ukuran file lama
+                '--------------------------------------------------
+                ukuran =
+                GetLongValue(row, "Ukuran")
 
             End If
 
+
+            '======================================================
+            ' VALIDASI
+            '======================================================
+            '
+            ' Kalau baris dokumen benar-benar kosong, jangan
+            ' masukkan record kosong ke database.
+            '
+            If String.IsNullOrWhiteSpace(jenis) AndAlso String.IsNullOrWhiteSpace(namaFile) AndAlso String.IsNullOrWhiteSpace(filePath) Then
+                Continue For
+            End If
+
+
+            '======================================================
+            ' 3. INSERT DOKUMEN BARU
+            '======================================================
             If idDokumen <= 0 Then
-                Using cmd As New MySqlCommand("INSERT INTO sakandidatdokumen (ffcidkandidat,ffcjenis,ffcnama,ffcfile,ffctipefile,ffnukurang,ffcketerangan) VALUES (@idkandidat," &
-                                              " @jenis,@nama,@file,@tipefile, @ukurang, @keterangan )", conn, trans)
+
+                Using cmd As New MySqlCommand("INSERT INTO sakandidatdokumen (ffcidkandidat,ffcjenis,ffcnama,ffcfile,ffctipefile,ffnukurang,ffcketerangan) VALUES ( @idkandidat,@jenis,@nama,@file,@tipefile,@ukurang," &
+                        "@keterangan)", conn, trans)
+
                     cmd.Parameters.AddWithValue("@idkandidat", idKandidat)
                     cmd.Parameters.AddWithValue("@jenis", jenis)
                     cmd.Parameters.AddWithValue("@nama", namaFile)
@@ -2388,14 +2543,20 @@ Public Class frmKandidatAdd
                     cmd.Parameters.AddWithValue("@tipefile", tipeFile)
                     cmd.Parameters.AddWithValue("@ukurang", ukuran)
                     cmd.Parameters.AddWithValue("@keterangan", keterangan)
+
                     cmd.ExecuteNonQuery()
 
                 End Using
 
+
             Else
 
-                Using cmd As New MySqlCommand("UPDATE sakandidatdokumen SET ffcjenis = @jenis,ffcnama = @nama,ffcfile = @file,ffctipefile = @tipefile,ffnukurang = @ukurang,ffcketerangan = @keterangan " &
-                                              " WHERE ffciddokumen = @id AND ffcidkandidat = @idkandidat", conn, trans)
+                '==================================================
+                ' 4. UPDATE DOKUMEN
+                '==================================================
+                Using cmd As New MySqlCommand("UPDATE sakandidatdokumen SET ffcjenis = @jenis, ffcnama = @nama,ffcfile = @file, ffctipefile = @tipefile, ffnukurang = @ukurang, ffcketerangan = @keterangan  " &
+                                              "WHERE ffciddokumen = @id  AND ffcidkandidat = @idkandidat", conn, trans)
+
                     cmd.Parameters.AddWithValue("@id", idDokumen)
                     cmd.Parameters.AddWithValue("@idkandidat", idKandidat)
                     cmd.Parameters.AddWithValue("@jenis", jenis)
@@ -2405,6 +2566,7 @@ Public Class frmKandidatAdd
                     cmd.Parameters.AddWithValue("@ukurang", ukuran)
                     cmd.Parameters.AddWithValue("@keterangan", keterangan)
                     cmd.ExecuteNonQuery()
+
                 End Using
 
             End If
@@ -2515,11 +2677,20 @@ Public Class frmKandidatAdd
     End Sub
     Private Sub UpdateKandidat()
         Dim fileBaru As New List(Of String)
+        Dim fotoLama As String = _fotodatabase
+        Dim fotoBaru As String = String.Empty
         Using conn As New MySqlConnection(sambung)
             conn.Open()
             Using trans As MySqlTransaction = conn.BeginTransaction()
                 Try
-                    Dim namaFoto As String = SimpanFoto()
+                    If Not String.IsNullOrWhiteSpace(_fotoPath) Then
+                        fotoBaru = SimpanFile(_fotoPath, tkandidat.Text.Trim(), "FOTO")
+                        'Masukkan ke daftar file baru
+                        If Not String.IsNullOrWhiteSpace(fotoBaru) Then
+                            fileBaru.Add(fotoBaru)
+                        End If
+
+                    End If
                     '========================================
                     ' UPDATE MASTER
                     '========================================
@@ -2528,7 +2699,7 @@ Public Class frmKandidatAdd
                             "ffcnik = @NIK, ffcnotelp = @NoTelp,ffcemail = @Email,ffcalamat = @Alamat,ffckelurahan = @Kelurahan,ffckecamatan = @Kecamatan,ffckota = @Kota,ffcprovinsi = @Provinsi,ffckodepos = @KodePos, " &
                             "ffcuserupdate = @UserUpdate, ffdupdate = NOW() "
 
-                    If Not String.IsNullOrWhiteSpace(namaFoto) Then
+                    If Not String.IsNullOrWhiteSpace(fotoBaru) Then
 
                         sql &= ", ffcfilefoto = @FileFoto "
 
@@ -2556,8 +2727,8 @@ Public Class frmKandidatAdd
                         AddParameter(cmd, "@UserUpdate", _userLogin)
                         AddParameter(cmd, "@ID", _idKandidat)
 
-                        If Not String.IsNullOrWhiteSpace(namaFoto) Then
-                            AddParameter(cmd, "@FileFoto", namaFoto)
+                        If Not String.IsNullOrWhiteSpace(fotoBaru) Then
+                            AddParameter(cmd, "@FileFoto", fotoBaru)
                         End If
 
                         cmd.ExecuteNonQuery()
@@ -2571,7 +2742,14 @@ Public Class frmKandidatAdd
                     SimpanDokumen(conn, trans, _idKandidat, tkandidat.Text.Trim(), fileBaru)
 
                     trans.Commit()
+                    If Not String.IsNullOrWhiteSpace(fotoBaru) AndAlso Not String.IsNullOrWhiteSpace(fotoLama) AndAlso Not fotoLama.Equals(fotoBaru, StringComparison.OrdinalIgnoreCase) Then
+                        Try
+                            HapusFile(fotoLama)
+                        Catch exHapusFoto As Exception
+                            PesanPopupPeringatan("PERINGATAN", "Data kandidat berhasil diperbarui, " & "tetapi foto lama gagal dihapus." & vbCrLf & vbCrLf & exHapusFoto.Message)
+                        End Try
 
+                    End If
 
                     PesanPopupSukses("SUKSES", "Data kandidat berhasil diperbarui.")
 
@@ -2579,11 +2757,45 @@ Public Class frmKandidatAdd
 
                     Me.Close()
 
+                    '==================================================
+                    ' ROLLBACK DATABASE
+                    '==================================================
                 Catch ex As MySqlException
-                    trans.Rollback()
+                    Try
+                        trans.Rollback()
+                    Catch
+                    End Try
+
+
+                    '==================================================
+                    ' HAPUS FILE YANG SUDAH TERLANJUR DISALIN
+                    '==================================================
+
+                    HapusFileBaru(fileBaru)
+
+
                     PesanPopupError("Error MySQL: Kesalahan Database", ex.Message)
+
+
                 Catch ex As Exception
-                    trans.Rollback()
+
+                    '==================================================
+                    ' ROLLBACK DATABASE
+                    '==================================================
+
+                    Try
+                        trans.Rollback()
+                    Catch
+                    End Try
+
+
+                    '==================================================
+                    ' HAPUS FILE YANG SUDAH TERLANJUR DISALIN
+                    '==================================================
+
+                    HapusFileBaru(fileBaru)
+
+
                     PesanPopupError("Error umum: Proses dibatalkan", ex.Message)
 
                 End Try
@@ -2598,7 +2810,7 @@ Public Class frmKandidatAdd
 #End Region
 #Region "TEXT COMBOBOX DLL"
     Private Sub KontrolC_TextChanged(sender As Object, e As EventArgs) Handles _
-        tnamalengkap.TextChanged, ttempatlahir.TextChanged, temail.TextChanged, talamat.TextChanged, tkelurahan.TextChanged, tkecamatan.TextChanged, tkota.TextChanged, tprovinsi.TextChanged
+        tnamalengkap.TextChanged, ttempatlahir.TextChanged, talamat.TextChanged, tkelurahan.TextChanged, tkecamatan.TextChanged, tkota.TextChanged, tprovinsi.TextChanged
         Dim tb As Guna2TextBox = CType(sender, Guna2TextBox)
 
         If tb.Text.Length > 0 Then
@@ -2659,7 +2871,6 @@ Public Class frmKandidatAdd
         End If
     End Sub
 #End Region
-
     Private Sub frmKandidatAdd_Load(sender As Object, e As EventArgs) Handles Me.Load
         Try
             SetupForm()
@@ -2682,6 +2893,23 @@ Public Class frmKandidatAdd
         Catch ex As Exception
             PesanPopupError("ERROR", "Gagal memuat form kandidat : " & ex.Message)
         End Try
+
+    End Sub
+    Private Sub frmKandidatAdd_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        If _mode = ModeForm.Tambah Then
+
+            Me.BeginInvoke(New MethodInvoker(
+            Sub()
+
+                Tabkandidat.SelectedIndex = 0
+
+                tnamalengkap.Focus()
+                tnamalengkap.Select()
+
+            End Sub))
+
+        End If
 
     End Sub
     Private Sub bBatal_Click(sender As Object, e As EventArgs) Handles bBatal.Click
@@ -2723,17 +2951,23 @@ Public Class frmKandidatAdd
                 ofd.Filter = "File Gambar|*.jpg;*.jpeg;*.png;*.bmp"
                 ofd.Multiselect = False
                 If ofd.ShowDialog() = DialogResult.OK Then
+
                     _fotoPath = ofd.FileName
                     _fotoFileName = Path.GetFileName(ofd.FileName)
 
-                    Using fs As New FileStream(_fotoPath, FileMode.Open, FileAccess.Read)
-
-                        PicFoto.Image = Image.FromStream(fs)
-
+                    'Lepaskan image sebelumnya
+                    If PicFoto.Image IsNot Nothing Then
+                        Dim oldImage As Image = PicFoto.Image
+                        PicFoto.Image = Nothing
+                        oldImage.Dispose()
+                    End If
+                    'Load image sebagai salinan mandiri
+                    Using fs As New FileStream(_fotoPath, FileMode.Open, FileAccess.Read, FileShare.Read)
+                        Using tempImage As Image = Image.FromStream(fs)
+                            PicFoto.Image = New Bitmap(tempImage)
+                        End Using
                     End Using
-
                 End If
-
             End Using
 
         Catch ex As Exception

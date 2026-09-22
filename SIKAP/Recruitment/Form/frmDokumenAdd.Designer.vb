@@ -128,9 +128,10 @@ Partial Class frmDokumenAdd
         Me.tketerangan.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.tketerangan.HoverState.Parent = Me.tketerangan
         Me.tketerangan.Location = New System.Drawing.Point(21, 152)
+        Me.tketerangan.Multiline = True
         Me.tketerangan.Name = "tketerangan"
         Me.tketerangan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tketerangan.PlaceholderText = ""
+        Me.tketerangan.PlaceholderText = "Keterangan"
         Me.tketerangan.SelectedText = ""
         Me.tketerangan.ShadowDecoration.Parent = Me.tketerangan
         Me.tketerangan.Size = New System.Drawing.Size(626, 109)
@@ -230,7 +231,7 @@ Partial Class frmDokumenAdd
         Me.tnama.Location = New System.Drawing.Point(392, 30)
         Me.tnama.Name = "tnama"
         Me.tnama.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tnama.PlaceholderText = ""
+        Me.tnama.PlaceholderText = "Ktp"
         Me.tnama.SelectedText = ""
         Me.tnama.ShadowDecoration.Parent = Me.tnama
         Me.tnama.Size = New System.Drawing.Size(255, 38)

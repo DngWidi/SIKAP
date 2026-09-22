@@ -239,7 +239,7 @@ Partial Class frmKandidatAdd
         Me.temail.Margin = New System.Windows.Forms.Padding(4)
         Me.temail.Name = "temail"
         Me.temail.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.temail.PlaceholderText = ""
+        Me.temail.PlaceholderText = "Email@gmail.com"
         Me.temail.SelectedText = ""
         Me.temail.ShadowDecoration.Parent = Me.temail
         Me.temail.Size = New System.Drawing.Size(288, 32)
@@ -264,7 +264,7 @@ Partial Class frmKandidatAdd
         Me.tnotelp.Margin = New System.Windows.Forms.Padding(4)
         Me.tnotelp.Name = "tnotelp"
         Me.tnotelp.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tnotelp.PlaceholderText = ""
+        Me.tnotelp.PlaceholderText = "08565443534 "
         Me.tnotelp.SelectedText = ""
         Me.tnotelp.ShadowDecoration.Parent = Me.tnotelp
         Me.tnotelp.Size = New System.Drawing.Size(288, 32)
@@ -329,7 +329,7 @@ Partial Class frmKandidatAdd
         Me.ttempatlahir.Margin = New System.Windows.Forms.Padding(4)
         Me.ttempatlahir.Name = "ttempatlahir"
         Me.ttempatlahir.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.ttempatlahir.PlaceholderText = ""
+        Me.ttempatlahir.PlaceholderText = "Amerika"
         Me.ttempatlahir.SelectedText = ""
         Me.ttempatlahir.ShadowDecoration.Parent = Me.ttempatlahir
         Me.ttempatlahir.Size = New System.Drawing.Size(323, 32)
@@ -374,7 +374,7 @@ Partial Class frmKandidatAdd
         Me.tnik.Margin = New System.Windows.Forms.Padding(4)
         Me.tnik.Name = "tnik"
         Me.tnik.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tnik.PlaceholderText = ""
+        Me.tnik.PlaceholderText = "33121608009860010"
         Me.tnik.SelectedText = ""
         Me.tnik.ShadowDecoration.Parent = Me.tnik
         Me.tnik.Size = New System.Drawing.Size(323, 32)
@@ -610,7 +610,7 @@ Partial Class frmKandidatAdd
         Me.tkodepos.Location = New System.Drawing.Point(605, 220)
         Me.tkodepos.Name = "tkodepos"
         Me.tkodepos.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tkodepos.PlaceholderText = ""
+        Me.tkodepos.PlaceholderText = "69577"
         Me.tkodepos.SelectedText = ""
         Me.tkodepos.ShadowDecoration.Parent = Me.tkodepos
         Me.tkodepos.Size = New System.Drawing.Size(200, 36)
@@ -633,7 +633,7 @@ Partial Class frmKandidatAdd
         Me.tprovinsi.Location = New System.Drawing.Point(321, 220)
         Me.tprovinsi.Name = "tprovinsi"
         Me.tprovinsi.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tprovinsi.PlaceholderText = ""
+        Me.tprovinsi.PlaceholderText = "Jawa Tengah"
         Me.tprovinsi.SelectedText = ""
         Me.tprovinsi.ShadowDecoration.Parent = Me.tprovinsi
         Me.tprovinsi.Size = New System.Drawing.Size(259, 36)
@@ -656,7 +656,7 @@ Partial Class frmKandidatAdd
         Me.tkota.Location = New System.Drawing.Point(32, 220)
         Me.tkota.Name = "tkota"
         Me.tkota.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tkota.PlaceholderText = ""
+        Me.tkota.PlaceholderText = "Demak"
         Me.tkota.SelectedText = ""
         Me.tkota.ShadowDecoration.Parent = Me.tkota
         Me.tkota.Size = New System.Drawing.Size(273, 36)
@@ -679,7 +679,7 @@ Partial Class frmKandidatAdd
         Me.tkecamatan.Location = New System.Drawing.Point(321, 163)
         Me.tkecamatan.Name = "tkecamatan"
         Me.tkecamatan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tkecamatan.PlaceholderText = ""
+        Me.tkecamatan.PlaceholderText = "Karang Tengah"
         Me.tkecamatan.SelectedText = ""
         Me.tkecamatan.ShadowDecoration.Parent = Me.tkecamatan
         Me.tkecamatan.Size = New System.Drawing.Size(259, 36)
@@ -702,7 +702,7 @@ Partial Class frmKandidatAdd
         Me.tkelurahan.Location = New System.Drawing.Point(32, 162)
         Me.tkelurahan.Name = "tkelurahan"
         Me.tkelurahan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tkelurahan.PlaceholderText = ""
+        Me.tkelurahan.PlaceholderText = "Batu"
         Me.tkelurahan.SelectedText = ""
         Me.tkelurahan.ShadowDecoration.Parent = Me.tkelurahan
         Me.tkelurahan.Size = New System.Drawing.Size(273, 36)
@@ -781,7 +781,7 @@ Partial Class frmKandidatAdd
         Me.talamat.Multiline = True
         Me.talamat.Name = "talamat"
         Me.talamat.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.talamat.PlaceholderText = ""
+        Me.talamat.PlaceholderText = "Jl. Semarang - demak km 16"
         Me.talamat.SelectedText = ""
         Me.talamat.ShadowDecoration.Parent = Me.talamat
         Me.talamat.Size = New System.Drawing.Size(1113, 84)

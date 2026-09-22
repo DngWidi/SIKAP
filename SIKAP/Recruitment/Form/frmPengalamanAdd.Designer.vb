@@ -149,7 +149,7 @@ Partial Class frmPengalamanAdd
         Me.tperusahaan.Location = New System.Drawing.Point(15, 32)
         Me.tperusahaan.Name = "tperusahaan"
         Me.tperusahaan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tperusahaan.PlaceholderText = ""
+        Me.tperusahaan.PlaceholderText = "PT. Bahana buana box"
         Me.tperusahaan.SelectedText = ""
         Me.tperusahaan.ShadowDecoration.Parent = Me.tperusahaan
         Me.tperusahaan.Size = New System.Drawing.Size(418, 38)
@@ -174,7 +174,7 @@ Partial Class frmPengalamanAdd
         Me.tketerangan.Location = New System.Drawing.Point(15, 335)
         Me.tketerangan.Name = "tketerangan"
         Me.tketerangan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tketerangan.PlaceholderText = ""
+        Me.tketerangan.PlaceholderText = "Tidak diperpanjang"
         Me.tketerangan.SelectedText = ""
         Me.tketerangan.ShadowDecoration.Parent = Me.tketerangan
         Me.tketerangan.Size = New System.Drawing.Size(418, 38)
@@ -199,7 +199,7 @@ Partial Class frmPengalamanAdd
         Me.talasanberhenti.Location = New System.Drawing.Point(15, 274)
         Me.talasanberhenti.Name = "talasanberhenti"
         Me.talasanberhenti.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.talasanberhenti.PlaceholderText = ""
+        Me.talasanberhenti.PlaceholderText = "Kontrak habis"
         Me.talasanberhenti.SelectedText = ""
         Me.talasanberhenti.ShadowDecoration.Parent = Me.talasanberhenti
         Me.talasanberhenti.Size = New System.Drawing.Size(418, 38)
@@ -224,7 +224,7 @@ Partial Class frmPengalamanAdd
         Me.tgajiterakhir.Location = New System.Drawing.Point(15, 213)
         Me.tgajiterakhir.Name = "tgajiterakhir"
         Me.tgajiterakhir.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tgajiterakhir.PlaceholderText = ""
+        Me.tgajiterakhir.PlaceholderText = "4.500.000"
         Me.tgajiterakhir.SelectedText = ""
         Me.tgajiterakhir.ShadowDecoration.Parent = Me.tgajiterakhir
         Me.tgajiterakhir.Size = New System.Drawing.Size(418, 38)
@@ -249,7 +249,7 @@ Partial Class frmPengalamanAdd
         Me.tjabatan.Location = New System.Drawing.Point(15, 93)
         Me.tjabatan.Name = "tjabatan"
         Me.tjabatan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tjabatan.PlaceholderText = ""
+        Me.tjabatan.PlaceholderText = "Manager"
         Me.tjabatan.SelectedText = ""
         Me.tjabatan.ShadowDecoration.Parent = Me.tjabatan
         Me.tjabatan.Size = New System.Drawing.Size(418, 38)

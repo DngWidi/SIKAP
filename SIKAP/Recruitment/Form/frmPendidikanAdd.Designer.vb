@@ -156,7 +156,7 @@ Partial Class frmPendidikanAdd
         Me.tketerangan.Location = New System.Drawing.Point(12, 335)
         Me.tketerangan.Name = "tketerangan"
         Me.tketerangan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tketerangan.PlaceholderText = ""
+        Me.tketerangan.PlaceholderText = "Keterangan"
         Me.tketerangan.SelectedText = ""
         Me.tketerangan.ShadowDecoration.Parent = Me.tketerangan
         Me.tketerangan.Size = New System.Drawing.Size(418, 38)
@@ -181,7 +181,7 @@ Partial Class frmPendidikanAdd
         Me.tnilai.Location = New System.Drawing.Point(12, 274)
         Me.tnilai.Name = "tnilai"
         Me.tnilai.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tnilai.PlaceholderText = ""
+        Me.tnilai.PlaceholderText = "3.0"
         Me.tnilai.SelectedText = ""
         Me.tnilai.ShadowDecoration.Parent = Me.tnilai
         Me.tnilai.Size = New System.Drawing.Size(418, 38)
@@ -206,7 +206,7 @@ Partial Class frmPendidikanAdd
         Me.tjurusan.Location = New System.Drawing.Point(12, 152)
         Me.tjurusan.Name = "tjurusan"
         Me.tjurusan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tjurusan.PlaceholderText = ""
+        Me.tjurusan.PlaceholderText = "Ekonomi"
         Me.tjurusan.SelectedText = ""
         Me.tjurusan.ShadowDecoration.Parent = Me.tjurusan
         Me.tjurusan.Size = New System.Drawing.Size(418, 38)
@@ -231,7 +231,7 @@ Partial Class frmPendidikanAdd
         Me.tinstitusi.Location = New System.Drawing.Point(12, 91)
         Me.tinstitusi.Name = "tinstitusi"
         Me.tinstitusi.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tinstitusi.PlaceholderText = ""
+        Me.tinstitusi.PlaceholderText = "Undip Semarang"
         Me.tinstitusi.SelectedText = ""
         Me.tinstitusi.ShadowDecoration.Parent = Me.tinstitusi
         Me.tinstitusi.Size = New System.Drawing.Size(418, 38)

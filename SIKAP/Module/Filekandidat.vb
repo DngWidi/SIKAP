@@ -8,6 +8,7 @@ Module Filekandidat
     '========================================================
 
     Public Const ROOT_FILE_KANDIDAT As String = "\\192.168.1.250\backup data\DataKandidat"
+    'Public Const ROOT_FILE_KANDIDAT As String = "D:\DataKandidat"
 
 
 #End Region

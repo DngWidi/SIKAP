@@ -1,4 +1,5 @@
 ﻿Imports System.Windows.Forms.LinkLabel
+Imports Guna.UI2.WinForms
 Imports MySql.Data.MySqlClient
 
 Public Class frmProsesSeleksi
@@ -100,39 +101,49 @@ Public Class frmProsesSeleksi
         End Select
 
     End Function
-    Private Function GetLatestRecruitmentStatus() As String
 
+    Private Function GetLatestRecruitmentStatus(conn As MySqlConnection, trans As MySqlTransaction) As String
         Try
 
-            Using conn As New MySqlConnection(sambung)
+            Dim tahap As String = ""
+            Dim status As String = ""
+            Dim hasil As String = ""
+            Dim sql As String = "SELECT ffctahap, ffcstatus, ffchasil FROM saprosesseleksi WHERE ffcidrekrutmen = @idrekrutmen AND ffcidkandidat = @idkandidat ORDER BY ffcidproses DESC LIMIT 1"
 
-                conn.Open()
-
-                Dim sql As String = "SELECT ffctahap, ffcstatus, ffchasil FROM saprosesseleksi WHERE ffcidrekrutmen = @idrekrutmen AND ffcidkandidat = @idkandidat ORDER BY ffcidproses DESC LIMIT 1"
-
-                Using cmd As New MySqlCommand(sql, conn)
-                    cmd.Parameters.Add("@idrekrutmen", MySqlDbType.Int64).Value = _idRekrutmen
-                    cmd.Parameters.Add("@idkandidat", MySqlDbType.Int64).Value = _idKandidat
-
-                    Using rd As MySqlDataReader = cmd.ExecuteReader()
-
-                        If rd.Read() Then
-                            Dim tahap As String = If(IsDBNull(rd("ffctahap")), "", rd("ffctahap").ToString())
-                            Dim status As String = If(IsDBNull(rd("ffcstatus")), "", rd("ffcstatus").ToString())
-                            Dim hasil As String = If(IsDBNull(rd("ffchasil")), "", rd("ffchasil").ToString())
-                            Return GetRecruitmentStatusByStage(tahap, status, hasil)
+            Using cmd As New MySqlCommand(sql, conn, trans)
+                cmd.Parameters.Add("@idrekrutmen", MySqlDbType.Int64).Value = _idRekrutmen
+                cmd.Parameters.Add("@idkandidat", MySqlDbType.Int64).Value = _idKandidat
+                Using rd As MySqlDataReader = cmd.ExecuteReader()
+                    If rd.Read() Then
+                        If Not IsDBNull(rd("ffctahap")) Then
+                            tahap = rd("ffctahap").ToString().Trim().ToUpper()
                         End If
-                    End Using
+                        If Not IsDBNull(rd("ffcstatus")) Then
+                            status = rd("ffcstatus").ToString().Trim().ToUpper()
+                        End If
+                        If Not IsDBNull(rd("ffchasil")) Then
+                            hasil = rd("ffchasil").ToString().Trim().ToUpper()
+                        End If
+                    Else
+                        Throw New Exception("Data proses seleksi tidak ditemukan setelah disimpan.")
+                    End If
 
                 End Using
 
             End Using
 
+            '==========================================================
+            ' TENTUKAN STATUS RECRUITMENT
+            '==========================================================
+
+            Dim recruitmentStatus As String = GetRecruitmentStatusByStage(tahap, status, hasil)
+            If String.IsNullOrWhiteSpace(recruitmentStatus) Then
+                Throw New Exception("Status recruitment tidak dapat ditentukan." & vbCrLf & "Tahap   : " & tahap & vbCrLf & "Status  : " & status & vbCrLf & "Hasil   : " & hasil)
+            End If
+            Return recruitmentStatus
         Catch ex As Exception
             Throw New Exception("Gagal menentukan status recruitment terbaru." & vbCrLf & ex.Message)
         End Try
-
-        Return ""
 
     End Function
     Private Function ValidasiInput() As Boolean
@@ -237,45 +248,32 @@ Public Class frmProsesSeleksi
         '==========================================================
         ' VALIDASI ID
         '==========================================================
-
         If _idKandidat <= 0 Then
             PesanPopupPeringatan("Peringatan", "Data kandidat belum ditentukan.")
             Return
         End If
 
-
         If _idRekrutmen <= 0 Then
             PesanPopupPeringatan("Peringatan", "Data recruitment belum ditentukan.")
             Return
         End If
-
-
         '==========================================================
         ' AMBIL TAHAP
         '==========================================================
-
         Dim tahap As String = ""
-
         If cTahap.SelectedItem IsNot Nothing Then
             tahap = cTahap.SelectedItem.ToString().Trim().ToUpper()
         End If
-
-
         '==========================================================
         ' AMBIL STATUS
         '==========================================================
-
         Dim statusProses As String = ""
-
         If cStatus.SelectedItem IsNot Nothing Then
             statusProses = cStatus.SelectedItem.ToString().Trim().ToUpper()
         End If
-
-
         '==========================================================
         ' AMBIL HASIL
         '==========================================================
-
         Dim hasil As String = ""
 
         If cHasil.SelectedItem IsNot Nothing Then
@@ -387,7 +385,6 @@ Public Class frmProsesSeleksi
             PesanPopupPeringatan("Peringatan", "Nilai wajib diisi untuk proses Test.")
             tNilai.Focus()
             Return
-
         End If
 
 
@@ -396,9 +393,7 @@ Public Class frmProsesSeleksi
         '==========================================================
 
         Dim interviewer As String = tInterviewer.Text.Trim()
-
         Dim catatan As String = tCatatan.Text.Trim()
-
         Dim jadwal As DateTime = dtpJadwal.Value
 
 
@@ -413,9 +408,7 @@ Public Class frmProsesSeleksi
             Case "PROCESS", "PASSED", "FAILED", "CANCELLED"
                 tanggalProses = DateTime.Now
             Case Else
-
                 tanggalProses = Nothing
-
         End Select
 
 
@@ -427,25 +420,18 @@ Public Class frmProsesSeleksi
 
         If _mode.ToUpper() = "EDIT" Then
             teksKonfirmasi = "Apakah perubahan proses seleksi akan disimpan?"
-
         Else
             teksKonfirmasi = "Apakah data proses seleksi akan disimpan?"
-
         End If
 
-
         teksKonfirmasi &= vbCrLf & vbCrLf & "Tahap    : " & tahap & vbCrLf & "Status   : " & statusProses
-
         If hasil <> "" Then
-
             teksKonfirmasi &= vbCrLf & "Hasil    : " & hasil
-
         End If
 
         Dim hasilPopup As DialogResult = PesanPopupKonfirmasi("Konfirmasi", teksKonfirmasi)
         If hasilPopup <> DialogResult.OK AndAlso hasilPopup <> DialogResult.Yes Then
             Return
-
         End If
 
 
@@ -493,13 +479,11 @@ Public Class frmProsesSeleksi
                                 cmd.Parameters.Add("@proses", MySqlDbType.DateTime).Value = DBNull.Value
                             End If
 
-
                             If String.IsNullOrWhiteSpace(interviewer) Then
                                 cmd.Parameters.Add("@interviewer", MySqlDbType.VarChar).Value = DBNull.Value
                             Else
                                 cmd.Parameters.Add("@interviewer", MySqlDbType.VarChar).Value = interviewer
                             End If
-
 
                             If String.IsNullOrWhiteSpace(hasil) Then
                                 cmd.Parameters.Add("@hasil", MySqlDbType.VarChar).Value = DBNull.Value
@@ -513,7 +497,6 @@ Public Class frmProsesSeleksi
                             Else
                                 cmd.Parameters.Add("@nilai", MySqlDbType.Decimal).Value = DBNull.Value
                             End If
-
 
                             If String.IsNullOrWhiteSpace(catatan) Then
                                 cmd.Parameters.Add("@catatan", MySqlDbType.Text).Value = DBNull.Value
@@ -560,13 +543,11 @@ Public Class frmProsesSeleksi
                                 cmd.Parameters.Add("@jadwal", MySqlDbType.DateTime).Value = DBNull.Value
                             End If
 
-
                             If tanggalProses.HasValue Then
                                 cmd.Parameters.Add("@proses", MySqlDbType.DateTime).Value = tanggalProses.Value
                             Else
                                 cmd.Parameters.Add("@proses", MySqlDbType.DateTime).Value = DBNull.Value
                             End If
-
 
                             If String.IsNullOrWhiteSpace(interviewer) Then
                                 cmd.Parameters.Add("@interviewer", MySqlDbType.VarChar).Value = DBNull.Value
@@ -593,17 +574,13 @@ Public Class frmProsesSeleksi
                                 cmd.Parameters.Add("@catatan", MySqlDbType.Text).Value = DBNull.Value
                             Else
                                 cmd.Parameters.Add("@catatan", MySqlDbType.Text).Value = catatan
-
                             End If
 
-
                             Dim affected As Integer = cmd.ExecuteNonQuery()
-
 
                             If affected <= 0 Then
                                 Throw New Exception("Data proses seleksi tidak ditemukan atau gagal diperbarui.")
                             End If
-
                         End Using
 
 
@@ -617,7 +594,7 @@ Public Class frmProsesSeleksi
                     ' TENTUKAN STATUS RECRUITMENT TERBARU
                     '==================================================
 
-                    Dim latestStatus As String = GetLatestRecruitmentStatus()
+                    Dim latestStatus As String = GetLatestRecruitmentStatus(conn, trans)
 
 
                     If String.IsNullOrWhiteSpace(latestStatus) Then
@@ -1234,12 +1211,9 @@ Public Class frmProsesSeleksi
     Private Sub bBatal_Click(sender As Object, e As EventArgs) Handles bBatal.Click
         Me.Close()
     End Sub
-
     Private Sub bSimpan_Click(sender As Object, e As EventArgs) Handles bSimpan.Click
         SimpanProsesSeleksi()
     End Sub
-
-
     Private Sub dgvRiwayatSeleksi_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvRiwayatSeleksi.CellDoubleClick
 
         Try
@@ -1287,5 +1261,68 @@ Public Class frmProsesSeleksi
             PesanPopupError("Error", "Gagal membuka proses seleksi untuk Edit." & vbCrLf & ex.Message)
         End Try
 
+    End Sub
+
+
+    Private Sub KontrolC_TextChanged(sender As Object, e As EventArgs) Handles _
+      tInterviewer.TextChanged, tCatatan.TextChanged
+        Dim tb As Guna2TextBox = CType(sender, Guna2TextBox)
+
+        If tb.Text.Length > 0 Then
+
+            Dim cursorPos As Integer = tb.SelectionStart
+
+            Dim text As String = tb.Text
+
+            Dim formatted As String = Char.ToUpper(text(0)) & text.Substring(1).ToLower()
+
+            If tb.Text <> formatted Then
+
+                tb.Text = formatted
+
+                tb.SelectionStart = Math.Min(cursorPos, tb.Text.Length)
+
+            End If
+
+        End If
+    End Sub
+    Private Sub KontrolT_KeyPress(sender As Object, e As KeyPressEventArgs) Handles _
+       tInterviewer.KeyPress, tCatatan.KeyPress
+        If e.KeyChar = ChrW(Keys.Enter) Then
+
+            SendKeys.Send("{TAB}")
+
+            e.Handled = True
+
+            Exit Sub
+
+        End If
+
+
+        ' Blokir karakter tanda kutip tunggal
+        If e.KeyChar = "'"c Then
+
+            e.Handled = True
+
+        End If
+    End Sub
+    Private Sub KontrolA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles _
+        tNilai.KeyPress
+        If (e.KeyChar = ChrW(Keys.Enter)) Then
+            SendKeys.Send("{TAB}")
+            e.Handled = True
+        End If
+        Dim KeyAscii As Integer
+        KeyAscii = Asc(e.KeyChar)
+        Select Case KeyAscii
+            Case 48 To 57, 8, 13, 46
+            Case Else
+                KeyAscii = 0
+        End Select
+        If KeyAscii = 0 Then
+            e.Handled = True
+        Else
+            e.Handled = False
+        End If
     End Sub
 End Class

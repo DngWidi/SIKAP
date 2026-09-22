@@ -1,5 +1,6 @@
-﻿Imports MySql.Data.MySqlClient
-Imports System.Globalization
+﻿Imports System.Globalization
+Imports Guna.UI2.WinForms
+Imports MySql.Data.MySqlClient
 Public Class frmPengalamanAdd
     Private ShadowForm As New Guna.UI2.WinForms.Guna2ShadowForm()
     Private _mode As ModeForm = ModeForm.Tambah
@@ -215,7 +216,7 @@ Public Class frmPengalamanAdd
 
         If dtglselesai.Checked Then
 
-            talasanberhenti.Enabled = True
+            talasanberhenti.Enabled = False
 
         Else
 
@@ -225,6 +226,67 @@ Public Class frmPengalamanAdd
 
     End Sub
 #End Region
+    Private Sub KontrolC_TextChanged(sender As Object, e As EventArgs) Handles _
+        tjabatan.TextChanged, talasanberhenti.TextChanged, tketerangan.TextChanged
+        Dim tb As Guna2TextBox = CType(sender, Guna2TextBox)
+
+        If tb.Text.Length > 0 Then
+
+            Dim cursorPos As Integer = tb.SelectionStart
+
+            Dim text As String = tb.Text
+
+            Dim formatted As String = Char.ToUpper(text(0)) & text.Substring(1).ToLower()
+
+            If tb.Text <> formatted Then
+
+                tb.Text = formatted
+
+                tb.SelectionStart = Math.Min(cursorPos, tb.Text.Length)
+
+            End If
+
+        End If
+    End Sub
+    Private Sub KontrolT_KeyPress(sender As Object, e As KeyPressEventArgs) Handles _
+       tjabatan.KeyPress, tperusahaan.KeyPress, talasanberhenti.KeyPress, tketerangan.KeyPress
+        If e.KeyChar = ChrW(Keys.Enter) Then
+
+            SendKeys.Send("{TAB}")
+
+            e.Handled = True
+
+            Exit Sub
+
+        End If
+
+
+        ' Blokir karakter tanda kutip tunggal
+        If e.KeyChar = "'"c Then
+
+            e.Handled = True
+
+        End If
+    End Sub
+    Private Sub KontrolA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles _
+        tgajiterakhir.KeyPress
+        If (e.KeyChar = ChrW(Keys.Enter)) Then
+            SendKeys.Send("{TAB}")
+            e.Handled = True
+        End If
+        Dim KeyAscii As Integer
+        KeyAscii = Asc(e.KeyChar)
+        Select Case KeyAscii
+            Case 48 To 57, 8, 13, 46
+            Case Else
+                KeyAscii = 0
+        End Select
+        If KeyAscii = 0 Then
+            e.Handled = True
+        Else
+            e.Handled = False
+        End If
+    End Sub
     Private Sub frmPengalamanAdd_Load(sender As Object, e As EventArgs) Handles Me.Load
         SetupForm()
         SetupTanggal()

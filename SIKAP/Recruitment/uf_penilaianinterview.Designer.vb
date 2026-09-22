@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class uf_penilaianinterview
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,20 +20,18 @@ Partial Class uf_penilaianinterview
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(uf_penilaianinterview))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlContext = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlButton = New Guna.UI2.WinForms.Guna2Panel()
-        Me.bHapus = New Guna.UI2.WinForms.Guna2Button()
         Me.bSubmit = New Guna.UI2.WinForms.Guna2Button()
         Me.bDetail = New Guna.UI2.WinForms.Guna2Button()
         Me.bEdit = New Guna.UI2.WinForms.Guna2Button()
         Me.pnlPage = New Guna.UI2.WinForms.Guna2Panel()
-        Me.paginationSeleksi = New SIKAP.ucPagination()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.dgvPenilaian = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -44,6 +42,9 @@ Partial Class uf_penilaianinterview
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.paginationInterview = New SIKAP.ucPagination()
+        Me.bCari = New Guna.UI2.WinForms.Guna2Button()
+        Me.bRefresh = New Guna.UI2.WinForms.Guna2Button()
         Me.pnlContext.SuspendLayout()
         Me.pnlButton.SuspendLayout()
         Me.pnlPage.SuspendLayout()
@@ -75,7 +76,6 @@ Partial Class uf_penilaianinterview
         Me.pnlButton.BorderColor = System.Drawing.Color.Silver
         Me.pnlButton.BorderRadius = 6
         Me.pnlButton.BorderThickness = 1
-        Me.pnlButton.Controls.Add(Me.bHapus)
         Me.pnlButton.Controls.Add(Me.bSubmit)
         Me.pnlButton.Controls.Add(Me.bDetail)
         Me.pnlButton.Controls.Add(Me.bEdit)
@@ -86,29 +86,6 @@ Partial Class uf_penilaianinterview
         Me.pnlButton.ShadowDecoration.Parent = Me.pnlButton
         Me.pnlButton.Size = New System.Drawing.Size(861, 487)
         Me.pnlButton.TabIndex = 4
-        '
-        'bHapus
-        '
-        Me.bHapus.BorderColor = System.Drawing.Color.Gainsboro
-        Me.bHapus.BorderRadius = 5
-        Me.bHapus.BorderThickness = 1
-        Me.bHapus.CheckedState.Parent = Me.bHapus
-        Me.bHapus.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.bHapus.CustomImages.Parent = Me.bHapus
-        Me.bHapus.FillColor = System.Drawing.Color.Transparent
-        Me.bHapus.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bHapus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.bHapus.HoverState.Parent = Me.bHapus
-        Me.bHapus.Image = Global.SIKAP.My.Resources.Resources.Delete
-        Me.bHapus.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
-        Me.bHapus.ImageSize = New System.Drawing.Size(18, 18)
-        Me.bHapus.Location = New System.Drawing.Point(287, 14)
-        Me.bHapus.Name = "bHapus"
-        Me.bHapus.ShadowDecoration.Parent = Me.bHapus
-        Me.bHapus.Size = New System.Drawing.Size(83, 32)
-        Me.bHapus.TabIndex = 13
-        Me.bHapus.Text = "Hapus"
-        Me.bHapus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'bSubmit
         '
@@ -131,7 +108,7 @@ Partial Class uf_penilaianinterview
         Me.bSubmit.ShadowDecoration.Parent = Me.bSubmit
         Me.bSubmit.Size = New System.Drawing.Size(94, 32)
         Me.bSubmit.TabIndex = 12
-        Me.bSubmit.Text = "Submit"
+        Me.bSubmit.Text = "L"
         Me.bSubmit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'bDetail
@@ -184,7 +161,7 @@ Partial Class uf_penilaianinterview
         '
         Me.pnlPage.BorderColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.pnlPage.BorderThickness = 1
-        Me.pnlPage.Controls.Add(Me.paginationSeleksi)
+        Me.pnlPage.Controls.Add(Me.paginationInterview)
         Me.pnlPage.Controls.Add(Me.lblInfo)
         Me.pnlPage.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlPage.Location = New System.Drawing.Point(0, 441)
@@ -192,18 +169,6 @@ Partial Class uf_penilaianinterview
         Me.pnlPage.ShadowDecoration.Parent = Me.pnlPage
         Me.pnlPage.Size = New System.Drawing.Size(861, 46)
         Me.pnlPage.TabIndex = 4
-        '
-        'paginationSeleksi
-        '
-        Me.paginationSeleksi.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
-        Me.paginationSeleksi.CurrentPage = 1
-        Me.paginationSeleksi.Dock = System.Windows.Forms.DockStyle.Right
-        Me.paginationSeleksi.Location = New System.Drawing.Point(511, 0)
-        Me.paginationSeleksi.Name = "paginationSeleksi"
-        Me.paginationSeleksi.PageSize = 10
-        Me.paginationSeleksi.Size = New System.Drawing.Size(350, 46)
-        Me.paginationSeleksi.TabIndex = 1
-        Me.paginationSeleksi.TotalRecord = 0
         '
         'lblInfo
         '
@@ -221,8 +186,8 @@ Partial Class uf_penilaianinterview
         Me.dgvPenilaian.AllowUserToAddRows = False
         Me.dgvPenilaian.AllowUserToDeleteRows = False
         Me.dgvPenilaian.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        Me.dgvPenilaian.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        Me.dgvPenilaian.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
         Me.dgvPenilaian.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -231,24 +196,24 @@ Partial Class uf_penilaianinterview
         Me.dgvPenilaian.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvPenilaian.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
         Me.dgvPenilaian.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(219, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(254, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvPenilaian.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(219, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(254, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvPenilaian.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.dgvPenilaian.ColumnHeadersHeight = 24
         Me.dgvPenilaian.Cursor = System.Windows.Forms.Cursors.Hand
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvPenilaian.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvPenilaian.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvPenilaian.EnableHeadersVisualStyles = False
         Me.dgvPenilaian.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.dgvPenilaian.Location = New System.Drawing.Point(3, 63)
@@ -300,6 +265,8 @@ Partial Class uf_penilaianinterview
         Me.pnlToolbar.BorderColor = System.Drawing.Color.Gainsboro
         Me.pnlToolbar.BorderRadius = 6
         Me.pnlToolbar.BorderThickness = 1
+        Me.pnlToolbar.Controls.Add(Me.bRefresh)
+        Me.pnlToolbar.Controls.Add(Me.bCari)
         Me.pnlToolbar.Controls.Add(Me.cTahap)
         Me.pnlToolbar.Controls.Add(Me.cstatus)
         Me.pnlToolbar.Controls.Add(Me.tPencarian)
@@ -407,6 +374,59 @@ Partial Class uf_penilaianinterview
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Kelola dan lakukan penilaian terhadap kandidat yang mengikuti interview"
         '
+        'paginationInterview
+        '
+        Me.paginationInterview.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
+        Me.paginationInterview.CurrentPage = 1
+        Me.paginationInterview.Dock = System.Windows.Forms.DockStyle.Right
+        Me.paginationInterview.Location = New System.Drawing.Point(511, 0)
+        Me.paginationInterview.Name = "paginationInterview"
+        Me.paginationInterview.PageSize = 10
+        Me.paginationInterview.Size = New System.Drawing.Size(350, 46)
+        Me.paginationInterview.TabIndex = 1
+        Me.paginationInterview.TotalRecord = 0
+        '
+        'bCari
+        '
+        Me.bCari.BorderRadius = 6
+        Me.bCari.CheckedState.Parent = Me.bCari
+        Me.bCari.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.bCari.CustomImages.Parent = Me.bCari
+        Me.bCari.FillColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.bCari.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bCari.ForeColor = System.Drawing.Color.White
+        Me.bCari.HoverState.Parent = Me.bCari
+        Me.bCari.Image = Global.SIKAP.My.Resources.Resources.SearchW
+        Me.bCari.ImageSize = New System.Drawing.Size(18, 18)
+        Me.bCari.Location = New System.Drawing.Point(666, 27)
+        Me.bCari.Name = "bCari"
+        Me.bCari.ShadowDecoration.Parent = Me.bCari
+        Me.bCari.Size = New System.Drawing.Size(86, 36)
+        Me.bCari.TabIndex = 6
+        Me.bCari.Text = "Cari"
+        '
+        'bRefresh
+        '
+        Me.bRefresh.BorderColor = System.Drawing.Color.Gray
+        Me.bRefresh.BorderRadius = 6
+        Me.bRefresh.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash
+        Me.bRefresh.BorderThickness = 1
+        Me.bRefresh.CheckedState.Parent = Me.bRefresh
+        Me.bRefresh.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.bRefresh.CustomImages.Parent = Me.bRefresh
+        Me.bRefresh.FillColor = System.Drawing.Color.Transparent
+        Me.bRefresh.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bRefresh.ForeColor = System.Drawing.Color.Black
+        Me.bRefresh.HoverState.Parent = Me.bRefresh
+        Me.bRefresh.Image = Global.SIKAP.My.Resources.Resources.Reset
+        Me.bRefresh.ImageSize = New System.Drawing.Size(18, 18)
+        Me.bRefresh.Location = New System.Drawing.Point(758, 27)
+        Me.bRefresh.Name = "bRefresh"
+        Me.bRefresh.ShadowDecoration.Parent = Me.bRefresh
+        Me.bRefresh.Size = New System.Drawing.Size(86, 36)
+        Me.bRefresh.TabIndex = 7
+        Me.bRefresh.Text = "Reset"
+        '
         'uf_penilaianinterview
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -430,7 +450,7 @@ Partial Class uf_penilaianinterview
     Friend WithEvents pnlContext As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents pnlButton As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents pnlPage As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents paginationSeleksi As ucPagination
+    Friend WithEvents paginationInterview As ucPagination
     Friend WithEvents lblInfo As Label
     Friend WithEvents dgvPenilaian As Guna.UI2.WinForms.Guna2DataGridView
     Friend WithEvents Label1 As Label
@@ -444,5 +464,6 @@ Partial Class uf_penilaianinterview
     Friend WithEvents bDetail As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents bEdit As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents bSubmit As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents bHapus As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents bCari As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents bRefresh As Guna.UI2.WinForms.Guna2Button
 End Class

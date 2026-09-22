@@ -16,14 +16,7 @@ Public Class uf_penilaianinterview
     Private _idRekrutmenTerpilih As Long = 0
     Private _idKandidatTerpilih As Long = 0
 
-    '==========================================================
-    ' PAGINATION
-    '==========================================================
-    Private CurrentPage As Integer = 1
-    Private PageSize As Integer = 10
-    Private TotalRecord As Integer = 0
-    Private TotalPage As Integer = 0
-    Private Offset As Integer = 0
+    Private _isInitializing As Boolean = False
     Private Sub ResetDataTerpilih()
 
         _idProsesTerpilih = 0
@@ -325,7 +318,9 @@ Public Class uf_penilaianinterview
 
     End Sub
     Private Sub LoadData()
-
+        If dgvPenilaian.Columns.Count = 0 Then
+            Exit Sub
+        End If
         Try
 
             Using conn As New MySqlConnection(sambung)
@@ -355,9 +350,7 @@ Public Class uf_penilaianinterview
                 '==========================================================
 
                 If Not String.IsNullOrWhiteSpace(_keywordCari) Then
-
                     kondisi &= " AND (k.ffcnokandidat LIKE @keyword OR k.ffcnama LIKE @keyword OR CAST(r.ffcidrekrutmen AS CHAR) LIKE @keyword)"
-
                 End If
 
 
@@ -366,9 +359,7 @@ Public Class uf_penilaianinterview
                 '==========================================================
 
                 If Not String.IsNullOrWhiteSpace(_tahapCari) Then
-
                     kondisi &= " AND s.ffctahap = @tahap"
-
                 End If
 
 
@@ -377,9 +368,7 @@ Public Class uf_penilaianinterview
                 '==========================================================
 
                 If Not String.IsNullOrWhiteSpace(_statusCari) Then
-
                     kondisi &= " AND s.ffcstatus = @status"
-
                 End If
 
 
@@ -390,57 +379,58 @@ Public Class uf_penilaianinterview
                 Dim sqlCount As String = "SELECT COUNT(*) FROM saprosesseleksi s INNER JOIN sakandidatrekrutmen r ON s.ffcidrekrutmen = r.ffcidrekrutmen INNER JOIN sakandidat k ON s.ffcidkandidat = k.ffcidkandidat " &
                 "LEFT JOIN sapermintaankaryawan p ON r.ffcidpermintaan = p.ffcidpermintaan " & kondisi
 
+
                 Using cmdCount As New MySqlCommand(sqlCount, conn)
+
+                    '======================================================
+                    ' PARAMETER SEARCH
+                    '======================================================
+
                     If Not String.IsNullOrWhiteSpace(_keywordCari) Then
                         cmdCount.Parameters.AddWithValue("@keyword", "%" & _keywordCari & "%")
                     End If
+
+
+                    '======================================================
+                    ' PARAMETER TAHAP
+                    '======================================================
+
                     If Not String.IsNullOrWhiteSpace(_tahapCari) Then
                         cmdCount.Parameters.AddWithValue("@tahap", _tahapCari)
                     End If
+
+
+                    '======================================================
+                    ' PARAMETER STATUS
+                    '======================================================
+
                     If Not String.IsNullOrWhiteSpace(_statusCari) Then
                         cmdCount.Parameters.AddWithValue("@status", _statusCari)
                     End If
-                    TotalRecord = Convert.ToInt32(cmdCount.ExecuteScalar())
+
+
+                    '======================================================
+                    ' TOTAL RECORD
+                    '======================================================
+
+                    Dim hasilCount As Object =
+                    cmdCount.ExecuteScalar()
+
+                    If hasilCount Is Nothing OrElse IsDBNull(hasilCount) Then
+                        paginationInterview.TotalRecord = 0
+                    Else
+                        paginationInterview.TotalRecord = Convert.ToInt32(hasilCount)
+                    End If
+
                 End Using
-
-
-                '==========================================================
-                ' HITUNG TOTAL PAGE
-                '==========================================================
-
-                If TotalRecord > 0 Then
-                    TotalPage = CInt(Math.Ceiling(TotalRecord / CDbl(PageSize)))
-                Else
-                    TotalPage = 1
-                End If
-
-
-                '==========================================================
-                ' PASTIKAN CURRENT PAGE VALID
-                '==========================================================
-
-                If CurrentPage < 1 Then
-                    CurrentPage = 1
-                End If
-
-                If CurrentPage > TotalPage Then
-                    CurrentPage = TotalPage
-                End If
-
-
-                '==========================================================
-                ' HITUNG OFFSET
-                '==========================================================
-
-                Offset = (CurrentPage - 1) * PageSize
 
 
                 '==========================================================
                 ' QUERY DATA
                 '==========================================================
 
-                Dim sql As String = "SELECT s.ffcidproses, s.ffcidrekrutmen, s.ffcidkandidat, k.ffcnokandidat, k.ffcnama, p.ffckddepart AS department, p.ffckdbagian AS bagian,p.ffckdjabatan AS jabatan, " &
-                "s.ffctahap, s.ffdjadwal, s.ffcinterviewer, s.ffcstatus,s.ffcnilai,s.ffchasil FROM saprosesseleksi s INNER JOIN sakandidatrekrutmen r ON s.ffcidrekrutmen = r.ffcidrekrutmen " &
+                Dim sql As String = "SELECT s.ffcidproses, s.ffcidrekrutmen, s.ffcidkandidat,k.ffcnokandidat,k.ffcnama,p.ffckddepart AS department, p.ffckdbagian AS bagian, p.ffckdjabatan AS jabatan, " &
+                "s.ffctahap, s.ffdjadwal, s.ffcinterviewer, s.ffcstatus, s.ffcnilai, s.ffchasil FROM saprosesseleksi s INNER JOIN sakandidatrekrutmen r ON s.ffcidrekrutmen = r.ffcidrekrutmen " &
                 "INNER JOIN sakandidat k ON s.ffcidkandidat = k.ffcidkandidat LEFT JOIN sapermintaankaryawan p ON r.ffcidpermintaan = p.ffcidpermintaan " & kondisi & " ORDER BY " &
                 "CASE WHEN s.ffdjadwal IS NULL THEN 1 ELSE 0 END, s.ffdjadwal DESC, s.ffcidproses DESC LIMIT @limit OFFSET @offset"
 
@@ -448,7 +438,7 @@ Public Class uf_penilaianinterview
                 Using cmd As New MySqlCommand(sql, conn)
 
                     '======================================================
-                    ' PARAMETER FILTER
+                    ' SEARCH
                     '======================================================
 
                     If Not String.IsNullOrWhiteSpace(_keywordCari) Then
@@ -456,9 +446,19 @@ Public Class uf_penilaianinterview
                     End If
 
 
+                    '======================================================
+                    ' TAHAP
+                    '======================================================
+
                     If Not String.IsNullOrWhiteSpace(_tahapCari) Then
                         cmd.Parameters.AddWithValue("@tahap", _tahapCari)
+
                     End If
+
+
+                    '======================================================
+                    ' STATUS
+                    '======================================================
 
                     If Not String.IsNullOrWhiteSpace(_statusCari) Then
                         cmd.Parameters.AddWithValue("@status", _statusCari)
@@ -468,20 +468,21 @@ Public Class uf_penilaianinterview
                     '======================================================
                     ' PAGINATION
                     '======================================================
-                    cmd.Parameters.AddWithValue("@limit", PageSize)
-                    cmd.Parameters.AddWithValue("@offset", Offset)
+
+                    cmd.Parameters.AddWithValue("@limit", paginationInterview.PageSize)
+
+                    cmd.Parameters.AddWithValue("@offset", paginationInterview.Offset)
 
 
                     '======================================================
-                    ' BACA DATA
+                    ' EXECUTE
                     '======================================================
 
                     Using rd As MySqlDataReader = cmd.ExecuteReader()
-
                         While rd.Read()
-
                             Dim rowIndex As Integer = dgvPenilaian.Rows.Add()
                             Dim row As DataGridViewRow = dgvPenilaian.Rows(rowIndex)
+
 
                             '==================================================
                             ' ID
@@ -490,37 +491,42 @@ Public Class uf_penilaianinterview
                             row.Cells("ffcidrekrutmen").Value = rd("ffcidrekrutmen")
                             row.Cells("ffcidkandidat").Value = rd("ffcidkandidat")
 
-
                             '==================================================
-                            ' KANDIDAT
+                            ' NO KANDIDAT
                             '==================================================
                             row.Cells("ffcnokandidat").Value = If(IsDBNull(rd("ffcnokandidat")), "", rd("ffcnokandidat").ToString())
-                            row.Cells("ffcnama").Value = If(IsDBNull(rd("ffcnama")), "", rd("ffcnama").ToString())
 
+
+                            '==================================================
+                            ' NAMA
+                            '==================================================
+
+                            row.Cells("ffcnama").Value = If(IsDBNull(rd("ffcnama")), "", rd("ffcnama").ToString())
 
                             '==================================================
                             ' DEPARTMENT
                             '==================================================
-                            row.Cells("department").Value = If(IsDBNull(rd("department")), "", rd("department").ToString())
 
+                            row.Cells("department").Value = If(IsDBNull(rd("department")), "", rd("department").ToString())
 
                             '==================================================
                             ' BAGIAN
                             '==================================================
+
                             row.Cells("bagian").Value = If(IsDBNull(rd("bagian")), "", rd("bagian").ToString())
+
 
                             '==================================================
                             ' JABATAN
                             '==================================================
-                            row.Cells("jabatan").Value = If(IsDBNull(rd("jabatan")), "", rd("jabatan").ToString())
 
+                            row.Cells("jabatan").Value = If(IsDBNull(rd("jabatan")), "", rd("jabatan").ToString())
 
                             '==================================================
                             ' TAHAP
                             '==================================================
 
                             row.Cells("ffctahap").Value = If(IsDBNull(rd("ffctahap")), "", rd("ffctahap").ToString())
-
 
                             '==================================================
                             ' JADWAL
@@ -550,6 +556,7 @@ Public Class uf_penilaianinterview
                             '==================================================
 
                             row.Cells("ffcnilai").Value = If(IsDBNull(rd("ffcnilai")), "", rd("ffcnilai").ToString())
+
                             '==================================================
                             ' HASIL
                             '==================================================
@@ -560,12 +567,12 @@ Public Class uf_penilaianinterview
                 End Using
             End Using
 
+
             '==============================================================
-            ' UPDATE INFO PAGINATION
+            ' UPDATE INFO
             '==============================================================
 
             UpdateInfoPagination()
-
 
         Catch ex As Exception
             PesanPopupError("ERROR", "Gagal memuat data penilaian interview: " & ex.Message)
@@ -573,32 +580,37 @@ Public Class uf_penilaianinterview
 
     End Sub
     Private Sub UpdateInfoPagination()
-
-        If TotalRecord <= 0 Then
+        If paginationInterview.TotalRecord <= 0 Then
             lblInfo.Text = "Menampilkan 0 - 0 dari 0 Data"
             Return
+
         End If
-        Dim startRecord As Integer = ((CurrentPage - 1) * PageSize) + 1
-        Dim endRecord As Integer = Math.Min(CurrentPage * PageSize, TotalRecord)
-        lblInfo.Text = "Menampilkan " & startRecord & " - " & endRecord & " dari " & TotalRecord & " Data"
+        lblInfo.Text = "Menampilkan " & paginationInterview.StartRecord & " - " & paginationInterview.EndRecord & " dari " & paginationInterview.TotalRecord & " Data"
 
     End Sub
+    Private Sub paginationInterview_PageChanged(sender As Object, e As EventArgs) Handles paginationInterview.PageChanged
+        If _isInitializing Then Exit Sub
+        LoadData()
+
+    End Sub
+
     Private Sub cTahap_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cTahap.SelectedIndexChanged
+        If _isInitializing Then Exit Sub
 
         If cTahap.SelectedIndex <= 0 Then
             _tahapCari = ""
         Else
-
             _tahapCari = cTahap.Text.Trim().ToUpper()
-
         End If
-        CurrentPage = 1
-        Offset = 0
 
+        paginationInterview.CurrentPage = 1
         LoadData()
 
     End Sub
     Private Sub cstatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cstatus.SelectedIndexChanged
+
+        ' Cegah fungsi berjalan saat inisialisasi awal
+        If _isInitializing Then Exit Sub
 
         If cstatus.SelectedIndex <= 0 Then
             _statusCari = ""
@@ -606,10 +618,7 @@ Public Class uf_penilaianinterview
             _statusCari = cstatus.Text.Trim().ToUpper()
         End If
 
-
-        CurrentPage = 1
-        Offset = 0
-
+        paginationInterview.CurrentPage = 1
         LoadData()
 
     End Sub
@@ -678,12 +687,24 @@ Public Class uf_penilaianinterview
     End Sub
     Private Sub uf_penilaianinterview_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
+            _isInitializing = True
+
             SetupGrid()
             SetupComboTahap()
             SetupComboStatus()
 
-            CurrentPage = 1
-            Offset = 0
+            paginationInterview.PageSize = 10
+            paginationInterview.CurrentPage = 1
+            paginationInterview.TotalRecord = 0
+
+            _keywordCari = ""
+            _tahapCari = ""
+            _statusCari = ""
+
+            ' 2. Matikan flag setelah semua setup komponen selesai
+            _isInitializing = False
+
+            ' 3. Panggil LoadData secara manual satu kali di akhir
             LoadData()
         Catch ex As Exception
             PesanPopupError("ERROR", "Gagal membuka menu Penilaian Interview: " & ex.Message)
@@ -692,5 +713,80 @@ Public Class uf_penilaianinterview
 
     End Sub
 
+    Private Sub bCari_Click(sender As Object, e As EventArgs) Handles bCari.Click
+        '==========================================================
+        ' AMBIL KEYWORD
+        '==========================================================
 
+        _keywordCari = tPencarian.Text.Trim()
+
+
+        '==========================================================
+        ' KEMBALI KE HALAMAN 1
+        '==========================================================
+
+        paginationInterview.CurrentPage = 1
+
+
+        '==========================================================
+        ' LOAD DATA
+        '==========================================================
+
+        LoadData()
+    End Sub
+    Private Sub tPencarian_KeyDown(sender As Object, e As KeyEventArgs) Handles tPencarian.KeyDown
+
+        If e.KeyCode = Keys.Enter Then
+
+            e.SuppressKeyPress = True
+            e.Handled = True
+
+            bCari.PerformClick()
+
+        End If
+
+    End Sub
+
+    Private Sub bRefresh_Click(sender As Object, e As EventArgs) Handles bRefresh.Click
+        '==========================================================
+        ' RESET KEYWORD
+        '==========================================================
+
+        tPencarian.Clear()
+
+
+        '==========================================================
+        ' RESET VARIABLE SEARCH
+        '==========================================================
+
+        _keywordCari = ""
+        _tahapCari = ""
+        _statusCari = ""
+
+
+        '==========================================================
+        ' RESET COMBO
+        '==========================================================
+
+        _isInitializing = True
+
+        cTahap.SelectedIndex = 0
+        cstatus.SelectedIndex = 0
+
+        _isInitializing = False
+
+
+        '==========================================================
+        ' KEMBALI KE HALAMAN 1
+        '==========================================================
+
+        paginationInterview.CurrentPage = 1
+
+
+        '==========================================================
+        ' LOAD DATA
+        '==========================================================
+
+        LoadData()
+    End Sub
 End Class

@@ -7,7 +7,7 @@ Imports SIKAP.f_pesan
 Module Sambungan
     Public sambung As String = ConfigurationManager.ConnectionStrings("KoneksiDB").ConnectionString
 
-    '  Public sambung As String = "server=localhost;user id=root;database=salary_new; password= danang;Convert Zero Datetime=True;pooling=false;connection Timeout=3600"
+    'Public sambung As String = "server=localhost;user id=root;database=salary_new; password= danang;Convert Zero Datetime=True;pooling=false;connection Timeout=3600"
     'Public sambung As String = "server=192.168.1.87;user id=server;database=salary; password= danang;Convert Zero Datetime=True;pooling=false;connection Timeout=3600"
     Public Sub ApplyGridTheme(ByVal grid As Guna2DataGridView)
 
