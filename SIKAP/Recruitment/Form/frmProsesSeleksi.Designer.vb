@@ -82,6 +82,7 @@ Partial Class frmProsesSeleksi
         Me.flpFooterButton = New System.Windows.Forms.FlowLayoutPanel()
         Me.bBatal = New Guna.UI2.WinForms.Guna2Button()
         Me.bSimpan = New Guna.UI2.WinForms.Guna2Button()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.pnlFooterLine = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlHeader = New Guna.UI2.WinForms.Guna2Panel()
         Me.bClose = New Guna.UI2.WinForms.Guna2Button()
@@ -89,7 +90,6 @@ Partial Class frmProsesSeleksi
         Me.pnlHeaderLine = New Guna.UI2.WinForms.Guna2Panel()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
-        Me.Label15 = New System.Windows.Forms.Label()
         Me.pnlMain.SuspendLayout()
         Me.pnlBody.SuspendLayout()
         Me.Guna2Panel4.SuspendLayout()
@@ -914,6 +914,17 @@ Partial Class frmProsesSeleksi
         Me.bSimpan.TabIndex = 2
         Me.bSimpan.Text = "Simpan"
         '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label15.Location = New System.Drawing.Point(205, 14)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(10, 15)
+        Me.Label15.TabIndex = 8
+        Me.Label15.Text = ":"
+        '
         'pnlFooterLine
         '
         Me.pnlFooterLine.BackColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
@@ -993,17 +1004,6 @@ Partial Class frmProsesSeleksi
         'Guna2Elipse1
         '
         Me.Guna2Elipse1.TargetControl = Me
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.Label15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
-        Me.Label15.Location = New System.Drawing.Point(205, 14)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(10, 15)
-        Me.Label15.TabIndex = 8
-        Me.Label15.Text = ":"
         '
         'frmProsesSeleksi
         '

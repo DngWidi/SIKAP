@@ -15,6 +15,7 @@ Public Class uf_penilaianinterview
     Private _idProsesTerpilih As Long = 0
     Private _idRekrutmenTerpilih As Long = 0
     Private _idKandidatTerpilih As Long = 0
+    Private _statusTerpilih As String = ""
 
     Private _isInitializing As Boolean = False
     Private Sub ResetDataTerpilih()
@@ -22,9 +23,10 @@ Public Class uf_penilaianinterview
         _idProsesTerpilih = 0
         _idRekrutmenTerpilih = 0
         _idKandidatTerpilih = 0
+        _statusTerpilih = ""
 
         dgvPenilaian.ClearSelection()
-
+        UpdateActionButtons()
     End Sub
     Private Sub SetupComboTahap()
 
@@ -623,68 +625,249 @@ Public Class uf_penilaianinterview
 
     End Sub
     Private Sub dgvPenilaian_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPenilaian.CellClick
+        '==========================================================
+        ' VALIDASI ROW
+        '==========================================================
+
         If e.RowIndex < 0 Then
+
+            _idProsesTerpilih = 0
+            _idRekrutmenTerpilih = 0
+            _idKandidatTerpilih = 0
+            _statusTerpilih = ""
+
+            UpdateActionButtons()
+
             Exit Sub
+
         End If
+
+
         Dim row As DataGridViewRow = dgvPenilaian.Rows(e.RowIndex)
 
-        If row.Cells("ffcidproses").Value Is Nothing Then
+
+        '==========================================================
+        ' VALIDASI ID PROSES
+        '==========================================================
+
+        If row.Cells("ffcidproses").Value Is Nothing OrElse IsDBNull(row.Cells("ffcidproses").Value) Then
+            _idProsesTerpilih = 0
+            _idRekrutmenTerpilih = 0
+            _idKandidatTerpilih = 0
+            _statusTerpilih = ""
+
+            UpdateActionButtons()
+
             Exit Sub
+
         End If
 
-        _idProsesTerpilih = Convert.ToInt64(row.Cells("ffcidproses").Value)
-        _idRekrutmenTerpilih = Convert.ToInt64(row.Cells("ffcidrekrutmen").Value)
-        _idKandidatTerpilih = Convert.ToInt64(row.Cells("ffcidkandidat").Value)
+
+        '==========================================================
+        ' AMBIL ID PROSES
+        '==========================================================
+
+        Long.TryParse(row.Cells("ffcidproses").Value.ToString(), _idProsesTerpilih)
+
+
+        '==========================================================
+        ' AMBIL ID REKRUTMEN
+        '==========================================================
+
+        If row.Cells("ffcidrekrutmen").Value IsNot Nothing AndAlso Not IsDBNull(row.Cells("ffcidrekrutmen").Value) Then
+            Long.TryParse(row.Cells("ffcidrekrutmen").Value.ToString(), _idRekrutmenTerpilih)
+        Else
+            _idRekrutmenTerpilih = 0
+        End If
+
+
+        '==========================================================
+        ' AMBIL ID KANDIDAT
+        '==========================================================
+
+        If row.Cells("ffcidkandidat").Value IsNot Nothing AndAlso Not IsDBNull(row.Cells("ffcidkandidat").Value) Then
+            Long.TryParse(row.Cells("ffcidkandidat").Value.ToString(), _idKandidatTerpilih)
+
+        Else
+            _idKandidatTerpilih = 0
+        End If
+
+
+        '==========================================================
+        ' AMBIL STATUS
+        '==========================================================
+
+        If row.Cells("ffcstatus").Value IsNot Nothing AndAlso Not IsDBNull(row.Cells("ffcstatus").Value) Then
+            _statusTerpilih = row.Cells("ffcstatus").Value.ToString().Trim().ToUpper()
+        Else
+            _statusTerpilih = ""
+        End If
+
+        '==========================================================
+        ' UPDATE BUTTON
+        '==========================================================
+
+        UpdateActionButtons()
+
+    End Sub
+    Private Sub UpdateActionButtons()
+
+        '==========================================================
+        ' DEFAULT
+        '==========================================================
+
+        bEdit.Enabled = False
+        bDetail.Enabled = False
+
+
+        '==========================================================
+        ' TIDAK ADA DATA TERPILIH
+        '==========================================================
+
+        If _idProsesTerpilih <= 0 Then
+            Return
+        End If
+
+
+        '==========================================================
+        ' DETAIL SELALU BOLEH
+        '==========================================================
+
+        bDetail.Enabled = True
+
+
+        '==========================================================
+        ' TENTUKAN STATUS PROSES
+        '==========================================================
+
+        Select Case _statusTerpilih
+
+        '======================================================
+        ' PROSES BELUM FINAL
+        '======================================================
+
+            Case "WAITING", "SCHEDULED", "PROCESS"
+                bEdit.Enabled = True
+
+        '======================================================
+        ' PROSES SUDAH FINAL
+        '======================================================
+
+            Case "PASSED", "FAILED", "CANCELLED"
+                bEdit.Enabled = False
+
+                '======================================================
+                ' STATUS TIDAK DIKENAL
+                '======================================================
+
+            Case Else
+
+                bEdit.Enabled = False
+
+        End Select
 
     End Sub
     Private Sub bEdit_Click(sender As Object, e As EventArgs) Handles bEdit.Click
 
+        '==========================================================
+        ' VALIDASI DATA
+        '==========================================================
+
         If _idProsesTerpilih <= 0 Then
-            PesanPopupPeringatan("Peringatan", "Silakan pilih kandidat terlebih dahulu.")
+            PesanPopupPeringatan("Peringatan", "Silakan pilih proses interview terlebih dahulu.")
             Exit Sub
 
         End If
 
 
-        Dim frm As New frmPenilaianInterviewAdd()
-        frm.IdProses = _idProsesTerpilih
-        frm.IdRekrutmen = _idRekrutmenTerpilih
-        frm.IdKandidat = _idKandidatTerpilih
-        frm.ModeForm = "Edit"
+        '==========================================================
+        ' VALIDASI STATUS
+        '==========================================================
 
-        If frm.ShowDialog() = DialogResult.OK Then
-            LoadData()
-            _idProsesTerpilih = 0
-            _idRekrutmenTerpilih = 0
-            _idKandidatTerpilih = 0
+        Select Case _statusTerpilih
 
-        End If
+            Case "WAITING", "SCHEDULED", "PROCESS"
+                            'Boleh lanjut
+            Case "PASSED", "FAILED", "CANCELLED"
+                PesanPopupPeringatan("Informasi", "Proses interview dengan status " & _statusTerpilih & " sudah selesai dan tidak dapat dinilai kembali.")
+                Exit Sub
+            Case Else
+                PesanPopupPeringatan("Peringatan", "Status proses interview tidak dikenali.")
+                Exit Sub
+
+        End Select
+
+
+        '==========================================================
+        ' BUKA FORM PENILAIAN
+        '==========================================================
+
+        Try
+
+            Using frm As New frmPenilaianInterviewAdd()
+
+                frm.IdProses = _idProsesTerpilih
+                frm.IdRekrutmen = _idRekrutmenTerpilih
+                frm.IdKandidat = _idKandidatTerpilih
+                frm.ModeForm = "Edit"
+
+                If frm.ShowDialog() = DialogResult.OK Then
+
+                    LoadData()
+
+                    _idProsesTerpilih = 0
+                    _idRekrutmenTerpilih = 0
+                    _idKandidatTerpilih = 0
+                    _statusTerpilih = ""
+
+                    UpdateActionButtons()
+
+                End If
+
+            End Using
+
+        Catch ex As Exception
+            PesanPopupError("ERROR", "Gagal membuka penilaian interview." & vbCrLf & ex.Message)
+        End Try
 
     End Sub
     Private Sub bDetail_Click(sender As Object, e As EventArgs) Handles bDetail.Click
 
         If _idProsesTerpilih <= 0 Then
-            PesanPopupPeringatan("Peringatan", "Silakan pilih kandidat terlebih dahulu.")
+            PesanPopupPeringatan("Peringatan", "Silakan pilih proses interview terlebih dahulu.")
             Exit Sub
 
         End If
-        Dim frm As New frmPenilaianInterviewAdd()
-        frm.IdProses = _idProsesTerpilih
-        frm.IdRekrutmen = _idRekrutmenTerpilih
-        frm.IdKandidat = _idKandidatTerpilih
-        frm.ModeForm = "View"
-        frm.ShowDialog()
+
+
+        Try
+
+            Using frm As New frmPenilaianInterviewAdd()
+
+                frm.IdProses = _idProsesTerpilih
+                frm.IdRekrutmen = _idRekrutmenTerpilih
+                frm.IdKandidat = _idKandidatTerpilih
+                frm.ModeForm = "View"
+
+                frm.ShowDialog()
+            End Using
+        Catch ex As Exception
+            PesanPopupError("ERROR", "Gagal membuka detail interview." & vbCrLf & ex.Message)
+
+        End Try
 
     End Sub
-    Private Sub dgvPenilaian_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPenilaian.CellDoubleClick
 
-        If e.RowIndex < 0 Then
-            Exit Sub
-        End If
-        dgvPenilaian.Rows(e.RowIndex).Selected = True
-        dgvPenilaian_CellClick(sender, e)
-        bEdit.PerformClick()
-    End Sub
+    '   Private Sub dgvPenilaian_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPenilaian.CellDoubleClick
+    '
+    '    If e.RowIndex < 0 Then
+    '    Exit Sub
+    '    End If
+    '        dgvPenilaian.Rows(e.RowIndex).Selected = True
+    '        dgvPenilaian_CellClick(sender, e)
+    '        bEdit.PerformClick()
+    '    End Sub
+
     Private Sub uf_penilaianinterview_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             _isInitializing = True
@@ -789,4 +972,6 @@ Public Class uf_penilaianinterview
 
         LoadData()
     End Sub
+
+
 End Class

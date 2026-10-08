@@ -215,6 +215,12 @@
     <Compile Include="Recruitment\Form\frmKeahlianAdd.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Recruitment\Form\frmPenawaranKerjaAdd.Designer.vb">
+      <DependentUpon>frmPenawaranKerjaAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\Form\frmPenawaranKerjaAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Recruitment\Form\frmPendidikanAdd.Designer.vb">
       <DependentUpon>frmPendidikanAdd.vb</DependentUpon>
     </Compile>
@@ -262,6 +268,12 @@
     </Compile>
     <Compile Include="Recruitment\Form\frmSertifikatAdd.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recruitment\Form\uf_penawarankerja.Designer.vb">
+      <DependentUpon>uf_penawarankerja.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Recruitment\Form\uf_penawarankerja.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Recruitment\uf_kandidat.Designer.vb">
       <DependentUpon>uf_kandidat.vb</DependentUpon>
@@ -356,6 +368,9 @@
     <EmbeddedResource Include="Recruitment\Form\frmKeahlianAdd.resx">
       <DependentUpon>frmKeahlianAdd.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\Form\frmPenawaranKerjaAdd.resx">
+      <DependentUpon>frmPenawaranKerjaAdd.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Recruitment\Form\frmPendidikanAdd.resx">
       <DependentUpon>frmPendidikanAdd.vb</DependentUpon>
     </EmbeddedResource>
@@ -379,6 +394,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Recruitment\Form\frmSertifikatAdd.resx">
       <DependentUpon>frmSertifikatAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recruitment\Form\uf_penawarankerja.resx">
+      <DependentUpon>uf_penawarankerja.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Recruitment\uf_kandidat.resx">
       <DependentUpon>uf_kandidat.vb</DependentUpon>
@@ -530,6 +548,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Gambar\Camera.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Recruitment\Report\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

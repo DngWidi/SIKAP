@@ -251,21 +251,14 @@ Public Class frmPengalamanAdd
     Private Sub KontrolT_KeyPress(sender As Object, e As KeyPressEventArgs) Handles _
        tjabatan.KeyPress, tperusahaan.KeyPress, talasanberhenti.KeyPress, tketerangan.KeyPress
         If e.KeyChar = ChrW(Keys.Enter) Then
-
             SendKeys.Send("{TAB}")
-
             e.Handled = True
-
             Exit Sub
-
         End If
-
 
         ' Blokir karakter tanda kutip tunggal
         If e.KeyChar = "'"c Then
-
             e.Handled = True
-
         End If
     End Sub
     Private Sub KontrolA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles _

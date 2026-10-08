@@ -27,6 +27,7 @@ Partial Class frmPenilaianInterviewAdd
         Me.pnlBody = New Guna.UI2.WinForms.Guna2Panel()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Guna2Panel3 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.nNilai = New Guna.UI2.WinForms.Guna2NumericUpDown()
         Me.Label36 = New System.Windows.Forms.Label()
         Me.tcatatan = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label35 = New System.Windows.Forms.Label()
@@ -37,6 +38,7 @@ Partial Class frmPenilaianInterviewAdd
         Me.Label31 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.lInterview = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.lTglJadwal = New System.Windows.Forms.Label()
@@ -87,17 +89,15 @@ Partial Class frmPenilaianInterviewAdd
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.pnlHeaderLine = New Guna.UI2.WinForms.Guna2Panel()
         Me.lblTitle = New System.Windows.Forms.Label()
-        Me.nNilai = New Guna.UI2.WinForms.Guna2NumericUpDown()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
-        Me.lInterview = New Guna.UI2.WinForms.Guna2TextBox()
         Me.pnlMain.SuspendLayout()
         Me.pnlBody.SuspendLayout()
         Me.Guna2Panel3.SuspendLayout()
+        CType(Me.nNilai, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2Panel2.SuspendLayout()
         Me.Guna2Panel1.SuspendLayout()
         Me.pnlFooter.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
-        CType(Me.nNilai, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlMain
@@ -160,6 +160,26 @@ Partial Class frmPenilaianInterviewAdd
         Me.Guna2Panel3.ShadowDecoration.Parent = Me.Guna2Panel3
         Me.Guna2Panel3.Size = New System.Drawing.Size(497, 216)
         Me.Guna2Panel3.TabIndex = 22
+        '
+        'nNilai
+        '
+        Me.nNilai.BackColor = System.Drawing.Color.Transparent
+        Me.nNilai.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.nNilai.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.nNilai.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.nNilai.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.nNilai.DisabledState.Parent = Me.nNilai
+        Me.nNilai.DisabledState.UpDownButtonFillColor = System.Drawing.Color.FromArgb(CType(CType(177, Byte), Integer), CType(CType(177, Byte), Integer), CType(CType(177, Byte), Integer))
+        Me.nNilai.DisabledState.UpDownButtonForeColor = System.Drawing.Color.FromArgb(CType(CType(203, Byte), Integer), CType(CType(203, Byte), Integer), CType(CType(203, Byte), Integer))
+        Me.nNilai.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.nNilai.FocusedState.Parent = Me.nNilai
+        Me.nNilai.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nNilai.ForeColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
+        Me.nNilai.Location = New System.Drawing.Point(140, 8)
+        Me.nNilai.Name = "nNilai"
+        Me.nNilai.ShadowDecoration.Parent = Me.nNilai
+        Me.nNilai.Size = New System.Drawing.Size(347, 36)
+        Me.nNilai.TabIndex = 10
         '
         'Label36
         '
@@ -316,6 +336,29 @@ Partial Class frmPenilaianInterviewAdd
         Me.Guna2Panel2.ShadowDecoration.Parent = Me.Guna2Panel2
         Me.Guna2Panel2.Size = New System.Drawing.Size(497, 220)
         Me.Guna2Panel2.TabIndex = 19
+        '
+        'lInterview
+        '
+        Me.lInterview.BorderRadius = 8
+        Me.lInterview.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.lInterview.DefaultText = ""
+        Me.lInterview.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.lInterview.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.lInterview.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.lInterview.DisabledState.Parent = Me.lInterview
+        Me.lInterview.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.lInterview.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lInterview.FocusedState.Parent = Me.lInterview
+        Me.lInterview.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lInterview.HoverState.Parent = Me.lInterview
+        Me.lInterview.Location = New System.Drawing.Point(138, 186)
+        Me.lInterview.Name = "lInterview"
+        Me.lInterview.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.lInterview.PlaceholderText = ""
+        Me.lInterview.SelectedText = ""
+        Me.lInterview.ShadowDecoration.Parent = Me.lInterview
+        Me.lInterview.Size = New System.Drawing.Size(350, 31)
+        Me.lInterview.TabIndex = 23
         '
         'Label28
         '
@@ -915,52 +958,9 @@ Partial Class frmPenilaianInterviewAdd
         Me.lblTitle.TabIndex = 0
         Me.lblTitle.Text = "Detail Interview"
         '
-        'nNilai
-        '
-        Me.nNilai.BackColor = System.Drawing.Color.Transparent
-        Me.nNilai.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.nNilai.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.nNilai.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.nNilai.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.nNilai.DisabledState.Parent = Me.nNilai
-        Me.nNilai.DisabledState.UpDownButtonFillColor = System.Drawing.Color.FromArgb(CType(CType(177, Byte), Integer), CType(CType(177, Byte), Integer), CType(CType(177, Byte), Integer))
-        Me.nNilai.DisabledState.UpDownButtonForeColor = System.Drawing.Color.FromArgb(CType(CType(203, Byte), Integer), CType(CType(203, Byte), Integer), CType(CType(203, Byte), Integer))
-        Me.nNilai.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.nNilai.FocusedState.Parent = Me.nNilai
-        Me.nNilai.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.nNilai.ForeColor = System.Drawing.Color.FromArgb(CType(CType(126, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
-        Me.nNilai.Location = New System.Drawing.Point(140, 8)
-        Me.nNilai.Name = "nNilai"
-        Me.nNilai.ShadowDecoration.Parent = Me.nNilai
-        Me.nNilai.Size = New System.Drawing.Size(347, 36)
-        Me.nNilai.TabIndex = 10
-        '
         'Guna2Elipse1
         '
         Me.Guna2Elipse1.TargetControl = Me
-        '
-        'lInterview
-        '
-        Me.lInterview.BorderRadius = 8
-        Me.lInterview.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.lInterview.DefaultText = ""
-        Me.lInterview.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.lInterview.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.lInterview.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.lInterview.DisabledState.Parent = Me.lInterview
-        Me.lInterview.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.lInterview.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lInterview.FocusedState.Parent = Me.lInterview
-        Me.lInterview.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lInterview.HoverState.Parent = Me.lInterview
-        Me.lInterview.Location = New System.Drawing.Point(138, 186)
-        Me.lInterview.Name = "lInterview"
-        Me.lInterview.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.lInterview.PlaceholderText = ""
-        Me.lInterview.SelectedText = ""
-        Me.lInterview.ShadowDecoration.Parent = Me.lInterview
-        Me.lInterview.Size = New System.Drawing.Size(350, 31)
-        Me.lInterview.TabIndex = 23
         '
         'frmPenilaianInterviewAdd
         '
@@ -981,6 +981,7 @@ Partial Class frmPenilaianInterviewAdd
         Me.pnlBody.PerformLayout()
         Me.Guna2Panel3.ResumeLayout(False)
         Me.Guna2Panel3.PerformLayout()
+        CType(Me.nNilai, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2Panel2.ResumeLayout(False)
         Me.Guna2Panel2.PerformLayout()
         Me.Guna2Panel1.ResumeLayout(False)
@@ -988,7 +989,6 @@ Partial Class frmPenilaianInterviewAdd
         Me.pnlFooter.ResumeLayout(False)
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
-        CType(Me.nNilai, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

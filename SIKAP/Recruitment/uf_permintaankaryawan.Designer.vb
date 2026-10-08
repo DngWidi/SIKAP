@@ -22,30 +22,30 @@ Partial Class uf_permintaankaryawan
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(uf_permintaankaryawan))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(uf_permintaankaryawan))
         Me.pnlContext = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlButton = New Guna.UI2.WinForms.Guna2Panel()
+        Me.pnlPage = New Guna.UI2.WinForms.Guna2Panel()
+        Me.paginationPermintaan = New SIKAP.ucPagination()
+        Me.lblInfo = New System.Windows.Forms.Label()
+        Me.dgvPermintaan = New Guna.UI2.WinForms.Guna2DataGridView()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.pnlToolbar = New Guna.UI2.WinForms.Guna2Panel()
+        Me.cstatus = New Guna.UI2.WinForms.Guna2ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.bSubmit = New Guna.UI2.WinForms.Guna2Button()
         Me.bDetail = New Guna.UI2.WinForms.Guna2Button()
         Me.bHapus = New Guna.UI2.WinForms.Guna2Button()
         Me.bEdit = New Guna.UI2.WinForms.Guna2Button()
-        Me.pnlPage = New Guna.UI2.WinForms.Guna2Panel()
-        Me.lblInfo = New System.Windows.Forms.Label()
-        Me.dgvPermintaan = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.bTambah = New Guna.UI2.WinForms.Guna2Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.pnlToolbar = New Guna.UI2.WinForms.Guna2Panel()
-        Me.cstatus = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.bRefresh = New Guna.UI2.WinForms.Guna2Button()
         Me.bCari = New Guna.UI2.WinForms.Guna2Button()
         Me.tPencarian = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.paginationPermintaan = New SIKAP.ucPagination()
         Me.pnlContext.SuspendLayout()
         Me.pnlButton.SuspendLayout()
         Me.pnlPage.SuspendLayout()
@@ -89,6 +89,189 @@ Partial Class uf_permintaankaryawan
         Me.pnlButton.ShadowDecoration.Parent = Me.pnlButton
         Me.pnlButton.Size = New System.Drawing.Size(668, 362)
         Me.pnlButton.TabIndex = 4
+        '
+        'pnlPage
+        '
+        Me.pnlPage.BorderColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.pnlPage.BorderThickness = 1
+        Me.pnlPage.Controls.Add(Me.paginationPermintaan)
+        Me.pnlPage.Controls.Add(Me.lblInfo)
+        Me.pnlPage.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.pnlPage.Location = New System.Drawing.Point(0, 316)
+        Me.pnlPage.Name = "pnlPage"
+        Me.pnlPage.ShadowDecoration.Parent = Me.pnlPage
+        Me.pnlPage.Size = New System.Drawing.Size(668, 46)
+        Me.pnlPage.TabIndex = 4
+        '
+        'paginationPermintaan
+        '
+        Me.paginationPermintaan.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
+        Me.paginationPermintaan.CurrentPage = 1
+        Me.paginationPermintaan.Dock = System.Windows.Forms.DockStyle.Right
+        Me.paginationPermintaan.Location = New System.Drawing.Point(318, 0)
+        Me.paginationPermintaan.Name = "paginationPermintaan"
+        Me.paginationPermintaan.PageSize = 10
+        Me.paginationPermintaan.Size = New System.Drawing.Size(350, 46)
+        Me.paginationPermintaan.TabIndex = 1
+        Me.paginationPermintaan.TotalRecord = 0
+        '
+        'lblInfo
+        '
+        Me.lblInfo.AutoSize = True
+        Me.lblInfo.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInfo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(107, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.lblInfo.Location = New System.Drawing.Point(11, 18)
+        Me.lblInfo.Name = "lblInfo"
+        Me.lblInfo.Size = New System.Drawing.Size(177, 15)
+        Me.lblInfo.TabIndex = 0
+        Me.lblInfo.Text = "Menampilkan 1-10 dari 245 Data"
+        '
+        'dgvPermintaan
+        '
+        Me.dgvPermintaan.AllowUserToAddRows = False
+        Me.dgvPermintaan.AllowUserToDeleteRows = False
+        Me.dgvPermintaan.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+        Me.dgvPermintaan.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvPermintaan.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvPermintaan.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvPermintaan.BackgroundColor = System.Drawing.Color.White
+        Me.dgvPermintaan.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvPermintaan.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgvPermintaan.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(219, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(254, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvPermintaan.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvPermintaan.ColumnHeadersHeight = 24
+        Me.dgvPermintaan.Cursor = System.Windows.Forms.Cursors.Hand
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvPermintaan.DefaultCellStyle = DataGridViewCellStyle3
+        Me.dgvPermintaan.EnableHeadersVisualStyles = False
+        Me.dgvPermintaan.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.dgvPermintaan.Location = New System.Drawing.Point(3, 63)
+        Me.dgvPermintaan.MultiSelect = False
+        Me.dgvPermintaan.Name = "dgvPermintaan"
+        Me.dgvPermintaan.ReadOnly = True
+        Me.dgvPermintaan.RowHeadersVisible = False
+        Me.dgvPermintaan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvPermintaan.Size = New System.Drawing.Size(662, 228)
+        Me.dgvPermintaan.TabIndex = 3
+        Me.dgvPermintaan.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
+        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
+        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.Font = Nothing
+        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty
+        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty
+        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty
+        Me.dgvPermintaan.ThemeStyle.BackColor = System.Drawing.Color.White
+        Me.dgvPermintaan.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.dgvPermintaan.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.dgvPermintaan.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgvPermintaan.ThemeStyle.HeaderStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        Me.dgvPermintaan.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
+        Me.dgvPermintaan.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+        Me.dgvPermintaan.ThemeStyle.HeaderStyle.Height = 24
+        Me.dgvPermintaan.ThemeStyle.ReadOnly = True
+        Me.dgvPermintaan.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
+        Me.dgvPermintaan.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgvPermintaan.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        Me.dgvPermintaan.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.dgvPermintaan.ThemeStyle.RowsStyle.Height = 22
+        Me.dgvPermintaan.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.dgvPermintaan.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Label1.Location = New System.Drawing.Point(8, 6)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(237, 13)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Home   >    Recruitment >  Permintaan Karyawan"
+        '
+        'pnlToolbar
+        '
+        Me.pnlToolbar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlToolbar.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
+        Me.pnlToolbar.BorderColor = System.Drawing.Color.Gainsboro
+        Me.pnlToolbar.BorderRadius = 6
+        Me.pnlToolbar.BorderThickness = 1
+        Me.pnlToolbar.Controls.Add(Me.cstatus)
+        Me.pnlToolbar.Controls.Add(Me.bRefresh)
+        Me.pnlToolbar.Controls.Add(Me.bCari)
+        Me.pnlToolbar.Controls.Add(Me.tPencarian)
+        Me.pnlToolbar.Controls.Add(Me.Label4)
+        Me.pnlToolbar.Location = New System.Drawing.Point(11, 82)
+        Me.pnlToolbar.Name = "pnlToolbar"
+        Me.pnlToolbar.ShadowDecoration.Parent = Me.pnlToolbar
+        Me.pnlToolbar.Size = New System.Drawing.Size(668, 74)
+        Me.pnlToolbar.TabIndex = 3
+        '
+        'cstatus
+        '
+        Me.cstatus.BackColor = System.Drawing.Color.Transparent
+        Me.cstatus.BorderRadius = 6
+        Me.cstatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cstatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cstatus.FocusedColor = System.Drawing.Color.Empty
+        Me.cstatus.FocusedState.Parent = Me.cstatus
+        Me.cstatus.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cstatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
+        Me.cstatus.FormattingEnabled = True
+        Me.cstatus.HoverState.Parent = Me.cstatus
+        Me.cstatus.ItemHeight = 30
+        Me.cstatus.ItemsAppearance.Parent = Me.cstatus
+        Me.cstatus.Location = New System.Drawing.Point(288, 27)
+        Me.cstatus.Name = "cstatus"
+        Me.cstatus.ShadowDecoration.Parent = Me.cstatus
+        Me.cstatus.Size = New System.Drawing.Size(183, 36)
+        Me.cstatus.TabIndex = 4
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Yu Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(14, 10)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(96, 16)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "Cari Permintaan"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(14, 29)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(279, 30)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Data Permintaan Karyawan"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(110, Byte), Integer), CType(CType(119, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(16, 59)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(320, 17)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Kelola seluruh data permintaan karyawan perusahaan"
         '
         'bSubmit
         '
@@ -183,96 +366,6 @@ Partial Class uf_permintaankaryawan
         Me.bEdit.Text = "Edit"
         Me.bEdit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'pnlPage
-        '
-        Me.pnlPage.BorderColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.pnlPage.BorderThickness = 1
-        Me.pnlPage.Controls.Add(Me.paginationPermintaan)
-        Me.pnlPage.Controls.Add(Me.lblInfo)
-        Me.pnlPage.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlPage.Location = New System.Drawing.Point(0, 316)
-        Me.pnlPage.Name = "pnlPage"
-        Me.pnlPage.ShadowDecoration.Parent = Me.pnlPage
-        Me.pnlPage.Size = New System.Drawing.Size(668, 46)
-        Me.pnlPage.TabIndex = 4
-        '
-        'lblInfo
-        '
-        Me.lblInfo.AutoSize = True
-        Me.lblInfo.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblInfo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(107, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.lblInfo.Location = New System.Drawing.Point(11, 18)
-        Me.lblInfo.Name = "lblInfo"
-        Me.lblInfo.Size = New System.Drawing.Size(177, 15)
-        Me.lblInfo.TabIndex = 0
-        Me.lblInfo.Text = "Menampilkan 1-10 dari 245 Data"
-        '
-        'dgvPermintaan
-        '
-        Me.dgvPermintaan.AllowUserToAddRows = False
-        Me.dgvPermintaan.AllowUserToDeleteRows = False
-        Me.dgvPermintaan.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        Me.dgvPermintaan.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.dgvPermintaan.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvPermintaan.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvPermintaan.BackgroundColor = System.Drawing.Color.White
-        Me.dgvPermintaan.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.dgvPermintaan.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        Me.dgvPermintaan.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(219, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(254, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvPermintaan.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvPermintaan.ColumnHeadersHeight = 24
-        Me.dgvPermintaan.Cursor = System.Windows.Forms.Cursors.Hand
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvPermintaan.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dgvPermintaan.EnableHeadersVisualStyles = False
-        Me.dgvPermintaan.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.dgvPermintaan.Location = New System.Drawing.Point(3, 63)
-        Me.dgvPermintaan.MultiSelect = False
-        Me.dgvPermintaan.Name = "dgvPermintaan"
-        Me.dgvPermintaan.ReadOnly = True
-        Me.dgvPermintaan.RowHeadersVisible = False
-        Me.dgvPermintaan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvPermintaan.Size = New System.Drawing.Size(662, 228)
-        Me.dgvPermintaan.TabIndex = 3
-        Me.dgvPermintaan.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
-        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
-        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.Font = Nothing
-        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty
-        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty
-        Me.dgvPermintaan.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty
-        Me.dgvPermintaan.ThemeStyle.BackColor = System.Drawing.Color.White
-        Me.dgvPermintaan.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.dgvPermintaan.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvPermintaan.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        Me.dgvPermintaan.ThemeStyle.HeaderStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        Me.dgvPermintaan.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
-        Me.dgvPermintaan.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        Me.dgvPermintaan.ThemeStyle.HeaderStyle.Height = 24
-        Me.dgvPermintaan.ThemeStyle.ReadOnly = True
-        Me.dgvPermintaan.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
-        Me.dgvPermintaan.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        Me.dgvPermintaan.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
-        Me.dgvPermintaan.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        Me.dgvPermintaan.ThemeStyle.RowsStyle.Height = 22
-        Me.dgvPermintaan.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvPermintaan.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        '
         'bTambah
         '
         Me.bTambah.BorderColor = System.Drawing.Color.Gainsboro
@@ -295,55 +388,6 @@ Partial Class uf_permintaankaryawan
         Me.bTambah.TabIndex = 0
         Me.bTambah.Text = "Tambah"
         Me.bTambah.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(8, 6)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(237, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Home   >    Recruitment >  Permintaan Karyawan"
-        '
-        'pnlToolbar
-        '
-        Me.pnlToolbar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlToolbar.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
-        Me.pnlToolbar.BorderColor = System.Drawing.Color.Gainsboro
-        Me.pnlToolbar.BorderRadius = 6
-        Me.pnlToolbar.BorderThickness = 1
-        Me.pnlToolbar.Controls.Add(Me.cstatus)
-        Me.pnlToolbar.Controls.Add(Me.bRefresh)
-        Me.pnlToolbar.Controls.Add(Me.bCari)
-        Me.pnlToolbar.Controls.Add(Me.tPencarian)
-        Me.pnlToolbar.Controls.Add(Me.Label4)
-        Me.pnlToolbar.Location = New System.Drawing.Point(11, 82)
-        Me.pnlToolbar.Name = "pnlToolbar"
-        Me.pnlToolbar.ShadowDecoration.Parent = Me.pnlToolbar
-        Me.pnlToolbar.Size = New System.Drawing.Size(668, 74)
-        Me.pnlToolbar.TabIndex = 3
-        '
-        'cstatus
-        '
-        Me.cstatus.BackColor = System.Drawing.Color.Transparent
-        Me.cstatus.BorderRadius = 6
-        Me.cstatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cstatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cstatus.FocusedColor = System.Drawing.Color.Empty
-        Me.cstatus.FocusedState.Parent = Me.cstatus
-        Me.cstatus.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cstatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
-        Me.cstatus.FormattingEnabled = True
-        Me.cstatus.HoverState.Parent = Me.cstatus
-        Me.cstatus.ItemHeight = 30
-        Me.cstatus.ItemsAppearance.Parent = Me.cstatus
-        Me.cstatus.Location = New System.Drawing.Point(288, 27)
-        Me.cstatus.Name = "cstatus"
-        Me.cstatus.ShadowDecoration.Parent = Me.cstatus
-        Me.cstatus.Size = New System.Drawing.Size(183, 36)
-        Me.cstatus.TabIndex = 4
         '
         'bRefresh
         '
@@ -410,50 +454,6 @@ Partial Class uf_permintaankaryawan
         Me.tPencarian.ShadowDecoration.Parent = Me.tPencarian
         Me.tPencarian.Size = New System.Drawing.Size(268, 36)
         Me.tPencarian.TabIndex = 1
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Yu Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(14, 10)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(96, 16)
-        Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Cari Permintaan"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(14, 29)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(279, 30)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Data Permintaan Karyawan"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(110, Byte), Integer), CType(CType(119, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(16, 59)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(320, 17)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Kelola seluruh data permintaan karyawan perusahaan"
-        '
-        'paginationPermintaan
-        '
-        Me.paginationPermintaan.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
-        Me.paginationPermintaan.CurrentPage = 1
-        Me.paginationPermintaan.Dock = System.Windows.Forms.DockStyle.Right
-        Me.paginationPermintaan.Location = New System.Drawing.Point(318, 0)
-        Me.paginationPermintaan.Name = "paginationPermintaan"
-        Me.paginationPermintaan.PageSize = 10
-        Me.paginationPermintaan.Size = New System.Drawing.Size(350, 46)
-        Me.paginationPermintaan.TabIndex = 1
-        Me.paginationPermintaan.TotalRecord = 0
         '
         'uf_permintaankaryawan
         '

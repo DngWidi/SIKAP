@@ -26,30 +26,174 @@ Public Class frmProsesSeleksi
         End Set
     End Property
 #Region "Function"
+    Private Function GetActiveOfferingId(conn As MySqlConnection, trans As MySqlTransaction) As Long
+
+        Dim sql As String = "SELECT ffcidoffering FROM sapenawarankerja WHERE ffcidrekrutmen = @idrekrutmen AND ffcidkandidat = @idkandidat AND ffcstatus = 'WAITING' ORDER BY ffcidoffering DESC LIMIT 1"
+
+        Using cmd As New MySqlCommand(sql, conn, trans)
+            cmd.Parameters.Add("@idrekrutmen", MySqlDbType.Int64).Value = _idRekrutmen
+            cmd.Parameters.Add("@idkandidat", MySqlDbType.Int64).Value = _idKandidat
+
+            Dim result As Object = cmd.ExecuteScalar()
+
+            If result Is Nothing OrElse result Is DBNull.Value Then
+                Return 0
+            End If
+
+            Return Convert.ToInt64(result)
+
+        End Using
+
+    End Function
+    Private Function GenerateNoPenawaran(conn As MySqlConnection, trans As MySqlTransaction) As String
+
+        Dim prefix As String = "OFF-" & DateTime.Now.ToString("yyyyMMdd") & "-"
+        Dim sql As String = "SELECT ffcnopenawaran FROM sapenawarankerja WHERE ffcnopenawaran LIKE @prefix ORDER BY ffcidoffering DESC LIMIT 1"
+        Dim nomorTerakhir As Integer = 0
+        Using cmd As New MySqlCommand(sql, conn, trans)
+
+            cmd.Parameters.Add("@prefix", MySqlDbType.VarChar).Value = prefix & "%"
+
+            Dim result As Object = cmd.ExecuteScalar()
+
+            If result IsNot Nothing AndAlso result IsNot DBNull.Value Then
+                Dim nomor As String = result.ToString().Trim()
+                Dim bagian() As String = nomor.Split("-"c)
+
+                If bagian.Length >= 3 Then
+                    Integer.TryParse(bagian(bagian.Length - 1), nomorTerakhir)
+                End If
+            End If
+
+        End Using
+        Return prefix &
+           (nomorTerakhir + 1).ToString("0000")
+
+    End Function
+    Private Function CreateOffering(conn As MySqlConnection, trans As MySqlTransaction) As Long
+
+        '==========================================================
+        ' GENERATE NOMOR OFFERING
+        '==========================================================
+        Dim noPenawaran As String =
+        GenerateNoPenawaran(conn, trans)
+
+        '==========================================================
+        ' AMBIL DATA POSISI DARI REKRUTMEN
+        '==========================================================
+        Dim jabatan As String = ""
+        Dim departemen As String = ""
+        Dim bagian As String = ""
+
+        Dim sqlRecruitment As String = "SELECT p.ffckddepart, p.ffckdbagian, p.ffckdjabatan FROM sakandidatrekrutmen r INNER JOIN sapermintaankaryawan p ON p.ffcidpermintaan = r.ffcidpermintaan " &
+        "WHERE r.ffcidrekrutmen = @idrekrutmen And r.ffcidkandidat = @idkandidat LIMIT 1"
+
+        Using cmd As New MySqlCommand(sqlRecruitment, conn, trans)
+            cmd.Parameters.Add("@idrekrutmen", MySqlDbType.Int64).Value = _idRekrutmen
+            cmd.Parameters.Add("@idkandidat", MySqlDbType.Int64).Value = _idKandidat
+
+            Using rd As MySqlDataReader = cmd.ExecuteReader()
+
+                If Not rd.Read() Then
+                    Throw New Exception("Data recruitment kandidat tidak ditemukan.")
+
+                End If
+
+                If Not IsDBNull(rd("ffckdjabatan")) Then
+                    jabatan = rd("ffckdjabatan").ToString().Trim()
+                End If
+
+                If Not IsDBNull(rd("ffckddepart")) Then
+                    departemen = rd("ffckddepart").ToString().Trim()
+                End If
+
+                If Not IsDBNull(rd("ffckdbagian")) Then
+                    bagian = rd("ffckdbagian").ToString().Trim()
+                End If
+
+            End Using
+
+        End Using
+
+        '==========================================================
+        ' INSERT OFFERING
+        '==========================================================
+        Dim sqlInsert As String = "INSERT INTO sapenawarankerja (ffcidkandidat, ffcidrekrutmen, ffcnopenawaran,ffdpenawaran, ffcjabatan, ffcdepartemen, ffcbagian," &
+        "ffcstatus, ffcusercreate, ffdcreate) VALUES (@idkandidat,@idrekrutmen, @nopenawaran, @tanggal, @jabatan, @departemen, @bagian, 'WAITING', @usercreate, NOW())"
+
+        Using cmd As New MySqlCommand(sqlInsert, conn, trans)
+
+            cmd.Parameters.Add("@idkandidat", MySqlDbType.Int64).Value = _idKandidat
+            cmd.Parameters.Add("@idrekrutmen", MySqlDbType.Int64).Value = _idRekrutmen
+            cmd.Parameters.Add("@nopenawaran", MySqlDbType.VarChar).Value = noPenawaran
+            cmd.Parameters.Add("@tanggal", MySqlDbType.Date).Value = DateTime.Today
+
+            If String.IsNullOrWhiteSpace(jabatan) Then
+                cmd.Parameters.Add("@jabatan", MySqlDbType.VarChar).Value = DBNull.Value
+            Else
+                cmd.Parameters.Add("@jabatan", MySqlDbType.VarChar).Value = jabatan
+            End If
+
+            If String.IsNullOrWhiteSpace(departemen) Then
+                cmd.Parameters.Add("@departemen", MySqlDbType.VarChar).Value = DBNull.Value
+            Else
+                cmd.Parameters.Add("@departemen", MySqlDbType.VarChar).Value = departemen
+            End If
+
+            If String.IsNullOrWhiteSpace(bagian) Then
+                cmd.Parameters.Add("@bagian", MySqlDbType.VarChar).Value = DBNull.Value
+            Else
+                cmd.Parameters.Add("@bagian", MySqlDbType.VarChar).Value = bagian
+            End If
+
+            'Untuk sementara gunakan user aplikasi
+            cmd.Parameters.Add("@usercreate", MySqlDbType.VarChar).Value = Environment.UserName
+
+            Dim affected As Integer = cmd.ExecuteNonQuery()
+            If affected <= 0 Then
+                Throw New Exception("Data penawaran kerja gagal dibuat.")
+            End If
+
+        End Using
+
+        '==========================================================
+        ' AMBIL ID OFFERING
+        '==========================================================
+        Dim idOffering As Long = 0
+        Using cmd As New MySqlCommand("SELECT LAST_INSERT_ID()", conn, trans)
+            idOffering = Convert.ToInt64(cmd.ExecuteScalar())
+        End Using
+
+        If idOffering <= 0 Then
+            Throw New Exception("ID Offering gagal diperoleh.")
+        End If
+
+        Return idOffering
+
+    End Function
+
+    '==========================================================
+    ' GET RECRUITMENT STATUS BERDASARKAN PROSES TERAKHIR
+    '==========================================================
     Private Function GetRecruitmentStatusByStage(tahap As String, statusProses As String, hasil As String) As String
 
         tahap = If(tahap, "").Trim().ToUpper()
         statusProses = If(statusProses, "").Trim().ToUpper()
         hasil = If(hasil, "").Trim().ToUpper()
 
-
         '==========================================================
-        ' JIKA PROSES GAGAL
+        ' PROSES GAGAL
         '==========================================================
         If statusProses = "FAILED" Then
             Return "REJECTED"
         End If
 
-
         '==========================================================
-        ' JIKA HASIL TIDAK LULUS
+        ' HASIL TIDAK LULUS
         '==========================================================
         If hasil = "TIDAK_LULUS" OrElse hasil = "TIDAK_DIREKOMENDASIKAN" Then
-
             Return "REJECTED"
-
         End If
-
 
         '==========================================================
         ' PROSES BELUM SELESAI
@@ -62,16 +206,16 @@ Public Class frmProsesSeleksi
                     Return "TEST"
                 Case "INTERVIEW_HR", "INTERVIEW_USER"
                     Return "INTERVIEW"
+
                 Case "MEDICAL_CHECK"
-                    Return "INTERVIEW"
+                    Return "MEDICAL_CHECK"
                 Case "OFFERING"
-                    Return "OFFER"
+                    Return "OFFERING"
                 Case Else
                     Return ""
             End Select
 
         End If
-
 
         '==========================================================
         ' PROSES PASSED
@@ -80,149 +224,422 @@ Public Class frmProsesSeleksi
 
             Case "SCREENING"
                 Return "SCREENING"
-
             Case "TEST"
                 Return "TEST"
-
-            Case "INTERVIEW_HR",
-             "INTERVIEW_USER"
-
+            Case "INTERVIEW_HR", "INTERVIEW_USER"
                 Return "INTERVIEW"
 
             Case "MEDICAL_CHECK"
-                Return "INTERVIEW"
-
+                Return "MEDICAL_CHECK"
             Case "OFFERING"
-                Return "ACCEPTED"
-
+                If hasil = "LULUS" Then
+                    Return "ACCEPTED"
+                End If
+                Return "OFFERING"
             Case Else
                 Return ""
-
         End Select
 
     End Function
 
+    '==========================================================
+    ' GET PROSES TERAKHIR
+    '
+    ' Mengambil satu baris proses paling baru berdasarkan
+    ' ffcidproses.
+    '==========================================================
+    Private Function GetLatestProcessInfo(ByRef idProses As Long, ByRef tahap As String, ByRef statusProses As String, ByRef hasil As String) As Boolean
+
+        idProses = 0
+        tahap = ""
+        statusProses = ""
+        hasil = ""
+
+        Try
+
+            Using conn As New MySqlConnection(sambung)
+
+                conn.Open()
+
+                Dim sql As String = "SELECT ffcidproses, ffctahap, ffcstatus, ffchasil FROM saprosesseleksi WHERE ffcidrekrutmen = @idrekrutmen AND ffcidkandidat = @idkandidat ORDER BY ffcidproses DESC LIMIT 1"
+
+                Using cmd As New MySqlCommand(sql, conn)
+
+                    cmd.Parameters.Add("@idrekrutmen", MySqlDbType.Int64).Value = _idRekrutmen
+                    cmd.Parameters.Add("@idkandidat", MySqlDbType.Int64).Value = _idKandidat
+
+                    Using rd As MySqlDataReader = cmd.ExecuteReader()
+
+                        If Not rd.Read() Then
+                            Return False
+                        End If
+
+                        If Not IsDBNull(rd("ffcidproses")) Then
+                            idProses = Convert.ToInt64(rd("ffcidproses"))
+                        End If
+
+                        If Not IsDBNull(rd("ffctahap")) Then
+                            tahap = rd("ffctahap").ToString().Trim().ToUpper()
+                        End If
+
+                        If Not IsDBNull(rd("ffcstatus")) Then
+                            statusProses = rd("ffcstatus").ToString().Trim().ToUpper()
+                        End If
+
+                        If Not IsDBNull(rd("ffchasil")) Then
+                            hasil = rd("ffchasil").ToString().Trim().ToUpper()
+                        End If
+
+                        Return True
+
+                    End Using
+
+                End Using
+
+            End Using
+
+        Catch ex As Exception
+            PesanPopupError("ERROR", "Gagal mengambil proses seleksi terakhir." & vbCrLf & ex.Message)
+            '   Throw New Exception("Gagal mengambil proses seleksi terakhir." & vbCrLf & ex.Message)
+
+        End Try
+
+    End Function
+
+
+    '==========================================================
+    ' GET STATUS RECRUITMENT TERBARU
+    ' Digunakan di dalam transaction setelah INSERT / UPDATE.
+    '==========================================================
     Private Function GetLatestRecruitmentStatus(conn As MySqlConnection, trans As MySqlTransaction) As String
+
         Try
 
             Dim tahap As String = ""
             Dim status As String = ""
             Dim hasil As String = ""
+
             Dim sql As String = "SELECT ffctahap, ffcstatus, ffchasil FROM saprosesseleksi WHERE ffcidrekrutmen = @idrekrutmen AND ffcidkandidat = @idkandidat ORDER BY ffcidproses DESC LIMIT 1"
 
             Using cmd As New MySqlCommand(sql, conn, trans)
+
                 cmd.Parameters.Add("@idrekrutmen", MySqlDbType.Int64).Value = _idRekrutmen
                 cmd.Parameters.Add("@idkandidat", MySqlDbType.Int64).Value = _idKandidat
+
                 Using rd As MySqlDataReader = cmd.ExecuteReader()
-                    If rd.Read() Then
-                        If Not IsDBNull(rd("ffctahap")) Then
-                            tahap = rd("ffctahap").ToString().Trim().ToUpper()
-                        End If
-                        If Not IsDBNull(rd("ffcstatus")) Then
-                            status = rd("ffcstatus").ToString().Trim().ToUpper()
-                        End If
-                        If Not IsDBNull(rd("ffchasil")) Then
-                            hasil = rd("ffchasil").ToString().Trim().ToUpper()
-                        End If
-                    Else
+
+                    If Not rd.Read() Then
                         Throw New Exception("Data proses seleksi tidak ditemukan setelah disimpan.")
+                    End If
+
+                    If Not IsDBNull(rd("ffctahap")) Then
+                        tahap = rd("ffctahap").ToString().Trim().ToUpper()
+                    End If
+
+                    If Not IsDBNull(rd("ffcstatus")) Then
+                        status = rd("ffcstatus").ToString().Trim().ToUpper()
+                    End If
+
+                    If Not IsDBNull(rd("ffchasil")) Then
+                        hasil = rd("ffchasil").ToString().Trim().ToUpper()
                     End If
 
                 End Using
 
             End Using
 
-            '==========================================================
-            ' TENTUKAN STATUS RECRUITMENT
-            '==========================================================
-
             Dim recruitmentStatus As String = GetRecruitmentStatusByStage(tahap, status, hasil)
+
             If String.IsNullOrWhiteSpace(recruitmentStatus) Then
+
                 Throw New Exception("Status recruitment tidak dapat ditentukan." & vbCrLf & "Tahap   : " & tahap & vbCrLf & "Status  : " & status & vbCrLf & "Hasil   : " & hasil)
+
             End If
             Return recruitmentStatus
         Catch ex As Exception
             Throw New Exception("Gagal menentukan status recruitment terbaru." & vbCrLf & ex.Message)
+
         End Try
 
     End Function
-    Private Function ValidasiInput() As Boolean
+    '==========================================================
+    '==== SEMENTARA DI REM DULU
+    '==========================================================
+    '  Private Function GetRecruitmentStatusByTahap(tahap As String) As String
+    '
+    '    Select Case tahap.Trim().ToUpper()
+
+    'Case "SCREENING"
+    'Return "SCREENING"
+
+    'Case "TEST"
+    'Return "TEST"
+
+    'Case "INTERVIEW_HR"
+    'Return "INTERVIEW"
+
+    'Case "INTERVIEW_USER"
+    'Return "INTERVIEW"
+
+    'Case "MEDICAL_CHECK"
+    'Return "MEDICAL_CHECK"
+
+    'Case "OFFERING"
+    'Return "OFFERING"
+    '
+    'Case Else
+    'Return ""
+
+    'End Select
+
+    'End Function
+
+
+
+    '==========================================================
+    ' VALIDASI TRANSISI TAHAP
+    '
+    ' Hanya berlaku ketika membuat proses baru.
+    ' Edit proses lama tidak dibatasi oleh fungsi ini karena
+    ' user memang sedang mengubah data history yang dipilih.
+    '==========================================================
+    Private Function IsTahapDiperbolehkan(tahapDipilih As String) As Boolean
+
+        tahapDipilih = If(tahapDipilih, "").Trim().ToUpper()
+
+        Dim latestId As Long = 0
+        Dim latestTahap As String = ""
+        Dim latestStatus As String = ""
+        Dim latestHasil As String = ""
+
+        Dim adaProses As Boolean = GetLatestProcessInfo(latestId, latestTahap, latestStatus, latestHasil)
 
         '==========================================================
-        ' TAHAP
+        ' BELUM ADA PROSES
         '==========================================================
 
-        If cTahap.SelectedIndex < 0 OrElse String.IsNullOrWhiteSpace(cTahap.Text) Then
-            PesanPopupPeringatan("Peringatan", "Silakan pilih tahap seleksi.")
-            cTahap.Focus()
+        If Not adaProses Then
+            Return tahapDipilih = "SCREENING"
+        End If
+
+        latestTahap = If(latestTahap, "").Trim().ToUpper()
+        latestStatus = If(latestStatus, "").Trim().ToUpper()
+        latestHasil = If(latestHasil, "").Trim().ToUpper()
+
+
+        '==========================================================
+        ' PROSES GAGAL / TIDAK LULUS
+        '==========================================================
+
+        If latestStatus = "FAILED" OrElse latestHasil = "TIDAK_LULUS" OrElse latestHasil = "TIDAK_DIREKOMENDASIKAN" Then
             Return False
         End If
 
 
         '==========================================================
-        ' STATUS
+        ' KHUSUS OFFERING YANG SUDAH REJECTED / CANCELLED
+        '
+        ' Offering yang sudah selesai dengan status REJECTED
+        ' atau CANCELLED boleh dibuatkan offering baru.
         '==========================================================
 
-        If cStatus.SelectedIndex < 0 OrElse String.IsNullOrWhiteSpace(cStatus.Text) Then
+        If latestTahap = "OFFERING" AndAlso (latestStatus = "REJECTED" OrElse latestStatus = "CANCELLED") Then
+            Return tahapDipilih = "OFFERING"
+        End If
 
+
+        '==========================================================
+        ' PROSES BELUM SELESAI
+        '==========================================================
+
+        If latestStatus <> "PASSED" Then
+            PesanPopupPeringatan("Peringatan", "Proses tahap " & latestTahap & " belum selesai. Silakan selesaikan proses tersebut terlebih dahulu.")
+            Return False
+
+        End If
+
+
+        '==========================================================
+        ' PROSES PASSED
+        '==========================================================
+
+        Select Case latestTahap
+
+            Case "SCREENING"
+                Return tahapDipilih = "TEST"
+            Case "TEST"
+                Return tahapDipilih = "INTERVIEW_HR" OrElse tahapDipilih = "INTERVIEW_USER" OrElse tahapDipilih = "MEDICAL_CHECK" OrElse tahapDipilih = "OFFERING"
+            Case "INTERVIEW_HR"
+                Return tahapDipilih = "INTERVIEW_USER" OrElse tahapDipilih = "MEDICAL_CHECK" OrElse tahapDipilih = "OFFERING"
+            Case "INTERVIEW_USER"
+                Return tahapDipilih = "MEDICAL_CHECK" OrElse tahapDipilih = "OFFERING"
+            Case "MEDICAL_CHECK"
+                Return tahapDipilih = "OFFERING"
+            Case "OFFERING"
+                'Offering ACCEPTED tidak boleh membuat
+                'offering baru.
+                Return False
+            Case Else
+                Return False
+        End Select
+
+    End Function
+
+    '==========================================================
+    ' VALIDASI INPUT
+    '==========================================================
+    Private Function ValidasiInput() As Boolean
+
+        Dim tahap As String = If(cTahap.Text, "").Trim().ToUpper()
+        Dim status As String = If(cStatus.Text, "").Trim().ToUpper()
+        Dim hasil As String = If(cHasil.Text, "").Trim().ToUpper()
+
+        '======================================================
+        ' TAHAP
+        '======================================================
+        If String.IsNullOrWhiteSpace(tahap) Then
+
+            PesanPopupPeringatan("Peringatan", "Silakan pilih tahap seleksi.")
+            cTahap.Focus()
+            Return False
+
+        End If
+
+        '======================================================
+        ' STATUS
+        '======================================================
+        If String.IsNullOrWhiteSpace(status) Then
             PesanPopupPeringatan("Peringatan", "Silakan pilih status proses seleksi.")
             cStatus.Focus()
             Return False
 
         End If
 
-
-        '==========================================================
+        '======================================================
         ' HASIL
-        '==========================================================
+        '
+        ' Hasil hanya wajib ketika PASSED / FAILED.
+        '======================================================
+        If status = "PASSED" OrElse status = "FAILED" Then
 
-        If cHasil.SelectedIndex < 0 OrElse
-       String.IsNullOrWhiteSpace(cHasil.Text) Then
-            PesanPopupPeringatan("Peringatan", "Silakan pilih hasil seleksi.")
-            cHasil.Focus()
-            Return False
+            If String.IsNullOrWhiteSpace(hasil) Then
+                PesanPopupPeringatan("Peringatan", "Hasil seleksi harus dipilih untuk status " & status & ".")
+                cHasil.Focus()
+                Return False
 
-        End If
+            End If
 
+        Else
 
-        '==========================================================
-        ' INTERVIEWER
-        '==========================================================
-
-        If String.IsNullOrWhiteSpace(tInterviewer.Text) Then
-            PesanPopupPeringatan("Peringatan", "Interviewer / penilai harus diisi.")
-            tInterviewer.Focus()
-            Return False
+            hasil = ""
 
         End If
 
+        '======================================================
+        ' VALIDASI HASIL BERDASARKAN TAHAP
+        '======================================================
+        Select Case tahap
 
-        '==========================================================
+            Case "SCREENING", "TEST", "MEDICAL_CHECK", "OFFERING"
+
+                If hasil <> "" AndAlso hasil <> "LULUS" AndAlso hasil <> "TIDAK_LULUS" Then
+                    PesanPopupPeringatan("Peringatan", "Hasil untuk tahap " & tahap & " hanya boleh LULUS atau TIDAK_LULUS.")
+                    cHasil.Focus()
+                    Return False
+
+                End If
+
+            Case "INTERVIEW_HR", "INTERVIEW_USER"
+
+                If hasil <> "" AndAlso hasil <> "DIREKOMENDASIKAN" AndAlso hasil <> "TIDAK_DIREKOMENDASIKAN" Then
+                    PesanPopupPeringatan("Peringatan", "Hasil untuk tahap " & tahap & " hanya boleh DIREKOMENDASIKAN atau TIDAK_DIREKOMENDASIKAN.")
+                    cHasil.Focus()
+                    Return False
+
+                End If
+
+            Case Else
+                PesanPopupPeringatan("Peringatan", "Tahap seleksi tidak dikenali.")
+                Return False
+
+        End Select
+
+        '======================================================
+        ' INTERVIEWER / PENILAI
+        '======================================================
+
+        If tahap = "INTERVIEW_HR" OrElse tahap = "INTERVIEW_USER" Then
+
+            If String.IsNullOrWhiteSpace(tInterviewer.Text) Then
+                PesanPopupPeringatan("Peringatan", "Interviewer harus diisi untuk tahap interview.")
+                tInterviewer.Focus()
+                Return False
+
+            End If
+
+        End If
+
+        '======================================================
         ' NILAI
-        '==========================================================
-
+        '======================================================
         If Not String.IsNullOrWhiteSpace(tNilai.Text) Then
-
             Dim nilai As Decimal
             If Not Decimal.TryParse(tNilai.Text.Trim(), nilai) Then
-                PesanPopupPeringatan("Peringatan", "Nilai harus berupa angka.")
+                PesanPopupPeringatan("Peringatan", "Nilai seleksi harus berupa angka.")
                 tNilai.Focus()
                 Return False
 
             End If
 
             If nilai < 0D OrElse nilai > 100D Then
-                PesanPopupPeringatan("Peringatan", "Nilai harus berada di antara 0 sampai 100.")
+                PesanPopupPeringatan("Peringatan", "Nilai seleksi harus berada antara 0 sampai 100.")
+
                 tNilai.Focus()
                 Return False
 
             End If
 
         End If
+        '==========================================================
+        ' ATURAN KHUSUS OFFERING
+        '
+        ' Offering pertama hanya dibuat dalam kondisi:
+        ' WAITING + hasil NULL
+        '
+        ' Keputusan ACCEPTED / REJECTED / CANCELLED
+        ' dilakukan melalui menu Penawaran Kerja.
+        '==========================================================
+        If tahap = "OFFERING" Then
+
+            If _mode.ToUpper() = "TAMBAH" Then
+
+                If status <> "WAITING" Then
+                    PesanPopupPeringatan("Peringatan", "Offering baru harus dibuat dengan status WAITING.")
+                    cStatus.Focus()
+                    Return False
+                End If
+                If Not String.IsNullOrWhiteSpace(hasil) Then
+                    PesanPopupPeringatan("Peringatan", "Offering baru belum memiliki hasil. Hasil harus kosong.")
+                    cHasil.SelectedIndex = -1
+                    Return False
+                End If
+
+            End If
+
+        End If
+        '======================================================
+        ' TEST PASSED WAJIB ADA NILAI
+        '======================================================
+        If tahap = "TEST" AndAlso status = "PASSED" AndAlso String.IsNullOrWhiteSpace(tNilai.Text) Then
+            PesanPopupPeringatan("Peringatan", "Nilai wajib diisi untuk proses Test.")
+            tNilai.Focus()
+            Return False
+        End If
 
         Return True
 
     End Function
+
 #End Region
     Public Property IdKandidat As Long
         Get
@@ -282,6 +699,24 @@ Public Class frmProsesSeleksi
 
 
         '==========================================================
+        ' VALIDASI INPUT UMUM
+        '==========================================================
+        If Not ValidasiInput() Then
+            Return
+        End If
+
+
+        '==========================================================
+        ' VALIDASI TRANSISI TAHAP
+        '==========================================================
+        If _mode.ToUpper() = "TAMBAH" Then
+            If Not IsTahapDiperbolehkan(tahap) Then
+                PesanPopupPeringatan("Peringatan", "Tahap " & tahap & " tidak diperbolehkan sebagai tahap berikutnya berdasarkan workflow recruitment.")
+                Return
+            End If
+        End If
+
+        '==========================================================
         ' VALIDASI TAHAP
         '==========================================================
 
@@ -290,7 +725,6 @@ Public Class frmProsesSeleksi
             Return
 
         End If
-
 
         '==========================================================
         ' VALIDASI STATUS
@@ -307,8 +741,7 @@ Public Class frmProsesSeleksi
         ' HASIL HANYA UNTUK PASSED / FAILED
         '==========================================================
 
-        If statusProses = "PASSED" OrElse
-       statusProses = "FAILED" Then
+        If statusProses = "PASSED" OrElse statusProses = "FAILED" Then
 
             If String.IsNullOrWhiteSpace(hasil) Then
                 PesanPopupPeringatan("Peringatan", "Hasil seleksi harus dipilih untuk status " & statusProses & ".")
@@ -317,7 +750,6 @@ Public Class frmProsesSeleksi
         Else
             hasil = ""
         End If
-
 
         '==========================================================
         ' VALIDASI HASIL BERDASARKAN TAHAP
@@ -332,20 +764,41 @@ Public Class frmProsesSeleksi
                     Return
                 End If
 
-
             Case "INTERVIEW_HR", "INTERVIEW_USER"
                 If hasil <> "" AndAlso hasil <> "DIREKOMENDASIKAN" AndAlso hasil <> "TIDAK_DIREKOMENDASIKAN" Then
                     PesanPopupPeringatan("Peringatan", "Hasil untuk tahap " & tahap & " hanya boleh DIREKOMENDASIKAN atau " & "TIDAK_DIREKOMENDASIKAN.")
                     Return
                 End If
 
-
             Case Else
                 PesanPopupPeringatan("Peringatan", "Tahap seleksi tidak dikenali.")
                 Return
 
         End Select
+        '==========================================================
+        ' KHUSUS OFFERING
+        '
+        ' Offering pertama selalu:
+        '
+        ' Tahap  : OFFERING
+        ' Status : WAITING
+        ' Hasil  : NULL
+        '
+        ' Keputusan kandidat akan dilakukan melalui
+        ' menu Penawaran Kerja.
+        '==========================================================
 
+        If _mode.ToUpper() = "TAMBAH" AndAlso tahap = "OFFERING" Then
+
+            If statusProses <> "WAITING" Then
+                PesanPopupPeringatan("Peringatan", "Offering baru harus menggunakan status WAITING.")
+                cStatus.Focus()
+                Return
+            End If
+            'Offering baru tidak mempunyai hasil.
+            hasil = ""
+
+        End If
 
         '==========================================================
         ' NILAI
@@ -376,7 +829,6 @@ Public Class frmProsesSeleksi
 
         End If
 
-
         '==========================================================
         ' TEST PASSED WAJIB ADA NILAI
         '==========================================================
@@ -386,7 +838,6 @@ Public Class frmProsesSeleksi
             tNilai.Focus()
             Return
         End If
-
 
         '==========================================================
         ' DATA LAIN
@@ -451,17 +902,47 @@ Public Class frmProsesSeleksi
                     '==================================================
                     ' MODE TAMBAH
                     '==================================================
+                    Dim idOffering As Long = 0
 
                     If _mode.ToUpper() = "TAMBAH" Then
 
-                        Dim sqlInsert As String = "INSERT INTO saprosesseleksi (ffcidrekrutmen, ffcidkandidat, ffctahap, ffcstatus,ffdjadwal, ffdproses, ffcinterviewer,ffchasil,ffcnilai, ffccatatan) VALUES (@idrekrutmen, " &
-                        "@idkandidat, @tahap, @status, @jadwal, @proses, @interviewer, @hasil, @nilai, @catatan)"
+
+                        If tahap = "OFFERING" Then
+
+                            '==================================================
+                            ' CEK OFFERING AKTIF
+                            '==================================================
+                            Dim activeOfferingId As Long = GetActiveOfferingId(conn, trans)
+
+                            If activeOfferingId > 0 Then
+                                Throw New Exception("Kandidat masih memiliki offering yang sedang menunggu respon.")
+
+                            End If
+
+                            '==================================================
+                            ' BUAT OFFERING BARU
+                            '==================================================
+                            idOffering = CreateOffering(conn, trans)
+                            If idOffering <= 0 Then
+                                Throw New Exception("ID Offering tidak valid.")
+                            End If
+
+                        End If
+
+                        Dim sqlInsert As String = "INSERT INTO saprosesseleksi (ffcidrekrutmen, ffcidkandidat,ffcidoffering, ffctahap, ffcstatus,ffdjadwal, ffdproses, ffcinterviewer,ffchasil,ffcnilai, ffccatatan) VALUES (@idrekrutmen, " &
+                        "@idkandidat,@idoffering, @tahap, @status, @jadwal, @proses, @interviewer, @hasil, @nilai, @catatan)"
 
 
                         Using cmd As New MySqlCommand(sqlInsert, conn, trans)
 
                             cmd.Parameters.Add("@idrekrutmen", MySqlDbType.Int64).Value = _idRekrutmen
                             cmd.Parameters.Add("@idkandidat", MySqlDbType.Int64).Value = _idKandidat
+                            If idOffering > 0 Then
+                                cmd.Parameters.Add("@idoffering", MySqlDbType.Int64).Value = idOffering
+                            Else
+                                cmd.Parameters.Add("@idoffering", MySqlDbType.Int64).Value = DBNull.Value
+                            End If
+
                             cmd.Parameters.Add("@tahap", MySqlDbType.VarChar).Value = tahap
                             cmd.Parameters.Add("@status", MySqlDbType.VarChar).Value = statusProses
 
@@ -521,6 +1002,17 @@ Public Class frmProsesSeleksi
 
                         If _idProses <= 0 Then
                             Throw New Exception("ID proses seleksi tidak valid untuk proses Edit.")
+                        End If
+                        If tahap = "OFFERING" Then
+                            '------------------------------------------------
+                            ' Jangan mengubah Offering menjadi PASSED/FAILED
+                            ' dari frmProsesSeleksi.
+                            '
+                            ' Jika record Offering diedit, tetap:
+                            ' WAITING + NULL
+                            '------------------------------------------------
+                            statusProses = "WAITING"
+                            hasil = ""
 
                         End If
 
@@ -590,37 +1082,27 @@ Public Class frmProsesSeleksi
                     End If
 
 
-                    '==================================================
-                    ' TENTUKAN STATUS RECRUITMENT TERBARU
-                    '==================================================
+                    Dim statusRecruitment As String = GetLatestRecruitmentStatus(conn, trans)
 
-                    Dim latestStatus As String = GetLatestRecruitmentStatus(conn, trans)
-
-
-                    If String.IsNullOrWhiteSpace(latestStatus) Then
-
-                        Throw New Exception("Status recruitment terbaru tidak dapat ditentukan.")
-
+                    If String.IsNullOrWhiteSpace(statusRecruitment) Then
+                        Throw New Exception("Status recruitment tidak dapat ditentukan dari proses seleksi terbaru.")
                     End If
 
-
-                    '==================================================
+                    '==========================================================
                     ' UPDATE STATUS RECRUITMENT
-                    '==================================================
+                    '==========================================================
 
-                    Dim sqlRecruitment As String = "UPDATE sakandidatrekrutmen SET ffcstatus = @status WHERE ffcidrekrutmen = @idrekrutmen AND ffcidkandidat = @idkandidat"
+                    Dim sqlUpdateRecruitment As String = "UPDATE sakandidatrekrutmen SET ffcstatus = @status, ffdupdate = NOW() WHERE ffcidrekrutmen = @idrekrutmen AND ffcidkandidat = @idkandidat"
 
+                    Using cmdUpdate As New MySqlCommand(sqlUpdateRecruitment, conn, trans)
 
-                    Using cmdRecruitment As New MySqlCommand(sqlRecruitment, conn, trans)
-                        cmdRecruitment.Parameters.Add("@status", MySqlDbType.VarChar).Value = latestStatus
-                        cmdRecruitment.Parameters.Add("@idrekrutmen", MySqlDbType.Int64).Value = _idRekrutmen
-                        cmdRecruitment.Parameters.Add("@idkandidat", MySqlDbType.Int64).Value = _idKandidat
+                        cmdUpdate.Parameters.Add("@status", MySqlDbType.VarChar).Value = statusRecruitment
+                        cmdUpdate.Parameters.Add("@idrekrutmen", MySqlDbType.Int64).Value = _idRekrutmen
+                        cmdUpdate.Parameters.Add("@idkandidat", MySqlDbType.Int64).Value = _idKandidat
+                        Dim affected As Integer = cmdUpdate.ExecuteNonQuery()
 
-                        Dim affectedRecruitment As Integer = cmdRecruitment.ExecuteNonQuery()
-
-
-                        If affectedRecruitment <= 0 Then
-                            Throw New Exception("Data recruitment tidak ditemukan atau status recruitment gagal diperbarui.")
+                        If affected <= 0 Then
+                            Throw New Exception("Data recruitment kandidat tidak ditemukan.")
                         End If
 
                     End Using
@@ -643,9 +1125,12 @@ Public Class frmProsesSeleksi
                     If _mode.ToUpper() = "EDIT" Then
                         PesanPopupSukses("Berhasil", "Proses seleksi berhasil diperbarui.")
                     Else
-                        PesanPopupSukses("Berhasil", "Proses seleksi berhasil disimpan.")
+                        If tahap = "OFFERING" Then
+                            PesanPopupSukses("Berhasil", "Offering berhasil dibuat dengan status WAITING.")
+                        Else
+                            PesanPopupSukses("Berhasil", "Proses seleksi berhasil disimpan.")
+                        End If
                     End If
-
 
                     '==================================================
                     ' SETELAH EDIT
@@ -654,6 +1139,8 @@ Public Class frmProsesSeleksi
                     If _mode.ToUpper() = "EDIT" Then
                         _mode = "Tambah"
                     End If
+                    Me.DialogResult = DialogResult.OK
+                    Me.Close()
 
 
                 Catch ex As Exception
@@ -674,19 +1161,6 @@ Public Class frmProsesSeleksi
     Private Sub SetupComboBox()
 
         '==========================================================
-        ' TAHAP SELEKSI
-        '==========================================================
-        cTahap.Items.Clear()
-
-        cTahap.Items.Add("SCREENING")
-        cTahap.Items.Add("TEST")
-        cTahap.Items.Add("INTERVIEW_HR")
-        cTahap.Items.Add("INTERVIEW_USER")
-        cTahap.Items.Add("MEDICAL_CHECK")
-        cTahap.Items.Add("OFFERING")
-
-
-        '==========================================================
         ' STATUS PROSES
         '==========================================================
         cStatus.Items.Clear()
@@ -698,13 +1172,159 @@ Public Class frmProsesSeleksi
         cStatus.Items.Add("FAILED")
         cStatus.Items.Add("CANCELLED")
 
-
         '==========================================================
         ' HASIL
         '==========================================================
         cHasil.Items.Clear()
 
+        '==========================================================
+        ' TAHAP
+        '
+        ' Untuk mode Edit, semua tahap harus tersedia agar data
+        ' history lama dapat dibaca kembali.
+        '
+        ' Untuk mode Tambah, tahap akan diisi oleh
+        ' SetupTahapWorkflow().
+        '==========================================================
+        cTahap.Items.Clear()
+
+        If _mode.ToUpper() = "EDIT" Then
+
+            TambahkanSemuaTahap()
+
+        End If
+
     End Sub
+
+    '==========================================================
+    ' TAMBAHKAN SEMUA TAHAP
+    '==========================================================
+    Private Sub TambahkanSemuaTahap()
+
+        cTahap.Items.Clear()
+
+        cTahap.Items.Add("SCREENING")
+        cTahap.Items.Add("TEST")
+        cTahap.Items.Add("INTERVIEW_HR")
+        cTahap.Items.Add("INTERVIEW_USER")
+        cTahap.Items.Add("MEDICAL_CHECK")
+        cTahap.Items.Add("OFFERING")
+
+    End Sub
+
+    '==========================================================
+    ' SETUP TAHAP BERDASARKAN WORKFLOW
+    '==========================================================
+    Private Sub SetupTahapWorkflow()
+
+        cTahap.Items.Clear()
+
+        Dim latestId As Long = 0
+        Dim latestTahap As String = ""
+        Dim latestStatus As String = ""
+        Dim latestHasil As String = ""
+
+        Dim adaProses As Boolean = GetLatestProcessInfo(latestId, latestTahap, latestStatus, latestHasil)
+
+        '======================================================
+        ' BELUM ADA PROSES
+        '======================================================
+        If Not adaProses Then
+
+            cTahap.Items.Add("SCREENING")
+            cTahap.SelectedItem = "SCREENING"
+            Return
+
+        End If
+
+        latestTahap = If(latestTahap, "").Trim().ToUpper()
+        latestStatus = If(latestStatus, "").Trim().ToUpper()
+        latestHasil = If(latestHasil, "").Trim().ToUpper()
+
+        '======================================================
+        ' PROSES BELUM SELESAI
+        '
+        ' Tetap tampilkan tahap yang sedang dikerjakan.
+        '======================================================
+        If latestStatus <> "PASSED" Then
+
+            If latestStatus = "FAILED" OrElse
+               latestHasil = "TIDAK_LULUS" OrElse
+               latestHasil = "TIDAK_DIREKOMENDASIKAN" Then
+
+                Return
+
+            End If
+
+            If latestTahap <> "" Then
+
+                cTahap.Items.Add(latestTahap)
+                cTahap.SelectedItem = latestTahap
+
+            End If
+
+            Return
+
+        End If
+
+        '======================================================
+        ' PROSES PASSED -> TAHAP BERIKUTNYA
+        '======================================================
+        Select Case latestTahap
+
+            Case "SCREENING"
+
+                cTahap.Items.Add("TEST")
+
+            Case "TEST"
+
+                cTahap.Items.Add("INTERVIEW_HR")
+                cTahap.Items.Add("INTERVIEW_USER")
+                cTahap.Items.Add("MEDICAL_CHECK")
+                cTahap.Items.Add("OFFERING")
+
+            Case "INTERVIEW_HR"
+
+                cTahap.Items.Add("INTERVIEW_USER")
+                cTahap.Items.Add("MEDICAL_CHECK")
+                cTahap.Items.Add("OFFERING")
+
+            Case "INTERVIEW_USER"
+
+                cTahap.Items.Add("MEDICAL_CHECK")
+                cTahap.Items.Add("OFFERING")
+
+            Case "MEDICAL_CHECK"
+
+                cTahap.Items.Add("OFFERING")
+
+            Case "OFFERING"
+
+                If latestStatus = "REJECTED" OrElse latestStatus = "CANCELLED" Then
+
+                    cTahap.Items.Add("OFFERING")
+
+                End If
+
+        End Select
+
+        If cTahap.Items.Count > 0 Then
+
+            If Not String.IsNullOrWhiteSpace(TahapAwal) AndAlso
+               cTahap.Items.Contains(TahapAwal.Trim().ToUpper()) Then
+
+                cTahap.SelectedItem = TahapAwal.Trim().ToUpper()
+
+            Else
+
+                cTahap.SelectedIndex = 0
+
+            End If
+
+        End If
+
+    End Sub
+
     Private Sub SetupHasilByTahap()
 
         '==========================================================
@@ -727,19 +1347,28 @@ Public Class frmProsesSeleksi
         '==========================================================
         ' TENTUKAN HASIL BERDASARKAN TAHAP
         '==========================================================
+
         Select Case tahap
 
-            Case "SCREENING", "TEST", "MEDICAL_CHECK", "OFFERING"
+            Case "SCREENING", "TEST", "MEDICAL_CHECK"
                 cHasil.Items.Add("LULUS")
                 cHasil.Items.Add("TIDAK_LULUS")
+
             Case "INTERVIEW_HR", "INTERVIEW_USER"
+
                 cHasil.Items.Add("DIREKOMENDASIKAN")
                 cHasil.Items.Add("TIDAK_DIREKOMENDASIKAN")
+
+            Case "OFFERING"
+
+                ' Tidak ada hasil pada saat Offering dibuat.
+                ' Hasil akan ditentukan melalui menu Penawaran Kerja.
+
             Case Else
-                'Tidak ada hasil
+
+                ' Tidak ada hasil.
 
         End Select
-
     End Sub
     Private Sub SetHasilSeleksi(hasil As String)
 
@@ -929,57 +1558,27 @@ Public Class frmProsesSeleksi
         Try
 
             Dim dt As New DataTable()
-
             Using conn As New MySqlConnection(sambung)
-
                 conn.Open()
-
-                Dim sql As String =
-                "SELECT " &
-                "ffcidproses, " &
-                "ffctahap, " &
-                "ffdjadwal, " &
-                "ffdproses, " &
-                "ffcstatus, " &
-                "ffcinterviewer, " &
-                "ffcnilai, " &
-                "ffchasil, " &
-                "ffccatatan " &
-                "FROM saprosesseleksi " &
-                "WHERE ffcidrekrutmen = @idrekrutmen " &
-                "AND ffcidkandidat = @idkandidat " &
-                "ORDER BY " &
-                "CASE WHEN ffdjadwal IS NULL THEN 1 ELSE 0 END, " &
-                "ffdjadwal ASC, " &
-                "ffcidproses ASC"
+                Dim sql As String = "SELECT ffcidproses, ffctahap, ffdjadwal, ffdproses, ffcstatus, ffcinterviewer, ffcnilai, ffchasil, ffccatatan FROM saprosesseleksi " &
+                "WHERE ffcidrekrutmen = @idrekrutmen AND ffcidkandidat = @idkandidat ORDER BY ffcidproses"
 
                 Using cmd As New MySqlCommand(sql, conn)
-
-                    cmd.Parameters.Add("@idrekrutmen", MySqlDbType.Int64).Value =
-                    _idRekrutmen
-
-                    cmd.Parameters.Add("@idkandidat", MySqlDbType.Int64).Value =
-                    _idKandidat
-
+                    cmd.Parameters.Add("@idrekrutmen", MySqlDbType.Int64).Value = _idRekrutmen
+                    cmd.Parameters.Add("@idkandidat", MySqlDbType.Int64).Value = _idKandidat
                     Using da As New MySqlDataAdapter(cmd)
-
                         da.Fill(dt)
-
                     End Using
 
                 End Using
 
             End Using
 
-
             '==========================================================
             ' PASANG DATATABLE KE DATAGRIDVIEW
             '==========================================================
             dgvRiwayatSeleksi.DataSource = Nothing
-
             dgvRiwayatSeleksi.DataSource = dt
-
-
             '==========================================================
             ' PASTIKAN DATAGRIDVIEW TIDAK KOSONG
             '==========================================================
@@ -988,11 +1587,7 @@ Public Class frmProsesSeleksi
 
         Catch ex As Exception
 
-            PesanPopupError(
-            "Error",
-            "Gagal mengambil riwayat seleksi." &
-            vbCrLf & ex.Message
-        )
+            PesanPopupError("Error", "Gagal mengambil riwayat seleksi." & vbCrLf & ex.Message)
 
         End Try
 
@@ -1123,40 +1718,73 @@ Public Class frmProsesSeleksi
         _idProses = 0
         _mode = "Tambah"
 
+        '==========================================================
+        ' RESET INPUT
+        '==========================================================
+        tInterviewer.Clear()
+        tNilai.Clear()
+        cHasil.SelectedIndex = -1
+        cHasil.Enabled = False
+        tCatatan.Clear()
+        dtpJadwal.Value = DateTime.Now
 
         '==========================================================
-        ' RESET TAHAP
+        ' CEK PROSES TERAKHIR
         '==========================================================
-        cTahap.SelectedIndex = -1
+        Dim latestId As Long = 0
+        Dim latestTahap As String = ""
+        Dim latestStatus As String = ""
+        Dim latestHasil As String = ""
 
+        Dim adaProses As Boolean = GetLatestProcessInfo(latestId, latestTahap, latestStatus, latestHasil)
 
-        If Not String.IsNullOrWhiteSpace(TahapAwal) Then
+        '==========================================================
+        ' JIKA PROSES TERAKHIR MASIH BERJALAN
+        '
+        ' Contoh:
+        ' TEST / SCHEDULED / NULL
+        '
+        ' Jangan INSERT TEST baru.
+        ' Buka row TEST yang sudah ada dalam mode EDIT sehingga
+        ' user dapat melanjutkan menjadi PROCESS / PASSED / FAILED.
+        '==========================================================
+        If adaProses AndAlso
+            latestStatus <> "PASSED" AndAlso
+            latestStatus <> "FAILED" AndAlso
+            latestStatus <> "CANCELLED" AndAlso
+            latestStatus <> "REJECTED" AndAlso
+            latestHasil <> "TIDAK_LULUS" AndAlso
+            latestHasil <> "TIDAK_DIREKOMENDASIKAN" Then
 
-            If cTahap.Items.Contains(TahapAwal) Then
-                cTahap.SelectedItem = TahapAwal
-            End If
+            _idProses = latestId
+            _mode = "Edit"
+
+            SetupTahapWorkflow()
+            LoadProsesSeleksi()
+
+            Me.Text = "Lanjutkan Proses Seleksi"
+            Return
 
         End If
 
+        '==========================================================
+        ' PROSES BARU
+        '==========================================================
+        SetupTahapWorkflow()
+
+        If cTahap.Items.Count = 0 Then
+
+            cStatus.SelectedIndex = -1
+            Return
+
+        End If
 
         '==========================================================
         ' RESET STATUS
         '==========================================================
         cStatus.SelectedIndex = -1
 
-
-        '==========================================================
-        ' RESET INPUT
-        '==========================================================
-        tInterviewer.Clear()
-        tNilai.Clear()
-
-        cHasil.SelectedIndex = -1
-        cHasil.Enabled = False
-
-        tCatatan.Clear()
-
-        dtpJadwal.Value = DateTime.Now
+        Me.Text = "Proses Seleksi"
 
     End Sub
     Private Sub frmProsesSeleksi_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -1175,11 +1803,9 @@ Public Class frmProsesSeleksi
                 PesanPopupPeringatan("Peringatan", "Data recruitment belum ditentukan.")
                 Return
             End If
-
             LoadKandidat()
             LoadRecruitment()
             LoadRiwayatSeleksi()
-
             If _mode.ToUpper() = "EDIT" Then
                 If _idProses <= 0 Then
                     PesanPopupPeringatan("Peringatan", "ID proses seleksi tidak valid.")
@@ -1194,7 +1820,6 @@ Public Class frmProsesSeleksi
             Else
                 ResetInput()
             End If
-
         Catch ex As Exception
             PesanPopupError("Error", "Gagal membuka proses seleksi." & vbCrLf & ex.Message)
         End Try
@@ -1214,55 +1839,6 @@ Public Class frmProsesSeleksi
     Private Sub bSimpan_Click(sender As Object, e As EventArgs) Handles bSimpan.Click
         SimpanProsesSeleksi()
     End Sub
-    Private Sub dgvRiwayatSeleksi_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvRiwayatSeleksi.CellDoubleClick
-
-        Try
-
-            If e.RowIndex < 0 Then
-                Return
-            End If
-
-
-            Dim row As DataGridViewRow = dgvRiwayatSeleksi.Rows(e.RowIndex)
-
-
-            If row.Cells("ffcidproses").Value Is Nothing OrElse
-               IsDBNull(row.Cells("ffcidproses").Value) Then
-                PesanPopupPeringatan("Peringatan", "ID proses seleksi tidak ditemukan.")
-                Return
-
-            End If
-
-
-            Dim idProses As Long = Convert.ToInt64(row.Cells("ffcidproses").Value)
-
-
-            If idProses <= 0 Then
-                PesanPopupPeringatan("Peringatan", "ID proses seleksi tidak valid.")
-                Return
-
-            End If
-
-
-            '======================================================
-            ' SET MODE EDIT
-            '======================================================
-
-            _idProses = idProses
-            _mode = "Edit"
-
-
-            '======================================================
-            ' LOAD DATA PROSES
-            '======================================================
-
-            LoadProsesSeleksi()
-        Catch ex As Exception
-            PesanPopupError("Error", "Gagal membuka proses seleksi untuk Edit." & vbCrLf & ex.Message)
-        End Try
-
-    End Sub
-
 
     Private Sub KontrolC_TextChanged(sender As Object, e As EventArgs) Handles _
       tInterviewer.TextChanged, tCatatan.TextChanged
@@ -1324,5 +1900,9 @@ Public Class frmProsesSeleksi
         Else
             e.Handled = False
         End If
+    End Sub
+
+    Private Sub bClose_Click(sender As Object, e As EventArgs) Handles bClose.Click
+        Me.Close()
     End Sub
 End Class

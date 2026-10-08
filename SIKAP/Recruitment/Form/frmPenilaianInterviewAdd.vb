@@ -124,6 +124,99 @@ Public Class frmPenilaianInterviewAdd
         Return True
 
     End Function
+    Private Function ValidasiStatusProsesInterview() As Boolean
+
+        Using conn As New MySqlConnection(sambung)
+
+            Try
+
+                conn.Open()
+
+
+                '======================================================
+                ' QUERY PROSES INTERVIEW
+                '======================================================
+
+                Dim sql As String = "SELECT ffctahap, ffcstatus FROM saprosesseleksi WHERE ffcidproses = @idproses AND ffcidrekrutmen = @idrekrutmen " &
+                "AND ffcidkandidat = @idkandidat LIMIT 1"
+
+
+                Using cmd As New MySqlCommand(sql, conn)
+                    cmd.Parameters.AddWithValue("@idproses", _idProses)
+                    cmd.Parameters.AddWithValue("@idrekrutmen", _idRekrutmen)
+                    cmd.Parameters.AddWithValue("@idkandidat", _idKandidat)
+
+
+                    Using rd As MySqlDataReader = cmd.ExecuteReader()
+
+                        '==================================================
+                        ' DATA TIDAK DITEMUKAN
+                        '==================================================
+
+                        If Not rd.Read() Then
+                            PesanPopupPeringatan("Peringatan", "Data proses interview tidak ditemukan.")
+                            Return False
+                        End If
+
+
+                        '==================================================
+                        ' TAHAP
+                        '==================================================
+
+                        Dim tahap As String = If(IsDBNull(rd("ffctahap")), "", rd("ffctahap").ToString().Trim().ToUpper())
+
+
+                        '==================================================
+                        ' STATUS
+                        '==================================================
+
+                        Dim status As String = If(IsDBNull(rd("ffcstatus")), "", rd("ffcstatus").ToString().Trim().ToUpper())
+
+
+                        '==================================================
+                        ' VALIDASI TAHAP
+                        '==================================================
+
+                        If tahap <> "INTERVIEW_HR" AndAlso tahap <> "INTERVIEW_USER" Then
+                            PesanPopupPeringatan("Peringatan", "Proses yang dipilih bukan merupakan proses interview.")
+                            Return False
+
+                        End If
+
+
+                        '==================================================
+                        ' VALIDASI STATUS
+                        '==================================================
+
+                        Select Case status
+
+                            Case "WAITING", "SCHEDULED", "PROCESS"
+                                Return True
+
+                            Case "PASSED", "FAILED", "CANCELLED"
+                                PesanPopupPeringatan("Informasi", "Proses interview sudah berstatus " & status & " dan tidak dapat dinilai kembali.")
+                                Return False
+
+                            Case Else
+                                PesanPopupPeringatan("Peringatan", "Status proses interview tidak valid.")
+                                Return False
+
+                        End Select
+
+                    End Using
+
+                End Using
+
+
+            Catch ex As Exception
+                PesanPopupError("ERROR", "Gagal memvalidasi status proses interview." & vbCrLf & ex.Message)
+                Return False
+
+            End Try
+
+        End Using
+
+    End Function
 
 #Region "Private"
     Private Function GetRecruitmentStatusAfterInterview(hasil As String) As String
@@ -333,12 +426,21 @@ Public Class frmPenilaianInterviewAdd
     Private Sub SimpanPenilaian()
 
         '==========================================================
-        ' VALIDASI
+        ' VALIDASI FORM
         '==========================================================
+
         If Not ValidasiPenilaian() Then
             Exit Sub
         End If
 
+
+        '==========================================================
+        ' VALIDASI DATABASE
+        '==========================================================
+
+        If Not ValidasiStatusProsesInterview() Then
+            Exit Sub
+        End If
 
         '==========================================================
         ' KONFIRMASI

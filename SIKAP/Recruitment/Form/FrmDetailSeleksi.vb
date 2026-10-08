@@ -159,7 +159,7 @@ Public Class frmDetailSeleksi
                 conn.Open()
 
                 Dim sql As String = "SELECT ffcidproses,ffctahap, ffdjadwal,ffdproses, ffcstatus,ffcinterviewer, ffcnilai,ffchasil,ffccatatan FROM saprosesseleksi " &
-                    "WHERE ffcidrekrutmen = @idrekrutmen AND ffcidkandidat = @idkandidat ORDER BY CASE WHEN ffdjadwal IS NULL THEN 1 ELSE 0 END, ffdjadwal ASC, ffcidproses ASC"
+                    "WHERE ffcidrekrutmen = @idrekrutmen AND ffcidkandidat = @idkandidat ORDER BY ffcidproses "
 
                 Using cmd As New MySqlCommand(sql, conn)
                     cmd.Parameters.Add("@idrekrutmen", MySqlDbType.Int64).Value = _idRekrutmen
