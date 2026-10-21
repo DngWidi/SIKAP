@@ -452,7 +452,7 @@ Public Class frmKandidatAdd
             conn.Open()
 
             Dim sql As String = "SELECT ffcnokandidat,ffcnama,ffctempatlahir,ffdtgllahir,ffcjeniskelamin, ffcstatuspernikahan, " &
-            "ffcnik,ffcnotelp,ffcemail,ffcalamat,ffckelurahan,ffckecamatan,ffckota,ffcprovinsi, ffckodepos, ffcfilefoto " &
+            "ffcnik,ffcnotelp,ffcemail,ffcagama,ffcalamat,ffckelurahan,ffckecamatan,ffckota,ffcprovinsi, ffckodepos, ffcfilefoto " &
             "FROM sakandidat WHERE ffcidkandidat = @ID"
 
             Using cmd As New MySqlCommand(sql, conn)
@@ -473,6 +473,7 @@ Public Class frmKandidatAdd
                     ttempatlahir.Text = DBString(rd, "ffctempatlahir")
                     tnik.Text = DBString(rd, "ffcnik")
                     tnotelp.Text = DBString(rd, "ffcnotelp")
+                    tAgama.Text = DBString(rd, "ffcagama")
                     temail.Text = DBString(rd, "ffcemail")
                     talamat.Text = DBString(rd, "ffcalamat")
                     tkelurahan.Text = DBString(rd, "ffckelurahan")
@@ -679,7 +680,7 @@ Public Class frmKandidatAdd
         ttempatlahir.Clear()
         tnotelp.Clear()
         temail.Clear()
-
+        tAgama.Clear()
         ckelamin.SelectedIndex = -1
         cstatuspernikahan.SelectedIndex = -1
 
@@ -743,6 +744,7 @@ Public Class frmKandidatAdd
         cstatuspernikahan.Enabled = enabled
         tnotelp.Enabled = enabled
         temail.Enabled = enabled
+        tAgama.Enabled = enabled
 
         talamat.Enabled = enabled
         tkelurahan.Enabled = enabled
@@ -1502,23 +1504,54 @@ Public Class frmKandidatAdd
     End Sub
 
     Private Sub HapusSertifikat(rowIndex As Integer)
-        If rowIndex < 0 OrElse rowIndex >= dgvsertifikat.Rows.Count Then
-            Return
-        End If
-        If PesanPopupKonfirmasi("Konfirmasi", "Apakah data sertifikat ini akan dihapus?") = DialogResult.No Then
-            Return
-        End If
+        If rowIndex < 0 OrElse rowIndex >= dgvsertifikat.Rows.Count Then Return
+        If PesanPopupKonfirmasi("Konfirmasi", "Apakah data sertifikat ini akan dihapus?") = DialogResult.No Then Return
+
         Dim row As DataGridViewRow = dgvsertifikat.Rows(rowIndex)
-        Dim id As Long = 0
+
+        ' 1. Ambil ID Sertifikat dan ID Dokumen yang terikat
+        Dim idSertifikat As Long = 0
+        Dim idDokumen As Long = 0
+
         If row.Cells("ffcidsertifikat").Value IsNot Nothing AndAlso row.Cells("ffcidsertifikat").Value IsNot DBNull.Value Then
-            Long.TryParse(row.Cells("ffcidsertifikat").Value.ToString(), id)
+            Long.TryParse(row.Cells("ffcidsertifikat").Value.ToString(), idSertifikat)
         End If
 
-        If id > 0 Then
-            If Not _deletedSertifikatIds.Contains(id) Then
-                _deletedSertifikatIds.Add(id)
+        If row.Cells("ffciddokumen").Value IsNot Nothing AndAlso row.Cells("ffciddokumen").Value IsNot DBNull.Value Then
+            Long.TryParse(row.Cells("ffciddokumen").Value.ToString(), idDokumen)
+        End If
+
+        ' 2. Tampung ID Sertifikat untuk dihapus dari DB
+        If idSertifikat > 0 Then
+            If Not _deletedSertifikatIds.Contains(idSertifikat) Then
+                _deletedSertifikatIds.Add(idSertifikat)
             End If
         End If
+
+        ' 3. Tampung ID Dokumen terkait untuk dihapus dari DB & Sinkronisasi UI Dokumen
+        If idDokumen > 0 Then
+            If Not _deletedDokumenIds.Contains(idDokumen) Then
+                _deletedDokumenIds.Add(idDokumen)
+            End If
+
+            ' Cari dan hapus baris yang sama secara otomatis di Grid Dokumen
+            For i As Integer = dgvdokumen.Rows.Count - 1 To 0 Step -1
+                Dim docRow As DataGridViewRow = dgvdokumen.Rows(i)
+                If docRow.IsNewRow Then Continue For
+
+                Dim currentDocId As Long = 0
+                If docRow.Cells("ffciddokumen").Value IsNot Nothing AndAlso docRow.Cells("ffciddokumen").Value IsNot DBNull.Value Then
+                    Long.TryParse(docRow.Cells("ffciddokumen").Value.ToString(), currentDocId)
+                End If
+
+                If currentDocId = idDokumen Then
+                    dgvdokumen.Rows.RemoveAt(i)
+                    Exit For
+                End If
+            Next
+        End If
+
+        ' 4. Hapus dari Grid Sertifikat
         dgvsertifikat.Rows.RemoveAt(rowIndex)
 
     End Sub
@@ -1700,28 +1733,52 @@ Public Class frmKandidatAdd
 
     End Sub
     Private Sub HapusDokumen(rowIndex As Integer)
-        If rowIndex < 0 OrElse rowIndex >= dgvdokumen.Rows.Count Then
-            Return
-        End If
-        If PesanPopupKonfirmasi("Konfirmasi", "Apakah dokumen ini akan dihapus?") = DialogResult.No Then
-            Return
-        End If
+        If rowIndex < 0 OrElse rowIndex >= dgvdokumen.Rows.Count Then Return
+        If PesanPopupKonfirmasi("Konfirmasi", "Apakah dokumen ini akan dihapus?") = DialogResult.No Then Return
 
         Dim row As DataGridViewRow = dgvdokumen.Rows(rowIndex)
-
         Dim idDokumen As Long = 0
 
         If row.Cells("ffciddokumen").Value IsNot Nothing AndAlso row.Cells("ffciddokumen").Value IsNot DBNull.Value Then
             Long.TryParse(row.Cells("ffciddokumen").Value.ToString(), idDokumen)
         End If
 
+        ' 1. Tampung ID Dokumen untuk dihapus dari DB
         If idDokumen > 0 Then
             If Not _deletedDokumenIds.Contains(idDokumen) Then
                 _deletedDokumenIds.Add(idDokumen)
             End If
+
+            ' 2. Cek apakah dokumen ini milik Sertifikat & Sinkronisasi UI Sertifikat
+            For i As Integer = dgvsertifikat.Rows.Count - 1 To 0 Step -1
+                Dim certRow As DataGridViewRow = dgvsertifikat.Rows(i)
+                If certRow.IsNewRow Then Continue For
+
+                Dim relatedDocId As Long = 0
+                If certRow.Cells("ffciddokumen").Value IsNot Nothing AndAlso certRow.Cells("ffciddokumen").Value IsNot DBNull.Value Then
+                    Long.TryParse(certRow.Cells("ffciddokumen").Value.ToString(), relatedDocId)
+                End If
+
+                If relatedDocId = idDokumen Then
+                    ' Dokumen ternyata terikat dengan Sertifikat, ambil ID Sertifikat
+                    Dim idSertifikat As Long = 0
+                    If certRow.Cells("ffcidsertifikat").Value IsNot Nothing AndAlso certRow.Cells("ffcidsertifikat").Value IsNot DBNull.Value Then
+                        Long.TryParse(certRow.Cells("ffcidsertifikat").Value.ToString(), idSertifikat)
+                    End If
+
+                    ' Tampung ID Sertifikat untuk dihapus dari DB
+                    If idSertifikat > 0 AndAlso Not _deletedSertifikatIds.Contains(idSertifikat) Then
+                        _deletedSertifikatIds.Add(idSertifikat)
+                    End If
+
+                    ' Hapus otomatis baris dari Grid Sertifikat
+                    dgvsertifikat.Rows.RemoveAt(i)
+                    Exit For
+                End If
+            Next
         End If
 
-
+        ' 3. Hapus dari Grid Dokumen
         dgvdokumen.Rows.RemoveAt(rowIndex)
 
     End Sub
@@ -2315,13 +2372,6 @@ Public Class frmKandidatAdd
             Dim keterangan As String = If(keteranganObj Is Nothing OrElse IsDBNull(keteranganObj), String.Empty, keteranganObj.ToString())
 
 
-            '   Dim id As Long = GetLongValue(row, "ffcidsertifikat")
-            '   Dim namaSertifikat As String = GetCellValue(row, "NamaSertifikat")
-            '   Dim penerbit As String = GetCellValue(row, "Penerbit")
-            '  Dim nomorSertifikat As String = GetCellValue(row, "NomorSertifikat")
-            '  Dim tanggalTerbit As Object = GetDateValue(row, "TanggalTerbit")
-            '  Dim tanggalKadaluarsa As Object = GetDateValue(row, "TanggalKadaluarsa")
-            ' Dim keterangan As String = GetCellValue(row, "Keterangan")
 
             ' ID dokumen yang sudah terhubung sebelumnya (0 jika belum ada)
             Dim idDokumen As Long = GetLongFromGrid(row, "ffciddokumen")
@@ -2340,21 +2390,32 @@ Public Class frmKandidatAdd
                 fileBaru.Add(newStoredPath)
 
                 Dim namaFileBaru As String = Path.GetFileName(newStoredPath)
+                Dim ukuranFile As Long = 0
+                Dim tipeFile As String = String.Empty
+
+                If File.Exists(sourcePathBaru) Then
+                    ukuranFile = New FileInfo(sourcePathBaru).Length
+                    tipeFile = Path.GetExtension(sourcePathBaru)
+                End If
 
                 If idDokumen > 0 Then
                     ' Sudah ada dokumen sebelumnya -> update record dokumennya
-                    Using cmdDok As New MySqlCommand("UPDATE sakandidatdokumen SET ffcnama = @nama, ffcfile = @file, ffdupdate = NOW() WHERE ffciddokumen = @id", conn, trans)
+                    Using cmdDok As New MySqlCommand("UPDATE sakandidatdokumen SET ffcnama = @nama, ffcfile = @file, ffnukurang = @ukurang, ffctipefile = @tipefile, ffdupdate = NOW() WHERE ffciddokumen = @id", conn, trans)
                         cmdDok.Parameters.AddWithValue("@nama", namaFileBaru)
                         cmdDok.Parameters.AddWithValue("@file", newStoredPath)
+                        cmdDok.Parameters.AddWithValue("@ukurang", ukuranFile)
+                        cmdDok.Parameters.AddWithValue("@tipefile", tipeFile)
                         cmdDok.Parameters.AddWithValue("@id", idDokumen)
                         cmdDok.ExecuteNonQuery()
                     End Using
                 Else
                     ' Belum ada dokumen -> insert baru, ambil ID-nya
-                    Using cmdDok As New MySqlCommand("INSERT INTO sakandidatdokumen (ffcidkandidat, ffcjenis, ffcnama, ffcfile) VALUES (@idkandidat, 'Sertifikat', @nama, @file)", conn, trans)
+                    Using cmdDok As New MySqlCommand("INSERT INTO sakandidatdokumen (ffcidkandidat, ffcjenis, ffcnama, ffcfile, ffnukurang, ffctipefile) VALUES (@idkandidat, 'Sertifikat', @nama, @file, @ukurang, @tipefile)", conn, trans)
                         cmdDok.Parameters.AddWithValue("@idkandidat", idKandidat)
                         cmdDok.Parameters.AddWithValue("@nama", namaFileBaru)
                         cmdDok.Parameters.AddWithValue("@file", newStoredPath)
+                        cmdDok.Parameters.AddWithValue("@ukurang", ukuranFile)
+                        cmdDok.Parameters.AddWithValue("@tipefile", tipeFile)
                         cmdDok.ExecuteNonQuery()
                     End Using
                     idDokumen = Convert.ToInt64(New MySqlCommand("SELECT LAST_INSERT_ID()", conn, trans).ExecuteScalar())
@@ -2490,8 +2551,7 @@ Public Class frmKandidatAdd
                 '--------------------------------------------------
                 If File.Exists(sourcePathBaru) Then
 
-                    ukuran =
-                    New FileInfo(sourcePathBaru).Length
+                    ukuran = New FileInfo(sourcePathBaru).Length
 
                 End If
 
@@ -2503,16 +2563,14 @@ Public Class frmKandidatAdd
                 ' Mode Edit:
                 ' gunakan file lama
                 '==================================================
-                filePath =
-                GetStringValue(row, "StoredFilePath")
+                filePath = GetStringValue(row, "StoredFilePath")
 
 
                 '--------------------------------------------------
                 ' Ambil ukuran file lama
                 '--------------------------------------------------
-                ukuran =
-                GetLongValue(row, "Ukuran")
-
+                'ukuran = GetLongValue(row, "Ukuran")
+                ukuran = GetLongFromGrid(row, "Ukuran")
             End If
 
 
@@ -2590,8 +2648,8 @@ Public Class frmKandidatAdd
                     ' INSERT DATA KANDIDAT
                     '========================================
 
-                    Dim sql As String = "INSERT INTO sakandidat (ffcnokandidat, ffcnama, ffctempatlahir,ffdtgllahir,ffcjeniskelamin,ffcstatuspernikahan,ffcnik,ffcnotelp,ffcemail,ffcalamat,ffckelurahan, " &
-                              "ffckecamatan, ffckota,ffcprovinsi,ffckodepos, ffcstatus, ffcfilefoto,ffcusercreate) VALUES (@NoKandidat,@Nama, @TempatLahir,@TanggalLahir,@JenisKelamin,@StatusPernikahan, " &
+                    Dim sql As String = "INSERT INTO sakandidat (ffcnokandidat, ffcnama, ffctempatlahir,ffdtgllahir,ffcagama,ffcjeniskelamin,ffcstatuspernikahan,ffcnik,ffcnotelp,ffcemail,ffcalamat,ffckelurahan, " &
+                              "ffckecamatan, ffckota,ffcprovinsi,ffckodepos, ffcstatus, ffcfilefoto,ffcusercreate) VALUES (@NoKandidat,@Nama, @TempatLahir,@TanggalLahir,@agama,@JenisKelamin,@StatusPernikahan, " &
                               "@NIK, @NoTelp,@Email,@Alamat, @Kelurahan,@Kecamatan,@Kota,@Provinsi,@KodePos,'ACTIVE', @FileFoto, @UserCreate)"
 
 
@@ -2600,6 +2658,7 @@ Public Class frmKandidatAdd
                         AddParameter(cmd, "@Nama", tnamalengkap.Text.Trim())
                         AddParameter(cmd, "@TempatLahir", ttempatlahir.Text.Trim())
                         AddParameter(cmd, "@TanggalLahir", dtgllahir.Value.Date)
+                        AddParameter(cmd, "@agama", tAgama.Text.Trim())
                         AddParameter(cmd, "@JenisKelamin", ckelamin.Text.Trim())
                         AddParameter(cmd, "@StatusPernikahan", cstatuspernikahan.Text.Trim())
                         AddParameter(cmd, "@NIK", tnik.Text.Trim())
@@ -2682,8 +2741,8 @@ Public Class frmKandidatAdd
         Using conn As New MySqlConnection(sambung)
             conn.Open()
             Using trans As MySqlTransaction = conn.BeginTransaction()
-                Try
-                    If Not String.IsNullOrWhiteSpace(_fotoPath) Then
+                '  Try
+                If Not String.IsNullOrWhiteSpace(_fotoPath) Then
                         fotoBaru = SimpanFile(_fotoPath, tkandidat.Text.Trim(), "FOTO")
                         'Masukkan ke daftar file baru
                         If Not String.IsNullOrWhiteSpace(fotoBaru) Then
@@ -2695,7 +2754,7 @@ Public Class frmKandidatAdd
                     ' UPDATE MASTER
                     '========================================
 
-                    Dim sql As String = "UPDATE sakandidat SET ffcnama = @Nama, ffctempatlahir = @TempatLahir,ffdtgllahir = @TanggalLahir, ffcjeniskelamin = @JenisKelamin,ffcstatuspernikahan = @StatusPernikahan, " &
+                    Dim sql As String = "UPDATE sakandidat SET ffcnama = @Nama, ffctempatlahir = @TempatLahir,ffcagama=@agama,ffdtgllahir = @TanggalLahir, ffcjeniskelamin = @JenisKelamin,ffcstatuspernikahan = @StatusPernikahan, " &
                             "ffcnik = @NIK, ffcnotelp = @NoTelp,ffcemail = @Email,ffcalamat = @Alamat,ffckelurahan = @Kelurahan,ffckecamatan = @Kecamatan,ffckota = @Kota,ffcprovinsi = @Provinsi,ffckodepos = @KodePos, " &
                             "ffcuserupdate = @UserUpdate, ffdupdate = NOW() "
 
@@ -2714,6 +2773,7 @@ Public Class frmKandidatAdd
                         AddParameter(cmd, "@TempatLahir", ttempatlahir.Text.Trim())
                         AddParameter(cmd, "@TanggalLahir", dtgllahir.Value.Date)
                         AddParameter(cmd, "@JenisKelamin", ckelamin.Text.Trim())
+                        AddParameter(cmd, "@agama", tAgama.Text.Trim())
                         AddParameter(cmd, "@StatusPernikahan", cstatuspernikahan.Text.Trim())
                         AddParameter(cmd, "@NIK", tnik.Text.Trim())
                         AddParameter(cmd, "@NoTelp", tnotelp.Text.Trim())
@@ -2757,48 +2817,48 @@ Public Class frmKandidatAdd
 
                     Me.Close()
 
-                    '==================================================
-                    ' ROLLBACK DATABASE
-                    '==================================================
-                Catch ex As MySqlException
-                    Try
-                        trans.Rollback()
-                    Catch
-                    End Try
+                '==================================================
+                ' ROLLBACK DATABASE
+                '==================================================
+                '  Catch ex As MySqlException
+                ' Try
+                ' trans.Rollback()
+                ' Catch
+                ' End Try
 
 
-                    '==================================================
-                    ' HAPUS FILE YANG SUDAH TERLANJUR DISALIN
-                    '==================================================
+                '==================================================
+                ' HAPUS FILE YANG SUDAH TERLANJUR DISALIN
+                '==================================================
 
-                    HapusFileBaru(fileBaru)
-
-
-                    PesanPopupError("Error MySQL: Kesalahan Database", ex.Message)
+                'HapusFileBaru(fileBaru)
 
 
-                Catch ex As Exception
-
-                    '==================================================
-                    ' ROLLBACK DATABASE
-                    '==================================================
-
-                    Try
-                        trans.Rollback()
-                    Catch
-                    End Try
+                'PesanPopupError("Error MySQL: Kesalahan Database", ex.Message)
 
 
-                    '==================================================
-                    ' HAPUS FILE YANG SUDAH TERLANJUR DISALIN
-                    '==================================================
+                ' Catch ex As Exception
 
-                    HapusFileBaru(fileBaru)
+                '==================================================
+                ' ROLLBACK DATABASE
+                '==================================================
+
+                'Try
+                'trans.Rollback()
+                'atch
+                'End Try
 
 
-                    PesanPopupError("Error umum: Proses dibatalkan", ex.Message)
+                '==================================================
+                ' HAPUS FILE YANG SUDAH TERLANJUR DISALIN
+                '==================================================
 
-                End Try
+                'HapusFileBaru(fileBaru)
+
+
+                'PesanPopupError("Error umum: Proses dibatalkan", ex.Message)
+
+                ' End Try
 
             End Using
 
@@ -2810,7 +2870,7 @@ Public Class frmKandidatAdd
 #End Region
 #Region "TEXT COMBOBOX DLL"
     Private Sub KontrolC_TextChanged(sender As Object, e As EventArgs) Handles _
-        tnamalengkap.TextChanged, ttempatlahir.TextChanged, talamat.TextChanged, tkelurahan.TextChanged, tkecamatan.TextChanged, tkota.TextChanged, tprovinsi.TextChanged
+        tnamalengkap.TextChanged, ttempatlahir.TextChanged, talamat.TextChanged, tkelurahan.TextChanged, tAgama.TextChanged, tkecamatan.TextChanged, tkota.TextChanged, tprovinsi.TextChanged
         Dim tb As Guna2TextBox = CType(sender, Guna2TextBox)
 
         If tb.Text.Length > 0 Then
@@ -2832,7 +2892,7 @@ Public Class frmKandidatAdd
         End If
     End Sub
     Private Sub KontrolT_KeyPress(sender As Object, e As KeyPressEventArgs) Handles _
-        tnamalengkap.KeyPress, ttempatlahir.KeyPress, temail.KeyPress, talamat.KeyPress, tkelurahan.KeyPress, tkecamatan.KeyPress, tkota.KeyPress, tprovinsi.KeyPress
+        tnamalengkap.KeyPress, ttempatlahir.KeyPress, temail.KeyPress, tAgama.KeyPress, talamat.KeyPress, tkelurahan.KeyPress, tkecamatan.KeyPress, tkota.KeyPress, tprovinsi.KeyPress
         If e.KeyChar = ChrW(Keys.Enter) Then
 
             SendKeys.Send("{TAB}")

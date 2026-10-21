@@ -40,7 +40,7 @@ Public Class uf_kandidat
             ' 3. QUERY DATA
             '========================================
             Dim sql As String = "SELECT ffcidkandidat,ffcnokandidat AS `No Kandidat`,ffcnama AS `Nama`,ffdtgllahir `Tanggal Lahir`,ffcjeniskelamin AS `Jenis Kelamin`,ffcnik AS `Nik`,ffcnotelp AS `Telp`," &
-            "ffcemail AS `Email`,ffcsumberkandidat AS `Sumber`,ffcstatus AS `Status`FROM sakandidat ORDER BY ffcidkandidat DESC LIMIT @Limit OFFSET @Offset "
+            "ffcemail AS `Email`,ffcsumberkandidat AS `Sumber`,ffcstatus AS `Status`  FROM sakandidat ORDER BY ffcidkandidat DESC LIMIT @Limit OFFSET @Offset "
 
 
             Using conn As New MySqlConnection(sambung)

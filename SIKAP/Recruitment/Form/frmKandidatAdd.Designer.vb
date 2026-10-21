@@ -109,6 +109,8 @@ Partial Class frmKandidatAdd
         Me.pnlHeaderLine = New Guna.UI2.WinForms.Guna2Panel()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
+        Me.tAgama = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlMain.SuspendLayout()
         Me.pnlBody.SuspendLayout()
         Me.Tabkandidat.SuspendLayout()
@@ -193,6 +195,8 @@ Partial Class frmKandidatAdd
         Me.pnlDataPribadi.BorderColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
         Me.pnlDataPribadi.BorderRadius = 8
         Me.pnlDataPribadi.BorderThickness = 1
+        Me.pnlDataPribadi.Controls.Add(Me.tAgama)
+        Me.pnlDataPribadi.Controls.Add(Me.Label16)
         Me.pnlDataPribadi.Controls.Add(Me.temail)
         Me.pnlDataPribadi.Controls.Add(Me.tnotelp)
         Me.pnlDataPribadi.Controls.Add(Me.cstatuspernikahan)
@@ -1480,6 +1484,42 @@ Partial Class frmKandidatAdd
         Me.Guna2Elipse1.BorderRadius = 8
         Me.Guna2Elipse1.TargetControl = Me
         '
+        'tAgama
+        '
+        Me.tAgama.BorderRadius = 6
+        Me.tAgama.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.tAgama.DefaultText = ""
+        Me.tAgama.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.tAgama.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.tAgama.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.tAgama.DisabledState.Parent = Me.tAgama
+        Me.tAgama.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.tAgama.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.tAgama.FocusedState.Parent = Me.tAgama
+        Me.tAgama.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.tAgama.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.tAgama.HoverState.Parent = Me.tAgama
+        Me.tAgama.Location = New System.Drawing.Point(874, 190)
+        Me.tAgama.Margin = New System.Windows.Forms.Padding(4)
+        Me.tAgama.Name = "tAgama"
+        Me.tAgama.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.tAgama.PlaceholderText = "Islam / Kristen / Katolik"
+        Me.tAgama.SelectedText = ""
+        Me.tAgama.ShadowDecoration.Parent = Me.tAgama
+        Me.tAgama.Size = New System.Drawing.Size(288, 32)
+        Me.tAgama.TabIndex = 21
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label16.Location = New System.Drawing.Point(755, 199)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(45, 15)
+        Me.Label16.TabIndex = 20
+        Me.Label16.Text = "Agama"
+        '
         'frmKandidatAdd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1599,4 +1639,6 @@ Partial Class frmKandidatAdd
     Friend WithEvents bUploadDokumen As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents ldokumen As Label
     Friend WithEvents Guna2Elipse1 As Guna.UI2.WinForms.Guna2Elipse
+    Friend WithEvents tAgama As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents Label16 As Label
 End Class

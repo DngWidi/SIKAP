@@ -1,0 +1,445 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class uf_calonpegawai
+    Inherits System.Windows.Forms.UserControl
+
+    'UserControl overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(uf_calonpegawai))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.pnlContext = New Guna.UI2.WinForms.Guna2Panel()
+        Me.pnlButton = New Guna.UI2.WinForms.Guna2Panel()
+        Me.bDetail = New Guna.UI2.WinForms.Guna2Button()
+        Me.bProses = New Guna.UI2.WinForms.Guna2Button()
+        Me.pnlPage = New Guna.UI2.WinForms.Guna2Panel()
+        Me.lblInfo = New System.Windows.Forms.Label()
+        Me.dgvCalonPegawai = New Guna.UI2.WinForms.Guna2DataGridView()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.pnlToolbar = New Guna.UI2.WinForms.Guna2Panel()
+        Me.bRefresh = New Guna.UI2.WinForms.Guna2Button()
+        Me.bCari = New Guna.UI2.WinForms.Guna2Button()
+        Me.cTahap = New Guna.UI2.WinForms.Guna2ComboBox()
+        Me.tPencarian = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.paginationCalon = New SIKAP.ucPagination()
+        Me.bJadikanPegawai = New Guna.UI2.WinForms.Guna2Button()
+        Me.pnlContext.SuspendLayout()
+        Me.pnlButton.SuspendLayout()
+        Me.pnlPage.SuspendLayout()
+        CType(Me.dgvCalonPegawai, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlToolbar.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'pnlContext
+        '
+        Me.pnlContext.AutoScroll = True
+        Me.pnlContext.Controls.Add(Me.pnlButton)
+        Me.pnlContext.Controls.Add(Me.Label1)
+        Me.pnlContext.Controls.Add(Me.pnlToolbar)
+        Me.pnlContext.Controls.Add(Me.Label2)
+        Me.pnlContext.Controls.Add(Me.Label3)
+        Me.pnlContext.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlContext.Location = New System.Drawing.Point(0, 0)
+        Me.pnlContext.Name = "pnlContext"
+        Me.pnlContext.ShadowDecoration.Parent = Me.pnlContext
+        Me.pnlContext.Size = New System.Drawing.Size(1050, 663)
+        Me.pnlContext.TabIndex = 8
+        '
+        'pnlButton
+        '
+        Me.pnlButton.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
+        Me.pnlButton.BorderColor = System.Drawing.Color.Silver
+        Me.pnlButton.BorderRadius = 6
+        Me.pnlButton.BorderThickness = 1
+        Me.pnlButton.Controls.Add(Me.bJadikanPegawai)
+        Me.pnlButton.Controls.Add(Me.bDetail)
+        Me.pnlButton.Controls.Add(Me.bProses)
+        Me.pnlButton.Controls.Add(Me.pnlPage)
+        Me.pnlButton.Controls.Add(Me.dgvCalonPegawai)
+        Me.pnlButton.Location = New System.Drawing.Point(11, 162)
+        Me.pnlButton.Name = "pnlButton"
+        Me.pnlButton.ShadowDecoration.Parent = Me.pnlButton
+        Me.pnlButton.Size = New System.Drawing.Size(1022, 498)
+        Me.pnlButton.TabIndex = 4
+        '
+        'bDetail
+        '
+        Me.bDetail.BorderColor = System.Drawing.Color.Gainsboro
+        Me.bDetail.BorderRadius = 5
+        Me.bDetail.BorderThickness = 1
+        Me.bDetail.CheckedState.Parent = Me.bDetail
+        Me.bDetail.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.bDetail.CustomImages.Parent = Me.bDetail
+        Me.bDetail.FillColor = System.Drawing.Color.Transparent
+        Me.bDetail.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bDetail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.bDetail.HoverState.Parent = Me.bDetail
+        Me.bDetail.Image = CType(resources.GetObject("bDetail.Image"), System.Drawing.Image)
+        Me.bDetail.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.bDetail.ImageSize = New System.Drawing.Size(18, 18)
+        Me.bDetail.Location = New System.Drawing.Point(8, 9)
+        Me.bDetail.Name = "bDetail"
+        Me.bDetail.ShadowDecoration.Parent = Me.bDetail
+        Me.bDetail.Size = New System.Drawing.Size(83, 32)
+        Me.bDetail.TabIndex = 11
+        Me.bDetail.Text = "Detail"
+        Me.bDetail.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'bProses
+        '
+        Me.bProses.BorderColor = System.Drawing.Color.Gainsboro
+        Me.bProses.BorderRadius = 5
+        Me.bProses.BorderThickness = 1
+        Me.bProses.CheckedState.Parent = Me.bProses
+        Me.bProses.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.bProses.CustomImages.Parent = Me.bProses
+        Me.bProses.FillColor = System.Drawing.Color.Transparent
+        Me.bProses.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bProses.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.bProses.HoverState.Parent = Me.bProses
+        Me.bProses.Image = Global.SIKAP.My.Resources.Resources.Edit
+        Me.bProses.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.bProses.ImageSize = New System.Drawing.Size(18, 18)
+        Me.bProses.Location = New System.Drawing.Point(97, 9)
+        Me.bProses.Name = "bProses"
+        Me.bProses.ShadowDecoration.Parent = Me.bProses
+        Me.bProses.Size = New System.Drawing.Size(103, 32)
+        Me.bProses.TabIndex = 9
+        Me.bProses.Text = "Proses"
+        Me.bProses.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'pnlPage
+        '
+        Me.pnlPage.BorderColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.pnlPage.BorderThickness = 1
+        Me.pnlPage.Controls.Add(Me.paginationCalon)
+        Me.pnlPage.Controls.Add(Me.lblInfo)
+        Me.pnlPage.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.pnlPage.Location = New System.Drawing.Point(0, 452)
+        Me.pnlPage.Name = "pnlPage"
+        Me.pnlPage.ShadowDecoration.Parent = Me.pnlPage
+        Me.pnlPage.Size = New System.Drawing.Size(1022, 46)
+        Me.pnlPage.TabIndex = 4
+        '
+        'lblInfo
+        '
+        Me.lblInfo.AutoSize = True
+        Me.lblInfo.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInfo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(107, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.lblInfo.Location = New System.Drawing.Point(11, 18)
+        Me.lblInfo.Name = "lblInfo"
+        Me.lblInfo.Size = New System.Drawing.Size(177, 15)
+        Me.lblInfo.TabIndex = 0
+        Me.lblInfo.Text = "Menampilkan 1-10 dari 245 Data"
+        '
+        'dgvCalonPegawai
+        '
+        Me.dgvCalonPegawai.AllowUserToAddRows = False
+        Me.dgvCalonPegawai.AllowUserToDeleteRows = False
+        Me.dgvCalonPegawai.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+        Me.dgvCalonPegawai.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvCalonPegawai.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvCalonPegawai.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvCalonPegawai.BackgroundColor = System.Drawing.Color.White
+        Me.dgvCalonPegawai.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvCalonPegawai.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgvCalonPegawai.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(219, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(254, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvCalonPegawai.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvCalonPegawai.ColumnHeadersHeight = 24
+        Me.dgvCalonPegawai.Cursor = System.Windows.Forms.Cursors.Hand
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvCalonPegawai.DefaultCellStyle = DataGridViewCellStyle3
+        Me.dgvCalonPegawai.EnableHeadersVisualStyles = False
+        Me.dgvCalonPegawai.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.dgvCalonPegawai.Location = New System.Drawing.Point(3, 47)
+        Me.dgvCalonPegawai.MultiSelect = False
+        Me.dgvCalonPegawai.Name = "dgvCalonPegawai"
+        Me.dgvCalonPegawai.ReadOnly = True
+        Me.dgvCalonPegawai.RowHeadersVisible = False
+        Me.dgvCalonPegawai.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvCalonPegawai.Size = New System.Drawing.Size(1016, 380)
+        Me.dgvCalonPegawai.TabIndex = 3
+        Me.dgvCalonPegawai.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.[Default]
+        Me.dgvCalonPegawai.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
+        Me.dgvCalonPegawai.ThemeStyle.AlternatingRowsStyle.Font = Nothing
+        Me.dgvCalonPegawai.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty
+        Me.dgvCalonPegawai.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty
+        Me.dgvCalonPegawai.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty
+        Me.dgvCalonPegawai.ThemeStyle.BackColor = System.Drawing.Color.White
+        Me.dgvCalonPegawai.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.dgvCalonPegawai.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.dgvCalonPegawai.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgvCalonPegawai.ThemeStyle.HeaderStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        Me.dgvCalonPegawai.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
+        Me.dgvCalonPegawai.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+        Me.dgvCalonPegawai.ThemeStyle.HeaderStyle.Height = 24
+        Me.dgvCalonPegawai.ThemeStyle.ReadOnly = True
+        Me.dgvCalonPegawai.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
+        Me.dgvCalonPegawai.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgvCalonPegawai.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
+        Me.dgvCalonPegawai.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.dgvCalonPegawai.ThemeStyle.RowsStyle.Height = 22
+        Me.dgvCalonPegawai.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.dgvCalonPegawai.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Label1.Location = New System.Drawing.Point(8, 6)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(205, 13)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Home   >    Recruitment >  Calon Pegawai" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
+        'pnlToolbar
+        '
+        Me.pnlToolbar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlToolbar.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
+        Me.pnlToolbar.BorderColor = System.Drawing.Color.Gainsboro
+        Me.pnlToolbar.BorderRadius = 6
+        Me.pnlToolbar.BorderThickness = 1
+        Me.pnlToolbar.Controls.Add(Me.bRefresh)
+        Me.pnlToolbar.Controls.Add(Me.bCari)
+        Me.pnlToolbar.Controls.Add(Me.cTahap)
+        Me.pnlToolbar.Controls.Add(Me.tPencarian)
+        Me.pnlToolbar.Controls.Add(Me.Label4)
+        Me.pnlToolbar.Location = New System.Drawing.Point(11, 82)
+        Me.pnlToolbar.Name = "pnlToolbar"
+        Me.pnlToolbar.ShadowDecoration.Parent = Me.pnlToolbar
+        Me.pnlToolbar.Size = New System.Drawing.Size(1022, 74)
+        Me.pnlToolbar.TabIndex = 3
+        '
+        'bRefresh
+        '
+        Me.bRefresh.BorderColor = System.Drawing.Color.Gray
+        Me.bRefresh.BorderRadius = 6
+        Me.bRefresh.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash
+        Me.bRefresh.BorderThickness = 1
+        Me.bRefresh.CheckedState.Parent = Me.bRefresh
+        Me.bRefresh.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.bRefresh.CustomImages.Parent = Me.bRefresh
+        Me.bRefresh.FillColor = System.Drawing.Color.Transparent
+        Me.bRefresh.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bRefresh.ForeColor = System.Drawing.Color.Black
+        Me.bRefresh.HoverState.Parent = Me.bRefresh
+        Me.bRefresh.Image = Global.SIKAP.My.Resources.Resources.Reset
+        Me.bRefresh.ImageSize = New System.Drawing.Size(18, 18)
+        Me.bRefresh.Location = New System.Drawing.Point(758, 27)
+        Me.bRefresh.Name = "bRefresh"
+        Me.bRefresh.ShadowDecoration.Parent = Me.bRefresh
+        Me.bRefresh.Size = New System.Drawing.Size(86, 36)
+        Me.bRefresh.TabIndex = 7
+        Me.bRefresh.Text = "Reset"
+        '
+        'bCari
+        '
+        Me.bCari.BorderRadius = 6
+        Me.bCari.CheckedState.Parent = Me.bCari
+        Me.bCari.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.bCari.CustomImages.Parent = Me.bCari
+        Me.bCari.FillColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(222, Byte), Integer))
+        Me.bCari.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bCari.ForeColor = System.Drawing.Color.White
+        Me.bCari.HoverState.Parent = Me.bCari
+        Me.bCari.Image = Global.SIKAP.My.Resources.Resources.SearchW
+        Me.bCari.ImageSize = New System.Drawing.Size(18, 18)
+        Me.bCari.Location = New System.Drawing.Point(666, 27)
+        Me.bCari.Name = "bCari"
+        Me.bCari.ShadowDecoration.Parent = Me.bCari
+        Me.bCari.Size = New System.Drawing.Size(86, 36)
+        Me.bCari.TabIndex = 6
+        Me.bCari.Text = "Cari"
+        '
+        'cTahap
+        '
+        Me.cTahap.BackColor = System.Drawing.Color.Transparent
+        Me.cTahap.BorderRadius = 6
+        Me.cTahap.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cTahap.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cTahap.FocusedColor = System.Drawing.Color.Empty
+        Me.cTahap.FocusedState.Parent = Me.cTahap
+        Me.cTahap.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cTahap.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
+        Me.cTahap.FormattingEnabled = True
+        Me.cTahap.HoverState.Parent = Me.cTahap
+        Me.cTahap.ItemHeight = 30
+        Me.cTahap.ItemsAppearance.Parent = Me.cTahap
+        Me.cTahap.Location = New System.Drawing.Point(319, 27)
+        Me.cTahap.Name = "cTahap"
+        Me.cTahap.ShadowDecoration.Parent = Me.cTahap
+        Me.cTahap.Size = New System.Drawing.Size(183, 36)
+        Me.cTahap.TabIndex = 5
+        '
+        'tPencarian
+        '
+        Me.tPencarian.BorderRadius = 6
+        Me.tPencarian.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.tPencarian.DefaultText = ""
+        Me.tPencarian.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.tPencarian.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.tPencarian.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.tPencarian.DisabledState.Parent = Me.tPencarian
+        Me.tPencarian.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.tPencarian.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.tPencarian.FocusedState.Parent = Me.tPencarian
+        Me.tPencarian.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.tPencarian.HoverState.Parent = Me.tPencarian
+        Me.tPencarian.IconRight = Global.SIKAP.My.Resources.Resources.Search
+        Me.tPencarian.IconRightSize = New System.Drawing.Size(18, 18)
+        Me.tPencarian.Location = New System.Drawing.Point(14, 27)
+        Me.tPencarian.Name = "tPencarian"
+        Me.tPencarian.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.tPencarian.PlaceholderText = "Cari Nama / No. Kandidat / KTP / No. Offering"
+        Me.tPencarian.SelectedText = ""
+        Me.tPencarian.ShadowDecoration.Parent = Me.tPencarian
+        Me.tPencarian.Size = New System.Drawing.Size(299, 36)
+        Me.tPencarian.TabIndex = 1
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Yu Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(14, 10)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(115, 16)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "Cari Calon Pegawai"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.Location = New System.Drawing.Point(14, 29)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(156, 30)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Calon Pegawai"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(110, Byte), Integer), CType(CType(119, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(16, 59)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(276, 17)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Daftar kandidat yang telah menerima Offering"
+        '
+        'paginationCalon
+        '
+        Me.paginationCalon.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
+        Me.paginationCalon.CurrentPage = 1
+        Me.paginationCalon.Dock = System.Windows.Forms.DockStyle.Right
+        Me.paginationCalon.Location = New System.Drawing.Point(672, 0)
+        Me.paginationCalon.Name = "paginationCalon"
+        Me.paginationCalon.PageSize = 10
+        Me.paginationCalon.Size = New System.Drawing.Size(350, 46)
+        Me.paginationCalon.TabIndex = 1
+        Me.paginationCalon.TotalRecord = 0
+        '
+        'bJadikanPegawai
+        '
+        Me.bJadikanPegawai.BorderColor = System.Drawing.Color.Gainsboro
+        Me.bJadikanPegawai.BorderRadius = 5
+        Me.bJadikanPegawai.BorderThickness = 1
+        Me.bJadikanPegawai.CheckedState.Parent = Me.bJadikanPegawai
+        Me.bJadikanPegawai.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.bJadikanPegawai.CustomImages.Parent = Me.bJadikanPegawai
+        Me.bJadikanPegawai.FillColor = System.Drawing.Color.Transparent
+        Me.bJadikanPegawai.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bJadikanPegawai.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.bJadikanPegawai.HoverState.Parent = Me.bJadikanPegawai
+        Me.bJadikanPegawai.Image = Global.SIKAP.My.Resources.Resources.Edit
+        Me.bJadikanPegawai.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.bJadikanPegawai.ImageSize = New System.Drawing.Size(18, 18)
+        Me.bJadikanPegawai.Location = New System.Drawing.Point(210, 9)
+        Me.bJadikanPegawai.Name = "bJadikanPegawai"
+        Me.bJadikanPegawai.ShadowDecoration.Parent = Me.bJadikanPegawai
+        Me.bJadikanPegawai.Size = New System.Drawing.Size(142, 32)
+        Me.bJadikanPegawai.TabIndex = 12
+        Me.bJadikanPegawai.Text = "Jadikan Pegawai"
+        Me.bJadikanPegawai.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'uf_calonpegawai
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.White
+        Me.Controls.Add(Me.pnlContext)
+        Me.Name = "uf_calonpegawai"
+        Me.Size = New System.Drawing.Size(1050, 663)
+        Me.pnlContext.ResumeLayout(False)
+        Me.pnlContext.PerformLayout()
+        Me.pnlButton.ResumeLayout(False)
+        Me.pnlPage.ResumeLayout(False)
+        Me.pnlPage.PerformLayout()
+        CType(Me.dgvCalonPegawai, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlToolbar.ResumeLayout(False)
+        Me.pnlToolbar.PerformLayout()
+        Me.ResumeLayout(False)
+
+    End Sub
+
+    Friend WithEvents pnlContext As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents pnlButton As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents bDetail As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents bProses As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents pnlPage As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents paginationCalon As ucPagination
+    Friend WithEvents lblInfo As Label
+    Friend WithEvents dgvCalonPegawai As Guna.UI2.WinForms.Guna2DataGridView
+    Friend WithEvents Label1 As Label
+    Friend WithEvents pnlToolbar As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents bRefresh As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents bCari As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents cTahap As Guna.UI2.WinForms.Guna2ComboBox
+    Friend WithEvents tPencarian As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents bJadikanPegawai As Guna.UI2.WinForms.Guna2Button
+End Class

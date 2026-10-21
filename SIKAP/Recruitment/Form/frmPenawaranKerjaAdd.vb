@@ -725,8 +725,8 @@ Public Class frmPenawaranKerjaAdd
                         ' UPDATE OFFERING
                         '==================================================
                         Dim sqlOffering As String = "UPDATE sapenawarankerja SET ffcstatus = 'ACCEPTED', ffdrespon = NOW(), " &
-                            "ffcuserupdate = @userUpdate, ffdupdate = NOW() WHERE ffcidoffering = @idOffering " &
-                            "AND ffcidkandidat = @idKandidat AND ffcidrekrutmen = @idRekrutmen AND ffcstatus = 'WAITING'"
+                                "ffcuserupdate = @userUpdate, ffdupdate = NOW() WHERE ffcidoffering = @idOffering " &
+                                "AND ffcidkandidat = @idKandidat AND ffcidrekrutmen = @idRekrutmen AND ffcstatus = 'WAITING'"
 
                         Dim affectedOffering As Integer
 
@@ -793,6 +793,31 @@ Public Class frmPenawaranKerjaAdd
                             End If
 
                         End Using
+
+                        '==================================================
+                        ' BUAT DATA CALON PEGAWAI
+                        '==================================================
+                        Dim sqlCalon As String = "INSERT INTO sacalonpegawai (ffcidkandidat, ffcidrekrutmen, ffcidoffering, ffcktp, ffcnik, ffcstatus, ffdmulai, ffcjabatan, ffcdepartemen, ffcbagian, " &
+                            "ffcjeniskaryawan, ffctempatkerja, ffcuserinput) Select o.ffcidkandidat, o.ffcidrekrutmen, o.ffcidoffering,k.ffcnik, NULL, 'CALON_PEGAWAI', o.ffdmulai, o.ffcjabatan, o.ffcdepartemen, o.ffcbagian, " &
+                            "o.ffcjeniskaryawan, o.ffctempatkerja, @userInput FROM sapenawarankerja o INNER JOIN sakandidat k ON k.ffcidkandidat = o.ffcidkandidat INNER JOIN sakandidatrekrutmen r ON r.ffcidrekrutmen = o.ffcidrekrutmen " &
+                            "AND r.ffcidkandidat = o.ffcidkandidat WHERE o.ffcidoffering = @idOffering AND o.ffcidkandidat = @idKandidat AND o.ffcidrekrutmen = @idRekrutmen AND o.ffcstatus = 'ACCEPTED' AND r.ffcstatus = 'ACCEPTED' " &
+                            "AND NOT EXISTS (SELECT 1 FROM sacalonpegawai cp WHERE cp.ffcidoffering = o.ffcidoffering)"
+
+                        Using cmd As New MySqlCommand(sqlCalon, conn, trans)
+
+                            cmd.Parameters.Add("@idOffering", MySqlDbType.Int64).Value = IdOffering
+                            cmd.Parameters.Add("@idKandidat", MySqlDbType.Int64).Value = IdKandidat
+                            cmd.Parameters.Add("@idRekrutmen", MySqlDbType.Int64).Value = IdRekrutmen
+                            cmd.Parameters.Add("@userInput", MySqlDbType.VarChar).Value = Environment.UserName
+
+                            Dim affectedCalon As Integer = cmd.ExecuteNonQuery()
+
+                            If affectedCalon <> 1 Then
+                                Throw New Exception("Data calon pegawai gagal dibuat. " & "Pastikan Offering, kandidat, dan rekrutmen valid " & "serta belum memiliki data calon pegawai.")
+                            End If
+
+                        End Using
+
 
                         '==================================================
                         ' COMMIT

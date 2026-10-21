@@ -115,6 +115,8 @@ Public Class Menu_Utama
                 AddHandler btn.Click, AddressOf bInterview_Click
             Case "bPenawaranKerja"
                 AddHandler btn.Click, AddressOf bPenawaranKerja_Click
+            Case "bCalon"
+                AddHandler btn.Click, AddressOf bCalon_Click
 
             ' Untuk Menu Employee
             Case "bEmployeeData"
@@ -401,6 +403,20 @@ Public Class Menu_Utama
 
         ' Tampilkan UserControl Department
         LoadUserControl(New uf_penawarankerja())
+    End Sub
+    Private Sub bCalon_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ' Matikan semua submenu Master Data
+        ResetSubMenuMaster()
+
+        ' Aktifkan tombol yang sedang dipilih
+        Dim btn = DirectCast(sender, Guna2Button)
+        btn.Checked = True
+
+        ' Aktifkan menu utama Master Data
+        bRecruitment.Checked = True
+
+        ' Tampilkan UserControl Department
+        LoadUserControl(New uf_calonpegawai())
     End Sub
     '============== Employee ==========
     '=========== Master Data =========
