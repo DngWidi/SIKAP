@@ -158,6 +158,9 @@ Public Class frmCalonPegawai
 
         'Status calon pegawai
         cCalon.Enabled = False
+        ' cHariKerja.Enabled = False
+        '  cShift.Enabled = False
+
 
         'Tanggal lahir
         dTglLahir.Enabled = False
@@ -178,6 +181,11 @@ Public Class frmCalonPegawai
         cCalon.Items.Clear()
         cCalon.Items.AddRange(New Object() {"CALON_PEGAWAI", "DATA_LENGKAP", "SIAP_MENJADI_PEGAWAI", "MENJADI_PEGAWAI", "BATAL"})
 
+        cShift.Items.Clear()
+        cShift.Items.AddRange(New Object() {"SHIFT", "NON SHIFT"})
+
+        cHariKerja.Items.Clear()
+        cHariKerja.Items.AddRange(New Object() {"6", "5"})
     End Sub
     Private Sub AturPenghasilanReadOnly()
 
@@ -434,6 +442,7 @@ Public Class frmCalonPegawai
                         cmd.Parameters.AddWithValue("@alamat", tAlamatKtp.Text.Trim())
                         cmd.Parameters.AddWithValue("@domisili", tAlamatDomisili.Text.Trim())
                         cmd.Parameters.AddWithValue("@keterangan", tKeterangan.Text.Trim())
+
                         cmd.Parameters.AddWithValue("@idkandidat", idKandidat)
 
                         cmd.ExecuteNonQuery()
@@ -441,7 +450,7 @@ Public Class frmCalonPegawai
                     End Using
 
                     '3. Simpan penempatan calon pegawai
-                    Dim sqlPenempatan As String = "UPDATE sacalonpegawai SET ffcdepartemen = @departemen, ffcbagian = @bagian, ffcjabatan = @jabatan, ffcjeniskaryawan = @jenis, ffdmulai = @mulai, ffdupdate = NOW() WHERE ffcidcalonpegawai = @id"
+                    Dim sqlPenempatan As String = "UPDATE sacalonpegawai SET ffcdepartemen = @departemen, ffcbagian = @bagian, ffcjabatan = @jabatan,ffcshift=@shift,ffckerja=@kerja, ffcjeniskaryawan = @jenis, ffdmulai = @mulai, ffdupdate = NOW() WHERE ffcidcalonpegawai = @id"
 
                     Using cmd As New MySqlCommand(sqlPenempatan, conn, trans)
 
@@ -450,6 +459,8 @@ Public Class frmCalonPegawai
                         cmd.Parameters.AddWithValue("@jabatan", cJabatan.SelectedValue)
                         cmd.Parameters.AddWithValue("@jenis", cJenis.Text.Trim())
                         cmd.Parameters.AddWithValue("@mulai", dTglkerja.Value.Date)
+                        cmd.Parameters.AddWithValue("@shift", cShift.Text.Trim())
+                        cmd.Parameters.AddWithValue("@kerja", cHariKerja.Text.Trim())
                         cmd.Parameters.AddWithValue("@id", IdCalonPegawai)
 
                         cmd.ExecuteNonQuery()

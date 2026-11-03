@@ -23,7 +23,133 @@ Public Class uf_calonpegawai
     Private ReadOnly _warnaTeks As Color = Color.FromArgb(31, 41, 55)
     Private ReadOnly _warnaGaris As Color = Color.FromArgb(229, 231, 235)
     Private ReadOnly _warnaHover As Color = Color.FromArgb(239, 246, 255)
+#Region "FUNTION"
+    '==========================================================
+    ' TOTAL RECORD
+    '==========================================================
+    Private Function GetTotalRecord() As Integer
 
+        Try
+            Using conn As New MySqlConnection(sambung)
+
+                conn.Open()
+
+                Dim sql As String = "SELECT COUNT(*) FROM sacalonpegawai cp INNER JOIN sakandidat k ON cp.ffcidkandidat = k.ffcidkandidat INNER JOIN sapenawarankerja o ON cp.ffcidoffering = o.ffcidoffering WHERE 1=1 "
+
+                If _keywordCari <> "" Then
+                    sql &= "AND (k.ffcnokandidat LIKE @keyword OR k.ffcnama LIKE @keyword OR cp.ffcktp LIKE @keyword OR o.ffcnopenawaran LIKE @keyword ) "
+                End If
+
+                If _statusCari <> "" Then
+                    sql &= "AND cp.ffcstatus = @status "
+                End If
+
+                Using cmd As New MySqlCommand(sql, conn)
+
+                    If _keywordCari <> "" Then
+                        cmd.Parameters.AddWithValue("@keyword", "%" & _keywordCari & "%")
+                    End If
+
+                    If _statusCari <> "" Then
+                        cmd.Parameters.AddWithValue("@status", _statusCari)
+                    End If
+
+                    Return Convert.ToInt32(cmd.ExecuteScalar())
+
+                End Using
+
+            End Using
+
+        Catch ex As Exception
+            PesanPopupError("ERROR", "Gagal menghitung data calon pegawai." & Environment.NewLine & ex.Message)
+            Return 0
+        End Try
+
+    End Function
+    Private Function KonversiJenisKelamin(nilai As Object) As String
+
+        If nilai Is Nothing OrElse IsDBNull(nilai) Then
+            Return ""
+        End If
+
+        Dim jenisKelamin As String =
+      Convert.ToString(nilai).Trim().ToUpperInvariant()
+
+        Select Case jenisKelamin
+            Case "L", "M", "LAKI-LAKI", "LAKI LAKI", "MALE"
+                Return "M"
+
+            Case "P", "F", "PEREMPUAN", "FEMALE"
+                Return "F"
+
+            Case Else
+                Return ""
+        End Select
+
+    End Function
+    Private Function AmbilLong(row As DataGridViewRow, namaKolom As String) As Long
+
+        If Not dgvCalonPegawai.Columns.Contains(namaKolom) Then
+            Return 0
+        End If
+
+        Dim nilai As Object = row.Cells(namaKolom).Value
+
+        If nilai Is Nothing OrElse IsDBNull(nilai) Then Return 0
+
+        Return Convert.ToInt64(nilai)
+
+    End Function
+
+    Private Function AmbilString(row As DataGridViewRow, namaKolom As String) As String
+
+        If Not dgvCalonPegawai.Columns.Contains(namaKolom) Then
+            Return ""
+        End If
+
+        Dim nilai As Object = row.Cells(namaKolom).Value
+
+        If nilai Is Nothing OrElse IsDBNull(nilai) Then Return ""
+
+        Return nilai.ToString().Trim()
+
+    End Function
+#End Region
+#Region "PRIVATE"
+
+    ' ==========================================================
+    ' SALIN RIWAYAT PENGALAMAN KERJA KANDIDAT KE PEGAWAI
+    ' ==========================================================
+    Private Sub SalinPengalamanPegawai(conn As MySqlConnection, trans As MySqlTransaction, idKandidat As Long, nik As String)
+
+        Dim sql As String = "INSERT INTO sapegawaipengalaman (ffcnik, ffcidpengalamanasal, ffcperusahaan, ffcjabatan, ffdtglmulai, ffdtglselesai,ffcgajiterakhir, ffcalasanberhenti, ffcketerangan) " &
+        "SELECT @nik, p.ffcidpengalaman, p.ffcperusahaan,p.ffcjabatan, p.ffdtglmulai, p.ffdtglselesai, p.ffcgajiterakhir, p.ffcalasanberhenti, p.ffcketerangan FROM sakandidatpengalaman p " &
+        "WHERE p.ffcidkandidat = @idKandidat ORDER BY p.ffcidpengalaman"
+        Using cmd As New MySqlCommand(sql, conn, trans)
+            cmd.Parameters.AddWithValue("@nik", nik)
+            cmd.Parameters.AddWithValue("@idKandidat", idKandidat)
+            cmd.ExecuteNonQuery()
+
+        End Using
+
+    End Sub
+
+
+    ' ==========================================================
+    ' SALIN RIWAYAT PENDIDIKAN KANDIDAT KE PEGAWAI
+    ' ==========================================================
+    Private Sub SalinPendidikanPegawai(conn As MySqlConnection, trans As MySqlTransaction, idKandidat As Long, nik As String)
+
+        Dim sql As String = "INSERT INTO sapegawaipendidikan (ffcnik, ffcidpendidikanasal, ffctingkat, ffcnamainstitusi, ffcjurusan, ffctahunmasuk, ffctahunlulus, ffcnilai, ffcketerangan) " &
+        "SELECT @nik, p.ffcidpendidikan, p.ffctingkat, p.ffcnamainstitusi, p.ffcjurusan, p.ffctahunmasuk, p.ffctahunlulus, p.ffcnilai, p.ffcketerangan FROM sakandidatpendidikan p " &
+        "WHERE p.ffcidkandidat = @idKandidat ORDER BY p.ffcidpendidikan"
+        Using cmd As New MySqlCommand(sql, conn, trans)
+            cmd.Parameters.AddWithValue("@nik", nik)
+            cmd.Parameters.AddWithValue("@idKandidat", idKandidat)
+            cmd.ExecuteNonQuery()
+        End Using
+
+    End Sub
     Private Sub SalinDokumenDanSertifikat(conn As MySqlConnection, trans As MySqlTransaction, idKandidat As Long, nik As String, daftarFileBaru As List(Of String))
 
         ' Pemetaan ID dokumen kandidat ke ID dokumen pegawai.
@@ -35,7 +161,7 @@ Public Class uf_calonpegawai
         Dim dtDokumen As New DataTable()
 
         Using cmd As New MySqlCommand("SELECT ffciddokumen, ffcjenis, ffcnama, ffcfile, ffctipefile, ffnukurang, ffcketerangan " &
-        "FROM sakandidatdokumen WHERE ffcidkandidat = @id ORDER BY ffciddokumen", conn, trans)
+       "FROM sakandidatdokumen WHERE ffcidkandidat = @id ORDER BY ffciddokumen", conn, trans)
 
             cmd.Parameters.AddWithValue("@id", idKandidat)
 
@@ -55,12 +181,25 @@ Public Class uf_calonpegawai
             Dim nama As String = Convert.ToString(dr("ffcnama"))
             Dim pathAsal As String = Convert.ToString(dr("ffcfile"))
 
+            If String.IsNullOrWhiteSpace(pathAsal) Then
+                Throw New Exception("Path file dokumen kandidat kosong: " & nama)
+            End If
+
             Dim folderTujuan As String = If(jenis.Trim().Equals("Sertifikat", StringComparison.OrdinalIgnoreCase), "Sertifikat", "Dokumen")
 
-            '     Dim pathBaru As String = SalinFileKePegawai(pathAsal, nik, folderTujuan, daftarFileBaru)
+            Dim pathBaru As String = String.Empty
+
+            If Not String.IsNullOrWhiteSpace(pathAsal) Then
+                pathBaru = SalinFileKandidatKeKaryawan(pathAsal, nik, folderTujuan)
+
+                ' Simpan path fisik untuk pembersihan jika transaksi gagal.
+                Dim pathFisikBaru As String = GetFullFilePathKaryawan(pathBaru)
+
+                daftarFileBaru.Add(pathFisikBaru)
+            End If
 
             Using cmd As New MySqlCommand("INSERT INTO sapegawaidokumen (ffcnik, ffciddokumenasal, ffcjenis, ffcnama, ffcfile, ffctipefile, ffnukurang, ffcketerangan) " &
-            "VALUES (@nik, @idAsal, @jenis, @nama, @file, @tipe, @ukuran, @keterangan)", conn, trans)
+           "VALUES (@nik, @idAsal, @jenis, @nama, @file, @tipe, @ukuran, @keterangan)", conn, trans)
 
                 cmd.Parameters.AddWithValue("@nik", nik)
                 cmd.Parameters.AddWithValue("@idAsal", idDokumenAsal)
@@ -83,7 +222,7 @@ Public Class uf_calonpegawai
         Dim dtSertifikat As New DataTable()
 
         Using cmd As New MySqlCommand("SELECT ffcidsertifikat, ffciddokumen, ffcnamasertifikat, ffcpenerbit, ffcnomorsertifikat, " &
-        "ffdtglterbit, ffdtglkadaluarsa, ffcketerangan FROM sakandidatsertifikat WHERE ffcidkandidat = @id ORDER BY ffcidsertifikat", conn, trans)
+       "ffdtglterbit, ffdtglkadaluarsa, ffcketerangan FROM sakandidatsertifikat WHERE ffcidkandidat = @id ORDER BY ffcidsertifikat", conn, trans)
 
             cmd.Parameters.AddWithValue("@id", idKandidat)
 
@@ -111,7 +250,7 @@ Public Class uf_calonpegawai
             End If
 
             Using cmd As New MySqlCommand("INSERT INTO sapegawisertifikat (ffcnik, ffcidsertifikatasal, ffcidpegawaidokumen, ffcnamasertifikat, ffcpenerbit, ffcnomorsertifikat, ffdtglterbit, ffdtglkadaluarsa, ffcketerangan) " &
-            "VALUES (@nik, @idAsal, @idDokumen, @nama, @penerbit,@nomor, @terbit, @kadaluarsa, @keterangan)", conn, trans)
+           "VALUES (@nik, @idAsal, @idDokumen, @nama, @penerbit,@nomor, @terbit, @kadaluarsa, @keterangan)", conn, trans)
 
                 cmd.Parameters.AddWithValue("@nik", nik)
                 cmd.Parameters.AddWithValue("@idAsal", idSertifikatAsal)
@@ -128,7 +267,41 @@ Public Class uf_calonpegawai
         Next
 
     End Sub
+    Private Sub AmbilDataBarisTerpilih()
 
+        ResetPilihan()
+
+        If dgvCalonPegawai.CurrentRow Is Nothing Then Return
+        If dgvCalonPegawai.CurrentRow.IsNewRow Then Return
+
+        Dim row As DataGridViewRow = dgvCalonPegawai.CurrentRow
+
+        _idCalonPegawaiTerpilih = AmbilLong(row, "ffcidcalonpegawai")
+        _idKandidatTerpilih = AmbilLong(row, "ffcidkandidat")
+        _idRekrutmenTerpilih = AmbilLong(row, "ffcidrekrutmen")
+        _idOfferingTerpilih = AmbilLong(row, "ffcidoffering")
+        _statusTerpilih = AmbilString(row, "ffcstatus")
+
+        bDetail.Enabled = _idCalonPegawaiTerpilih > 0
+        bProses.Enabled = _idCalonPegawaiTerpilih > 0 AndAlso _statusTerpilih <> "MENJADI_PEGAWAI"
+
+        bJadikanPegawai.Enabled = _idCalonPegawaiTerpilih > 0 AndAlso _statusTerpilih = "SIAP_MENJADI_PEGAWAI"
+
+    End Sub
+    Private Sub ResetPilihan()
+
+        _idCalonPegawaiTerpilih = 0
+        _idKandidatTerpilih = 0
+        _idRekrutmenTerpilih = 0
+        _idOfferingTerpilih = 0
+        _statusTerpilih = ""
+
+        bDetail.Enabled = False
+        bProses.Enabled = False
+        bJadikanPegawai.Enabled = False
+
+    End Sub
+#End Region
 
     '==========================================================
     ' FORM LOAD
@@ -347,69 +520,7 @@ Public Class uf_calonpegawai
 
     End Sub
 
-    '==========================================================
-    ' TOTAL RECORD
-    '==========================================================
-    Private Function GetTotalRecord() As Integer
 
-        Try
-            Using conn As New MySqlConnection(sambung)
-
-                conn.Open()
-
-                Dim sql As String = "SELECT COUNT(*) FROM sacalonpegawai cp INNER JOIN sakandidat k ON cp.ffcidkandidat = k.ffcidkandidat INNER JOIN sapenawarankerja o ON cp.ffcidoffering = o.ffcidoffering WHERE 1=1 "
-
-                If _keywordCari <> "" Then
-                    sql &= "AND (k.ffcnokandidat LIKE @keyword OR k.ffcnama LIKE @keyword OR cp.ffcktp LIKE @keyword OR o.ffcnopenawaran LIKE @keyword ) "
-                End If
-
-                If _statusCari <> "" Then
-                    sql &= "AND cp.ffcstatus = @status "
-                End If
-
-                Using cmd As New MySqlCommand(sql, conn)
-
-                    If _keywordCari <> "" Then
-                        cmd.Parameters.AddWithValue("@keyword", "%" & _keywordCari & "%")
-                    End If
-
-                    If _statusCari <> "" Then
-                        cmd.Parameters.AddWithValue("@status", _statusCari)
-                    End If
-
-                    Return Convert.ToInt32(cmd.ExecuteScalar())
-
-                End Using
-
-            End Using
-
-        Catch ex As Exception
-            PesanPopupError("ERROR", "Gagal menghitung data calon pegawai." & Environment.NewLine & ex.Message)
-            Return 0
-        End Try
-
-    End Function
-    Private Function KonversiJenisKelamin(nilai As Object) As String
-
-        If nilai Is Nothing OrElse IsDBNull(nilai) Then
-            Return ""
-        End If
-
-        Dim jenisKelamin As String =
-        Convert.ToString(nilai).Trim().ToUpperInvariant()
-
-        Select Case jenisKelamin
-            Case "L", "M", "LAKI-LAKI", "LAKI LAKI", "MALE"
-                Return "M"
-
-            Case "P", "F", "PEREMPUAN", "FEMALE"
-                Return "F"
-
-            Case Else
-                Return ""
-        End Select
-
-    End Function
     '==========================================================
     ' PAGINATION DAN INFO DATA
     '==========================================================
@@ -543,70 +654,6 @@ Public Class uf_calonpegawai
 
     End Sub
 
-    Private Sub AmbilDataBarisTerpilih()
-
-        ResetPilihan()
-
-        If dgvCalonPegawai.CurrentRow Is Nothing Then Return
-        If dgvCalonPegawai.CurrentRow.IsNewRow Then Return
-
-        Dim row As DataGridViewRow = dgvCalonPegawai.CurrentRow
-
-        _idCalonPegawaiTerpilih = AmbilLong(row, "ffcidcalonpegawai")
-        _idKandidatTerpilih = AmbilLong(row, "ffcidkandidat")
-        _idRekrutmenTerpilih = AmbilLong(row, "ffcidrekrutmen")
-        _idOfferingTerpilih = AmbilLong(row, "ffcidoffering")
-        _statusTerpilih = AmbilString(row, "ffcstatus")
-
-        bDetail.Enabled = _idCalonPegawaiTerpilih > 0
-        bProses.Enabled = _idCalonPegawaiTerpilih > 0
-
-        bJadikanPegawai.Enabled = _idCalonPegawaiTerpilih > 0 AndAlso _statusTerpilih = "SIAP_MENJADI_PEGAWAI"
-
-    End Sub
-
-    Private Function AmbilLong(row As DataGridViewRow, namaKolom As String) As Long
-
-        If Not dgvCalonPegawai.Columns.Contains(namaKolom) Then
-            Return 0
-        End If
-
-        Dim nilai As Object = row.Cells(namaKolom).Value
-
-        If nilai Is Nothing OrElse IsDBNull(nilai) Then Return 0
-
-        Return Convert.ToInt64(nilai)
-
-    End Function
-
-    Private Function AmbilString(row As DataGridViewRow, namaKolom As String) As String
-
-        If Not dgvCalonPegawai.Columns.Contains(namaKolom) Then
-            Return ""
-        End If
-
-        Dim nilai As Object = row.Cells(namaKolom).Value
-
-        If nilai Is Nothing OrElse IsDBNull(nilai) Then Return ""
-
-        Return nilai.ToString().Trim()
-
-    End Function
-
-    Private Sub ResetPilihan()
-
-        _idCalonPegawaiTerpilih = 0
-        _idKandidatTerpilih = 0
-        _idRekrutmenTerpilih = 0
-        _idOfferingTerpilih = 0
-        _statusTerpilih = ""
-
-        bDetail.Enabled = False
-        bProses.Enabled = False
-        bJadikanPegawai.Enabled = False
-
-    End Sub
-
     '==========================================================
     ' DETAIL
     '==========================================================
@@ -652,11 +699,7 @@ Public Class uf_calonpegawai
     ' JADIKAN PEGAWAI
     '==========================================================
 
-
-
     Private Sub bJadikanPegawai_Click(sender As Object, e As EventArgs) Handles bJadikanPegawai.Click
-
-
 
         If _idCalonPegawaiTerpilih <= 0 Then
             PesanPopupPeringatan("Peringatan", "Pilih calon pegawai terlebih dahulu.")
@@ -693,11 +736,11 @@ Public Class uf_calonpegawai
                         ' 1. AMBIL DATA CALON PEGAWAI DAN OFFERING
                         ' ==================================================
                         Dim dt As New DataTable()
-
-                        Dim sqlData As String = "SELECT cp.ffcidcalonpegawai, cp.ffcidkandidat, cp.ffcidoffering, cp.ffcktp, cp.ffdmulai, cp.ffcjabatan, cp.ffcdepartemen, cp.ffcbagian, cp.ffcjeniskaryawan, cp.ffctempatkerja, " &
-                        "k.ffcnama, k.ffctempatlahir, k.ffdtgllahir, k.ffcjeniskelamin, k.ffcstatuspernikahan, k.ffcnik AS ktp, k.ffcnpwp, k.ffcnotelp, k.ffcemail, k.ffcalamat, k.ffcdomisili, " &
-                        "k.ffcagama, o.ffngajipokok, o.ffntunjangantetap, o.ffntunjanganlain, o.ffntransport, o.ffnmakan FROM sacalonpegawai cp INNER JOIN sakandidat k ON k.ffcidkandidat = cp.ffcidkandidat " &
-                        "INNER JOIN sapenawarankerja o ON o.ffcidoffering = cp.ffcidoffering WHERE cp.ffcidcalonpegawai = @id AND cp.ffcstatus = 'SIAP_MENJADI_PEGAWAI' AND o.ffcstatus = 'ACCEPTED' FOR UPDATE"
+                        Dim sqlData As String = "SELECT cp.ffcidcalonpegawai, cp.ffcidkandidat,cp.ffcidrekrutmen, cp.ffcidoffering, cp.ffcktp, cp.ffdmulai, cp.ffcjabatan, cp.ffcdepartemen, cp.ffcbagian, cp.ffcjeniskaryawan, cp.ffctempatkerja, " &
+                            "k.ffcnama, k.ffctempatlahir, k.ffdtgllahir, k.ffcjeniskelamin, k.ffcstatuspernikahan, k.ffcnik AS ktp, k.ffcnpwp, k.ffcnotelp, k.ffcemail, k.ffcalamat, k.ffcdomisili, " &
+                            "k.ffcagama, k.ffcfilefoto AS filefoto, o.ffngajipokok, o.ffntunjangantetap, o.ffntunjanganlain, o.ffntransport, o.ffnmakan " &
+                            "FROM sacalonpegawai cp INNER JOIN sakandidat k ON k.ffcidkandidat = cp.ffcidkandidat INNER JOIN sapenawarankerja o ON o.ffcidoffering = cp.ffcidoffering " &
+                            "WHERE cp.ffcidcalonpegawai = @id And cp.ffcstatus = 'SIAP_MENJADI_PEGAWAI' AND o.ffcstatus = 'ACCEPTED' FOR UPDATE"
 
                         Using cmd As New MySqlCommand(sqlData, conn, trans)
                             cmd.Parameters.AddWithValue("@id", _idCalonPegawaiTerpilih)
@@ -713,6 +756,63 @@ Public Class uf_calonpegawai
 
                         Dim dr As DataRow = dt.Rows(0)
                         Dim idKandidat As Long = Convert.ToInt64(dr("ffcidkandidat"))
+
+                        Dim idRekrutmen As Long = Convert.ToInt64(dr("ffcidrekrutmen"))
+                        Dim idPermintaan As Long = 0
+
+                        ' Ambil ID permintaan melalui relasi rekrutmen.
+                        Using cmd As New MySqlCommand("SELECT ffcidpermintaan FROM sakandidatrekrutmen WHERE ffcidrekrutmen = @idRekrutmen FOR UPDATE", conn, trans)
+                            cmd.Parameters.AddWithValue("@idRekrutmen", idRekrutmen)
+                            Dim hasil As Object = cmd.ExecuteScalar()
+
+                            If hasil Is Nothing OrElse IsDBNull(hasil) Then
+                                Throw New Exception("Permintaan karyawan terkait tidak ditemukan.")
+                            End If
+
+                            idPermintaan = Convert.ToInt64(hasil)
+                        End Using
+
+
+                        ' ==================================================
+                        ' 2. VALIDASI PENCEGAHAN PENGANGKATAN GANDA
+                        ' ==================================================
+
+                        ' A. Pastikan kandidat belum diangkat melalui record lain.
+                        Dim sqlCekPengangkatan As String = "SELECT COUNT(*) FROM sacalonpegawai WHERE ffcidkandidat = @idKandidat AND ffcstatus = 'MENJADI_PEGAWAI' AND ffcidcalonpegawai <> @idCalon"
+
+                        Using cmd As New MySqlCommand(sqlCekPengangkatan, conn, trans)
+
+                            cmd.Parameters.AddWithValue("@idKandidat", idKandidat)
+                            cmd.Parameters.AddWithValue("@idCalon", _idCalonPegawaiTerpilih)
+
+                            Dim jumlah As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+                            If jumlah > 0 Then
+                                Throw New Exception("Kandidat ini sudah tercatat sebagai pegawai. Pengangkatan ulang tidak diperbolehkan.")
+                            End If
+
+                        End Using
+
+                        ' B. Pastikan nomor KTP belum terdaftar pada master pegawai.
+                        Dim ktpKandidat As String = Convert.ToString(dr("ktp")).Trim()
+
+                        If ktpKandidat <> String.Empty Then
+
+                            Dim sqlCekKTP As String = "SELECT COUNT(*) FROM sajatidiri WHERE ffcktp = @ktp"
+
+                            Using cmd As New MySqlCommand(sqlCekKTP, conn, trans)
+
+                                cmd.Parameters.AddWithValue("@ktp", ktpKandidat)
+
+                                Dim jumlah As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+                                If jumlah > 0 Then
+                                    Throw New Exception("Nomor KTP kandidat sudah terdaftar pada data pegawai. " & "Proses pengangkatan dibatalkan untuk mencegah duplikasi.")
+                                End If
+
+                            End Using
+
+                        End If
 
                         ' ==================================================
                         ' 2. GENERATE NIK PEGAWAI YYMMSS
@@ -751,11 +851,38 @@ Public Class uf_calonpegawai
                         End If
 
                         ' ==================================================
+                        ' SALIN FOTO KANDIDAT KE FOLDER PEGAWAI
+                        ' ==================================================
+                        Dim pathFotoPegawai As Object = DBNull.Value
+
+                        Dim pathFotoAsal As String = Convert.ToString(dr("filefoto")).Trim()
+
+                        If pathFotoAsal <> String.Empty Then
+
+                            ' Salin foto menggunakan modul FileKaryawan.
+                            Dim pathFotoBaru As String = FileKaryawan.SalinFileKandidatKeKaryawan(pathFotoAsal, nikBaru, "Foto")
+
+                            If String.IsNullOrWhiteSpace(pathFotoBaru) Then
+                                Throw New Exception("Gagal menyalin foto kandidat ke folder pegawai.")
+                            End If
+
+                            ' Simpan path fisik agar dapat dihapus jika transaksi gagal.
+                            Dim pathFisikFoto As String = FileKaryawan.GetFullFilePathKaryawan(pathFotoBaru)
+
+                            daftarFileBaru.Add(pathFisikFoto)
+
+                            ' Database menyimpan path relatif.
+                            pathFotoPegawai = pathFotoBaru
+
+                        End If
+
+                        ' ==================================================
                         ' 4. INSERT MASTER PEGAWAI
                         ' ==================================================
-                        Dim sqlPegawai As String = "INSERT INTO sajatidiri (ffcnik, ffcktp, ffcnama, ffcdepart, ffcbagian, ffcjabatan, ffcsex, ffdmasuk, ffcstatuspeg, ffcnpwp, ffclahir, ffdlahir, ffcagama, ffcemail, " &
-                        "ffcstatuskawin, ffctelp, ffcalamatktp, ffcdomisili) VALUES (@nik, @ktp, @nama, @depart, @bagian, @jabatan,@sex, @masuk, @statuspeg, @npwp, @lahir, @tgllahir, @agama, @email, @statuskawin, " &
-                        "@telp, @alamat, @domisili)"
+                        Dim sqlPegawai As String = "INSERT INTO sajatidiri (ffcnik, ffcktp, ffcnama, ffcdepart, ffcbagian, ffcjabatan, ffcsex, ffdmasuk, ffcstatuspeg, ffcnpwp, ffclahir, ffdlahir, " &
+                            "ffcagama, ffcemail, ffcstatuskawin, ffctelp, ffcalamatktp, ffcdomisili, ffcfilefoto) VALUES (@nik, @ktp, @nama, @depart, @bagian, @jabatan, @sex, " &
+                            "@masuk, @statuspeg, @npwp, @lahir, @tgllahir, @agama, @email, @statuskawin, @telp, @alamat, @domisili, @filefoto)"
+
 
                         Using cmd As New MySqlCommand(sqlPegawai, conn, trans)
 
@@ -777,7 +904,7 @@ Public Class uf_calonpegawai
                             cmd.Parameters.AddWithValue("@telp", dr("ffcnotelp"))
                             cmd.Parameters.AddWithValue("@alamat", dr("ffcalamat"))
                             cmd.Parameters.AddWithValue("@domisili", dr("ffcdomisili"))
-
+                            cmd.Parameters.AddWithValue("@filefoto", pathFotoPegawai)
                             cmd.ExecuteNonQuery()
                         End Using
 
@@ -798,11 +925,21 @@ Public Class uf_calonpegawai
                             cmd.ExecuteNonQuery()
                         End Using
 
-                        ' ==================================================
-                        ' 6. SALIN DOKUMEN DAN SERTIFIKAT
-                        '    Semua INSERT memakai transaksi yang sama.
-                        ' ==================================================
+                        ' ==========================================================
+                        ' 6. SALIN RIWAYAT PENDIDIKAN
+                        ' ==========================================================
+                        SalinPendidikanPegawai(conn, trans, idKandidat, nikBaru)
+
+                        ' ==========================================================
+                        ' SALIN RIWAYAT PENGALAMAN KERJA
+                        ' ==========================================================
+                        SalinPengalamanPegawai(conn, trans, idKandidat, nikBaru)
+
+                        ' ==========================================================
+                        ' SALIN DOKUMEN DAN SERTIFIKAT
+                        ' ==========================================================
                         SalinDokumenDanSertifikat(conn, trans, idKandidat, nikBaru, daftarFileBaru)
+
 
                         ' ==================================================
                         ' 7. UPDATE STATUS PALING AKHIR
@@ -817,6 +954,63 @@ Public Class uf_calonpegawai
                                 Throw New Exception("Status calon pegawai gagal diperbarui.Transaksi dibatalkan.")
                             End If
                         End Using
+
+                        ' ==================================================
+                        ' 8. PERBARUI STATUS PERMINTAAN KARYAWAN
+                        ' ==================================================
+
+                        Dim jumlahKebutuhan As Integer
+                        Dim jumlahTerpenuhi As Integer
+                        Dim statusPermintaan As String = ""
+
+                        ' Ambil jumlah kebutuhan dan status permintaan.
+                        Using cmd As New MySqlCommand("SELECT ffnjumlah, ffcstatus FROM sapermintaankaryawan WHERE ffcidpermintaan = @idPermintaan FOR UPDATE", conn, trans)
+
+                            cmd.Parameters.AddWithValue("@idPermintaan", idPermintaan)
+
+                            Using rd As MySqlDataReader = cmd.ExecuteReader()
+
+                                If Not rd.Read() Then
+                                    Throw New Exception("Data permintaan karyawan tidak ditemukan.")
+                                End If
+
+                                jumlahKebutuhan = If(IsDBNull(rd("ffnjumlah")), 0, Convert.ToInt32(rd("ffnjumlah")))
+                                statusPermintaan = If(IsDBNull(rd("ffcstatus")), "", rd("ffcstatus").ToString().Trim())
+
+                            End Using
+                        End Using
+
+                        ' Hitung kandidat unik yang sudah menjadi pegawai
+                        ' untuk permintaan ini.
+                        Using cmd As New MySqlCommand("SELECT COUNT(DISTINCT cp.ffcidkandidat) FROM sakandidatrekrutmen r INNER JOIN sacalonpegawai cp ON cp.ffcidrekrutmen = r.ffcidrekrutmen WHERE r.ffcidpermintaan = @idPermintaan AND cp.ffcstatus = 'MENJADI_PEGAWAI'", conn, trans)
+
+                            cmd.Parameters.AddWithValue("@idPermintaan", idPermintaan)
+
+                            jumlahTerpenuhi = Convert.ToInt32(cmd.ExecuteScalar())
+                        End Using
+
+                        ' Perbarui status hanya untuk permintaan yang sedang
+                        ' berada dalam tahap Recruitment atau pemenuhan sebagian.
+                        If statusPermintaan = "RECRUITMENT" OrElse statusPermintaan = "PartiallyFulfilled" Then
+
+                            Dim statusBaru As String
+
+                            If jumlahKebutuhan > 0 AndAlso jumlahTerpenuhi >= jumlahKebutuhan Then
+                                statusBaru = "Fulfilled"
+                            ElseIf jumlahTerpenuhi > 0 Then
+                                statusBaru = "PartiallyFulfilled"
+                            Else
+                                statusBaru = "RECRUITMENT"
+                            End If
+
+                            Using cmd As New MySqlCommand("UPDATE sapermintaankaryawan SET ffcstatus = @statusBaru, ffdupdate = NOW() WHERE ffcidpermintaan = @idPermintaan AND ffcstatus IN ('RECRUITMENT', 'PartiallyFulfilled')", conn, trans)
+
+                                cmd.Parameters.AddWithValue("@statusBaru", statusBaru)
+                                cmd.Parameters.AddWithValue("@idPermintaan", idPermintaan)
+
+                                cmd.ExecuteNonQuery()
+                            End Using
+                        End If
 
                         ' ==================================================
                         ' 8. COMMIT
@@ -852,7 +1046,29 @@ Public Class uf_calonpegawai
                 End Try
             Next
 
-            PesanPopupError("ERROR", "Gagal menjadikan pegawai." & Environment.NewLine & ex.Message)
+            ' PesanPopupError("ERROR", "Gagal menjadikan pegawai." & Environment.NewLine & ex.Message)
+            Dim pesanError As String = ex.Message
+
+            Dim mysqlEx As MySqlException =
+                TryCast(ex, MySqlException)
+
+            If mysqlEx IsNot Nothing AndAlso mysqlEx.Number = 1062 Then
+
+                If mysqlEx.Message.IndexOf("uq_sacalonpegawai_kandidat_diangkat", StringComparison.OrdinalIgnoreCase) >= 0 Then
+
+                    pesanError = "Kandidat ini sudah pernah diangkat menjadi pegawai. " & "Pengangkatan ulang tidak diperbolehkan."
+
+                ElseIf mysqlEx.Message.IndexOf("uq_sajatidiri_ktp", StringComparison.OrdinalIgnoreCase) >= 0 Then
+
+                    pesanError = "Nomor KTP sudah terdaftar pada pegawai lain. " & "Periksa kembali data kandidat."
+
+                Else
+                    pesanError = "Database menolak data duplikat. " & "Periksa kembali data yang sedang diproses."
+                End If
+
+            End If
+
+            PesanPopupError("PENGANGKATAN GAGAL", pesanError)
 
             Return
         End Try

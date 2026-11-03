@@ -18,7 +18,24 @@ Public Class Menu_Utama
     .Dock = DockStyle.Top,
     .Padding = New Padding(20, 2, 5, 2)
 }
-
+    Private pnlSubMaster As New FlowLayoutPanel With {
+    .AutoSize = True,
+    .AutoSizeMode = AutoSizeMode.GrowAndShrink,
+    .FlowDirection = FlowDirection.TopDown,
+    .WrapContents = False,
+    .Visible = False,
+    .Dock = DockStyle.Top,
+    .Padding = New Padding(20, 2, 5, 2)
+}
+    Private pnlSubEmployee As New FlowLayoutPanel With {
+    .AutoSize = True,
+    .AutoSizeMode = AutoSizeMode.GrowAndShrink,
+    .FlowDirection = FlowDirection.TopDown,
+    .WrapContents = False,
+    .Visible = False,
+    .Dock = DockStyle.Top,
+    .Padding = New Padding(20, 2, 5, 2)
+}
     Private Sub bMax_Click(sender As Object, e As EventArgs) Handles bMax.Click
         If Me.WindowState = FormWindowState.Normal Then
 
@@ -35,15 +52,7 @@ Public Class Menu_Utama
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
-    Private pnlSubMaster As New FlowLayoutPanel With {
-    .AutoSize = True,
-    .AutoSizeMode = AutoSizeMode.GrowAndShrink,
-    .FlowDirection = FlowDirection.TopDown,
-    .WrapContents = False,
-    .Visible = False,
-    .Dock = DockStyle.Top,
-    .Padding = New Padding(20, 2, 5, 2)
-}
+
 #Region "FUNCTION"
     '========== BUTTON UTAMA ==========
     Private Function BuatButtonUtama(ByVal text As String, ByVal name As String, ByVal iconNormal As Image) As Guna.UI2.WinForms.Guna2Button
@@ -120,9 +129,9 @@ Public Class Menu_Utama
 
             ' Untuk Menu Employee
             Case "bEmployeeData"
-            '    AddHandler btn.Click, AddressOf bEmployeeData_Click
-            Case "bEmployeeProfile"
-             '   AddHandler btn.Click, AddressOf bEmployeeProfile_Click
+                AddHandler btn.Click, AddressOf bEmployeeData_Click
+            Case "bKontrakKerja"
+                AddHandler btn.Click, AddressOf bKontrakKerja_Click
             Case "bOrganization"
              '   AddHandler btn.Click, AddressOf bOrganization_Click
           '  Case "bDepartment"
@@ -269,6 +278,13 @@ Public Class Menu_Utama
             End If
 
         Next
+        For Each ctrl As Control In pnlSubEmployee.Controls
+
+            If TypeOf ctrl Is Guna2Button Then
+                DirectCast(ctrl, Guna2Button).Checked = False
+            End If
+
+        Next
     End Sub
     Private Sub LoadUserControl(uc As UserControl)
         pnlForm.BringToFront()
@@ -289,7 +305,7 @@ Public Class Menu_Utama
     Private Sub HideAllSubMenu()
         pnlSubRecruitment.Visible = False
         pnlSubMaster.Visible = False
-
+        pnlSubEmployee.Visible = False
 
     End Sub
 
@@ -419,6 +435,74 @@ Public Class Menu_Utama
         LoadUserControl(New uf_calonpegawai())
     End Sub
     '============== Employee ==========
+    Private Sub bEmployee_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Dim btn = DirectCast(sender, Guna.UI2.WinForms.Guna2Button)
+        Dim icons = DirectCast(btn.Tag, Object())
+
+        'Jika submenu Master sedang terbuka maka cukup ditutup
+        If pnlSubEmployee.Visible Then
+
+            pnlSubEmployee.Visible = False
+            btn.Image = DirectCast(icons(0), Image)
+
+            Exit Sub
+
+        End If
+
+        'Tutup semua submenu
+        HideAllSubMenu()
+
+        'Reset semua icon menu utama
+        '  ResetMenuIcon()
+
+        pnlSubEmployee.SuspendLayout()
+
+        pnlSubEmployee.Controls.Clear()
+
+        pnlSubEmployee.Controls.Add(BuatSubButton("   Data Karyawan", "bEmployeeData", My.Resources.Biodata, True))
+        pnlSubEmployee.Controls.Add(BuatSubButton("   Kontrak Kerja", "bKontrakKerja", My.Resources.Kontrak, True))
+        pnlSubEmployee.Controls.Add(BuatSubButton("   Riwayat Karyawan", "bHistorisKaryawan", My.Resources.Historis, True))
+        pnlSubEmployee.Controls.Add(BuatSubButton("   Pelatihan", "bPelatihan", My.Resources.Training, True))
+        pnlSubEmployee.Controls.Add(BuatSubButton("   Sertifikat", "bSertifikat", My.Resources.Sertifikat, True))
+
+
+        pnlSubEmployee.Visible = True
+
+        '  btn.Image = DirectCast(icons(1), Image)
+
+        pnlSubEmployee.ResumeLayout()
+
+        pnlSubEmployee.PerformLayout()
+
+    End Sub
+    Private Sub bEmployeeData_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ' Matikan semua submenu Master Data
+        ResetSubMenuMaster()
+
+        ' Aktifkan tombol yang sedang dipilih
+        Dim btn = DirectCast(sender, Guna2Button)
+        btn.Checked = True
+
+        ' Aktifkan menu utama Master Data
+        bEmployee.Checked = True
+
+        ' Tampilkan UserControl Department
+        LoadUserControl(New uf_karyawan)
+    End Sub
+    Private Sub bKontrakKerja_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ' Matikan semua submenu Master Data
+        ResetSubMenuMaster()
+
+        ' Aktifkan tombol yang sedang dipilih
+        Dim btn = DirectCast(sender, Guna2Button)
+        btn.Checked = True
+
+        ' Aktifkan menu utama Master Data
+        bEmployee.Checked = True
+
+        ' Tampilkan UserControl Department
+        LoadUserControl(New uf_kontrakkerja)
+    End Sub
     '=========== Master Data =========
     Private Sub bMaster_Click(ByVal sender As Object, ByVal e As EventArgs)
         Dim btn = DirectCast(sender, Guna.UI2.WinForms.Guna2Button)
@@ -588,6 +672,7 @@ Public Class Menu_Utama
         'AddHandler bDashboard.Click, AddressOf ButtonUtama_Click
         AddHandler bRecruitment.Click, AddressOf bRecruitment_Click
         AddHandler bMaster.Click, AddressOf bMaster_Click
+        AddHandler bEmployee.Click, AddressOf bEmployee_Click
         '
 
         ' Buat Label Header
@@ -600,6 +685,7 @@ Public Class Menu_Utama
         flpMenu.Controls.Add(bRecruitment)
         flpMenu.Controls.Add(pnlSubRecruitment)
         flpMenu.Controls.Add(bEmployee)
+        flpMenu.Controls.Add(pnlSubEmployee)
         flpMenu.Controls.Add(bAttendance)
         flpMenu.Controls.Add(bOvertime)
         flpMenu.Controls.Add(bLeave)

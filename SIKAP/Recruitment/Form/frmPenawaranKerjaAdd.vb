@@ -2,6 +2,7 @@
 Imports MySql.Data.MySqlClient
 Imports System.Drawing
 Public Class frmPenawaranKerjaAdd
+    Private ShadowForm As New Guna.UI2.WinForms.Guna2ShadowForm()
     '==========================================================
     ' FORM MODE
     '==========================================================
@@ -503,7 +504,7 @@ Public Class frmPenawaranKerjaAdd
 #End Region
 
     Private Sub frmPenawaranKerjaAdd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        ShadowForm.SetShadowForm(Me)
         Try
 
             '======================================================

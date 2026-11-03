@@ -1,6 +1,8 @@
 ﻿
-Imports System.IO
+Imports System.Configuration
 Imports System.Diagnostics
+Imports System.IO
+Imports System.Text.RegularExpressions
 
 Module FileKaryawan
 
@@ -9,9 +11,17 @@ Module FileKaryawan
     '========================================================
     ' Root ini terpisah dari ROOT_FILE_KANDIDAT.
     ' Sesuaikan lokasinya jika server penyimpanan berubah.
+    Private ReadOnly Property RootFileKaryawan As String
+        Get
+            Dim root As String = ConfigurationManager.AppSettings("RootFileKaryawan")
 
-    Public Const ROOT_FILE_KARYAWAN As String = "\\192.168.1.250\backup data\DataKandidat"
+            If String.IsNullOrWhiteSpace(root) Then
+                Throw New InvalidOperationException("Konfigurasi RootFileKaryawan belum diisi di App.config.")
+            End If
 
+            Return Path.GetFullPath(root.Trim())
+        End Get
+    End Property
 
 #Region "Folder Karyawan"
 
@@ -27,8 +37,13 @@ Module FileKaryawan
         If String.IsNullOrWhiteSpace(nik) Then
             Throw New ArgumentException("NIK karyawan tidak boleh kosong.")
         End If
+        Dim nikBersih As String = nik.Trim()
 
-        Return Path.Combine(ROOT_FILE_KARYAWAN, Path.GetFileName(nik.Trim()))
+        If Not Regex.IsMatch(nikBersih, "^[0-9]{6}$") Then
+            Throw New ArgumentException("NIK harus terdiri dari 6 digit angka.")
+        End If
+
+        Return Path.Combine(RootFileKaryawan, nik.Trim())
 
     End Function
 
@@ -136,16 +151,14 @@ Module FileKaryawan
             Throw New ArgumentException("Path karyawan harus berupa relative path.")
         End If
 
-        Dim rootFull As String = Path.GetFullPath(ROOT_FILE_KARYAWAN)
+        Dim rootFull As String = RootFileKaryawan
 
         Dim fullPath As String = Path.GetFullPath(Path.Combine(rootFull, cleanPath))
 
         Dim rootPrefix As String = rootFull.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar) & Path.DirectorySeparatorChar
 
         If Not fullPath.StartsWith(rootPrefix, StringComparison.OrdinalIgnoreCase) Then
-
             Throw New ArgumentException("Path file berada di luar folder DataKaryawan.")
-
         End If
 
         Return fullPath
@@ -337,8 +350,7 @@ Module FileKaryawan
     ' agar tidak terjadi konflik nama fungsi.
     '========================================================
 
-    Private Function GenerateNamaFileKaryawan(namaFile As String
-    ) As String
+    Private Function GenerateNamaFileKaryawan(namaFile As String) As String
 
         If String.IsNullOrWhiteSpace(namaFile) Then
             Throw New ArgumentException("Nama file tidak boleh kosong.")
@@ -354,8 +366,7 @@ Module FileKaryawan
             namaAsli = namaAsli.Replace(karakter, "_"c)
         Next
 
-        Dim idUnik As String =
-            Guid.NewGuid().ToString("N").Substring(0, 8)
+        Dim idUnik As String = Guid.NewGuid().ToString("N").Substring(0, 8)
 
         Return idUnik & "_" & namaAsli & ekstensi
 

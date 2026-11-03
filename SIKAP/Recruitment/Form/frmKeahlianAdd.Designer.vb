@@ -292,9 +292,9 @@ Partial Class frmKeahlianAdd
         Me.lblDescription.ForeColor = System.Drawing.Color.White
         Me.lblDescription.Location = New System.Drawing.Point(36, 40)
         Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(222, 15)
+        Me.lblDescription.Size = New System.Drawing.Size(230, 15)
         Me.lblDescription.TabIndex = 1
-        Me.lblDescription.Text = "Tambahkan bagian baru ke dalam sistem"
+        Me.lblDescription.Text = "Tambahkan keahlian baru ke dalam sistem"
         '
         'pnlHeaderLine
         '
@@ -314,9 +314,9 @@ Partial Class frmKeahlianAdd
         Me.lblTitle.ForeColor = System.Drawing.Color.White
         Me.lblTitle.Location = New System.Drawing.Point(37, 12)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(142, 25)
+        Me.lblTitle.Size = New System.Drawing.Size(158, 25)
         Me.lblTitle.TabIndex = 0
-        Me.lblTitle.Text = "Tambah Bagian"
+        Me.lblTitle.Text = "Tambah Keahlian"
         '
         'Guna2Elipse1
         '

@@ -88,6 +88,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Employee\Form\frmKaryawanAdd.Designer.vb">
+      <DependentUpon>frmKaryawanAdd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\Form\frmKaryawanAdd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Employee\Form\frmKontrakKerja.Designer.vb">
+      <DependentUpon>frmKontrakKerja.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\Form\frmKontrakKerja.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Employee\uf_karyawan.Designer.vb">
+      <DependentUpon>uf_karyawan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\uf_karyawan.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Employee\uf_kontrakkerja.Designer.vb">
+      <DependentUpon>uf_kontrakkerja.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\uf_kontrakkerja.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="f_pesan.Designer.vb">
       <DependentUpon>f_pesan.vb</DependentUpon>
     </Compile>
@@ -321,6 +345,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Employee\Form\frmKaryawanAdd.resx">
+      <DependentUpon>frmKaryawanAdd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Employee\Form\frmKontrakKerja.resx">
+      <DependentUpon>frmKontrakKerja.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Employee\uf_karyawan.resx">
+      <DependentUpon>uf_karyawan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Employee\uf_kontrakkerja.resx">
+      <DependentUpon>uf_kontrakkerja.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="f_pesan.resx">
       <DependentUpon>f_pesan.vb</DependentUpon>
     </EmbeddedResource>
@@ -573,6 +609,10 @@
     <Folder Include="Report\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Training.png" />
+    <None Include="Resources\Biodata.png" />
+    <None Include="Resources\Historis.png" />
+    <None Include="Resources\Sertifikat.png" />
     <Content Include="Resources\square16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

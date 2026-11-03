@@ -28,9 +28,11 @@ Partial Class uf_calonpegawai
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlContext = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlButton = New Guna.UI2.WinForms.Guna2Panel()
+        Me.bJadikanPegawai = New Guna.UI2.WinForms.Guna2Button()
         Me.bDetail = New Guna.UI2.WinForms.Guna2Button()
         Me.bProses = New Guna.UI2.WinForms.Guna2Button()
         Me.pnlPage = New Guna.UI2.WinForms.Guna2Panel()
+        Me.paginationCalon = New SIKAP.ucPagination()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.dgvCalonPegawai = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -42,8 +44,6 @@ Partial Class uf_calonpegawai
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.paginationCalon = New SIKAP.ucPagination()
-        Me.bJadikanPegawai = New Guna.UI2.WinForms.Guna2Button()
         Me.pnlContext.SuspendLayout()
         Me.pnlButton.SuspendLayout()
         Me.pnlPage.SuspendLayout()
@@ -85,6 +85,29 @@ Partial Class uf_calonpegawai
         Me.pnlButton.ShadowDecoration.Parent = Me.pnlButton
         Me.pnlButton.Size = New System.Drawing.Size(1022, 498)
         Me.pnlButton.TabIndex = 4
+        '
+        'bJadikanPegawai
+        '
+        Me.bJadikanPegawai.BorderColor = System.Drawing.Color.Gainsboro
+        Me.bJadikanPegawai.BorderRadius = 5
+        Me.bJadikanPegawai.BorderThickness = 1
+        Me.bJadikanPegawai.CheckedState.Parent = Me.bJadikanPegawai
+        Me.bJadikanPegawai.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.bJadikanPegawai.CustomImages.Parent = Me.bJadikanPegawai
+        Me.bJadikanPegawai.FillColor = System.Drawing.Color.Transparent
+        Me.bJadikanPegawai.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bJadikanPegawai.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.bJadikanPegawai.HoverState.Parent = Me.bJadikanPegawai
+        Me.bJadikanPegawai.Image = Global.SIKAP.My.Resources.Resources.Edit
+        Me.bJadikanPegawai.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.bJadikanPegawai.ImageSize = New System.Drawing.Size(18, 18)
+        Me.bJadikanPegawai.Location = New System.Drawing.Point(210, 9)
+        Me.bJadikanPegawai.Name = "bJadikanPegawai"
+        Me.bJadikanPegawai.ShadowDecoration.Parent = Me.bJadikanPegawai
+        Me.bJadikanPegawai.Size = New System.Drawing.Size(142, 32)
+        Me.bJadikanPegawai.TabIndex = 12
+        Me.bJadikanPegawai.Text = "Jadikan Pegawai"
+        Me.bJadikanPegawai.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'bDetail
         '
@@ -144,6 +167,18 @@ Partial Class uf_calonpegawai
         Me.pnlPage.ShadowDecoration.Parent = Me.pnlPage
         Me.pnlPage.Size = New System.Drawing.Size(1022, 46)
         Me.pnlPage.TabIndex = 4
+        '
+        'paginationCalon
+        '
+        Me.paginationCalon.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
+        Me.paginationCalon.CurrentPage = 1
+        Me.paginationCalon.Dock = System.Windows.Forms.DockStyle.Right
+        Me.paginationCalon.Location = New System.Drawing.Point(672, 0)
+        Me.paginationCalon.Name = "paginationCalon"
+        Me.paginationCalon.PageSize = 10
+        Me.paginationCalon.Size = New System.Drawing.Size(350, 46)
+        Me.paginationCalon.TabIndex = 1
+        Me.paginationCalon.TotalRecord = 0
         '
         'lblInfo
         '
@@ -368,41 +403,6 @@ Partial Class uf_calonpegawai
         Me.Label3.Size = New System.Drawing.Size(276, 17)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Daftar kandidat yang telah menerima Offering"
-        '
-        'paginationCalon
-        '
-        Me.paginationCalon.BackColor = System.Drawing.Color.FromArgb(CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer), CType(CType(254, Byte), Integer))
-        Me.paginationCalon.CurrentPage = 1
-        Me.paginationCalon.Dock = System.Windows.Forms.DockStyle.Right
-        Me.paginationCalon.Location = New System.Drawing.Point(672, 0)
-        Me.paginationCalon.Name = "paginationCalon"
-        Me.paginationCalon.PageSize = 10
-        Me.paginationCalon.Size = New System.Drawing.Size(350, 46)
-        Me.paginationCalon.TabIndex = 1
-        Me.paginationCalon.TotalRecord = 0
-        '
-        'bJadikanPegawai
-        '
-        Me.bJadikanPegawai.BorderColor = System.Drawing.Color.Gainsboro
-        Me.bJadikanPegawai.BorderRadius = 5
-        Me.bJadikanPegawai.BorderThickness = 1
-        Me.bJadikanPegawai.CheckedState.Parent = Me.bJadikanPegawai
-        Me.bJadikanPegawai.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.bJadikanPegawai.CustomImages.Parent = Me.bJadikanPegawai
-        Me.bJadikanPegawai.FillColor = System.Drawing.Color.Transparent
-        Me.bJadikanPegawai.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bJadikanPegawai.ForeColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.bJadikanPegawai.HoverState.Parent = Me.bJadikanPegawai
-        Me.bJadikanPegawai.Image = Global.SIKAP.My.Resources.Resources.Edit
-        Me.bJadikanPegawai.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left
-        Me.bJadikanPegawai.ImageSize = New System.Drawing.Size(18, 18)
-        Me.bJadikanPegawai.Location = New System.Drawing.Point(210, 9)
-        Me.bJadikanPegawai.Name = "bJadikanPegawai"
-        Me.bJadikanPegawai.ShadowDecoration.Parent = Me.bJadikanPegawai
-        Me.bJadikanPegawai.Size = New System.Drawing.Size(142, 32)
-        Me.bJadikanPegawai.TabIndex = 12
-        Me.bJadikanPegawai.Text = "Jadikan Pegawai"
-        Me.bJadikanPegawai.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'uf_calonpegawai
         '

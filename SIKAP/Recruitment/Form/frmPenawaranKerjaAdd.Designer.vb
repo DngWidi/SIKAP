@@ -22,6 +22,7 @@ Partial Class frmPenawaranKerjaAdd
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.pnlMain = New Guna.UI2.WinForms.Guna2Panel()
         Me.pnlBody = New Guna.UI2.WinForms.Guna2Panel()
         Me.Label59 = New System.Windows.Forms.Label()
@@ -54,6 +55,7 @@ Partial Class frmPenawaranKerjaAdd
         Me.Label31 = New System.Windows.Forms.Label()
         Me.tTempatKerja = New Guna.UI2.WinForms.Guna2TextBox()
         Me.cJenisKaryawan = New Guna.UI2.WinForms.Guna2ComboBox()
+        Me.tnoPenawaran = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.Label27 = New System.Windows.Forms.Label()
@@ -110,7 +112,7 @@ Partial Class frmPenawaranKerjaAdd
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.pnlHeaderLine = New Guna.UI2.WinForms.Guna2Panel()
         Me.lblTitle = New System.Windows.Forms.Label()
-        Me.tnoPenawaran = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.pnlMain.SuspendLayout()
         Me.pnlBody.SuspendLayout()
         Me.Guna2Panel5.SuspendLayout()
@@ -160,7 +162,7 @@ Partial Class frmPenawaranKerjaAdd
         Me.Label59.AutoSize = True
         Me.Label59.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label59.ForeColor = System.Drawing.Color.Fuchsia
-        Me.Label59.Location = New System.Drawing.Point(12, 435)
+        Me.Label59.Location = New System.Drawing.Point(12, 492)
         Me.Label59.Name = "Label59"
         Me.Label59.Size = New System.Drawing.Size(81, 13)
         Me.Label59.TabIndex = 26
@@ -172,10 +174,10 @@ Partial Class frmPenawaranKerjaAdd
         Me.Guna2Panel5.BorderRadius = 8
         Me.Guna2Panel5.BorderThickness = 1
         Me.Guna2Panel5.Controls.Add(Me.tKeterangan)
-        Me.Guna2Panel5.Location = New System.Drawing.Point(15, 459)
+        Me.Guna2Panel5.Location = New System.Drawing.Point(15, 513)
         Me.Guna2Panel5.Name = "Guna2Panel5"
         Me.Guna2Panel5.ShadowDecoration.Parent = Me.Guna2Panel5
-        Me.Guna2Panel5.Size = New System.Drawing.Size(733, 204)
+        Me.Guna2Panel5.Size = New System.Drawing.Size(733, 150)
         Me.Guna2Panel5.TabIndex = 20
         '
         'tKeterangan
@@ -192,14 +194,14 @@ Partial Class frmPenawaranKerjaAdd
         Me.tKeterangan.FocusedState.Parent = Me.tKeterangan
         Me.tKeterangan.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.tKeterangan.HoverState.Parent = Me.tKeterangan
-        Me.tKeterangan.Location = New System.Drawing.Point(12, 13)
+        Me.tKeterangan.Location = New System.Drawing.Point(12, 14)
         Me.tKeterangan.Multiline = True
         Me.tKeterangan.Name = "tKeterangan"
         Me.tKeterangan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.tKeterangan.PlaceholderText = ""
         Me.tKeterangan.SelectedText = ""
         Me.tKeterangan.ShadowDecoration.Parent = Me.tKeterangan
-        Me.tKeterangan.Size = New System.Drawing.Size(709, 176)
+        Me.tKeterangan.Size = New System.Drawing.Size(709, 121)
         Me.tKeterangan.TabIndex = 47
         '
         'Guna2Panel4
@@ -404,7 +406,7 @@ Partial Class frmPenawaranKerjaAdd
         Me.Guna2Panel3.Location = New System.Drawing.Point(15, 205)
         Me.Guna2Panel3.Name = "Guna2Panel3"
         Me.Guna2Panel3.ShadowDecoration.Parent = Me.Guna2Panel3
-        Me.Guna2Panel3.Size = New System.Drawing.Size(733, 216)
+        Me.Guna2Panel3.Size = New System.Drawing.Size(733, 284)
         Me.Guna2Panel3.TabIndex = 22
         '
         'dtpMulai
@@ -672,6 +674,30 @@ Partial Class frmPenawaranKerjaAdd
         Me.cJenisKaryawan.ShadowDecoration.Parent = Me.cJenisKaryawan
         Me.cJenisKaryawan.Size = New System.Drawing.Size(178, 36)
         Me.cJenisKaryawan.TabIndex = 27
+        '
+        'tnoPenawaran
+        '
+        Me.tnoPenawaran.BorderRadius = 6
+        Me.tnoPenawaran.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.tnoPenawaran.DefaultText = ""
+        Me.tnoPenawaran.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.tnoPenawaran.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.tnoPenawaran.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.tnoPenawaran.DisabledState.Parent = Me.tnoPenawaran
+        Me.tnoPenawaran.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.tnoPenawaran.Enabled = False
+        Me.tnoPenawaran.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.tnoPenawaran.FocusedState.Parent = Me.tnoPenawaran
+        Me.tnoPenawaran.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.tnoPenawaran.HoverState.Parent = Me.tnoPenawaran
+        Me.tnoPenawaran.Location = New System.Drawing.Point(141, 6)
+        Me.tnoPenawaran.Name = "tnoPenawaran"
+        Me.tnoPenawaran.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.tnoPenawaran.PlaceholderText = ""
+        Me.tnoPenawaran.SelectedText = ""
+        Me.tnoPenawaran.ShadowDecoration.Parent = Me.tnoPenawaran
+        Me.tnoPenawaran.Size = New System.Drawing.Size(208, 35)
+        Me.tnoPenawaran.TabIndex = 24
         '
         'Label29
         '
@@ -1393,29 +1419,9 @@ Partial Class frmPenawaranKerjaAdd
         Me.lblTitle.TabIndex = 0
         Me.lblTitle.Text = "Penawaran Kerja"
         '
-        'tnoPenawaran
+        'Guna2Elipse1
         '
-        Me.tnoPenawaran.BorderRadius = 6
-        Me.tnoPenawaran.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.tnoPenawaran.DefaultText = ""
-        Me.tnoPenawaran.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.tnoPenawaran.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.tnoPenawaran.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.tnoPenawaran.DisabledState.Parent = Me.tnoPenawaran
-        Me.tnoPenawaran.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.tnoPenawaran.Enabled = False
-        Me.tnoPenawaran.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.tnoPenawaran.FocusedState.Parent = Me.tnoPenawaran
-        Me.tnoPenawaran.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.tnoPenawaran.HoverState.Parent = Me.tnoPenawaran
-        Me.tnoPenawaran.Location = New System.Drawing.Point(141, 6)
-        Me.tnoPenawaran.Name = "tnoPenawaran"
-        Me.tnoPenawaran.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.tnoPenawaran.PlaceholderText = ""
-        Me.tnoPenawaran.SelectedText = ""
-        Me.tnoPenawaran.ShadowDecoration.Parent = Me.tnoPenawaran
-        Me.tnoPenawaran.Size = New System.Drawing.Size(208, 35)
-        Me.tnoPenawaran.TabIndex = 24
+        Me.Guna2Elipse1.TargetControl = Me
         '
         'frmPenawaranKerjaAdd
         '
@@ -1538,4 +1544,5 @@ Partial Class frmPenawaranKerjaAdd
     Friend WithEvents dtpMulai As Guna.UI2.WinForms.Guna2DateTimePicker
     Friend WithEvents dtpPenawaran As Guna.UI2.WinForms.Guna2DateTimePicker
     Friend WithEvents tnoPenawaran As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents Guna2Elipse1 As Guna.UI2.WinForms.Guna2Elipse
 End Class

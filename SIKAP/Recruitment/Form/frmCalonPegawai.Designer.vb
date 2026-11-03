@@ -119,6 +119,10 @@ Partial Class frmCalonPegawai
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.pnlHeaderLine = New Guna.UI2.WinForms.Guna2Panel()
         Me.lblTitle = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.cShift = New Guna.UI2.WinForms.Guna2ComboBox()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.cHariKerja = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.pnlMain.SuspendLayout()
         Me.pnlBody.SuspendLayout()
         Me.TabCalonPegawai.SuspendLayout()
@@ -852,6 +856,10 @@ Partial Class frmCalonPegawai
         '
         'pnlPendidikan
         '
+        Me.pnlPendidikan.Controls.Add(Me.cHariKerja)
+        Me.pnlPendidikan.Controls.Add(Me.Label38)
+        Me.pnlPendidikan.Controls.Add(Me.cShift)
+        Me.pnlPendidikan.Controls.Add(Me.Label21)
         Me.pnlPendidikan.Controls.Add(Me.cCalon)
         Me.pnlPendidikan.Controls.Add(Me.dTglkerja)
         Me.pnlPendidikan.Controls.Add(Me.tLokasi)
@@ -1654,6 +1662,68 @@ Partial Class frmCalonPegawai
         Me.lblTitle.TabIndex = 0
         Me.lblTitle.Text = "Proses Calon Pegawai"
         '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label21.Location = New System.Drawing.Point(389, 209)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(32, 15)
+        Me.Label21.TabIndex = 16
+        Me.Label21.Text = "Shift"
+        '
+        'cShift
+        '
+        Me.cShift.BackColor = System.Drawing.Color.Transparent
+        Me.cShift.BorderRadius = 6
+        Me.cShift.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cShift.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cShift.FocusedColor = System.Drawing.Color.Empty
+        Me.cShift.FocusedState.Parent = Me.cShift
+        Me.cShift.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.cShift.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
+        Me.cShift.FormattingEnabled = True
+        Me.cShift.HoverState.Parent = Me.cShift
+        Me.cShift.ItemHeight = 30
+        Me.cShift.ItemsAppearance.Parent = Me.cShift
+        Me.cShift.Location = New System.Drawing.Point(392, 229)
+        Me.cShift.Name = "cShift"
+        Me.cShift.ShadowDecoration.Parent = Me.cShift
+        Me.cShift.Size = New System.Drawing.Size(200, 36)
+        Me.cShift.TabIndex = 17
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.Label38.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(65, Byte), Integer), CType(CType(81, Byte), Integer))
+        Me.Label38.Location = New System.Drawing.Point(389, 270)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(58, 15)
+        Me.Label38.TabIndex = 18
+        Me.Label38.Text = "Hari Kerja"
+        '
+        'cHariKerja
+        '
+        Me.cHariKerja.BackColor = System.Drawing.Color.Transparent
+        Me.cHariKerja.BorderRadius = 6
+        Me.cHariKerja.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cHariKerja.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cHariKerja.FocusedColor = System.Drawing.Color.Empty
+        Me.cHariKerja.FocusedState.Parent = Me.cHariKerja
+        Me.cHariKerja.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.cHariKerja.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
+        Me.cHariKerja.FormattingEnabled = True
+        Me.cHariKerja.HoverState.Parent = Me.cHariKerja
+        Me.cHariKerja.ItemHeight = 30
+        Me.cHariKerja.ItemsAppearance.Parent = Me.cHariKerja
+        Me.cHariKerja.Location = New System.Drawing.Point(392, 290)
+        Me.cHariKerja.Name = "cHariKerja"
+        Me.cHariKerja.ShadowDecoration.Parent = Me.cHariKerja
+        Me.cHariKerja.Size = New System.Drawing.Size(200, 36)
+        Me.cHariKerja.TabIndex = 19
+        '
         'frmCalonPegawai
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1792,4 +1862,8 @@ Partial Class frmCalonPegawai
     Friend WithEvents bBatal As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents bSimpan As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents bTandai As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents cShift As Guna.UI2.WinForms.Guna2ComboBox
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Label38 As Label
+    Friend WithEvents cHariKerja As Guna.UI2.WinForms.Guna2ComboBox
 End Class
